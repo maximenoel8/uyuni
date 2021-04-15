@@ -8,6 +8,7 @@ Feature: Push a package with unset vendor
 
   Background:
     Given I am authorized as "admin" with password "admin"
+    And I upload ./features/upload_files/root/subscription-tools-1.0-0.noarch.rpm to /root/subscription-tools-1.0-0.noarch.rpm on server
 
   Scenario: Push a package with unset vendor
     When I push package "/root/subscription-tools-1.0-0.noarch.rpm" into "test_base_channel" channel
