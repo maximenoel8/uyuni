@@ -1709,3 +1709,20 @@ Then(/^I flush firewall on "([^"]*)"$/) do |target|
   node = get_target(target)
   node.run("iptables -F INPUT")
 end
+
+Then(/^I set the admin password$/) do
+  # generate expect file
+  script = "spawn satpasswd admin\n" \
+           "while {1} {\n" \
+           "  expect {\n" \
+           "    eof                                                  {break}\n" \
+	         "    \"Password:\"                                        {send \"admin\r\"}\n" \
+           "    \"Retype password:\"                                 {send \"admin\r\"}\n" \
+           "  }\n" \
+           "}\n"
+  path = generate_temp_file('admin-setting.exp', script)
+  step 'I copy "' + path + '" to "server"'
+  filename = File.basename(path)
+  bootstrap_timeout = 600
+  $server.run("expect #{filename}", timeout: bootstrap_timeout)
+end
