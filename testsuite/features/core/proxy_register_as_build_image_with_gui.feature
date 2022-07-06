@@ -21,11 +21,11 @@ Feature: Setup SUSE Manager proxy
   Scenario: Add SUSE Manager Proxy 4.3 x86_64
     When I follow the left menu "Admin > Setup Wizard > Products"
     And I wait until I do not see "Loading" text
-    And I enter "SUSE Manager Proxy 4.3 x86_64 (ALPHA)" as the filtered product description
-    And I select "SUSE Manager Proxy 4.3 x86_64 (ALPHA)" as a product
-    Then I should see the "SUSE Manager Proxy 4.3 x86_64 (ALPHA)" selected
+    And I enter "SUSE Manager Proxy 4.3 x86_64" as the filtered product description
+    And I select "SUSE Manager Proxy 4.3 x86_64" as a product
+    Then I should see the "SUSE Manager Proxy 4.3 x86_64" selected
     When I click the Add Product button
-    And I wait until I see "SUSE Manager Proxy 4.3 x86_64 (ALPHA)" product has been added
+    And I wait until I see "SUSE Manager Proxy 4.3 x86_64" product has been added
     When I wait until all spacewalk-repo-sync finished
 
 
