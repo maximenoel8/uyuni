@@ -34,7 +34,6 @@ Feature: Bootstrap a Salt host managed via salt-ssh
     And I follow "Proxy" in the content area
     Then I should see "ssh_minion" hostname
 
-@skip_if_cloud
   Scenario: Migrate this SSH minion to SLE 15 SP3
     Given I am on the Systems overview page of this "ssh_minion"
     When I follow "Software" in the content area
@@ -48,7 +47,6 @@ Feature: Bootstrap a Salt host managed via salt-ssh
     When I click on "Confirm"
     Then I should see a "This system is scheduled to be migrated to" text
 
-@skip_if_cloud
   Scenario: Check the migration is successful for this SSH minion
     Given I am on the Systems overview page of this "ssh_minion"
     When I follow "Events"
@@ -60,6 +58,7 @@ Feature: Bootstrap a Salt host managed via salt-ssh
     Then I should see a "SUSE Linux Enterprise Server 15 SP3" text
     And vendor change should be enabled for product migration on "ssh_minion"
 
+  @skip_if_cloud
   Scenario: Install the latest Salt on this SSH minion
     When I migrate the non-SUMA repositories on "ssh_minion"
     And I enable repositories before installing Salt on this "ssh_minion"
