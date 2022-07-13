@@ -376,20 +376,36 @@ OS_REPOS_BY_OS_VERSION = {
   %w[
     SLE-Module-Basesystem15-SP1-Pool
     SLE-Module-Basesystem15-SP1-Updates
+    SLE-Module-DevTools15-SP1-Pool
+    SLE-Module-DevTools15-SP1-Updates
+    SLE-Module-Desktop-Applications15-SP1-Pool
+    SLE-Module-Desktop-Applications15-SP1-Updates
   ],
   '15-SP2' =>
   %w[
     SLE-Module-Basesystem15-SP2-Pool
     SLE-Module-Basesystem15-SP2-Updates
+    SLE-Module-DevTools15-SP2-Pool
+    SLE-Module-DevTools15-SP2-Updates
+    SLE-Module-Desktop-Applications15-SP2-Pool
+    SLE-Module-Desktop-Applications15-SP2-Updates
   ],
   '15-SP3' =>
   %w[
     SLE-Module-Basesystem15-SP3-Pool
     SLE-Module-Basesystem15-SP3-Updates
+    SLE-Module-DevTools15-SP3-Pool
+    SLE-Module-DevTools15-SP3-Updates
+    SLE-Module-Desktop-Applications15-SP3-Pool
+    SLE-Module-Desktop-Applications15-SP3-Updates
   ],
   '15-SP4' =>
   %w[
     SLE-Module-Basesystem15-SP4-Pool
     SLE-Module-Basesystem15-SP4-Updates
+    SLE-Module-DevTools15-SP4-Pool
+    SLE-Module-DevTools15-SP4-Updates
+    SLE-Module-Desktop-Applications15-SP4-Pool
+    SLE-Module-Desktop-Applications15-SP4-Updates
   ]
 }.freeze
