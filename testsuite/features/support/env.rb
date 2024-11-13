@@ -174,11 +174,12 @@ def handle_screenshot_and_relog(scenario, current_epoch)
 
       # Check if further scrolling is possible
       page_height = page.evaluate_script("document.body.scrollHeight")
+      warn "Page height: #{page_height}"
       scroll_position = page.evaluate_script("window.scrollY + window.innerHeight")
 
       # Break the loop if we are at the bottom of the page
       break if scroll_position >= page_height
-
+      warn "Try to scroll down"
       # Scroll down and increment screenshot index
       page.execute_script("window.scrollBy(0, window.innerHeight)")
       sleep 0.5 # Give time for the scroll and rendering to complete
