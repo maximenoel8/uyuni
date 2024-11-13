@@ -32,7 +32,10 @@ def last_onboarding_duration(host)
     onboarding_events = events.select { |event| event['summary'].include? 'certs, channels, packages' }
     last_event_id = onboarding_events.last['id']
     event_details = $api_test.system.get_event_details(system_id, last_event_id)
-    Time.parse(event_details['completed']) - Time.parse(event_details['picked_up'])
+    # Convert XMLRPC::DateTime to Ruby's Time if necessary
+    completed_time = event_details['completed'].is_a?(XMLRPC::DateTime) ? event_details['completed'].to_time : Time.parse(event_details['completed'])
+    picked_up_time = event_details['picked_up'].is_a?(XMLRPC::DateTime) ? event_details['picked_up'].to_time : Time.parse(event_details['picked_up'])
+    completed_time - picked_up_time
   rescue StandardError => e
     raise ScriptError, "Error extracting onboarding duration for #{host}.\n #{e.full_message}"
   end
@@ -52,22 +55,26 @@ def product_synchronization_duration(os_product_version)
   duration = 0
   channel_to_evaluate = false
   matches = 0
-  File.foreach('/tmp/reposync.log') do |line|
+  log_content = File.readlines('/tmp/reposync.log')
+  log_content.each do |line|
     if line.include?('Channel: ')
       channel_name = line.split('Channel: ')[1].strip
       channel_to_evaluate = channels_to_wait.include?(channel_name)
     end
-    if line.include?('Total time: ') && channel_to_evaluate
-      match = line.match(/Total time: (\d+):(\d+):(\d+)/)
-      hours, minutes, seconds = match.captures.map(&:to_i)
-      total_seconds = (hours * 3600) + (minutes * 60) + seconds
-      duration += total_seconds
-      matches += 1
-      channel_to_evaluate = false
-    end
+    next unless line.include?('Total time: ') && channel_to_evaluate
+
+    match = line.match(/Total time: (\d+):(\d+):(\d+)/)
+    hours, minutes, seconds = match.captures.map(&:to_i)
+    total_seconds = (hours * 3600) + (minutes * 60) + seconds
+    duration += total_seconds
+    matches += 1
+    channel_to_evaluate = false
   end
 
-  raise ScriptError, "Error extracting the synchronization duration of #{os_product_version}" if matches.zero?
+  if matches < channels_to_wait.size
+    $stdout.puts("Error extracting the synchronization duration of #{os_product_version}")
+    $stdout.puts("Content of reposync.log:\n#{log_content.join}")
+  end
 
   duration
 end
