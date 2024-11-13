@@ -160,13 +160,34 @@ end
 # Take a screenshot and try to log back at suse manager server
 def handle_screenshot_and_relog(scenario, current_epoch)
   Dir.mkdir('screenshots') unless File.directory?('screenshots')
-  path = "screenshots/#{scenario.name.tr(' ./', '_')}.png"
+  base_path = "screenshots/#{scenario.name.tr(' ./', '_')}"
+  screenshot_index = 1
+
   begin
     click_details_if_present
-    page.driver.browser.save_screenshot(path)
-    attach path, 'image/png'
-    # Attach additional information
+
+    # Continue taking screenshots until we reach the bottom of the page
+    loop do
+      path = "#{base_path}_#{screenshot_index}.png"
+      page.driver.browser.save_screenshot(path)
+      attach path, 'image/png'
+
+      # Check if further scrolling is possible
+      page_height = page.evaluate_script("document.body.scrollHeight")
+      scroll_position = page.evaluate_script("window.scrollY + window.innerHeight")
+
+      # Break the loop if we are at the bottom of the page
+      break if scroll_position >= page_height
+
+      # Scroll down and increment screenshot index
+      page.execute_script("window.scrollBy(0, window.innerHeight)")
+      sleep 0.5 # Give time for the scroll and rendering to complete
+      screenshot_index += 1
+    end
+
+    # Attach additional information about the scenario
     attach "#{Time.at(@scenario_start_time).strftime('%H:%M:%S:%L')} - #{Time.at(current_epoch).strftime('%H:%M:%S:%L')} | Current URL: #{current_url}", 'text/plain'
+
   rescue StandardError => e
     warn "Error message: #{e.message}"
   ensure
