@@ -172,17 +172,19 @@ def handle_screenshot_and_relog(scenario, current_epoch)
       page.driver.browser.save_screenshot(path)
       attach path, 'image/png'
 
-      # Check if further scrolling is possible
-      page_height = page.evaluate_script("document.body.scrollHeight")
-      warn "Page height: #{page_height}"
+      # Use document.documentElement.scrollHeight for a more reliable check
+      page_height = page.evaluate_script("document.documentElement.scrollHeight")
       scroll_position = page.evaluate_script("window.scrollY + window.innerHeight")
+
+      warn "Page height: #{page_height}, Scroll position: #{scroll_position}"
 
       # Break the loop if we are at the bottom of the page
       break if scroll_position >= page_height
       warn "Try to scroll down"
-      # Scroll down and increment screenshot index
+
+      # Scroll down
       page.execute_script("window.scrollBy(0, window.innerHeight)")
-      sleep 0.5 # Give time for the scroll and rendering to complete
+      sleep 0.5
       screenshot_index += 1
     end
 
