@@ -173,6 +173,10 @@ Feature: Synchronize products in the products page of the Setup Wizard
     When I execute mgr-sync "list channels" with user "admin" and password "admin"
     And I should get "    [I] SLE15-SP4-Installer-Updates for x86_64 SUSE Linux Enterprise Server 15 SP4 x86_64 [sle15-sp4-installer-updates-x86_64]"
 
+  @scc_credentials
+  Scenario: Trigger a refresh of the products synched from SCC
+    When I execute mgr-sync refresh
+
 @scc_credentials
   Scenario: Detect product loading issues from the UI
     Given I am authorized for the "Admin" section
@@ -181,10 +185,10 @@ Feature: Synchronize products in the products page of the Setup Wizard
     And I wait until I do not see "Loading" text
     Then I should not see a "Operation not successful" text
     And I should only see success signs in the product list
-
-@scc_credentials
-  Scenario: Trigger a refresh of the products synched from SCC
-    When I execute mgr-sync refresh
+#
+#@scc_credentials
+#  Scenario: Trigger a refresh of the products synched from SCC
+#    When I execute mgr-sync refresh
 
 @scc_credentials
   Scenario: Report the synchronization duration for SLES 15 SP4
