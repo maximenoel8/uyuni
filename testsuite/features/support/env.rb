@@ -167,26 +167,35 @@ def handle_screenshot_and_relog(scenario, current_epoch)
     click_details_if_present
 
     # Continue taking screenshots until we reach the bottom of the page
-    loop do
-      path = "#{base_path}_#{screenshot_index}.png"
-      page.driver.browser.save_screenshot(path)
-      attach path, 'image/png'
+    # loop do
+    path = "#{base_path}_#{screenshot_index}.png"
+    page.driver.browser.save_screenshot(path)
+    attach path, 'image/png'
 
-      # Use document.documentElement.scrollHeight for a more reliable check
-      page_height = page.evaluate_script("document.documentElement.scrollHeight")
-      scroll_position = page.evaluate_script("window.scrollY + window.innerHeight")
+    # Use document.documentElement.scrollHeight for a more reliable check
+    page_height = page.evaluate_script("document.documentElement.scrollHeight")
+    scroll_position = page.evaluate_script("window.scrollY + window.innerHeight")
 
-      warn "Page height: #{page_height}, Scroll position: #{scroll_position}"
+    warn "Page height: #{page_height}, Scroll position: #{scroll_position}"
 
-      # Break the loop if we are at the bottom of the page
-      break if scroll_position >= page_height
-      warn "Try to scroll down"
+    # Break the loop if we are at the bottom of the page
+    # break if scroll_position >= page_height
+    warn "Try to scroll down"
+    screenshot_index += 1
+    # Scroll down
+    visit '#footer'
+    path = "#{base_path}_#{screenshot_index}.png"
+    page.driver.browser.save_screenshot(path)
+    attach path, 'image/png'
+    # Use document.documentElement.scrollHeight for a more reliable check
+    page_height = page.evaluate_script("document.documentElement.scrollHeight")
+    scroll_position = page.evaluate_script("window.scrollY + window.innerHeight")
 
-      # Scroll down
-      page.execute_script("window.scrollBy(0, window.innerHeight)")
-      sleep 0.5
-      screenshot_index += 1
-    end
+    warn "Page height: #{page_height}, Scroll position: #{scroll_position}"
+    # page.execute_script("window.scrollBy(0, window.innerHeight)")
+    # sleep 0.5
+
+    # end
 
     # Attach additional information about the scenario
     attach "#{Time.at(@scenario_start_time).strftime('%H:%M:%S:%L')} - #{Time.at(current_epoch).strftime('%H:%M:%S:%L')} | Current URL: #{current_url}", 'text/plain'
