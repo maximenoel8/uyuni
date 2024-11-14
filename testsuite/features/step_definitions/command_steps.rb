@@ -581,7 +581,7 @@ When(/^the server starts mocking an IPMI host$/) do
   # Check if ipmi_sim is already running
   result = server.run('pgrep -f ipmi_sim', verbose: false, check_errors: false)
   puts "ipmi_sim status #{result}"
-  if result.to_s.strip.empty?
+  if server.run('pgrep -f ipmi_sim', verbose: false, check_errors: false)[1] != 0
     server.run('ipmi_sim -n < /dev/null > /dev/null &', verbose: true, check_errors: true)
   else
     puts 'ipmi_sim is already running; skipping startup.'
