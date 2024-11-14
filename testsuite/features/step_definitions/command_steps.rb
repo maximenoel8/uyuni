@@ -579,7 +579,7 @@ When(/^the server starts mocking an IPMI host$/) do
   end
   server.run('chmod +x /etc/ipmi/fake_ipmi_host.sh', verbose: true, check_errors: true)
   # Check if ipmi_sim is already running
-  if server.run('pgrep -f ipmi_sim', verbose: false, check_errors: false).empty?
+  if server.run('pgrep -f ipmi_sim', verbose: true, check_errors: false).empty?
     server.run('ipmi_sim -n < /dev/null > /dev/null &', verbose: true, check_errors: true)
   else
     puts 'ipmi_sim is already running; skipping startup.'
