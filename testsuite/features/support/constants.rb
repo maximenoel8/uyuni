@@ -485,7 +485,7 @@ CHANNEL_LABEL_TO_SYNC_BY_BASE_CHANNEL = {
     'ubuntu-2004-amd64-main for amd64' => 'ubuntu-20.04-amd64',
     'ubuntu-2204-amd64-main for amd64' => 'ubuntu-22.04-amd64',
     'ubuntu-2404-amd64-main for amd64' => 'ubuntu-24.04-amd64',
-    'debian-12-pool for amd64' => 'debian12-amd64',
+    'debian-12-pool for amd64' => 'debian-12-pool-amd64',
     'openSUSE-Leap-15.6-Pool for aarch64' => 'openSUSE-Leap-15.6-aarch64'
   },
   'Uyuni' => {
