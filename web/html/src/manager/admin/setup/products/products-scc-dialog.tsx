@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Component } from "react";
 
 import { Button } from "components/buttons";
 import { Messages, MessageType } from "components/messages/messages";
@@ -56,7 +56,7 @@ type Props = {
   updateSccSyncRunning: (isRunning: boolean) => void;
 };
 
-class SCCDialog extends React.Component<Props> {
+class SCCDialog extends Component<Props> {
   state = {
     steps: _SCC_REFRESH_STEPS,
     errors: [] as MessageType[],

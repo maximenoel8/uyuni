@@ -125,6 +125,11 @@ export default defineConfig([
             //   // TODO: Update message once we move the directory to where it should be
             //   message: "Please import from `components/formik` instead.",
             // },
+            {
+              name: "react",
+              importNames: ["default"],
+              message: "Not needed anymore thanks to JSX transform.",
+            },
           ],
         },
       ],

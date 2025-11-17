@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 
 import _last from "lodash/last";
@@ -120,7 +119,7 @@ const Build = ({
           )
         }
         buttons={
-          <React.Fragment>
+          <>
             <div className="col-lg-offset-6 offset-lg-6 col-lg-6">
               <div className="pull-right btn-group">
                 <Button
@@ -160,7 +159,7 @@ const Build = ({
                 />
               </div>
             </div>
-          </React.Fragment>
+          </>
         }
       />
 

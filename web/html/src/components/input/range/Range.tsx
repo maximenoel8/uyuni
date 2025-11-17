@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useContext } from "react";
 
 import { ControlledInput } from "../ControlledInput";
 import { FormContext } from "../form/Form";
@@ -24,7 +24,7 @@ type Props = InputBaseProps & {
 
 export const Range = (props: Props) => {
   const { placeholder, inputClass, ...propsToPass } = props;
-  const formContext = React.useContext(FormContext);
+  const formContext = useContext(FormContext);
   return (
     <InputBase {...propsToPass} name={[`${props.prefix}_start`, `${props.prefix}_end`]}>
       {({ setValue, onBlur }) => {

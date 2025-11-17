@@ -1,4 +1,4 @@
-import * as React from "react";
+import { type ReactNode, type RefObject, Component, createRef } from "react";
 
 import { pageSize } from "core/user-preferences";
 
@@ -25,13 +25,13 @@ type State = {
   confirmDeleteDialog: boolean;
 };
 
-export class TokenTable extends React.Component<Props, State> {
-  private tableRef: React.RefObject<TableRef>;
+export class TokenTable extends Component<Props, State> {
+  private tableRef: RefObject<TableRef>;
 
   public constructor(props: Props) {
     super(props);
 
-    this.tableRef = React.createRef();
+    this.tableRef = createRef();
     this.state = {
       selectedRow: undefined,
       confirmValidityDialog: false,
@@ -43,7 +43,7 @@ export class TokenTable extends React.Component<Props, State> {
     this.tableRef.current?.refresh();
   }
 
-  public render(): React.ReactNode {
+  public render(): ReactNode {
     return (
       <>
         <Table
@@ -140,7 +140,7 @@ export class TokenTable extends React.Component<Props, State> {
     );
   }
 
-  private renderExpiration(expirationTime: Date | null): React.ReactNode {
+  private renderExpiration(expirationTime: Date | null): ReactNode {
     if (expirationTime === null) {
       return t("No, never expires");
     }
@@ -155,7 +155,7 @@ export class TokenTable extends React.Component<Props, State> {
     );
   }
 
-  private renderDate(date: Date): React.ReactNode {
+  private renderDate(date: Date): ReactNode {
     return <FromNow value={date} />;
   }
 

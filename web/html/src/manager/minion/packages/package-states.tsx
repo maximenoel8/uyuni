@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 
 import { useImmer } from "use-immer";
 
@@ -252,7 +251,7 @@ const PackageStates = ({ serverId }: PropsType) => {
   };
 
   const tableBody = () => {
-    const elements: React.ReactNode[] = [];
+    const elements: ReactNode[] = [];
     for (const row of tableRows) {
       const currentState = row.value !== undefined ? row.value : row.original;
 
@@ -281,8 +280,8 @@ const PackageStates = ({ serverId }: PropsType) => {
   };
 
   const renderState = (row, currentState) => {
-    let versionConstraintSelect: React.ReactNode = null;
-    let undoButton: React.ReactNode = null;
+    let versionConstraintSelect: ReactNode = null;
+    let undoButton: ReactNode = null;
 
     if (currentState.packageStateId === packageHelpers.INSTALLED) {
       versionConstraintSelect = (
