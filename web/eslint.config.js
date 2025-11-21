@@ -116,7 +116,7 @@ export default defineConfig([
           paths: [
             {
               name: "node-gettext",
-              message: "Please import from `core/intl/node-gettext` instead.",
+              message: "Import from `core/intl/node-gettext` instead.",
             },
             // TODO: List everything we want to limit once the implementation is done
             // {
@@ -128,7 +128,7 @@ export default defineConfig([
             {
               name: "react",
               importNames: ["default"],
-              message: "Not needed anymore thanks to JSX transform.",
+              message: 'Import specific submodules instead, e.g. `import { useEffect } from "react";`.',
             },
           ],
         },
