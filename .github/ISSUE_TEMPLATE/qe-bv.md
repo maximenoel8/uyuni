@@ -25,7 +25,11 @@ assignees: ''
 ---
 
 - Jenkins pipeline:
+  - Full:
+  - Mini:
 - Server URL:
+  - Full:
+  - Mini:
 
 ---
 

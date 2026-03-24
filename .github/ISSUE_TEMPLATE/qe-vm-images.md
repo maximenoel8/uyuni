@@ -17,18 +17,7 @@ assignees: ''
 - Resubmissions:
 - Submission card:
 
-## Legend
-
-- Selected checkbox means, we tested it and the testing is completed with no
-  pending blockers to be verified as fixed in a resubmission
-- :white_check_mark: : Test/verification was successful
-- :x: : Test/verification was not successful
-- :test_tube: : Test failed due to test suite issue but succeed manually
-- If multiple emotes: task was run several times
-  - Example: :x: :white_check_mark: = first run failed, second run passed (resubmission)
-  - Example: In case of a blocker, we should wait for the fix and retest -> :x:
-    and not checked checkbox. In case of non-blocker -> :x: and checked
-    checkbox.
+---
 
 # Description
 
@@ -56,6 +45,19 @@ installation is enough.
   - [ ] Raw 4096
   - [ ] ISO self install 4096
 
+## Links
 
- # Links
 - https://confluence.suse.com/spaces/SUSEMANAGER/pages/1471348883/QE+VM+images
+
+## Legend
+
+- Selected checkbox means, we tested it and the testing is completed with no
+  pending blockers to be verified as fixed in a resubmission
+- :white_check_mark: : Test/verification was successful
+- :x: : Test/verification was not successful
+- :test_tube: : Test failed due to test suite issue but succeed manually
+- If multiple emotes: task was run several times
+  - Example: :x: :white_check_mark: = first run failed, second run passed (resubmission)
+  - Example: In case of a blocker, we should wait for the fix and retest -> :x:
+    and not checked checkbox. In case of non-blocker -> :x: and checked
+    checkbox.
