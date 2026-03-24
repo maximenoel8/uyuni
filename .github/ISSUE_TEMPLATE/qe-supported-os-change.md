@@ -19,7 +19,7 @@ assignees: ''
   - [ ] apply high state to the mirrors on `manager.mgr.suse.de`
   - [ ] trigger a mirror sync to have the new changes available
 - [ ] [sumaform](https://github.com/uyuni-project/sumaform)
-  - [ ] add client support for libvirt (`backend_modules/libvirt/base/maint.f`, `backend_modules/libvirt/host/user_data.yaml`)
+  - [ ] add client support for libvirt (`backend_modules/libvirt/base/main.tf`, `backend_modules/libvirt/host/user_data.yaml`)
   - [ ] add new client to controller (`salt/controller/bashrc`, `modules/controller/variables.tf`, `modules/controller/main.tf`)
   - [ ] update mirror configuration (`salt/mirror/etc/minima.yaml`)
 - [ ] [susemanager-ci](https://github.com/SUSE/susemanager-ci)
