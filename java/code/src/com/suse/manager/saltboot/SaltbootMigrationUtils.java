@@ -74,7 +74,7 @@ public class SaltbootMigrationUtils {
                         oldDistro.remove();
                     }
                 }
-                catch (XmlRpcException | SaltbootMigrationException e) {
+                catch (XmlRpcException | SaltbootException | SaltbootMigrationException e) {
                     LOG.error("Error migrating {}-{}-{}", imageInfo.getName(),
                             imageInfo.getVersion(), imageInfo.getRevisionNumber(), e);
                     allOk = false;
@@ -101,7 +101,7 @@ public class SaltbootMigrationUtils {
             for (ServerGroup saltbootGroup : Pillar.getGroupsForCategory(FormulaFactory.SALTBOOT_PILLAR)) {
                 try {
                     String groupImageName = SaltbootUtils.getGroupImageName(saltbootGroup).orElseThrow(
-                            () -> new SaltbootException(String.format(
+                            () -> new SaltbootMigrationException(String.format(
                                     "Cannot get an image for a saltboot group %s under organization %s",
                                     saltbootGroup.getOrg().getId(), saltbootGroup.getName())));
 
@@ -112,7 +112,7 @@ public class SaltbootMigrationUtils {
                         oldProfile.remove();
                     }
                 }
-                catch (XmlRpcException e) {
+                catch (XmlRpcException | SaltbootException | SaltbootMigrationException e) {
                     LOG.error("Error migrating {}", saltbootGroup.getName(), e);
                     allOk = false;
                 }
