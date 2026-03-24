@@ -604,7 +604,7 @@ end
 # @param channels [Array<String>] List of channel names that still need solving
 # @return [Integer] Total timeout in seconds for these channels
 def calculate_remaining_channels_timeout(channels)
-  channels.reduce(0) { |acc, channel| acc + channel_timeout(channel) }
+  channels.reduce(0) { |acc, elem| acc + channel_timeout(elem) }
 end
 
 # This method re-optimizes the timeout based on channels actually solved
@@ -632,11 +632,12 @@ def re_optimize_timeout(remaining_channels, time_spent, original_optimized_timeo
 
   adjustment_made = new_timeout < time_remaining_in_original
 
-  reason = if adjustment_made
-             "Channels solved; tightening timeout from #{time_remaining_in_original}s to #{new_timeout}s"
-           else
-             "No optimization needed; keeping #{new_timeout}s"
-           end
+  reason =
+    if adjustment_made
+      "Channels solved; tightening timeout from #{time_remaining_in_original}s to #{new_timeout}s"
+    else
+      "No optimization needed; keeping #{new_timeout}s"
+    end
 
   {
     new_timeout: new_timeout,

@@ -488,7 +488,7 @@ When(/^I wait until all synchronized channels have solved their dependencies$/) 
       # Check if any channels were actually removed
       channels_removed = channels_before.count - channels_to_wait_solv_file.count
 
-      if channels_removed > 0
+      if channels_removed.positive?
         log " #{channels_removed} channel(s) solved. Remaining: #{channels_to_wait_solv_file.count}"
 
         # Re-optimize timeout based on what's actually left
