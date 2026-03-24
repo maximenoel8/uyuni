@@ -17,6 +17,9 @@ fi
 # Database schema creation
 ./reset_pgsql_database.sh
 
+# start cobbler when installed
+(/usr/bin/rpm --quiet -q cobbler && /usr/bin/cobblerd) || true
+
 # SUSE Manager initialization
 cp /root/rhn.conf /etc/rhn/rhn.conf
 

@@ -31,8 +31,10 @@ import org.cobbler.Profile;
 import org.cobbler.SystemRecord;
 import org.cobbler.XmlRpcException;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class SaltbootMigrationUtils {
@@ -40,6 +42,7 @@ public class SaltbootMigrationUtils {
 
     private final Set<String> oldDistroNames = new HashSet<>();
     private final Set<String> oldProfileNames = new HashSet<>();
+    private final Map<Profile, Profile> distroProfilesMap = new HashMap<>();
 
     private final CobblerConnection cobblerConnection;
 
@@ -59,7 +62,7 @@ public class SaltbootMigrationUtils {
     }
 
     private void migrateSaltbootDistros() throws SaltbootMigrationException {
-        CobblerConnection con = this.cobblerConnection;
+        CobblerConnection con = cobblerConnection;
         List<Distro> distros = Distro.list(con);
         boolean allOk = true;
         con.transactionBegin();
@@ -81,7 +84,7 @@ public class SaltbootMigrationUtils {
                     String oldName = getOldNamingScheme(imageInfo);
                     Profile oldDistroProfile = Profile.lookupByName(con, oldName);
                     if (oldDistroProfile != null) {
-                        migrateSaltbootSystems(oldDistroProfile, newDistroProfile);
+                        distroProfilesMap.put(oldDistroProfile, newDistroProfile);
                     }
                     oldDistroNames.add(oldName);
                 }
@@ -106,7 +109,7 @@ public class SaltbootMigrationUtils {
     }
 
     private void migrateSaltbootProfiles() {
-        CobblerConnection con = this.cobblerConnection;
+        CobblerConnection con = cobblerConnection;
         boolean allOk = true;
         con.transactionBegin();
         try {
@@ -140,12 +143,19 @@ public class SaltbootMigrationUtils {
         }
     }
 
-    private void migrateSaltbootSystems(Profile oldProfile, Profile newProfile) {
-        List<SystemRecord> systems = SystemRecord.listByAssociatedProfile(this.cobblerConnection, oldProfile.getName());
-        for (SystemRecord system : systems) {
-            system.setProfile(newProfile);
-            system.save();
-        }
+    private void migrateSaltbootSystems() {
+        // We need to migrate systems outside of transaction.
+        // Transaction is forcing cobbler to copy the system object and triggering MAC conflict
+        distroProfilesMap.forEach(
+            (oldProfile, newProfile) -> {
+                List<SystemRecord> systems = SystemRecord.listByAssociatedProfile(
+                        cobblerConnection, oldProfile.getName());
+                for (SystemRecord system : systems) {
+                    system.setProfile(newProfile);
+                    system.save();
+                }
+            }
+        );
     }
 
     /**
@@ -154,7 +164,7 @@ public class SaltbootMigrationUtils {
      * Custom-made profiles are not removed and so parent profiles will fail to be removed too
      */
     private void cleanupOldEntries() {
-        CobblerConnection con = this.cobblerConnection;
+        CobblerConnection con = cobblerConnection;
         con.transactionBegin();
         try {
             // Group profiles must be removed before distros and their profiles
@@ -221,6 +231,7 @@ public class SaltbootMigrationUtils {
     private void performMigration() {
         migrateSaltbootDistros();
         migrateSaltbootProfiles();
+        migrateSaltbootSystems();
         cleanupOldEntries();
     }
 }

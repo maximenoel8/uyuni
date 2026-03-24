@@ -23,12 +23,14 @@ import com.redhat.rhn.domain.image.ImageInfo;
 import com.redhat.rhn.domain.server.MinionServer;
 import com.redhat.rhn.domain.server.ServerGroup;
 import com.redhat.rhn.domain.server.test.MinionServerFactoryTest;
+import com.redhat.rhn.manager.kickstart.cobbler.CobblerXMLRPCHelper;
 import com.redhat.rhn.testing.JMockBaseTestCaseWithUser;
 
 import com.suse.manager.saltboot.SaltbootMigrationUtils;
 import com.suse.manager.saltboot.SaltbootUtils;
 
 import org.cobbler.CobblerConnection;
+import org.cobbler.CobblerObject;
 import org.cobbler.Distro;
 import org.cobbler.Profile;
 import org.cobbler.SystemRecord;
@@ -46,18 +48,42 @@ public class SaltbootMigrationUtilsTest extends JMockBaseTestCaseWithUser {
 
     private CobblerConnection client;
 
+    // Pending cobbler integration to the test container
+    private final boolean useRealCobbler = false;
+
     @Override
     @BeforeEach
     public void setUp() throws Exception {
         super.setUp();
         MockConnection.clear();
-        client = new MockConnection("http://localhost", "token");
+        if (useRealCobbler) {
+            client = CobblerXMLRPCHelper.getUncachedAutomatedConnection();
+        }
+        else {
+            client = new MockConnection("http://localhost", "token");
+        }
     }
 
     @Override
     @AfterEach
     public void tearDown() throws Exception {
-        MockConnection.clear();
+        if (useRealCobbler) {
+            SystemRecord.list(client).forEach(
+                    CobblerObject::remove
+            );
+            Distro.list(client).forEach(
+                    CobblerObject::remove
+            );
+            Profile.list(client).forEach(
+                    CobblerObject::remove
+            );
+        }
+        else {
+            MockConnection.clear();
+        }
+
+
+
         super.tearDown();
     }
 
@@ -153,6 +179,9 @@ public class SaltbootMigrationUtilsTest extends JMockBaseTestCaseWithUser {
 
         // Old system record
         SystemRecord.create(client, orgId + "-my-system", oldDistroProfile);
+
+        assertEquals(oldDistroProfile.getName(),
+                SystemRecord.lookupByName(client, orgId + "-my-system").getProfile().getName());
 
         SaltbootMigrationUtils.migrateSaltboot(client);
 
@@ -367,6 +396,10 @@ public class SaltbootMigrationUtilsTest extends JMockBaseTestCaseWithUser {
         String systemName3 = orgId + "-system-three";
         SystemRecord.create(client, systemName2, oldProfile2);
         SystemRecord.create(client, systemName3, oldProfile2);
+
+        assertEquals(oldProfile1.getName(), SystemRecord.lookupByName(client, systemName1).getProfile().getName());
+        assertEquals(oldProfile2.getName(), SystemRecord.lookupByName(client, systemName2).getProfile().getName());
+        assertEquals(oldProfile2.getName(), SystemRecord.lookupByName(client, systemName3).getProfile().getName());
 
         SaltbootMigrationUtils.migrateSaltboot(client);
 
