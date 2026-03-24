@@ -637,6 +637,14 @@ def channel_timeout(channel)
   timeout
 end
 
+# This method calculates the timeout needed for channels still waiting to solve dependencies
+#
+# @param channels [Array<String>] List of channel names that still need solving
+# @return [Integer] Total timeout in seconds for these channels
+def calculate_remaining_channels_timeout(channels)
+  channels.reduce(0) { |acc, elem| acc + channel_timeout(elem) }
+end
+
 # @param channel_label [String] the label of the channel to check
 # @return [Boolean] true if the synchronization is completed, false otherwise
 def channel_sync_completed?(channel_label)

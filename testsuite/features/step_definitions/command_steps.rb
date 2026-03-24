@@ -434,21 +434,44 @@ When(/^I wait until all synchronized channels for "([^"]*)" have finished$/) do 
 end
 
 When(/^I wait until all synchronized channels have solved their dependencies$/) do
-  # Initialize the failure tracker here since this is the only step that uses it
   add_context('channels_failed_without_solv_file', [])
-  channels_to_wait_solv_file = get_context('channels_to_wait_solv_file')
+  channels_to_wait_solv_file = get_context('channels_to_wait_solv_file').uniq
+  accumulated_timeout = get_context('channels_timeout')
   checking_rate = 10
-  begin
-    repeat_until_timeout(timeout: get_context('channels_timeout'), message: 'Product not fully initialized') do
-      channels_to_wait_solv_file.reject! do |channel|
-        channel_is_synced?(channel)
-      end
-      break if channels_to_wait_solv_file.empty?
 
-      sleep checking_rate
+  remaining_channels_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
+  optimized_timeout = [accumulated_timeout, remaining_channels_timeout].min
+
+  log "Waiting for #{channels_to_wait_solv_file.count} channel(s) to solve dependencies (timeout: #{optimized_timeout}s)"
+
+  begin
+    deadline = Time.now + optimized_timeout
+
+    until channels_to_wait_solv_file.empty?
+      if Time.now >= deadline
+        raise Timeout::Error,
+              "Metadata generation timed out for: #{channels_to_wait_solv_file.join(', ')}"
+      end
+
+      channels_before = channels_to_wait_solv_file.dup
+      channels_to_wait_solv_file.reject! { |channel| channel_is_synced?(channel) }
+      channels_removed = channels_before.count - channels_to_wait_solv_file.count
+
+      if channels_removed.positive? && channels_to_wait_solv_file.any?
+        log "#{channels_removed} channel(s) solved. Remaining: #{channels_to_wait_solv_file.count}"
+
+        recalc_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
+        tightened_deadline = Time.now + recalc_timeout
+        if tightened_deadline < deadline
+          log "Tightening deadline: #{(deadline - Time.now).round}s remaining → #{recalc_timeout}s"
+          deadline = tightened_deadline
+        end
+      end
+
+      sleep checking_rate unless channels_to_wait_solv_file.empty?
     end
   rescue StandardError => e
-    log "These channels were not initialized:\n #{channels_to_wait_solv_file}. \n#{e.message}"
+    log "These channels were not initialized: #{channels_to_wait_solv_file}. #{e.message}"
     add_context('channels_failed_without_solv_file', get_context('channels_failed_without_solv_file') + channels_to_wait_solv_file)
     # It might be that the MU repository is wrong, but on BV we want to continue in any case
     raise unless $build_validation
