@@ -599,6 +599,54 @@ def channel_timeout(channel)
   timeout
 end
 
+# This method calculates the timeout needed for channels still waiting to solve dependencies
+#
+# @param channels [Array<String>] List of channel names that still need solving
+# @return [Integer] Total timeout in seconds for these channels
+def calculate_remaining_channels_timeout(channels)
+  channels.reduce(0) { |acc, channel| acc + channel_timeout(channel) }
+end
+
+# This method re-optimizes the timeout based on channels actually solved
+# and the time already spent. It ensures we don't over-wait.
+#
+# @param remaining_channels [Array<String>] Channels still waiting to solve
+# @param time_spent [Integer] Seconds already spent in the current loop
+# @param original_optimized_timeout [Integer] The initial optimized timeout
+# @param accumulated_timeout [Integer] The global accumulated timeout (safety ceiling)
+# @return [Hash] { new_timeout: Integer, adjustment_made: Boolean, reason: String }
+def re_optimize_timeout(remaining_channels, time_spent, original_optimized_timeout, accumulated_timeout)
+  # Calculate what's left from the original optimized timeout
+  time_remaining_in_original = original_optimized_timeout - time_spent
+
+  # Calculate the timeout needed for channels still in queue
+  recalc_timeout = calculate_remaining_channels_timeout(remaining_channels)
+
+  # The actual remaining time needed is the minimum of:
+  # 1. What's left in the original optimized timeout
+  # 2. The recalculated timeout for remaining channels
+  new_timeout = [time_remaining_in_original, recalc_timeout].min
+
+  # Safety: Don't exceed accumulated timeout
+  new_timeout = [new_timeout, accumulated_timeout].min
+
+  adjustment_made = new_timeout < time_remaining_in_original
+
+  reason = if adjustment_made
+             "Channels solved; tightening timeout from #{time_remaining_in_original}s to #{new_timeout}s"
+           else
+             "No optimization needed; keeping #{new_timeout}s"
+           end
+
+  {
+    new_timeout: new_timeout,
+    adjustment_made: adjustment_made,
+    time_remaining: time_remaining_in_original,
+    recalculated: recalc_timeout,
+    reason: reason
+  }
+end
+
 # @param channel_label [String] the label of the channel to check
 # @return [Boolean] true if the synchronization is completed, false otherwise
 def channel_sync_completed?(channel_label)

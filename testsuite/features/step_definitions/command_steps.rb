@@ -445,14 +445,74 @@ When(/^I wait until all synchronized channels have solved their dependencies$/) 
   # Initialize the failure tracker here since this is the only step that uses it
   add_context('channels_failed_without_solv_file', [])
   channels_to_wait_solv_file = get_context('channels_to_wait_solv_file')
+  accumulated_timeout = get_context('channels_timeout')
   checking_rate = 10
+
+  # --- Initial Timeout Optimization ---
+  # Calculate timeout for ONLY the remaining channels that need solving dependencies
+  remaining_channels_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
+
+  # Use the minimum of: accumulated timeout vs remaining channels timeout
+  optimized_timeout = [accumulated_timeout, remaining_channels_timeout].min
+  current_timeout = optimized_timeout
+  time_spent = 0
+
+  # Detailed logging for diagnostics
+  log "═" * 80
+  log "TIMEOUT OPTIMIZATION FOR DEPENDENCY SOLVING"
+  log "═" * 80
+  log "Accumulated global timeout:        #{accumulated_timeout}s (#{(accumulated_timeout / 60.0).round(1)}m)"
+  log "Channels still waiting to solve:   #{channels_to_wait_solv_file.count} channels"
+
+  if channels_to_wait_solv_file.any?
+    log "Detailed breakdown:"
+    channels_to_wait_solv_file.each do |channel|
+      timeout = channel_timeout(channel)
+      log "  • #{channel}: #{timeout}s"
+    end
+  end
+
+  log "Calculated timeout for remaining: #{remaining_channels_timeout}s (#{(remaining_channels_timeout / 60.0).round(1)}m)"
+  log "Initial optimized timeout:        #{optimized_timeout}s (#{(optimized_timeout / 60.0).round(1)}m)"
+  log "═" * 80
+
   begin
-    repeat_until_timeout(timeout: get_context('channels_timeout'), message: 'Product not fully initialized') do
+    repeat_until_timeout(timeout: current_timeout, message: 'Product not fully initialized') do
+      channels_before = channels_to_wait_solv_file.dup
+
+      # Remove solved channels
       channels_to_wait_solv_file.reject! do |channel|
         channel_is_synced?(channel)
       end
+
+      # Check if any channels were actually removed
+      channels_removed = channels_before.count - channels_to_wait_solv_file.count
+
+      if channels_removed > 0
+        log " #{channels_removed} channel(s) solved. Remaining: #{channels_to_wait_solv_file.count}"
+
+        # Re-optimize timeout based on what's actually left
+        reopt_result = re_optimize_timeout(
+          channels_to_wait_solv_file,
+          time_spent,
+          optimized_timeout,
+          accumulated_timeout
+        )
+
+        log "  #{reopt_result[:reason]}"
+        log "    Time spent so far: #{time_spent}s"
+        log "    Time remaining in original: #{reopt_result[:time_remaining]}s"
+        log "    Timeout for channels still waiting: #{reopt_result[:recalculated]}s"
+
+        if reopt_result[:adjustment_made]
+          log "   Timeout adjusted: #{current_timeout}s → #{reopt_result[:new_timeout]}s"
+          current_timeout = reopt_result[:new_timeout]
+        end
+      end
+
       break if channels_to_wait_solv_file.empty?
 
+      time_spent += checking_rate
       sleep checking_rate
     end
   rescue StandardError => e
