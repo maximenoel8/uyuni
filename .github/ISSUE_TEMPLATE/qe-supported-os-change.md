@@ -25,6 +25,7 @@ This will add support for <NEW_OPERATING_SYSTEM_NAME>.
   - [ ] add client support for libvirt (`backend_modules/libvirt/base/main.tf`)
   - [ ] update cloud-init definition (`backend_modules/libvirt/host/user_data.yaml`)
   - [ ] update combustion definition (`backend_modules/libvirt/host/combustion`)
+  - [ ] add new client support in the BV module (`modules/build_validation/main.tf`)
   - [ ] add new client to controller (`salt/controller/bashrc`, `modules/controller/variables.tf`, `modules/controller/main.tf`)
   - [ ] update mirror configuration (`salt/mirror/etc/minima.yaml`)
 
