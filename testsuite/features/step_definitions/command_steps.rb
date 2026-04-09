@@ -1420,14 +1420,9 @@ Then(/^I should see the read-only user listed on the ReportDB user accounts$/) d
 end
 
 When(/^I delete the read-only user for the ReportDB$/) do
-  file = 'delete_user_reportdb.exp'
-  source = "#{File.dirname(__FILE__)}/../upload_files/#{file}"
-  dest = "/tmp/#{file}"
-  success = file_inject(get_target('server'), source, dest)
-  raise ScriptError, 'File injection in server failed' unless success
-
   node = get_target('server')
-  node.run_local("expect -f /tmp/#{file} #{$reportdb_ro_user} #{node.has_mgrctl}")
+  delete_sql = "DROP OWNED BY #{$reportdb_ro_user}; DROP ROLE #{$reportdb_ro_user};"
+  node.run("echo \"#{delete_sql}\" | spacewalk-sql --reportdb --select-mode -")
 end
 
 Then(/^I shouldn't see the read-only user listed on the ReportDB user accounts$/) do
