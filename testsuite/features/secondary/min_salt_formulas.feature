@@ -57,6 +57,7 @@ Feature: Use salt formulas
      And the pillar data for "timezone" should be empty on "ssh_minion"
      And the pillar data for "keyboard_and_language" should be empty on "ssh_minion"
 
+@susemanager
   Scenario: Use the parametrized formula in test mode
      Given I am on the Systems overview page of this "sle_minion"
      And I follow "States" in the content area
@@ -66,6 +67,7 @@ Feature: Use salt formulas
      Then I should see a "Applying the highstate has been scheduled." text
      And I wait at most 300 seconds until event "Apply highstate in test-mode scheduled" is completed
 
+@susemanager
   Scenario: Apply the parametrized formula via the highstate
      When I enable repository "sle_update_repo" on this "sle_minion" without error control
      And I follow "States" in the content area
@@ -91,6 +93,7 @@ Feature: Use salt formulas
      And the pillar data for "keyboard_and_language:keyboard_layout" should be "English (US)" on "sle_minion"
      And the pillar data for "keyboard_and_language:language" should be "English (US)" on "sle_minion"
 
+@susemanager
   Scenario: Apply the reset formula via the highstate
      And I follow "States" in the content area
      And I click on "Apply Highstate"
@@ -157,6 +160,7 @@ Feature: Use salt formulas
      And I should see a "locale-formula-group" text
      And I should see a "deleted" text
 
+@susemanager
   Scenario: Cleanup: reset locale values on the minion
      Given I am on the Systems overview page of this "sle_minion"
      And I follow "States" in the content area
