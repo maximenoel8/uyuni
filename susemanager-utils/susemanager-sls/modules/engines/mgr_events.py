@@ -125,11 +125,13 @@ class Responder:
             conn_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'".format(
                 **db_config
             )
-        # Enable TCP keepalives so the OS detects and tears down stale SSL connections
-        # before PostgreSQL silently closes them on the server side.
-        # keepalives_idle=30:    send the first keepalive probe after 30 s of inactivity
+        # Enable TCP keepalives so the OS can detect and tear down stale or half-open
+        # network connections (for example after NAT/firewall timeouts or broken links).
+        # These probes do not prevent PostgreSQL from closing idle sessions on the server
+        # side; they mainly help detect dead peers when the network path disappears.
+        # keepalives_idle=30:     send the first keepalive probe after 30 s of inactivity
         # keepalives_interval=10: retry probe every 10 s if no reply
-        # keepalives_count=3:    drop the connection after 3 consecutive missed probes
+        # keepalives_count=3:     consider the connection dead after 3 missed probes
         conn_string += (
             " keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=3"
         )
@@ -265,8 +267,21 @@ class Responder:
         # *before* an event INSERT fails and risks losing the event.
         try:
             self.cursor.execute("SELECT 1")
+            if self.counter == 0:
+                # The keepalive probe starts a transaction when autocommit is
+                # disabled. Roll it back if there are no pending inserts so the
+                # session does not remain idle in transaction.
+                self.connection.rollback()
         except Exception:  # pylint: disable=broad-exception-caught
             log.error("Disconnected from database. Trying to reconnect...")
+            try:
+                self.cursor.close()
+            except Exception:  # pylint: disable=broad-exception-caught
+                pass
+            try:
+                self.connection.close()
+            except Exception:  # pylint: disable=broad-exception-caught
+                pass
             self._connect_to_database()
 
     def queue_thread(self):

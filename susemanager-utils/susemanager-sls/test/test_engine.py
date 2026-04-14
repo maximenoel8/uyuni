@@ -248,9 +248,6 @@ def test_commit_avoidance_without_tokens(responder):
 
 # pylint: disable-next=redefined-outer-name
 def test_postgres_connect(db_connection, responder):
-    disposable_connection = new_connection()
-    disposable_connection.close()
-    responder.connection = disposable_connection
     with patch("mgr_events.time") as mock_time:
         with patch("mgr_events.psycopg2") as mock_psycopg2:
             mock_psycopg2.connect.side_effect = [
@@ -258,7 +255,13 @@ def test_postgres_connect(db_connection, responder):
                 db_connection,
             ]
             mock_psycopg2.OperationalError = psycopg2.OperationalError
-            responder.db_keepalive()
+            # Simulate the cursor detecting a dead connection (e.g. SSL teardown)
+            with patch.object(
+                responder.cursor,
+                "execute",
+                side_effect=Exception("SSL connection has been closed unexpectedly"),
+            ):
+                responder.db_keepalive()
             assert mock_psycopg2.connect.call_count == 2
     mock_time.sleep.assert_called_once_with(5)
 
@@ -271,4 +274,5 @@ def test_postgres_connect_with_port(responder):
         responder._connect_to_database()
         mock_psycopg2.connect.assert_called_once_with(
             "dbname='tests' user='postgres' host='localhost' port='1234' password=''"
+            " keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=3"
         )
