@@ -125,6 +125,14 @@ class Responder:
             conn_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'".format(
                 **db_config
             )
+        # Enable TCP keepalives so the OS detects and tears down stale SSL connections
+        # before PostgreSQL silently closes them on the server side.
+        # keepalives_idle=30:    send the first keepalive probe after 30 s of inactivity
+        # keepalives_interval=10: retry probe every 10 s if no reply
+        # keepalives_count=3:    drop the connection after 3 consecutive missed probes
+        conn_string += (
+            " keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=3"
+        )
         log.debug("connecting to database")
         while True:
             try:
@@ -249,8 +257,16 @@ class Responder:
             log.warning("Unable to unpack the event data: %s", e)
 
     def db_keepalive(self):
-        if self.connection.closed:
-            log.error("Diconnected from database. Trying to reconnect...")
+        # psycopg2's connection.closed flag is only set when the connection is
+        # explicitly closed from our side.  A PostgreSQL-initiated SSL teardown
+        # (e.g. idle_session_timeout, SSL renegotiation, network drop) leaves
+        # connection.closed == 0 until the next I/O call raises an exception.
+        # Use an active probe query so we detect and recover from silent drops
+        # *before* an event INSERT fails and risks losing the event.
+        try:
+            self.cursor.execute("SELECT 1")
+        except Exception:  # pylint: disable=broad-exception-caught
+            log.error("Disconnected from database. Trying to reconnect...")
             self._connect_to_database()
 
     def queue_thread(self):
