@@ -9,7 +9,6 @@ from unittest.mock import MagicMock, patch, call
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database, drop_database
 
-
 ch = logging.StreamHandler()
 ch.setLevel(logging.DEBUG)
 log = logging.getLogger("mgr_events")
