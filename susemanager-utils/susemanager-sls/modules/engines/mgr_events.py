@@ -125,13 +125,6 @@ class Responder:
             conn_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'".format(
                 **db_config
             )
-        # Enable TCP keepalives so the OS can detect and tear down stale or half-open
-        # network connections (for example after NAT/firewall timeouts or broken links).
-        # These probes do not prevent PostgreSQL from closing idle sessions on the server
-        # side; they mainly help detect dead peers when the network path disappears.
-        # keepalives_idle=30:     send the first keepalive probe after 30 s of inactivity
-        # keepalives_interval=10: retry probe every 10 s if no reply
-        # keepalives_count=3:     consider the connection dead after 3 missed probes
         conn_string += (
             " keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=3"
         )
@@ -259,18 +252,9 @@ class Responder:
             log.warning("Unable to unpack the event data: %s", e)
 
     def db_keepalive(self):
-        # psycopg2's connection.closed flag is only set when the connection is
-        # explicitly closed from our side.  A PostgreSQL-initiated SSL teardown
-        # (e.g. idle_session_timeout, SSL renegotiation, network drop) leaves
-        # connection.closed == 0 until the next I/O call raises an exception.
-        # Use an active probe query so we detect and recover from silent drops
-        # *before* an event INSERT fails and risks losing the event.
         try:
             self.cursor.execute("SELECT 1")
             if self.counter == 0:
-                # The keepalive probe starts a transaction when autocommit is
-                # disabled. Roll it back if there are no pending inserts so the
-                # session does not remain idle in transaction.
                 self.connection.rollback()
         except Exception:  # pylint: disable=broad-exception-caught
             log.error("Disconnected from database. Trying to reconnect...")
