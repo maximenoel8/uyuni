@@ -157,10 +157,21 @@ After do |scenario|
         Capybara.current_session.driver.quit
         visit Capybara.app_host
         log 'Web driver has been restarted'
-      elsif web_session_is_active?
-        handle_screenshot_and_relog(scenario, current_epoch)
       else
-        warn 'There is no active web session; unable to take a screenshot or relog.'
+        # web_session_is_active? can raise WebDriverError if the session went stale
+        # after a long-running step (e.g. bootstrap timeout). Rescue it so the After
+        # hook does not fail and swallow the screenshot opportunity.
+        session_active = begin
+                           web_session_is_active?
+                         rescue Selenium::WebDriver::Error::WebDriverError => e
+                           log "WebDriver session went stale when checking for active session: #{e.message}"
+                           false
+                         end
+        if session_active
+          handle_screenshot_and_relog(scenario, current_epoch)
+        else
+          warn 'There is no active web session; unable to take a screenshot or relog.'
+        end
       end
     ensure
       print_server_logs
@@ -185,8 +196,9 @@ end
 
 # Take a screenshot and try to log back at suse manager server
 def handle_screenshot_and_relog(scenario, current_epoch)
-  Dir.mkdir('screenshots') unless File.directory?('screenshots')
-  path = "screenshots/#{scenario.name.tr(' ./', '_')}.png"
+  screenshot_dir = ENV.fetch('SCREENSHOT_DIR', 'screenshots')
+  Dir.mkdir(screenshot_dir) unless File.directory?(screenshot_dir)
+  path = "#{screenshot_dir}/#{scenario.name.tr(' ./', '_')}.png"
   begin
     click_details_if_present
     page.driver.browser.save_screenshot(path)
