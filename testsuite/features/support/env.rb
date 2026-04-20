@@ -185,8 +185,9 @@ end
 
 # Take a screenshot and try to log back at suse manager server
 def handle_screenshot_and_relog(scenario, current_epoch)
-  Dir.mkdir('screenshots') unless File.directory?('screenshots')
-  path = "screenshots/#{scenario.name.tr(' ./', '_')}.png"
+  screenshot_dir = ENV.fetch('SCREENSHOT_DIR', 'screenshots')
+  Dir.mkdir(screenshot_dir) unless File.directory?(screenshot_dir)
+  path = "#{screenshot_dir}/#{scenario.name.tr(' ./', '_')}.png"
   begin
     click_details_if_present
     page.driver.browser.save_screenshot(path)
