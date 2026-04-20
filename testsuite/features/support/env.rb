@@ -161,12 +161,13 @@ After do |scenario|
         # web_session_is_active? can raise WebDriverError if the session went stale
         # after a long-running step (e.g. bootstrap timeout). Rescue it so the After
         # hook does not fail and swallow the screenshot opportunity.
-        session_active = begin
-                           web_session_is_active?
-                         rescue Selenium::WebDriver::Error::WebDriverError => e
-                           log "WebDriver session went stale when checking for active session: #{e.message}"
-                           false
-                         end
+        session_active =
+          begin
+            web_session_is_active?
+          rescue Selenium::WebDriver::Error::WebDriverError => e
+            log "WebDriver session went stale when checking for active session: #{e.message}"
+            false
+          end
         if session_active
           handle_screenshot_and_relog(scenario, current_epoch)
         else
