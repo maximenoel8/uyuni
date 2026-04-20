@@ -81,7 +81,15 @@ namespace :parallel do
       cucumber_opts = "#{include_profiles} #{include_tags} #{html_results} #{json_results} #{junit_results} -f CustomFormatter::PrettyFormatter -r features "
       # Publish the results in reports.cucumber.io if the environment variable PUBLISH_CUCUMBER_REPORT is set
       cucumber_opts << ' --publish' if ENV['PUBLISH_CUCUMBER_REPORT'] == 'true'
-      sh "bundle exec parallel_cucumber -n 6 -o '#{cucumber_opts}' #{features}"
+      # Capture test failures so the rename step always runs before re-raising.
+      # parallel_cucumber exits non-zero when any test fails, which would cause
+      # Rake's sh to raise immediately and skip the rename block.
+      cucumber_error = nil
+      begin
+        sh "bundle exec parallel_cucumber -n 6 -o '#{cucumber_opts}' #{features}"
+      rescue => cucumber_error # rubocop:disable Naming/RescuedExceptionsVariableName
+        nil
+      end
       # Rename output files from the opaque TEST_ENV_NUMBER suffix to the client name
       # extracted from the feature URI inside each JSON (e.g. min_rhlike_salt.feature → min_rhlike_salt).
       Dir.glob("#{result_folder}/output_#{timestamp}-#{run_set}-[0-9]*.json").each do |json_file|
@@ -99,6 +107,7 @@ namespace :parallel do
         new_html = new_json.sub(/\.json$/, '.html')
         File.rename(html_file, new_html) if File.exist?(html_file)
       end
+      raise cucumber_error if cucumber_error
     end
   end
 end
