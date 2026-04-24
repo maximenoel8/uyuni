@@ -30,6 +30,10 @@ Feature: Operate an Ansible control node in a normal minion
     And I click on "Update Properties"
     Then I wait until I see "Ansible Control Node type has been applied." text
 
+  Scenario: Check that the automatic Ansible inventory refresh succeeds
+    Given I am on the Systems overview page of this "sle_minion"
+    And I wait until event "Refresh Ansible inventories scheduled by (system)" is completed
+
   Scenario: Apply highstate and check that Ansible is installed
     Given I am on the Systems overview page of this "sle_minion"
     When I follow "States" in the content area
