@@ -25,6 +25,7 @@ Feature: Operate an Ansible control node in a normal minion
 
   Scenario: Enable "Ansible control node" system type
     Given I am on the Systems overview page of this "sle_minion"
+    And I store the current last event id for "sle_minion"
     When I follow "Properties" in the content area
     And I check "ansible_control_node"
     And I click on "Update Properties"
@@ -32,7 +33,7 @@ Feature: Operate an Ansible control node in a normal minion
 
   Scenario: Check that the automatic Ansible inventory refresh succeeds
     Given I am on the Systems overview page of this "sle_minion"
-    And I wait until event "Refresh Ansible inventories scheduled by (system)" is completed
+    Then I wait until a new "Refresh Ansible inventories scheduled by (system)" event is completed for "sle_minion"
 
   Scenario: Apply highstate and check that Ansible is installed
     Given I am on the Systems overview page of this "sle_minion"

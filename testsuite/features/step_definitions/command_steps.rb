@@ -1806,6 +1806,22 @@ Then(/^the word "([^']*)" does not occur more than (\d+) times in "(.*)" on "([^
   raise "The word #{word} occured #{occurences} times, which is more more than #{threshold} times in file #{path}" if occurences > threshold
 end
 
+When(/^I store the current last event id for "([^"]*)"$/) do |host|
+  add_context(:last_event_baseline, get_last_event(host))
+end
+
+Then(/^I wait until a new "([^"]*)" event is completed for "([^"]*)"$/) do |event_summary, host|
+  baseline = get_context(:last_event_baseline)
+  raise 'No baseline event stored - did the previous scenario run the store step?' if baseline.nil?
+
+  last_event = baseline
+  repeat_until_timeout(message: "Waiting for new '#{event_summary}' event to be created") do
+    last_event = get_last_event(host)
+    break if last_event['id'] > baseline['id'] && last_event['summary'].include?(event_summary)
+  end
+  wait_action_complete(last_event['id'])
+end
+
 Then(/^I upgrade "([^"]*)" with the last "([^"]*)" version$/) do |host, package|
   system_name = get_system_name(host)
   last_event_before_upgrade = get_last_event(host)
