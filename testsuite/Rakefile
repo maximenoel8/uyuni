@@ -53,7 +53,7 @@ namespace :cucumber do
       # Patch the HTML report to preserve execution order instead of alphabetical sorting.
       # cucumber-html-formatter 21.x hardcodes a localeCompare sort by URI in its bundled JS,
       # which overrides the execution order regardless of the --order flag.
-      # We neutralise that sort call so features render in the order they were executed.
+      # We neutralize that sort call so features render in the order they were executed.
       if File.exist?(html_results)
         html_content = File.read(html_results)
         sort_call = 'i.sort(((e,t)=>(e.uri||"").localeCompare(t.uri||"")))'
