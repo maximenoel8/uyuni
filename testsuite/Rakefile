@@ -50,6 +50,21 @@ namespace :cucumber do
     # This block executes when the task runs and uses the exact same `html_results` path.
     # This file is used to expose the cucumber html report in Jenkins
     Rake::Task[task_name].enhance do
+      # Patch the HTML report to preserve execution order instead of alphabetical sorting.
+      # cucumber-html-formatter 21.x hardcodes a localeCompare sort by URI in its bundled JS,
+      # which overrides the execution order regardless of the --order flag.
+      # We neutralise that sort call so features render in the order they were executed.
+      if File.exist?(html_results)
+        html_content = File.read(html_results)
+        sort_call = 'i.sort(((e,t)=>(e.uri||"").localeCompare(t.uri||"")))'
+        if html_content.include?(sort_call)
+          patched = html_content.gsub(sort_call, 'i' + (' ' * (sort_call.length - 1)))
+          File.write(html_results, patched)
+        else
+          warn "WARNING: Could not find sort patch target in #{html_results} — " \
+                 'cucumber-html-formatter may have changed; verify execution order in the HTML report.'
+        end
+      end
       # Write the final HTML path (without the option flag) to the file
       # This uses the CONSISTENT, PRE-CALCULATED 'html_results' variable
       sh "echo '#{html_results}' > #{path_export_file}", verbose: false
