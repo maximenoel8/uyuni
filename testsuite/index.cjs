@@ -1,34 +1,41 @@
 /**
- * https://github.com/gkushang/cucumber-html-reporter
+ * Cucumber HTML report generator using multiple-cucumber-html-reporter
+ * Replaces cucumber-html-reporter (abandoned since 2021)
+ * Preserves JSON execution order, supports filter by passed/failed/skipped
  */
 
-var reporter = require('cucumber-html-reporter');
-var path = require('path');
+const report = require('multiple-cucumber-html-reporter');
+const path = require('path');
 
-// Read command-line arguments
-var args = process.argv.slice(2);
-var jsonDir = args[0] || '.'; // Default to current directory if no argument provided
+const args = process.argv.slice(2);
+const jsonDir = args[0] || '.';
 
-var options = {
-  theme: 'bootstrap',
+report.generate({
   jsonDir: jsonDir,
-  output: 'cucumber_report/cucumber_report.html',
-  reportSuiteAsScenarios: true,
-  launchReport: true,
-  columnLayout: 1,
-  scenarioTimestamp: true,
-  screenshotsDirectory: './cucumber_report/screenshots/',
-  storeScreenshots: true,
-  noInlineScreenshots: true,
-  ignoreBadJsonFile: true,
-  name: 'Uyuni/Head Testsuite',
-  brandTitle: ' ',
-  metadata: {
-    "App Version":"Uyuni/Head",
-    "Browser": "Chrome",
-    "Platform": "x86_64",
-    "Parallel": "Disabled"
-  }
-};
+  reportPath: 'cucumber_report',
+  reportName: 'Uyuni/Head Testsuite',
 
-reporter.generate(options);
+  // Preserve the order features appear in the JSON (= execution order)
+  // multiple-cucumber-html-reporter does not sort — it uses array order
+  displayDuration: true,
+  durationInMS: false,  // Cucumber Ruby reports in nanoseconds
+
+  // Show pass/fail/skip filter buttons on the overview
+  displayReportTime: true,
+
+  // Flatten metadata (no browser/device columns — not relevant for your setup)
+  hideMetadata: true,
+
+  customData: {
+    title: 'Run info',
+    data: [
+      { label: 'Product',   value: 'Uyuni/Head' },
+      { label: 'Platform',  value: 'x86_64' },
+    ]
+  },
+
+  // Screenshots embedded in the report
+  // (attach them in your Cucumber hooks with world.attach(screenshot, 'image/png'))
+
+  ignoreBadJsonFile: true,
+});
