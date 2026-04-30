@@ -7,6 +7,7 @@
 const report = require('multiple-cucumber-html-reporter');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const args = process.argv.slice(2);
 const jsonDir = args[0] || '.';
@@ -45,31 +46,26 @@ for (const file of jsonFiles) {
 
 console.log(`Loaded ${allFeatures.length} features from ${jsonFiles.length} JSON files.`);
 
-// Write a single merged + ordered JSON file for the reporter to consume.
-// Using a distinct name avoids it being picked up as a cucumber report itself.
-const mergedJsonPath = path.join(jsonDir, '_ordered_report.json');
+// Write the merged file into a dedicated temp directory.
+// This avoids passing both jsonDir (original files) and jsonFile (merged file)
+// to the reporter simultaneously, which caused duplicate un-numbered entries.
+// The library requires jsonDir to be set, so we point it at the temp dir
+// that contains only our single ordered merged file.
+const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cucumber-report-'));
+const mergedJsonPath = path.join(tmpDir, 'ordered_report.json');
 fs.writeFileSync(mergedJsonPath, JSON.stringify(allFeatures));
 
 try {
   report.generate({
-    // Point at the single pre-ordered merged file rather than the directory,
-    // so the reporter doesn't re-discover and re-sort the individual files.
-    jsonDir: jsonDir,
+    jsonDir: tmpDir,        // only our merged file lives here — no duplicates
     jsonFile: mergedJsonPath,
     reportPath: 'cucumber_report',
     reportName: 'Uyuni/Head Testsuite',
-
-    // Durations are in nanoseconds (Cucumber Ruby default)
     displayDuration: true,
     durationInMS: false,
-
     displayReportTime: true,
-
-    // No browser/device metadata columns — not relevant for this setup
     hideMetadata: true,
-
     ignoreBadJsonFile: true,
-
     customData: {
       title: 'Run info',
       data: [
@@ -79,6 +75,6 @@ try {
     }
   });
 } finally {
-  // Always clean up the temp merged file
-  fs.unlinkSync(mergedJsonPath);
+  // Always clean up the temp directory
+  fs.rmSync(tmpDir, { recursive: true, force: true });
 }
