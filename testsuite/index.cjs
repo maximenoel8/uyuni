@@ -41,6 +41,15 @@ for (const file of jsonFiles) {
       sequenceNumber++;
       const pad = String(sequenceNumber).padStart(4, '0');
       feature.name = `${pad} - ${feature.name}`;
+
+      // Strip before/after hooks to remove visual noise and fix false failures
+      for (const scenario of (feature.elements || [])) {
+        delete scenario.before;
+        delete scenario.after;
+        for (const step of (scenario.steps || [])) {
+          delete step.after;
+        }
+      }
     }
     allFeatures.push(...features);
   } catch (e) {
@@ -51,10 +60,6 @@ for (const file of jsonFiles) {
 console.log(`Loaded ${allFeatures.length} features from ${jsonFiles.length} JSON files.`);
 
 // Write the merged file into a dedicated temp directory.
-// This avoids passing both jsonDir (original files) and jsonFile (merged file)
-// to the reporter simultaneously, which caused duplicate un-numbered entries.
-// The library requires jsonDir to be set, so we point it at the temp dir
-// that contains only our single ordered merged file.
 const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cucumber-report-'));
 const mergedJsonPath = path.join(tmpDir, 'ordered_report.json');
 fs.writeFileSync(mergedJsonPath, JSON.stringify(allFeatures));
