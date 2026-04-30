@@ -15,6 +15,10 @@ const jsonDir = args[0] || '.';
 // Read all Cucumber JSON files in the directory.
 // Filenames contain timestamps (e.g. output_20260429143645-sanity_check.json)
 // so lexicographic sort == chronological == execution order.
+if (!fs.existsSync(jsonDir) || !fs.statSync(jsonDir).isDirectory()) {
+  console.error(`Results directory not found or not a directory: ${jsonDir}`);
+  process.exit(1);
+}
 const jsonFiles = fs.readdirSync(jsonDir)
   .filter(f => f.match(/^output_.*\.json$/))
   .sort()
