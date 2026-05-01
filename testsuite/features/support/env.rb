@@ -89,6 +89,18 @@ end
 # Fix a problem with minitest and cucumber options passed through rake
 MultiTest.disable_autorun
 
+# WORKAROUND: Chrome 134+ raises UnknownError ("Node with given id does not belong to the document")
+# via CDP when a full page navigation invalidates DOM node references mid-wait.
+# Capybara's synchronize() only retries on errors in invalid_element_errors, which does not include
+# UnknownError, so the error surfaces as a hard crash. Extending the driver makes it retryable.
+module CapybaraUnknownErrorRetry
+  # Adds UnknownError to the list of errors that Capybara retries on during synchronize().
+  # Chrome 134+ raises UnknownError via CDP when a page navigation invalidates DOM node references.
+  def invalid_element_errors
+    super + [Selenium::WebDriver::Error::UnknownError]
+  end
+end
+
 # register chromedriver in headless mode
 def capybara_register_driver
   Capybara.register_driver :selenium_chrome_headless do |app|
@@ -114,7 +126,9 @@ def capybara_register_driver
     chrome_options.add_preference('unhandledPromptBehavior', 'accept')
     chrome_options.add_preference('unexpectedAlertBehaviour', 'accept')
 
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options, http_client: client)
+    driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options, http_client: client)
+    driver.extend(CapybaraUnknownErrorRetry)
+    driver
   end
 end
 
