@@ -42,13 +42,37 @@ for (const file of jsonFiles) {
       const pad = String(sequenceNumber).padStart(4, '0');
       feature.name = `${pad} - ${feature.name}`;
 
-      // Strip before/after hooks to remove visual noise and fix false failures
       for (const scenario of (feature.elements || [])) {
-        delete scenario.before;
-        delete scenario.after;
-        for (const step of (scenario.steps || [])) {
-          delete step.after;
+        // Rescue screenshot embeddings from hooks before stripping them.
+        // Cucumber Ruby attaches screenshots inside after hooks on failure —
+        // we move them onto the failed step so they appear in the report.
+        const hookEmbeddings = [];
+        for (const hook of [...(scenario.before || []), ...(scenario.after || [])]) {
+          for (const embedding of (hook.embeddings || [])) {
+            if (embedding.mime_type === 'image/png' || embedding.media_type === 'image/png') {
+              hookEmbeddings.push(embedding);
+            }
+          }
         }
+        if (hookEmbeddings.length > 0) {
+          const failedStep = (scenario.steps || []).find(s => s.result?.status === 'failed');
+          if (failedStep) {
+            failedStep.embeddings = [...(failedStep.embeddings || []), ...hookEmbeddings];
+          }
+        }
+
+        // Strip passed/skipped hooks to remove visual noise and fix false failures
+        // in the Jenkins Cucumber plugin. Failed hooks (and hooks with no result)
+        // are kept so they remain visible in the report for debugging.
+        const safeStatuses = ['passed', 'skipped'];
+        scenario.before = (scenario.before || []).filter(h => !safeStatuses.includes(h.result?.status));
+        scenario.after  = (scenario.after  || []).filter(h => !safeStatuses.includes(h.result?.status));
+        for (const step of (scenario.steps || [])) {
+          step.after = (step.after || []).filter(h => !safeStatuses.includes(h.result?.status));
+          if (step.after.length === 0) delete step.after;
+        }
+        if (scenario.before.length === 0) delete scenario.before;
+        if (scenario.after.length === 0)  delete scenario.after;
       }
     }
     allFeatures.push(...features);
