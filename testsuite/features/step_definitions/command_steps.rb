@@ -630,19 +630,22 @@ When(/^the controller starts mocking a Redfish host$/) do
   file_extract(get_target('server'), key_path.strip, '/root/controller.key')
   file_extract(get_target('server'), crt_path.strip, '/root/controller.crt')
 
-  `curl --output /root/DSP2043_2019.1.zip https://www.dmtf.org/sites/default/files/standards/documents/DSP2043_2019.1.zip`
-  `unzip /root/DSP2043_2019.1.zip -d /root/`
+  data_dir = "#{File.dirname(__FILE__)}/../upload_files/Redfish-Mockup-Server/data/public-catfish"
   cmd = "/usr/bin/python3 #{File.dirname(__FILE__)}/../upload_files/Redfish-Mockup-Server/redfishMockupServer.py " \
         "-H #{hostname} -p 8443 " \
-        '-S -D /root/DSP2043_2019.1/public-catfish/ ' \
+        "-S -D #{data_dir} " \
         '--ssl --cert /root/controller.crt --key /root/controller.key ' \
         '< /dev/null > /dev/null 2>&1 &'
   `#{cmd}`
+  repeat_until_timeout(timeout: 30, message: 'Redfish mock server did not start on port 8443') do
+    result = `curl -sk --connect-timeout 2 --max-time 3 https://#{hostname}:8443/redfish/v1 2>/dev/null`
+    break unless result.empty?
+    sleep 1
+  end
 end
 
 When(/^the controller stops mocking a Redfish host$/) do
   `pkill -e -f #{File.dirname(__FILE__)}/../upload_files/Redfish-Mockup-Server/redfishMockupServer.py`
-  `rm -rf /root/DSP2043_2019.1*`
 end
 
 When(/^I install a user-defined state for "([^"]*)" on the server$/) do |host|
