@@ -434,21 +434,44 @@ When(/^I wait until all synchronized channels for "([^"]*)" have finished$/) do 
 end
 
 When(/^I wait until all synchronized channels have solved their dependencies$/) do
-  # Initialize the failure tracker here since this is the only step that uses it
   add_context('channels_failed_without_solv_file', [])
-  channels_to_wait_solv_file = get_context('channels_to_wait_solv_file')
+  channels_to_wait_solv_file = get_context('channels_to_wait_solv_file').uniq
+  accumulated_timeout = get_context('channels_timeout')
   checking_rate = 10
+
+  if channels_to_wait_solv_file.empty?
+    log 'No channels pending dependency solving, skipping wait'
+    next
+  end
+
+  remaining_channels_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
+  optimized_timeout = [accumulated_timeout, remaining_channels_timeout].min
+
+  log "Waiting for #{channels_to_wait_solv_file.count} channel(s) to solve dependencies (timeout: #{optimized_timeout}s)"
+
   begin
-    repeat_until_timeout(timeout: get_context('channels_timeout'), message: 'Product not fully initialized') do
-      channels_to_wait_solv_file.reject! do |channel|
-        channel_is_synced?(channel)
-      end
+    start = Time.now
+    deadline_elapsed = optimized_timeout
+    repeat_until_timeout(timeout: optimized_timeout, message: 'Product not fully initialized') do
+      prev_count = channels_to_wait_solv_file.count
+      channels_to_wait_solv_file.reject! { |channel| channel_is_synced?(channel) }
       break if channels_to_wait_solv_file.empty?
+
+      if channels_to_wait_solv_file.count < prev_count
+        elapsed = Time.now - start
+        recalc_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
+        deadline_elapsed = [deadline_elapsed, elapsed + recalc_timeout].min
+      end
+
+      if Time.now - start >= deadline_elapsed
+        raise Timeout::Error,
+              "Metadata generation timed out for: #{channels_to_wait_solv_file.join(', ')}"
+      end
 
       sleep checking_rate
     end
   rescue StandardError => e
-    log "These channels were not initialized:\n #{channels_to_wait_solv_file}. \n#{e.message}"
+    log "These channels were not initialized: #{channels_to_wait_solv_file}. #{e.message}"
     add_context('channels_failed_without_solv_file', get_context('channels_failed_without_solv_file') + channels_to_wait_solv_file)
     # It might be that the MU repository is wrong, but on BV we want to continue in any case
     raise unless $build_validation
