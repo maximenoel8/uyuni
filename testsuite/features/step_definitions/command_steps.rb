@@ -439,36 +439,36 @@ When(/^I wait until all synchronized channels have solved their dependencies$/) 
   accumulated_timeout = get_context('channels_timeout')
   checking_rate = 10
 
+  if channels_to_wait_solv_file.empty?
+    log 'No channels pending dependency solving, skipping wait'
+    next
+  end
+
   remaining_channels_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
   optimized_timeout = [accumulated_timeout, remaining_channels_timeout].min
 
   log "Waiting for #{channels_to_wait_solv_file.count} channel(s) to solve dependencies (timeout: #{optimized_timeout}s)"
 
   begin
-    deadline = Time.now + optimized_timeout
+    start = Time.now
+    deadline_elapsed = optimized_timeout
+    repeat_until_timeout(timeout: optimized_timeout, message: 'Product not fully initialized') do
+      prev_count = channels_to_wait_solv_file.count
+      channels_to_wait_solv_file.reject! { |channel| channel_is_synced?(channel) }
+      break if channels_to_wait_solv_file.empty?
 
-    until channels_to_wait_solv_file.empty?
-      if Time.now >= deadline
+      if channels_to_wait_solv_file.count < prev_count
+        elapsed = Time.now - start
+        recalc_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
+        deadline_elapsed = [deadline_elapsed, elapsed + recalc_timeout].min
+      end
+
+      if Time.now - start >= deadline_elapsed
         raise Timeout::Error,
               "Metadata generation timed out for: #{channels_to_wait_solv_file.join(', ')}"
       end
 
-      channels_before = channels_to_wait_solv_file.dup
-      channels_to_wait_solv_file.reject! { |channel| channel_is_synced?(channel) }
-      channels_removed = channels_before.count - channels_to_wait_solv_file.count
-
-      if channels_removed.positive? && channels_to_wait_solv_file.any?
-        log "#{channels_removed} channel(s) solved. Remaining: #{channels_to_wait_solv_file.count}"
-
-        recalc_timeout = calculate_remaining_channels_timeout(channels_to_wait_solv_file)
-        tightened_deadline = Time.now + recalc_timeout
-        if tightened_deadline < deadline
-          log "Tightening deadline: #{(deadline - Time.now).round}s remaining → #{recalc_timeout}s"
-          deadline = tightened_deadline
-        end
-      end
-
-      sleep checking_rate unless channels_to_wait_solv_file.empty?
+      sleep checking_rate
     end
   rescue StandardError => e
     log "These channels were not initialized: #{channels_to_wait_solv_file}. #{e.message}"
