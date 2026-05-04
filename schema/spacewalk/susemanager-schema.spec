@@ -22,7 +22,7 @@
 %{!?fedora: %global sbinpath /sbin}%{?fedora: %global sbinpath %{_sbindir}}
 
 Name:           susemanager-schema
-Version:        5.2.7
+Version:        5.2.8
 Release:        0
 Summary:        SQL schema for %{productprettyname} server
 License:        GPL-2.0-only
