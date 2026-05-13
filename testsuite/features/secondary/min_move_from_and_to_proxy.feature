@@ -10,6 +10,7 @@ Feature: Move a minion from a proxy to direct connection
 
   Scenario: Delete minion system profile before bootstrap
     When I delete "sle_minion" system using the api
+    And I perform a full salt minion cleanup on "sle_minion"
     And I wait until Salt client is inactive on "sle_minion"
     Then "sle_minion" should not be registered
 

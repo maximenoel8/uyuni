@@ -93,6 +93,8 @@ Feature: Bootstrap a SSH-managed Debian-like minion and do some basic operations
 
   Scenario: Cleanup: delete the SSH-managed Debian-like minion
     When I delete "deblike_minion" system using the api
+    And I perform a full salt minion cleanup on "deblike_minion"
+    And I wait until Salt client is inactive on "deblike_minion"
     Then "deblike_minion" should not be registered
 
   Scenario: Cleanup: bootstrap a Debian-like minion

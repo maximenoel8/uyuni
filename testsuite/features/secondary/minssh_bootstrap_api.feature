@@ -20,6 +20,8 @@ Feature: Register a salt-ssh system via API
 
   Scenario: Delete SSH minion system profile before API bootstrap test
     When I delete "ssh_minion" system using the api
+    And I perform a full salt minion cleanup on "ssh_minion"
+    And I wait until Salt client is inactive on "ssh_minion"
     Then "ssh_minion" should not be registered
 
 @proxy

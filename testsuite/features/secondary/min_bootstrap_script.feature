@@ -23,6 +23,7 @@ Feature: Register a Salt minion with a bootstrap script
 
   Scenario: Delete SLES minion system profile before script bootstrap test
     When I delete "sle_minion" system using the api
+    And I perform a full salt minion cleanup on "sle_minion"
     And I wait until Salt client is inactive on "sle_minion"
     Then "sle_minion" should not be registered
 

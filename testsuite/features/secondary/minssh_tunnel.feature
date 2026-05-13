@@ -85,6 +85,8 @@ Feature: Register a Salt system to be managed via SSH tunnel
 
   Scenario: Cleanup: delete the SSH tunnel minion
     When I delete "ssh_minion" system using the api
+    And I perform a full salt minion cleanup on "ssh_minion"
+    And I wait until Salt client is inactive on "ssh_minion"
     Then "ssh_minion" should not be registered
 
   Scenario: Cleanup: register a SSH minion after SSH tunnel tests

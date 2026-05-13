@@ -93,6 +93,8 @@ Feature: Bootstrap a SSH-managed Red Hat-like minion and do some basic operation
 
   Scenario: Cleanup: delete the SSH-managed Red Hat-like minion
     When I delete "rhlike_minion" system using the api
+    And I perform a full salt minion cleanup on "rhlike_minion"
+    And I wait until Salt client is inactive on "rhlike_minion"
     Then "rhlike_minion" should not be registered
 
   Scenario: Cleanup: bootstrap a Red Hat-like minion after SSH minion tests

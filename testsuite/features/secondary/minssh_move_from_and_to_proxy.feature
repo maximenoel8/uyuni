@@ -20,6 +20,8 @@ Feature: Move a SSH minion from a proxy to direct connection
 
   Scenario: Delete minion system profile before bootstrap
     When I delete "ssh_minion" system using the api
+    And I perform a full salt minion cleanup on "ssh_minion"
+    And I wait until Salt client is inactive on "ssh_minion"
     Then "ssh_minion" should not be registered
 
   Scenario: Bootstrap a minion
