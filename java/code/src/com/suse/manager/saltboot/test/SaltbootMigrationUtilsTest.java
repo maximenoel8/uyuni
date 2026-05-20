@@ -49,7 +49,7 @@ public class SaltbootMigrationUtilsTest extends JMockBaseTestCaseWithUser {
     private CobblerConnection client;
 
     // Pending cobbler integration to the test container
-    private final boolean useRealCobbler = false;
+    private final boolean useRealCobbler = true;
 
     @Override
     @BeforeEach
