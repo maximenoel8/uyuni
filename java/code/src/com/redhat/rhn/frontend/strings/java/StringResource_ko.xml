@@ -12111,17 +12111,17 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         <source>Recommended post-migration steps:
 - Check for orphaned/unneeded packages: zypper packages --orphaned --unneeded
 - Check for updated config files: find /etc/ -name '*.rpmnew' -o -name '*.rpmsave'</source>
-        <target state="translated">Recommended post-migration steps:
-- Check for orphaned/unneeded packages: zypper packages --orphaned --unneeded
-- Check for updated config files: find /etc/ -name '*.rpmnew' -o -name '*.rpmsave'</target>
+        <target state="needs-translation">권장 마이그레이션 후 단계:
+- 고아/불필요한 패키지 확인: zypper packages --orphaned --unneeded
+- 업데이트된 구성 파일 확인: find /etc/ -name '*.rpmnew' -o -name '*.rpmsave'</target>
       </trans-unit>
       <trans-unit id="distupgrade.sles16.migration.failed" xml:space="preserve">
         <source>SLES 16 migration failed or result not found.{0}</source>
-        <target state="new"/>
+        <target state="needs-translation">SLES 16 마이그레이션이 실패했으며 결과가 없습니다.{0}</target>
       </trans-unit>
       <trans-unit id="pxeeventfailed" xml:space="preserve">
         <source>Processing of a PXE event failed</source>
-        <target state="new"/>
+        <target state="needs-translation">PXE 이벤트 처리 실패</target>
       </trans-unit>
     </body>
   </file>
