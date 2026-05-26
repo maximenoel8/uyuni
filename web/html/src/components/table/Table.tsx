@@ -214,13 +214,13 @@ export const Table = forwardRef<TableRef, TableProps>((props, ref) => {
                 columnKey="expandable"
                 onClick={() => expanded.toggle(props.identifier(item))}
                 cell={() => {
-                  const hasChildren = "children" in item && item.children.length > 0;
+                  const hasChildren =
+                    !!item && typeof item === "object" && "children" in item && item.children.length > 0;
                   const isExpanded = expanded.has(props.identifier(item));
                   return (
                     <i
-                      className={`expand-icon fa ${isExpanded ? "fa-chevron-down" : "fa-chevron-right"} ${
-                        hasChildren ? "visible" : "invisible"
-                      }`}
+                      className={`expand-icon fa ${isExpanded ? "fa-chevron-down" : "fa-chevron-right"} ${hasChildren ? "visible" : "invisible"
+                        }`}
                     />
                   );
                 }}
