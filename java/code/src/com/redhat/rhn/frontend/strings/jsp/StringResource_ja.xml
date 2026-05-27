@@ -15455,7 +15455,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
       </trans-unit>
       <trans-unit id="system.event.pending.headerPending" xml:space="preserve" approved="yes">
         <source>You may cancel events for this system by selecting them and clicking the &lt;strong&gt;Cancel Events&lt;/strong&gt; button.</source>
-        <target state="final">イベントを選択し、ページ下部にある &lt;strong&gt;イベントの取り消し&lt;/strong&gt; ボタンをクリックすると、このシステムのイベントを取り消すことができます。</target>
+        <target state="final">イベントを選択し、&lt;strong&gt;イベントの取り消し&lt;/strong&gt; ボタンをクリックすると、このシステムのイベントを取り消すことができます。</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
@@ -21547,7 +21547,7 @@ any of these revisions.  Are you sure you want to do this?</source>
           </source>
         <target state="final">以下に表示されるパッケージは 1 つまたは複数のシステムから削除できます。
 
-             1 つまたは複数のシステムを選択し、 &lt;b&gt;パッケージの削除&lt;/b&gt; ボタンをクリックしてパッケージ削除をスケジュールします。
+             1 つまたは複数のシステムを選択し、&lt;b&gt;パッケージの削除&lt;/b&gt;ボタンをクリックしてパッケージ削除をスケジュールします。
           </target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageRemove.do</context>
@@ -21687,7 +21687,7 @@ any of these revisions.  Are you sure you want to do this?</source>
          </source>
         <target state="final">以下に表示されるパッケージは 1 つまたは複数のシステムで検証できます。
 
-            1 つまたは複数のシステムを選択し、 &lt;b&gt;パッケージの検証&lt;/b&gt; ボタンをクリックしてパッケージ検証をスケジュールします。
+            1 つまたは複数のシステムを選択し、&lt;b&gt;パッケージの検証&lt;/b&gt;ボタンをクリックしてパッケージ検証をスケジュールします。
          </target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageVerify.do</context>
@@ -23896,7 +23896,7 @@ The Tree Path, Base Channel, and Installer Generation should always match. This 
         <context-group name="ctx">
           <context context-type="sourcefile">/systems/details/Overview.do</context>
         </context-group>
-        <target state="final">システムのプロパティ</target>
+        <target state="final">システムプロパティ</target>
       </trans-unit>
       <trans-unit id="sdc.details.overview.entitlement" xml:space="preserve">
         <source>System Types:</source>
