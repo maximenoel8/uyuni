@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 27 12:02:05 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.14
+  * Use python3*-tornado6 package to make it working with Python 3.11
+
+-------------------------------------------------------------------
 Mon Apr 27 10:49:18 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.13
