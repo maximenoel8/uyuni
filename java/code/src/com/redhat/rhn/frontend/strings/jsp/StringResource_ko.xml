@@ -7082,16 +7082,16 @@ organization. You may grant or remove the organization administrator role in the
           <context context-type="sourcefile">/rhn/systems/details/groups/* pages</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="systems.groups.jsp.remove" xml:space="preserve">
+      <trans-unit id="systems.groups.jsp.remove" xml:space="preserve" approved="yes">
         <source>Leave Groups</source>
-        <target state="needs-adaptation">선택한 그룹 종료</target>
+        <target state="final">그룹 종료</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/groups/* pages</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="systems.groups.jsp.add" xml:space="preserve">
+      <trans-unit id="systems.groups.jsp.add" xml:space="preserve" approved="yes">
         <source>Join Groups</source>
-        <target state="needs-adaptation">선택한 그룹 가입</target>
+        <target state="final">그룹 가입</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/groups/* pages</context>
         </context-group>
@@ -7250,9 +7250,9 @@ organization. You may grant or remove the organization administrator role in the
           <context context-type="sourcefile">/rhn/systems/details/groups/* pages</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="systemgroup.details.editproperties" xml:space="preserve">
+      <trans-unit id="systemgroup.details.editproperties" xml:space="preserve" approved="yes">
         <source>Edit System Group Properties</source>
-        <target state="needs-adaptation">이 속성 편집</target>
+        <target state="final">시스템 그룹 속성 편집</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/groups/* pages</context>
         </context-group>
@@ -8139,12 +8139,12 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
         <target>원격 명령 작업은 패키지 제거 작업 &lt;strong&gt;이전에&lt;/strong&gt; 실행되도록 스케줄되었습니다.</target>
       </trans-unit>
-      <trans-unit id="installpkgs.jsp.installpackages" xml:space="preserve">
+      <trans-unit id="installpkgs.jsp.installpackages" xml:space="preserve" approved="yes">
         <source>Install Packages</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/packages/InstallPackages</context>
         </context-group>
-        <target state="needs-adaptation">선택된 패키지 설치</target>
+        <target state="final">패키지 설치</target>
       </trans-unit>
       <trans-unit id="installconfirm.jsp.header" xml:space="preserve">
         <source>Confirm Package Install</source>
@@ -14061,9 +14061,9 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">/rhn/activationkeys/groups/* pages</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="activation-key.groups.jsp.add" xml:space="preserve">
+      <trans-unit id="activation-key.groups.jsp.add" xml:space="preserve" approved="yes">
         <source>Join Groups</source>
-        <target state="needs-adaptation">선택한 그룹 가입</target>
+        <target state="final">그룹 가입</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/activationkeys/groups/* pages</context>
         </context-group>
@@ -14546,16 +14546,16 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.removebut" xml:space="preserve">
+      <trans-unit id="system.audit.listscap.jsp.removebut" xml:space="preserve" approved="yes">
         <source>Remove</source>
-        <target state="needs-adaptation">선택한 검사 삭제</target>
+        <target state="final">제거</target>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.diffbut" xml:space="preserve">
+      <trans-unit id="system.audit.listscap.jsp.diffbut" xml:space="preserve" approved="yes">
         <source>Compare</source>
-        <target state="needs-adaptation">선택한 스캔 비교</target>
+        <target state="final">비교</target>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
@@ -15451,9 +15451,9 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.event.pending.headerPending" xml:space="preserve">
+      <trans-unit id="system.event.pending.headerPending" xml:space="preserve" approved="yes">
         <source>You may cancel events for this system by selecting them and clicking the &lt;strong&gt;Cancel Events&lt;/strong&gt; button.</source>
-        <target state="needs-adaptation">선택한 후 &lt;strong&gt;선택한 이벤트 취소&lt;/strong&gt; 버튼을 클릭하여 이벤트를 취소할 수 있습니다.</target>
+        <target state="final">선택한 후 &lt;strong&gt;이벤트 취소&lt;/strong&gt; 버튼을 클릭하여 이벤트를 취소할 수 있습니다.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
@@ -15472,9 +15472,9 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.event.pending.cancel" xml:space="preserve">
+      <trans-unit id="system.event.pending.cancel" xml:space="preserve" approved="yes">
         <source>Cancel Events</source>
-        <target state="needs-adaptation">선택한 이벤트 취소</target>
+        <target state="final">이벤트 취소</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
@@ -16910,12 +16910,12 @@ a file or files, or copy the latest version into a set of local overrides or int
         </context-group>
         <target>리비전 {0}</target>
       </trans-unit>
-      <trans-unit id="channelfiles.jsp.removeselected" xml:space="preserve">
+      <trans-unit id="channelfiles.jsp.removeselected" xml:space="preserve" approved="yes">
         <source>Remove Files</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/configuration/ChannelFiles.do</context>
         </context-group>
-        <target state="needs-adaptation">선택한 파일 삭제</target>
+        <target state="final">파일 제거</target>
       </trans-unit>
       <trans-unit id="channelfiles.jsp.copy2systems" xml:space="preserve">
         <source>Copy to Systems</source>
@@ -17064,12 +17064,12 @@ a file or files, or copy the latest version into a set of local overrides or int
         </context-group>
         <target>등록된 시스템</target>
       </trans-unit>
-      <trans-unit id="channeltarget.jsp.header1" xml:space="preserve">
+      <trans-unit id="channeltarget.jsp.header1" xml:space="preserve" approved="yes">
         <source>Eligible Systems</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/TargetSystems.do</context>
         </context-group>
-        <target state="needs-adaptation">대상 시스템</target>
+        <target state="final">대상 시스템</target>
       </trans-unit>
       <trans-unit approved="yes" id="channeltarget.jsp.header2" xml:space="preserve">
         <source>The following systems can be subscribed to this channel:</source>
@@ -17969,12 +17969,12 @@ centrally-managed configuration channel, {2}; below is a list of systems you may
         </context-group>
         <target>최신 리비전 다운로드</target>
       </trans-unit>
-      <trans-unit id="toolbar.delete.configfile" xml:space="preserve">
+      <trans-unit id="toolbar.delete.configfile" xml:space="preserve" approved="yes">
         <source>Delete</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/configuration/file/FileDetails.do</context>
         </context-group>
-        <target state="needs-adaptation">이 파일 리비전 삭제</target>
+        <target state="final">삭제</target>
       </trans-unit>
       <trans-unit approved="yes" id="toolbar.delete.org" xml:space="preserve">
         <source>Delete Organization</source>
@@ -17983,12 +17983,12 @@ centrally-managed configuration channel, {2}; below is a list of systems you may
         </context-group>
         <target state="final">조직 삭제</target>
       </trans-unit>
-      <trans-unit id="toolbar.delete.deletefile" xml:space="preserve">
+      <trans-unit id="toolbar.delete.deletefile" xml:space="preserve" approved="yes">
         <source>Delete</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/configuration/file/FileDetails.do</context>
         </context-group>
-        <target state="needs-adaptation">이 파일 삭제</target>
+        <target state="final">삭제</target>
       </trans-unit>
       <trans-unit id="filedetails.jsp.download" xml:space="preserve">
         <source>download file revision</source>
@@ -21537,22 +21537,22 @@ any of these revisions.  Are you sure you want to do this?</source>
           <context context-type="sourcefile">/rhn/ssm/PackageRemove.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ssm.package.remove.select.summary" xml:space="preserve">
+      <trans-unit id="ssm.package.remove.select.summary" xml:space="preserve" approved="yes">
         <source>Packages listed below may be removed from one or more systems.
 
              Select one or more and click the &lt;b&gt;Remove Packages&lt;/b&gt; button to schedule package removal.
           </source>
-        <target state="needs-adaptation">아래에 나열된 패키지는 하나 이상의 시스템에서 제거할 수 있습니다.
+        <target state="final">아래에 나열된 패키지는 하나 이상의 시스템에서 제거할 수 있습니다.
 
-             하나 이상의 시스템을 선택하고 &lt;b&gt;선택한 패키지 제거&lt;/b&gt; 버튼을 클릭하여 패키지 제거를 스케줄합니다.
+             하나 이상의 시스템을 선택하고 &lt;b&gt;패키지 제거&lt;/b&gt; 버튼을 클릭하여 패키지 제거를 스케줄합니다.
           </target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageRemove.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ssm.package.remove.select.confirm" xml:space="preserve">
+      <trans-unit id="ssm.package.remove.select.confirm" xml:space="preserve" approved="yes">
         <source>Remove Packages</source>
-        <target state="needs-adaptation">선택한 패키지 제거</target>
+        <target state="final">패키지 제거</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageRemove.do</context>
         </context-group>
@@ -21619,9 +21619,9 @@ any of these revisions.  Are you sure you want to do this?</source>
           <context context-type="sourcefile">/rhn/ssm/PackageUpgrade.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ssm.package.upgrade.select.confirm" xml:space="preserve">
+      <trans-unit id="ssm.package.upgrade.select.confirm" xml:space="preserve" approved="yes">
         <source>Upgrade Packages</source>
-        <target state="needs-adaptation">선택한 패키지 업그레이드</target>
+        <target state="final">패키지 업그레이드</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageUpgrade.do</context>
         </context-group>
@@ -21677,22 +21677,22 @@ any of these revisions.  Are you sure you want to do this?</source>
           <context context-type="sourcefile">/rhn/ssm/PackageVerify.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ssm.package.verify.select.summary" xml:space="preserve">
+      <trans-unit id="ssm.package.verify.select.summary" xml:space="preserve" approved="yes">
         <source>Packages listed below may be verified on one or more systems.
 
             Select one or more and click the &lt;b&gt;Verify Packages&lt;/b&gt; button to schedule package verification.
          </source>
-        <target state="needs-adaptation">아래에 나열된 패키지는 하나 이상의 시스템에서 확인할 수 있습니다.
+        <target state="final">아래에 나열된 패키지는 하나 이상의 시스템에서 확인할 수 있습니다.
 
-             하나 이상의 시스템을 선택하고 &lt;b&gt;선택한 패키지 확인&lt;/b&gt; 버튼을 클릭하여 패키지 확인을 스케줄링합니다.
+             하나 이상의 시스템을 선택하고 &lt;b&gt;패키지 검증&lt;/b&gt; 버튼을 클릭하여 패키지 검증을 스케줄링합니다.
          </target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageVerify.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ssm.package.verify.select.confirm" xml:space="preserve">
+      <trans-unit id="ssm.package.verify.select.confirm" xml:space="preserve" approved="yes">
         <source>Verify Packages</source>
-        <target state="needs-adaptation">선택된 패키지 검증</target>
+        <target state="final">패키지 검증</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageVerify.do</context>
         </context-group>
@@ -23809,12 +23809,12 @@ The Tree Path, Base Channel, and Installer Generation should always match. This 
         </context-group>
         <target>(&lt;a href="{0}"&gt;시스템 잠금&lt;/a&gt;)</target>
       </trans-unit>
-      <trans-unit id="sdc.details.overview.subscribedchannels" xml:space="preserve">
+      <trans-unit id="sdc.details.overview.subscribedchannels" xml:space="preserve" approved="yes">
         <source>Subscribed Channels</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/systems/details/Overview.do</context>
         </context-group>
-        <target state="needs-adaptation">등록된 채널(&lt;a href="{0}"&gt;채널 서브스크립션 변경&lt;/a&gt;)</target>
+        <target state="final">서브스크립션된 채널</target>
       </trans-unit>
       <trans-unit id="sdc.details.overview.sysevents" xml:space="preserve">
         <source>System Events</source>
@@ -23888,12 +23888,12 @@ The Tree Path, Base Channel, and Installer Generation should always match. This 
         </context-group>
         <target>(&lt;a href="{0}"&gt;시스템 재부팅 스케줄&lt;/a&gt;)</target>
       </trans-unit>
-      <trans-unit id="sdc.details.overview.sysproperties" xml:space="preserve">
+      <trans-unit id="sdc.details.overview.sysproperties" xml:space="preserve" approved="yes">
         <source>System Properties</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/systems/details/Overview.do</context>
         </context-group>
-        <target state="needs-adaptation">시스템 등록 정보(&lt;a href="{0}"&gt;이 등록 정보 편집&lt;/a&gt;)</target>
+        <target state="final">시스템 등록 정보</target>
       </trans-unit>
       <trans-unit id="sdc.details.overview.entitlement" xml:space="preserve">
         <source>System Types:</source>
@@ -27323,12 +27323,12 @@ given channel.</source>
         </context-group>
         <target>스케줄 {0}</target>
       </trans-unit>
-      <trans-unit id="toolbar.create.schedule" xml:space="preserve">
+      <trans-unit id="toolbar.create.schedule" xml:space="preserve" approved="yes">
         <source>Create schedule</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/ScheduleDetail.do</context>
         </context-group>
-        <target state="needs-adaptation">스케줄 생성</target>
+        <target state="final">스케줄 생성</target>
       </trans-unit>
       <trans-unit approved="yes" id="toolbar.delete.schedule" xml:space="preserve">
         <source>disable schedule</source>
@@ -27493,9 +27493,9 @@ given channel.</source>
      사용하여 언제든지 수정할 수 있습니다.
         </target>
       </trans-unit>
-      <trans-unit id="toolbar.delete.software.channel" xml:space="preserve">
+      <trans-unit id="toolbar.delete.software.channel" xml:space="preserve" approved="yes">
         <source>Delete Channel</source>
-        <target state="needs-adaptation">소프트웨어 채널 삭제</target>
+        <target state="final">채널 삭제</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Edit.do</context>
         </context-group>
@@ -27521,9 +27521,9 @@ given channel.</source>
         </context-group>
         <target>검색</target>
       </trans-unit>
-      <trans-unit id="toolbar.delete.channel" xml:space="preserve">
+      <trans-unit id="toolbar.delete.channel" xml:space="preserve" approved="yes">
         <source>Delete Channel</source>
-        <target state="needs-adaptation">소프트웨어 채널 삭제</target>
+        <target state="final">채널 삭제</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/errata//Add.do</context>
         </context-group>
@@ -28052,17 +28052,17 @@ given channel.</source>
         <source>Add new slave</source>
         <target>새 슬레이브 추가</target>
       </trans-unit>
-      <trans-unit id="iss.slave.remove" xml:space="preserve">
+      <trans-unit id="iss.slave.remove" xml:space="preserve" approved="yes">
         <source>Remove slaves</source>
-        <target state="needs-adaptation">선택한 슬레이브 삭제</target>
+        <target state="final">슬레이브 제거</target>
       </trans-unit>
       <trans-unit id="toolbar.create.master" xml:space="preserve">
         <source>Add new master</source>
         <target>새 마스터 추가</target>
       </trans-unit>
-      <trans-unit id="iss.master.remove" xml:space="preserve">
+      <trans-unit id="iss.master.remove" xml:space="preserve" approved="yes">
         <source>Remove masters</source>
-        <target state="needs-adaptation">선택한 마스터 삭제</target>
+        <target state="final">마스터 제거</target>
       </trans-unit>
       <trans-unit id="toolbar.delete.slave" xml:space="preserve">
         <source>Delete slave</source>
@@ -29853,116 +29853,116 @@ given channel.</source>
         </context-group>
         <target state="final">선택한 패키지를 잠글 수 없습니다. 동일한 패키지의 여러 버전을 잠글 수 없습니다.</target>
       </trans-unit>
-      <trans-unit id="system.event.actionId" xml:space="preserve">
+      <trans-unit id="system.event.actionId" xml:space="preserve" approved="yes">
         <source>Action ID</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">액션 ID</target>
       </trans-unit>
-      <trans-unit id="channel.jsp.sync.status.ready" xml:space="preserve">
+      <trans-unit id="channel.jsp.sync.status.ready" xml:space="preserve" approved="yes">
         <source> Completed </source>
-        <target state="new"/>
+        <target state="final"> 완료됨 </target>
       </trans-unit>
-      <trans-unit id="channel.jsp.sync.status.syncing" xml:space="preserve">
+      <trans-unit id="channel.jsp.sync.status.syncing" xml:space="preserve" approved="yes">
         <source> In Progress </source>
-        <target state="new"/>
+        <target state="final"> 진행 중 </target>
       </trans-unit>
-      <trans-unit id="channel.jsp.sync.status.created" xml:space="preserve">
+      <trans-unit id="channel.jsp.sync.status.created" xml:space="preserve" approved="yes">
         <source> New Created </source>
-        <target state="new"/>
+        <target state="final"> 새로 생성됨 </target>
       </trans-unit>
-      <trans-unit id="preferences.disk-check-warning.name" xml:space="preserve">
+      <trans-unit id="preferences.disk-check-warning.name" xml:space="preserve" approved="yes">
         <source>Disk Check Warning</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/users/UserPreferences</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">디스크 확인 경고</target>
       </trans-unit>
-      <trans-unit id="preferences.disk-check-warning.description" xml:space="preserve">
+      <trans-unit id="preferences.disk-check-warning.description" xml:space="preserve" approved="yes">
         <source> Show disk space warning when running low.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/users/UserPreferences</context>
         </context-group>
-        <target state="new"/>
+        <target state="final"> 디스크 공간이 부족해지면 디스크 공간 경고를 표시합니다.</target>
       </trans-unit>
-      <trans-unit id="sdc.details.overview.subscribedchannels.edit" xml:space="preserve">
+      <trans-unit id="sdc.details.overview.subscribedchannels.edit" xml:space="preserve" approved="yes">
         <source>Edit Subscribed Channels</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/systems/details/Overview.do</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">서브스크라이브된 채널 편집</target>
       </trans-unit>
-      <trans-unit id="sdc.details.overview.sysproperties.edit" xml:space="preserve">
+      <trans-unit id="sdc.details.overview.sysproperties.edit" xml:space="preserve" approved="yes">
         <source>Edit System Properties</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/systems/details/Overview.do</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">시스템 등록 정보 편집</target>
       </trans-unit>
-      <trans-unit id="bunch.jsp.description.diskcheck-task-bunch" xml:space="preserve">
+      <trans-unit id="bunch.jsp.description.diskcheck-task-bunch" xml:space="preserve" approved="yes">
         <source>Schedule a disk check</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/BunchDetail.do</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">디스크 확인 예약</target>
       </trans-unit>
-      <trans-unit id="task.status.clm-channel-diff" xml:space="preserve">
+      <trans-unit id="task.status.clm-channel-diff" xml:space="preserve" approved="yes">
         <source>CLM Channel Comparison</source>
-        <target state="new"/>
+        <target state="final">CLM 채널 비교</target>
       </trans-unit>
-      <trans-unit id="task.status.diskcheck-task" xml:space="preserve">
+      <trans-unit id="task.status.diskcheck-task" xml:space="preserve" approved="yes">
         <source>Disk Check Actions</source>
-        <target state="new"/>
+        <target state="final">디스크 확인 액션</target>
       </trans-unit>
-      <trans-unit id="usercreate.prefix" xml:space="preserve">
+      <trans-unit id="usercreate.prefix" xml:space="preserve" approved="yes">
         <source>Prefix</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/users/CreateUser</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">프리픽스</target>
       </trans-unit>
-      <trans-unit id="usercreate.firstName" xml:space="preserve">
+      <trans-unit id="usercreate.firstName" xml:space="preserve" approved="yes">
         <source>First Name</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/users/CreateUser</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">이름</target>
       </trans-unit>
-      <trans-unit id="usercreate.lastName" xml:space="preserve">
+      <trans-unit id="usercreate.lastName" xml:space="preserve" approved="yes">
         <source>Last Name</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/users/CreateUser</context>
         </context-group>
-        <target state="new"/>
+        <target state="final">성</target>
       </trans-unit>
-      <trans-unit id="spmigration.sles16.preflight.title" xml:space="preserve">
+      <trans-unit id="spmigration.sles16.preflight.title" xml:space="preserve" approved="yes">
         <source>Before Migrating to SLES 16 — Please ensure</source>
-        <target state="new"/>
+        <target state="final">SLES 16로 마이그레이션하기 전에 다음을 확인하세요.</target>
       </trans-unit>
-      <trans-unit id="spmigration.sles16.preflight.patch.title" xml:space="preserve">
+      <trans-unit id="spmigration.sles16.preflight.patch.title" xml:space="preserve" approved="yes">
         <source>System is fully up to date</source>
-        <target state="new"/>
+        <target state="final">시스템이 완전히 업데이트되었음</target>
       </trans-unit>
-      <trans-unit id="spmigration.sles16.preflight.diskspace.title" xml:space="preserve">
+      <trans-unit id="spmigration.sles16.preflight.diskspace.title" xml:space="preserve" approved="yes">
         <source>Sufficient disk space is available</source>
-        <target state="new"/>
+        <target state="final">충분한 디스크 공간 사용 가능</target>
       </trans-unit>
-      <trans-unit id="spmigration.sles16.preflight.ssh.title" xml:space="preserve">
+      <trans-unit id="spmigration.sles16.preflight.ssh.title" xml:space="preserve" approved="yes">
         <source>Ensure SSH key-based access is available for at least one user. If root login is required, create /etc/ssh/sshd_config.d/50-permit-root-login.conf with: PermitRootLogin yes</source>
-        <target state="new"/>
+        <target state="final">SSH 키 기반 액세스가 한 명 이상의 사용자에 대해 사용 가능한지 확인하세요. 루트 로그인이 필요한 경우 PermitRootLogin yes로 /etc/ssh/sshd_config.d/50-permit-root-login.conf를 생성하세요.</target>
       </trans-unit>
-      <trans-unit id="spmigration.sles16.preflight.kvmguests.title" xml:space="preserve">
+      <trans-unit id="spmigration.sles16.preflight.kvmguests.title" xml:space="preserve" approved="yes">
         <source>KVM guests are shut down (if applicable)</source>
-        <target state="new"/>
+        <target state="final">KVM 게스트 종료됨(있는 경우)</target>
       </trans-unit>
-      <trans-unit id="spmigration.sles16.preflight.network.title" xml:space="preserve">
+      <trans-unit id="spmigration.sles16.preflight.network.title" xml:space="preserve" approved="yes">
         <source>Network configuration will be migrated from wicked to NetworkManager</source>
-        <target state="new"/>
+        <target state="final">네트워크 구성이 wicked에서 NetworkManager로 마이그레이션됨</target>
       </trans-unit>
-      <trans-unit id="spmigration.sles16.preflight.selinux.title" xml:space="preserve">
+      <trans-unit id="spmigration.sles16.preflight.selinux.title" xml:space="preserve" approved="yes">
         <source>AppArmor profiles will be migrated to SELinux</source>
-        <target state="new"/>
+        <target state="final">AppArmor 프로파일이 SELinux로 마이그레이션될 예정</target>
       </trans-unit>
     </body>
   </file>
