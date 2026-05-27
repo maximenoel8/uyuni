@@ -170,7 +170,7 @@ public class UpgradeCommand extends BaseTransactionCommand {
                         break;
                     case MIGRATE_COBBLER:
                         migrateCobbler(t);
-                        return; // do not remove the task here, migrateCobbler handles it
+                        continue; // do not remove the task after switch, migrateCobbler handles it
                     default:
                 }
                 // always run this
