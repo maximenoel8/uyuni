@@ -1,2 +1,0 @@
-- Fix conflicting cobbler system migrations
-  (bsc#1258382)

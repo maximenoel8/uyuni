@@ -1,2 +1,0 @@
-- Fix non-ASCII em dash in Pbkdf2Sha256Crypt breaking javadoc build
-  with US-ASCII encoding
