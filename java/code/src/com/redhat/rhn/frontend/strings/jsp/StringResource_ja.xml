@@ -29964,7 +29964,7 @@ given channel.</source>
       </trans-unit>
       <trans-unit id="spmigration.sles16.preflight.ssh.title" xml:space="preserve" approved="yes">
         <source>Ensure SSH key-based access is available for at least one user. If root login is required, create /etc/ssh/sshd_config.d/50-permit-root-login.conf with: PermitRootLogin yes</source>
-        <target state="final">少なくとも1人のユーザーに対してSSHキーベースのアクセスが利用できるようにしてください。rootログインが必要な場合は、/etc/ssh/sshd_config.d/50-permit-root-login.conf を作成し、PermitRootLogin yesを記述してください</target>
+        <target state="final">少なくとも1人のユーザに対してSSHキーベースのアクセスが利用できるようにしてください。rootログインが必要な場合は、PermitRootLogin yesを記述した/etc/ssh/sshd_config.d/50-permit-root-login.confを作成してください</target>
       </trans-unit>
       <trans-unit id="spmigration.sles16.preflight.kvmguests.title" xml:space="preserve" approved="yes">
         <source>KVM guests are shut down (if applicable)</source>
