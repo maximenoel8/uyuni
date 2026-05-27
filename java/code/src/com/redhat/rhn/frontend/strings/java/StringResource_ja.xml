@@ -12083,9 +12083,9 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         </context-group>
         <target state="final">編集</target>
       </trans-unit>
-      <trans-unit id="ARMHF Debian" xml:space="preserve">
+      <trans-unit id="ARMHF Debian" xml:space="preserve" approved="yes">
         <source>ARMHF Debian</source>
-        <target>ARMHF Debian</target>
+        <target state="final">ARMHF Debian</target>
         <target state="new"/>
       </trans-unit>
       <trans-unit id="diskcheckwarning" xml:space="preserve" approved="yes">
