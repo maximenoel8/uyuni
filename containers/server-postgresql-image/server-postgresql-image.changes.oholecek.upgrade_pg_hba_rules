@@ -1,1 +1,0 @@
-- Add needed pg_hba rules on upgrade (bsc#1262492, bsc#1264149)
