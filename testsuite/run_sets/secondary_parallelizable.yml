@@ -39,6 +39,7 @@
 - features/secondary/srv_task_status_engine.feature
 - features/secondary/srv_errata_api.feature
 - features/secondary/srv_health_check_supportconfig.feature
+- features/secondary/srv_software_channels_and_repositories_management.feature
 
 - features/secondary/allcli_overview_systems_details.feature
 - features/secondary/allcli_system_group.feature
