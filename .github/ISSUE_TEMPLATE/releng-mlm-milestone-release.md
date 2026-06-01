@@ -17,6 +17,10 @@ Release deadline:
 - [ ] The PO must provide the release notes for the Beta announcement. Release engineers can provide support as needed, to improve the announcement.
 
 # Release date
+- [ ] Once QE approved the milestone, "release" the artifacts to `:PUBLISH`
+  - [ ] `suma-release-tools/release-with-token -p SUSE:SLE-15-SP7:Update:Products:MultiLinuxManager52:ToTest -r charts -r containerfile -r images-SP7 [--doit]`
+  - [ ] `suma-release-tools/release-with-token -p SUSE:SLFO:Products:Multi-Linux-Manager:5.2:ToTest -r product -r containerkiwi [--doit]`
+  - [ ] "Beta" Client Tools if needed: `iosc release <PROJECT>:ToTest`
 - [ ] Ask autobuild to publish to the CDN opening a new issue in the [release-support board](https://gitlab.suse.de/buildops/release-support/-/issues).
  - [ ] Mention the list of projects to be released (client tools, extensions etc)
  - [ ] Mention any new container image to be released and included in their release automation

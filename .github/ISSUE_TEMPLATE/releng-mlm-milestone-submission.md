@@ -74,6 +74,10 @@ Add more tasks if needed (for example, asking Maintenace to change the channel d
 - [ ] Prepare the submissions with `mu-massive-task` or `patch-creator` for the client tools, salt and salt bundle. For any new packages that will be added to the codestreams, fetch the groups which will maintain them (one per package) and document this at the release card.
 - [ ] Add the IDs (and notes, if any), to the JIRA ticket, and ping the Maintenace Team at [#discuss-multi-linux-manager-maintenance](https://app.slack.com/client/T02863RC2AC/C02DEF2U0E5)
 - [ ] Verify that also the "Product PRs" are reviewed and merged.
+- [ ] Once autobuild approves all MRs, verify that all artifacts where build and published. After this is the case, "release" the artifacts to `:toTest:`
+  - [ ] `suma-release-tools/release-with-token -p SUSE:SLE-15-SP7:Update:Products:MultiLinuxManager52 -r charts -r containerfile -r images-SP7 [--doit]`
+  - [ ] `suma-release-tools/release-with-token -p SUSE:SLFO:Products:Multi-Linux-Manager:5.2 -r product -r containerkiwi [--doit]`
+  - [ ] "Beta" Client Tools if needed: `iosc release <PROJECT>`
 - [ ] Once autobuild approves all MRs, create the `Manager-X.Y-MILESTONE` branches on both `uyuni-project/uyuni` and `uyuni-project/uyuni-tools` (for example `Manager-5.1-Alpha1`) and push them.
 - [ ] Before unlocking `master` and `main`, consider PRs for merge that became ready during the branch freeze looking for the ["merge-candidate" label](https://github.com/uyuni-project/uyuni/pulls?q=is%3Apr+is%3Aopen+label%3Amerge-candidate) or ["merge-candidate" label on uyuni-tools](https://github.com/uyuni-project/uyuni-tools/pulls?q=is%3Apr+is%3Aopen+label%3Amerge-candidate) or ping reviewers to take care of it
 - [ ] Send an email to galaxy-devel@suse.de informing that the branch `uyuni-project/uyuni:master` and `uyuni-project/uyuni-tools:main` are unlocked , and adjust the topic on the slack [#team-multi-linux-manager](https://app.slack.com/client/T02863RC2AC/C02D78LLS04) channel
