@@ -930,7 +930,7 @@ end
 
 When(/^I click on the filter button$/) do
   find_and_wait_click('button.spacewalk-button-filter').click
-  raise ScriptError, "Filter was not applied: 'is filtered' text did not appear" unless check_text?('filtered', timeout: 20)
+  raise ScriptError, "Filter was not applied: 'filtered' text did not appear" unless check_text?('filtered', timeout: 20)
 end
 
 Then(/^I click on the filter button until page does not contain "([^"]*)" text$/) do |text|
