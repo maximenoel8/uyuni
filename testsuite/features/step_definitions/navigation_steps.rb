@@ -607,13 +607,19 @@ Given(/^I am authorized as "([^"]*)" with password "([^"]*)"$/) do |user, passwd
   rescue NoMethodError => e
     log "The browser session could not be cleaned because there is no browser available: #{e.message}"
     capybara_register_driver
+    Capybara.reset_sessions!
   rescue StandardError => e
     log "The browser session could not be cleaned for unknown issue: #{e.message}"
     capybara_register_driver
+    Capybara.reset_sessions!
   ensure
     visit Capybara.app_host
   end
-  next if all(:xpath, "//header//span[text()='#{$current_user}']", wait: 0).any?
+  begin
+    next if all(:xpath, "//header//span[text()='#{$current_user}']", wait: 0).any?
+  rescue NoMethodError, Capybara::NotSupportedByDriverError
+    # driver is not ready yet after session reset, proceed to full login
+  end
 
   begin
     find(:xpath, '//header//i[@class=\'fa fa-sign-out\']').click
@@ -924,7 +930,7 @@ end
 
 When(/^I click on the filter button$/) do
   find_and_wait_click('button.spacewalk-button-filter').click
-  check_text?('is filtered')
+  raise ScriptError, "Filter was not applied: 'is filtered' text did not appear" unless check_text?('filtered', timeout: 20)
 end
 
 Then(/^I click on the filter button until page does not contain "([^"]*)" text$/) do |text|

@@ -142,9 +142,10 @@ def check_text?(text1, text2: nil, timeout: Capybara.default_max_wait_time)
   # WORKAROUND: Chrome 134+ raises Capybara::ElementNotFound, StaleElementReferenceError, or
   # NoMethodError (CDP response type mismatch) during page navigation, bypassing Capybara's
   # synchronize() retry mechanism. All three are caught and retried. All other exceptions still
-  # propagate. wait: 1 is used instead of wait: timeout to avoid two competing Timeout instances;
-  # repeat_until_timeout drives the overall timing.
-  repeat_until_timeout(timeout: timeout) do
+  # propagate. Uses a plain Time.now loop instead of repeat_until_timeout / Timeout.timeout to
+  # avoid interrupting WebDriver mid-call, which corrupts the Selenium session.
+  deadline = Time.now + timeout
+  while Time.now < deadline
     begin
       return true if has_text?(text1, wait: 1)
       return true if !text2.nil? && has_text?(text2, wait: 1)
@@ -157,8 +158,6 @@ def check_text?(text1, text2: nil, timeout: Capybara.default_max_wait_time)
       sleep 2
     end
   end
-  false
-rescue Timeout::Error
   false
 end
 
