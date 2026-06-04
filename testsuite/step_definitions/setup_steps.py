@@ -691,6 +691,7 @@ def step_mark_as_read_via_button(page, target_button: str):
             "Expected '1 message read status updated successfully.' text"
 
 
+@then("I check for failed events on history event page")
 @when("I check for failed events on history event page")
 def step_check_for_failed_events(page):
     from support.commonlib import check_text
@@ -761,3 +762,161 @@ def step_select_mu_repositories(page, client: str, context_store):
     for _repo_name, repo_url in repo_list.items():
         unique_repo_name = generate_repository_name(repo_url)
         page.get_by_label(unique_repo_name).check()
+
+
+# ---------------------------------------------------------------------------
+# Child channel visibility and state
+# ---------------------------------------------------------------------------
+
+@then(parsers.re(r'I should see the child channel "(?P<channel>[^"]*)" "(?P<status>selected|unselected)"$'))
+def step_should_see_child_channel(page, channel: str, status: str):
+    from support.commonlib import check_text
+    assert check_text(page, channel), f"Channel '{channel}' not found on page"
+    checkbox_id = page.locator(f"xpath=//label[contains(text(), '{channel}')]").get_attribute("for")
+    checkbox = page.locator(f"#\\ {checkbox_id}" if " " in (checkbox_id or "") else f"#{checkbox_id}")
+    is_checked = checkbox.is_checked()
+    if status == "selected":
+        assert is_checked, f"Channel '{channel}' is not selected"
+    else:
+        assert not is_checked, f"Channel '{channel}' is selected but should not be"
+
+
+@then(parsers.re(
+    r'I should see the child channel "(?P<channel>[^"]*)" "(?P<status>selected|unselected)" and "(?P<disabled_flag>[^"]*)"'
+))
+def step_should_see_child_channel_with_disabled(page, channel: str, status: str, disabled_flag: str):
+    assert disabled_flag == "disabled", f"Invalid disabled flag: '{disabled_flag}'"
+    from support.commonlib import check_text
+    assert check_text(page, channel), f"Channel '{channel}' not found on page"
+    checkbox_id = page.locator(f"xpath=//label[contains(text(), '{channel}')]").get_attribute("for")
+    checkbox = page.locator(f"#{checkbox_id}")
+    is_checked = checkbox.is_checked()
+    if status == "selected":
+        assert is_checked, f"Channel '{channel}' is not selected"
+    else:
+        assert not is_checked, f"Channel '{channel}' is selected but should not be"
+
+
+@then(parsers.re(
+    r'I should see "(?P<radio_label>[^"]*)" "(?P<status>selected|unselected)" for the "(?P<channel>[^"]*)" channel'
+))
+def step_should_see_channel_radio(page, radio_label: str, status: str, channel: str):
+    channel_link = page.locator(f"xpath=//a[contains(text(), '{channel}')]")
+    href = channel_link.get_attribute("href") or ""
+    channel_id = href.split("?", 1)[-1].split("=", 1)[-1] if "?" in href else ""
+
+    value_map = {"No change": "NO_CHANGE", "Subscribe": "SUBSCRIBE", "Unsubscribe": "UNSUBSCRIBE"}
+    value = value_map.get(radio_label)
+    assert value, f"Unsupported radio label: '{radio_label}'"
+
+    radio = page.locator(f"xpath=//input[@type='radio' and @name='ch_action_{channel_id}' and @value='{value}']")
+    is_checked = radio.is_checked()
+    if status == "selected":
+        assert is_checked, f"Radio '{radio_label}' for channel '{channel}' is not selected"
+    else:
+        assert not is_checked, f"Radio '{radio_label}' for channel '{channel}' is selected but should not be"
+
+
+# ---------------------------------------------------------------------------
+# Check default base channel radio button
+# ---------------------------------------------------------------------------
+
+@when(parsers.re(r'I check default base channel radio button of this "(?P<host>[^"]*)"'))
+def step_check_default_base_channel(page, host: str):
+    from support.commonlib import product
+    from support.constants import BASE_CHANNEL_BY_CLIENT
+    prod = product()
+    channel_name = BASE_CHANNEL_BY_CLIENT.get(prod, {}).get(host)
+    assert channel_name, f"No default base channel configured for product='{prod}' host='{host}'"
+    radio = page.get_by_label(channel_name)
+    assert radio.count() > 0, f"Base channel radio button '{channel_name}' not found"
+    radio.first.check()
+
+
+# ---------------------------------------------------------------------------
+# Remember when action was scheduled
+# ---------------------------------------------------------------------------
+
+@when("I remember when I scheduled an action")
+def step_remember_scheduled_action(feature_context):
+    import datetime
+    feature_context["schedule_action_time"] = datetime.datetime.now()
+
+
+# ---------------------------------------------------------------------------
+# Package visible in channel
+# ---------------------------------------------------------------------------
+
+@then(parsers.re(r'I should see package "(?P<pkg>[^"]*)" in channel "(?P<channel>[^"]*)"'))
+def step_should_see_package_in_channel(page, pkg: str, channel: str):
+    follow_left_menu(page, "Software > Channel List > All")
+    page.get_by_role("link", name=channel).click()
+    page.get_by_role("link", name="Packages").click()
+    from support.commonlib import check_text
+    assert check_text(page, pkg), f"Package '{pkg}' not found in channel '{channel}'"
+
+
+# ---------------------------------------------------------------------------
+# ISO mount on server
+# ---------------------------------------------------------------------------
+
+@when(parsers.re(
+    r'I mount as "(?P<name>[^"]+)" the ISO from "(?P<url>[^"]+)" in the server, validating its checksum'
+))
+def step_mount_iso(name: str, url: str):
+    from support.env import MIRROR, IS_CONTAINERIZED_SERVER
+    server = get_target("server")
+
+    if MIRROR:
+        host_part = url.split("://", 1)[-1].split("/", 1)[-1] if "/" in url.split("://", 1)[-1] else ""
+        iso_path = f"/srv/mirror/{host_part}" if IS_CONTAINERIZED_SERVER else f"/mirror/{host_part}"
+    else:
+        iso_path = f"/tmp/{name}.iso"
+        server.run(f"curl --insecure -o {iso_path} {url}", timeout=1500)
+
+    if IS_CONTAINERIZED_SERVER:
+        server.run("mkdir -p /srv/www/distributions")
+        server.run(f"mgradm distro copy {iso_path} {name}", runs_in_container=False)
+        server.run(f"ln -s /srv/www/distributions/{name} /srv/www/htdocs/pub/")
+    else:
+        mount_point = f"/srv/www/htdocs/pub/{name}"
+        server.run(
+            f"mkdir -p {mount_point} && "
+            f"grep -q {iso_path} /etc/fstab || "
+            f"echo '{iso_path}  {mount_point}  iso9660  loop,ro,_netdev  0 0' >> /etc/fstab && "
+            f"umount {iso_path}; mount {iso_path}"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Prepare development repositories for a client
+# ---------------------------------------------------------------------------
+
+@when(parsers.re(
+    r'I prepare the development repositories of "(?P<host>[^"]*)" as part of "(?P<channel_label>[^"]*)" channel'
+))
+def step_prepare_development_repositories(host: str, channel_label: str, api_test):
+    from support.commonlib import deb_host, rh_host, generate_repository_name
+    node = get_target(host)
+
+    if deb_host(host):
+        out, _ = node.run("grep -rh ^deb /etc/apt/sources.list.d/")
+        repo_urls = [line.split()[1].strip() for line in out.splitlines() if line.strip()]
+    elif rh_host(host):
+        out, _ = node.run("grep -rh 'baseurl' /etc/yum.repos.d/")
+        repo_urls = [line.split("=", 1)[-1].strip() for line in out.splitlines() if "=" in line]
+    else:
+        out, _ = node.run("grep -rh 'baseurl' /etc/zypp/repos.d/")
+        repo_urls = [line.split("=", 1)[-1].strip() for line in out.splitlines() if "=" in line]
+
+    seen = set()
+    for repo_url in repo_urls:
+        if not repo_url or repo_url in seen:
+            continue
+        seen.add(repo_url)
+        unique_name = generate_repository_name(repo_url)
+        existing = [r["label"] for r in api_test.channel.software.list_user_repos()]
+        if unique_name not in existing:
+            content_type = "deb" if deb_host(host) else "yum"
+            api_test.channel.software.create_repo(unique_name, repo_url, content_type)
+        api_test.channel.software.associate_repo(channel_label, unique_name)

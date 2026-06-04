@@ -1058,3 +1058,17 @@ def step_select_in_field(page, value: str, box: str):
     from support.constants import FIELD_IDS
     field_id = FIELD_IDS.get(box, box)
     page.select_option(f"#{field_id}", label=value)
+
+
+# ---------------------------------------------------------------------------
+# Base channel set assertion
+# ---------------------------------------------------------------------------
+
+@then("the system should have a base channel set")
+def step_system_should_have_base_channel(page):
+    from support.commonlib import check_text
+    assert not check_text(
+        page,
+        "This system has no Base Software Channel. You can select a Base Channel from the list below.",
+        timeout=5,
+    ), "System has no base channel set"

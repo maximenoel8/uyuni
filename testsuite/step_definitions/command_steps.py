@@ -40,6 +40,7 @@ from support.constants import (
 # Disable local repos
 # ---------------------------------------------------------------------------
 
+@when("I turn off disable_local_repos for all clients")
 @then("I turn off disable_local_repos for all clients")
 def step_turn_off_disable_local_repos():
     """Write pillar and install top file — mirrors the Ruby step."""
@@ -92,7 +93,7 @@ def step_wait_until_file_exists(path: str, host: str):
 # ---------------------------------------------------------------------------
 
 @when(parsers.re(
-    r'I (?P<action>enable|disable) repository "(?P<repos>[^"]*)" on this "(?P<host>[^"]*)"'
+    r'I (?P<action>enable|disable) (?:the repositories|repository) "(?P<repos>[^"]*)" on this "(?P<host>[^"]*)"'
     r'(?P<error_control>(?: without error control)?)$'
 ))
 def step_enable_disable_repository(action: str, repos: str, host: str, error_control: str):
@@ -281,61 +282,6 @@ def step_spacecmd_show_packages_installed(packages: str, client: str):
     for package in packages.split():
         pkg = package.strip()
         assert pkg in result, f"Package {pkg} is not installed (not in spacecmd output)"
-
-
-# ---------------------------------------------------------------------------
-# Salt minion full cleanup
-# ---------------------------------------------------------------------------
-
-@when(parsers.re(r'I perform a full salt minion cleanup on "(?P<host>[^"]*)"'))
-def step_full_salt_minion_cleanup(host: str):
-    node = get_target(host)
-
-    salt_bundle_config_dir = "/etc/venv-salt-minion"
-    salt_classic_config_dir = "/etc/salt"
-    salt_bundle_cleanup_paths = (
-        "/var/cache/venv-salt-minion /run/venv-salt-minion "
-        "/var/log/venv-salt-minion.log /var/tmp/.root*"
-    )
-    salt_classic_cleanup_paths = (
-        "/var/cache/salt/minion /var/run/salt /run/salt /var/log/salt /var/tmp/.root*"
-    )
-
-    node.run(
-        f"rm -f {salt_bundle_config_dir}/grains {salt_bundle_config_dir}/minion_id",
-        check_errors=False,
-    )
-    node.run(
-        f"find {salt_bundle_config_dir}/minion.d/ -type f ! -name '00-venv.conf' -delete",
-        check_errors=False,
-    )
-    node.run(
-        f"rm -f {salt_bundle_config_dir}/pki/minion/*",
-        check_errors=False,
-    )
-    node.run(
-        f"rm -f {salt_classic_config_dir}/grains {salt_classic_config_dir}/minion_id",
-        check_errors=False,
-    )
-    node.run(
-        f"find {salt_classic_config_dir}/minion.d/ -type f ! -name '00-venv.conf' -delete",
-        check_errors=False,
-    )
-    node.run(
-        f"rm -f {salt_classic_config_dir}/pki/minion/*",
-        check_errors=False,
-    )
-    node.run(
-        f"rm -Rf /root/salt {salt_bundle_cleanup_paths} {salt_classic_cleanup_paths}",
-        check_errors=False,
-    )
-
-    # Remove packages
-    step_remove_packages("venv-salt-minion salt salt-minion", host, "")
-    # Disable repositories
-    step_enable_disable_repository(
-        "disable", "tools_update_repo tools_pool_repo", host, " without error control"
-    )
 
 
 # ---------------------------------------------------------------------------

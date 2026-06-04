@@ -12,7 +12,7 @@ Covers browser-driven navigation steps needed by the validation slice features:
 import re
 import time
 
-from pytest_bdd import given, when, then, parsers
+from pytest_bdd import given, when, then, step, parsers
 
 from support.commonlib import (
     check_text,
@@ -108,13 +108,8 @@ def step_systems_overview_page(page, api_test, host: str):
 # Left menu navigation
 # ---------------------------------------------------------------------------
 
-@when(parsers.re(r'I follow the left menu "(?P<menu_path>[^"]*)"'))
+@step(parsers.re(r'I follow the left menu "(?P<menu_path>[^"]*)"'))
 def step_follow_left_menu(page, menu_path: str):
-    follow_left_menu(page, menu_path)
-
-
-@given(parsers.re(r'I follow the left menu "(?P<menu_path>[^"]*)"'))
-def step_given_follow_left_menu(page, menu_path: str):
     follow_left_menu(page, menu_path)
 
 
@@ -122,13 +117,8 @@ def step_given_follow_left_menu(page, menu_path: str):
 # Content-area links
 # ---------------------------------------------------------------------------
 
-@when(parsers.re(r'I follow "(?P<text>[^"]*)" in the content area'))
+@step(parsers.re(r'I follow "(?P<text>[^"]*)" in the content area'))
 def step_follow_in_content_area(page, text: str):
-    follow_link_in_content_area(page, text)
-
-
-@given(parsers.re(r'I follow "(?P<text>[^"]*)" in the content area'))
-def step_given_follow_in_content_area(page, text: str):
     follow_link_in_content_area(page, text)
 
 
@@ -136,13 +126,8 @@ def step_given_follow_in_content_area(page, text: str):
 # Generic link following
 # ---------------------------------------------------------------------------
 
-@when(parsers.re(r'I follow "(?P<text>[^"]*)"$'))
+@step(parsers.re(r'I follow "(?P<text>[^"]*)"$'))
 def step_follow_link(page, text: str):
-    click_link_and_wait(page, text)
-
-
-@given(parsers.re(r'I follow "(?P<text>[^"]*)"$'))
-def step_given_follow_link(page, text: str):
     click_link_and_wait(page, text)
 
 
@@ -851,7 +836,7 @@ def step_click_and_confirm_alert(page, text: str):
     page.get_by_role("button", name=text).first.click()
 
 
-@when(parsers.re(r'I follow first "(?P<text>[^"]*)"$'))
+@step(parsers.re(r'I follow first "(?P<text>[^"]*)"$'))
 def step_follow_first_link(page, text: str):
     page.get_by_role("link", name=text).first.click()
 

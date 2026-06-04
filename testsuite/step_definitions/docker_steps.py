@@ -145,13 +145,7 @@ def step_wait_all_images_built(page, timeout: str, count: str):
 
 
 @when(parsers.re(r'I schedule the build of image "(?P<image>[^"]*)" via API calls'))
-def step_schedule_image_build(api_test):
-    pass  # image arg captured but not used here — called differently
-    # This step requires both image name and is called via pattern matching
-
-
-@when(parsers.re(r'I schedule the build of image "(?P<image>[^"]*)" via API calls'))
-def step_schedule_image_build_v2(api_test, image: str):
+def step_schedule_image_build(api_test, image: str):
     build_host_id = _retrieve_build_host_id(api_test)
     date_build = api_test.date_now()
     api_test.image.schedule_image_build(image, "", build_host_id, date_build)
