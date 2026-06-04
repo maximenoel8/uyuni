@@ -341,6 +341,10 @@ def pytest_configure(config):
 
 def pytest_collection_modifyitems(config, items):
     for item in items:
+        scenario = getattr(item, "_pybdd_scenario", None)
+        if scenario:
+            item.extra_keyword_matches.add(Path(scenario.feature.filename).stem)
+
         markers = {m.name for m in item.iter_markers()}
 
         # Host presence tags
