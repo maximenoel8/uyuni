@@ -30,6 +30,8 @@ def follow_link_in_content_area(page, text: str):
 
 def follow_left_menu(page, menu_path: str):
     """Navigate the left sidebar. menu_path is 'Top > Sub > Item' or just 'Item'."""
+    if page.url == "about:blank":
+        page.goto(APP_HOST, wait_until="domcontentloaded")
     parts = [p.strip() for p in menu_path.split(">")]
     for part in parts:
         page.get_by_role("link", name=part).first.click()

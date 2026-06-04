@@ -212,8 +212,8 @@ def _print_server_logs():
             "/var/log/rhn/rhn_web_api.log",
         ]:
             cmd = (
-                f'tail -n20 {log_path} | awk -v limit="'
-                f'$(date --date=\\"5 minutes ago\\" \\"+%Y-%m-%d %H:%M:%S\\")" '
+                f"tail -n20 {log_path} | "
+                f"awk -v limit=\"$(date --date='5 minutes ago' '+%Y-%m-%d %H:%M:%S')\" "
                 f"'substr($0, 1, 19) > limit'"
             )
             out, _code = server.run(cmd, timeout=10, check_errors=False)
