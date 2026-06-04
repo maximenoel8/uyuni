@@ -152,10 +152,11 @@ def feature_boundary(request, context_manager):
 
 
 @pytest.fixture
-def page(context_manager):
+def page(context_manager, request):
     """One Playwright page per scenario. Closed on teardown regardless of outcome."""
     ctx = context_manager.get_or_create()
     pg = ctx.new_page()
+    request.node._playwright_page = pg
     start = time.time()
     yield pg
     duration = time.time() - start
@@ -190,7 +191,7 @@ def pytest_runtest_makereport(item, call):
     if report.when == "call":
         item._report = report
     if report.when == "call" and report.failed:
-        pg = item.funcargs.get("page")
+        pg = getattr(item, "_playwright_page", None) or item.funcargs.get("page")
         if pg:
             os.makedirs(SCREENSHOT_DIR, exist_ok=True)
             safe_name = re.sub(r"[ ./:]", "_", report.nodeid)[:200]
@@ -198,6 +199,16 @@ def pytest_runtest_makereport(item, call):
             try:
                 pg.screenshot(path=path)
                 print(f"Screenshot saved: {path}")
+                try:
+                    import base64
+                    from pytest_html import extras
+                    if not hasattr(report, "extras"):
+                        report.extras = []
+                    with open(path, "rb") as f:
+                        encoded = base64.b64encode(f.read()).decode("utf-8")
+                    report.extras.append(extras.image(encoded, mime_type="image/png"))
+                except Exception:
+                    pass
             except Exception as e:
                 print(f"Screenshot failed: {e}")
         _print_server_logs()

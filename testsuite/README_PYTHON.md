@@ -152,15 +152,38 @@ pytest features/init_clients/ -v
 ### Single feature file
 
 Each feature directory has its own `test_features.py`. Filter by the feature file's stem
-name with `-k`:
+(filename without `.feature`) using `-k`:
 
 ```bash
-pytest features/core/ -k "srv_disable_local_repos_off" -v
-pytest features/secondary/ -k "allcli_action_chain" -v
+pytest features/core/test_features.py -k "srv_first_settings" -v
+pytest features/secondary/test_features.py -k "allcli_action_chain" -v
 ```
 
+The `-k` filter matches the feature file stem because `conftest.py` adds it to each
+test item's keyword set at collection time. All scenarios from that feature file are
+selected; scenarios from other files in the same directory are deselected.
+
 > **Note:** Passing a `.feature` path directly to pytest does not work — pytest cannot
-> collect test items from Gherkin files. Always run from the parent directory with `-k`.
+> collect test items from Gherkin files. Always target the `test_features.py` in the
+> same directory and filter with `-k "feature_stem"`.
+
+### HTML report with embedded screenshots
+
+Generate a self-contained HTML report (similar to Cucumber's HTML report). On failure,
+the screenshot taken at the moment of the error is embedded directly in the report:
+
+```bash
+pytest features/core/test_features.py -k "srv_first_settings" -v \
+    --html=report.html --self-contained-html
+```
+
+Open `report.html` in a browser. Each failed scenario shows:
+- The full Python traceback
+- The Playwright step that timed out
+- An embedded screenshot of the browser at the moment of failure
+
+The `--self-contained-html` flag bundles all assets (including screenshots as base64) into
+a single file you can copy off the controller without needing the `screenshots/` directory.
 
 ### Dry run (collect without executing)
 
@@ -184,6 +207,7 @@ DEBUG=true pytest features/secondary/ -k "allcli_action_chain" -v
 | Path | Format | Description |
 |---|---|---|
 | `screenshots/` | PNG | Captured automatically on scenario failure |
+| `report.html` | HTML | Self-contained report with embedded screenshots (pass `--html=report.html --self-contained-html`) |
 | `api.log` | Text | All XML-RPC/HTTP API calls with timestamps |
 
 ---
