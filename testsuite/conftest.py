@@ -134,7 +134,8 @@ _current_feature = None
 
 
 def _get_feature_path(request):
-    scenario = getattr(request.node, "_pybdd_scenario", None)
+    func = getattr(request.node, "function", None)
+    scenario = getattr(func, "__scenario__", None)
     if scenario:
         return str(scenario.feature.filename)
     return request.node.nodeid.split("::")[0]
@@ -341,9 +342,10 @@ def pytest_configure(config):
 
 def pytest_collection_modifyitems(config, items):
     for item in items:
-        scenario = getattr(item, "_pybdd_scenario", None)
-        if scenario:
-            item.extra_keyword_matches.add(Path(scenario.feature.filename).stem)
+        func = getattr(item, "function", None)
+        bdd_scenario = getattr(func, "__scenario__", None)
+        if bdd_scenario is not None:
+            item.extra_keyword_matches.add(Path(bdd_scenario.feature.filename).stem)
 
         markers = {m.name for m in item.iter_markers()}
 
