@@ -13,4 +13,7 @@ dependencies = [
     "pytest-html>=4.0",
 ]
 
+[tool.setuptools.packages.find]
+include = ["support*", "step_definitions*"]
+
 
