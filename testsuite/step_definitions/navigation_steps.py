@@ -12,7 +12,7 @@ Covers browser-driven navigation steps needed by the validation slice features:
 import re
 import time
 
-from pytest_bdd import given, when, then, step, parsers
+from pytest_bdd import given, when, then, parsers
 
 from support.commonlib import (
     check_text,
@@ -41,7 +41,7 @@ from support.navigation_helper import (
     toggle_checkbox_in_package_list,
     filter_by_package_name,
 )
-from support.remote_nodes_env import get_target
+from support.remote_nodes_env import get_target, get_system_name
 from support.env import APP_HOST, DEFAULT_TIMEOUT
 from support.constants import PACKAGE_BY_CLIENT, PKGARCH_BY_CLIENT, BASE_CHANNEL_BY_CLIENT
 
@@ -50,13 +50,6 @@ from support.constants import PACKAGE_BY_CLIENT, PKGARCH_BY_CLIENT, BASE_CHANNEL
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _get_system_name(host: str) -> str:
-    """Return the full hostname for a logical host name."""
-    try:
-        node = get_target(host)
-        return node.full_hostname
-    except (NotImplementedError, KeyError):
-        return host
 
 
 def _get_system_id(api_test, host: str) -> int:
@@ -108,25 +101,18 @@ def step_systems_overview_page(page, api_test, host: str):
 # Left menu navigation
 # ---------------------------------------------------------------------------
 
-@step(parsers.re(r'I follow the left menu "(?P<menu_path>[^"]*)"'))
+@when(parsers.re(r'I follow the left menu "(?P<menu_path>[^"]*)"'))
+@given(parsers.re(r'I follow the left menu "(?P<menu_path>[^"]*)"'))
 def step_follow_left_menu(page, menu_path: str):
     follow_left_menu(page, menu_path)
-
-
-# ---------------------------------------------------------------------------
-# Content-area links
-# ---------------------------------------------------------------------------
-
-@step(parsers.re(r'I follow "(?P<text>[^"]*)" in the content area'))
-def step_follow_in_content_area(page, text: str):
-    follow_link_in_content_area(page, text)
 
 
 # ---------------------------------------------------------------------------
 # Generic link following
 # ---------------------------------------------------------------------------
 
-@step(parsers.re(r'I follow "(?P<text>[^"]*)"$'))
+@when(parsers.re(r'I follow "(?P<text>[^"]*)"$'))
+@given(parsers.re(r'I follow "(?P<text>[^"]*)"$'))
 def step_follow_link(page, text: str):
     click_link_and_wait(page, text)
 
@@ -168,7 +154,7 @@ def step_wait_until_not_see_text(page, text: str):
     r'I wait until I see the name of "(?P<host>[^"]*)", refreshing the page'
 ))
 def step_wait_until_see_name_refreshing(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     has_csv = check_text(page, "Download CSV", timeout=3)
     has_keys = check_text(page, "Keys", timeout=3)
     if not has_csv and not has_keys:
@@ -182,7 +168,7 @@ def step_wait_until_see_name_refreshing(page, host: str):
 
 @then(parsers.re(r'I should see "(?P<host>[^"]*)" short hostname'))
 def step_should_see_short_hostname(page, host: str):
-    system_name = _get_system_name(host).partition(".")[0]
+    system_name = get_system_name(host).partition(".")[0]
     assert check_text(page, system_name), (
         f"Short hostname {system_name} is not present"
     )
@@ -190,7 +176,7 @@ def step_should_see_short_hostname(page, host: str):
 
 @then(parsers.re(r'I should see "(?P<host>[^"]*)" hostname'))
 def step_should_see_hostname(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     assert check_text(page, system_name), f"Hostname {system_name} is not present"
 
 
@@ -220,7 +206,7 @@ def step_enter_filtered_package_name(page, value: str):
 
 @when(parsers.re(r'I enter the hostname of "(?P<host>[^"]*)" as "(?P<field>[^"]*)"'))
 def step_enter_hostname_as_field(page, host: str, field: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     enter_text_in_field(page, system_name, field)
 
 
@@ -239,7 +225,7 @@ def step_select_from(page, option: str, field: str):
 ))
 def step_select_hostname_from(page, host: str, field: str, if_present: str):
     try:
-        system_name = _get_system_name(host)
+        system_name = get_system_name(host)
     except (KeyError, NotImplementedError):
         if if_present.strip():
             return
@@ -253,7 +239,7 @@ def step_select_hostname_from(page, host: str, field: str, if_present: str):
 
 @when(parsers.re(r'I check the "(?P<host>[^"]*)" client'))
 def step_check_client(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     _toggle_checkbox_in_list(page, system_name, True)
 
 
@@ -267,6 +253,7 @@ def step_check_in_list(page, text: str):
 # ---------------------------------------------------------------------------
 
 @when(parsers.re(r'I check radio button "(?P<radio>[^"]*)"'))
+@given(parsers.re(r'I check radio button "(?P<radio>[^"]*)"'))
 def step_check_radio_button(page, radio: str):
     loc = page.get_by_label(radio).first
     if not loc.is_checked():
@@ -553,7 +540,7 @@ def step_wait_event_completed(page, timeout: str):
 
 @when(parsers.re(r'I wait until I see the system name of "(?P<host>[^"]*)"$'))
 def step_wait_until_see_system_name(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     wait_for_text(page, system_name)
 
 
@@ -581,7 +568,7 @@ def step_wait_until_not_see_text_refreshing(page, text: str):
 
 @when(parsers.re(r'I wait until I do not see the name of "(?P<host>[^"]*)", refreshing the page$'))
 def step_wait_until_not_see_name_refreshing(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     if not check_text(page, system_name, timeout=3):
         return
 
@@ -836,12 +823,14 @@ def step_click_and_confirm_alert(page, text: str):
     page.get_by_role("button", name=text).first.click()
 
 
-@step(parsers.re(r'I follow first "(?P<text>[^"]*)"$'))
+@when(parsers.re(r'I follow first "(?P<text>[^"]*)"$'))
+@given(parsers.re(r'I follow first "(?P<text>[^"]*)"$'))
 def step_follow_first_link(page, text: str):
     page.get_by_role("link", name=text).first.click()
 
 
 @when(parsers.re(r'I follow "(?P<arg1>[^"]*)" in the (?P<arg2>.+)$'))
+@given(parsers.re(r'I follow "(?P<arg1>[^"]*)" in the (?P<arg2>.+)$'))
 def step_follow_in_section(page, arg1: str, arg2: str):
     tag_map = {
         "tab bar": "header", "tabs": "header", "content area": "section",
@@ -855,6 +844,7 @@ def step_follow_in_section(page, arg1: str, arg2: str):
         raise ValueError(f"Unknown element with description '{arg2}'")
     scope = page.locator(f"xpath=//{tag}")
     scope.get_by_role("link", name=arg1).first.click()
+    wait_for_ajax(page)
 
 
 @when(parsers.re(r'I follow first "(?P<arg1>[^"]*)" in the (?P<arg2>.+)$'))
@@ -875,7 +865,7 @@ def step_follow_first_in_section(page, arg1: str, arg2: str):
 
 @when(parsers.re(r'I follow "(?P<text>[^"]*)" on "(?P<host>.*?)" row$'))
 def step_follow_on_host_row(page, text: str, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     xpath = (
         f"//tr[td[contains(.,'{system_name}')]]//a[contains(., '{text}')]"
     )
@@ -889,7 +879,7 @@ def step_enter_in_editor(page, arg1: str):
 
 @when(parsers.re(r'I follow this "(?P<host>[^"]*)" link$'))
 def step_follow_host_link(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     click_link_and_wait(page, system_name)
 
 
@@ -966,7 +956,7 @@ def step_am_logged_in(page):
 
 @given(parsers.re(r'I navigate to the Systems overview page of this "(?P<host>[^"]*)"'))
 def step_navigate_systems_overview(page, api_test, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     # Go to systems page, search, click
     page.goto(f"{APP_HOST}/rhn/systems/Overview.do", wait_until="domcontentloaded")
     enter_text_in_field(page, system_name, "criteria")
@@ -1063,6 +1053,7 @@ def step_wait_table_row_has_button_default(page, text: str, button: str):
 
 
 @when(parsers.re(r'I wait until table row contains a "(?P<text>[^"]*)" text$'))
+@then(parsers.re(r'I wait until table row contains a "(?P<text>[^"]*)" text$'))
 def step_wait_table_row_contains_text(page, text: str):
     xpath = f"//tr[.//td[contains(.,'{text}')]]"
     page.locator(f"xpath={xpath}").first.wait_for(
@@ -1126,7 +1117,7 @@ def step_should_see_text_or(page, text1: str, text2: str):
 
 @then(parsers.re(r'I should not see "(?P<host>[^"]*)" hostname$'))
 def step_should_not_see_hostname(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     assert not check_text(page, system_name, timeout=3), (
         f"Hostname {system_name} is present"
     )
@@ -1351,7 +1342,7 @@ def step_only_success_in_product_list(page):
 # Repo / row checkbox helpers
 # ---------------------------------------------------------------------------
 
-@then(parsers.re(r'I select the "(?P<repo>[^"]*)" repo$'))
+@when(parsers.re(r'I select the "(?P<repo>[^"]*)" repo$'))
 def step_select_repo(page, repo: str):
     toggle_checkbox_in_list(page, "check", repo)
 
@@ -1428,7 +1419,7 @@ def step_click_filter_until_not_contains(page, text: str):
 
 @when(parsers.re(r'I enter the hostname of "(?P<host>[^"]*)" as the filtered system name$'))
 def step_enter_hostname_as_filtered_system_name(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     page.locator("input[placeholder='Filter by System Name: ']").first.fill(system_name)
 
 
@@ -1756,10 +1747,10 @@ def step_check_blackbox_exporter(page):
 # Service endpoint visit
 # ---------------------------------------------------------------------------
 
-@when(parsers.re(r'I visit "(?P<service>[^"]*)" endpoint of this "(?P<host>[^"]*)"'))
+@then(parsers.re(r'I visit "(?P<service>[^"]*)" endpoint of this "(?P<host>[^"]*)"'))
 def step_visit_service_endpoint(page, service: str, host: str):
     node = get_target(host)
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     services = {
         "Proxy":                    (443,  "https", "/pub/",   "Index of /pub"),
         "Prometheus":               (9090, "http",  "/query",  "Prometheus Time Series Collection"),
@@ -1908,7 +1899,7 @@ def step_click_search_button(page):
 
 @when(parsers.re(r'I enter "(?P<host>[^"]*)" hostname on the search field$'))
 def step_enter_hostname_on_search_field(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     enter_text_in_field(page, system_name, "search_string")
 
 
@@ -1919,7 +1910,7 @@ def step_enter_hostname_on_search_field(page, host: str):
 @when(parsers.re(r"I enter \"(?P<host>[^\"]*)\" hostname on grafana's host field$"))
 def step_enter_hostname_grafana(page, host: str):
     import re as _re
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     current_url = page.url
     updated_url = _re.sub(r"var-hostname=[^&]*", f"var-hostname={system_name}", current_url)
     page.goto(updated_url, wait_until="domcontentloaded")
@@ -1927,7 +1918,7 @@ def step_enter_hostname_grafana(page, host: str):
 
 @then(parsers.re(r'I should see "(?P<host>[^"]*)" hostname as first search result$'))
 def step_should_see_hostname_as_first_result(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     scope = page.locator("xpath=//section").first
     row = scope.locator(
         "xpath=//div[@class='table-responsive']//tr[.//td]"

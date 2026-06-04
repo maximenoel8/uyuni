@@ -717,6 +717,7 @@ def step_wait_container_active(service: str):
 
 
 @when(parsers.re(r'I wait until "(?P<service>[^"]*)" service is active on "(?P<host>[^"]*)"'))
+@then(parsers.re(r'I wait until "(?P<service>[^"]*)" service is active on "(?P<host>[^"]*)"'))
 def step_wait_service_active(service: str, host: str):
     node = get_target(host)
     node.run_until_ok(f"systemctl is-active {service}")
@@ -1818,7 +1819,7 @@ def step_wait_package_installed_spacecmd(pkg: str, client: str):
     repeat_until_timeout(_check, timeout=600, message=f"package {pkg} is not installed yet")
 
 
-@when(parsers.re(r'I wait until package "(?P<pkg>[^"]*)" is removed from "(?P<client>[^"]*)" via spacecmd'))
+@then(parsers.re(r'I wait until package "(?P<pkg>[^"]*)" is removed from "(?P<client>[^"]*)" via spacecmd'))
 def step_wait_package_removed_spacecmd(pkg: str, client: str):
     node = get_target(client)
     system_name = node.full_hostname
@@ -2111,7 +2112,7 @@ def step_remove_offending_ssh_key(key_host: str, key_port: str, known_hosts_path
     node.run(f"ssh-keygen -R [{system_name}]:{key_port} -f {known_hosts_path}")
 
 
-@when(parsers.re(
+@then(parsers.re(
     r'I wait until port "(?P<port>[^"]*)" is listening on "(?P<host>[^"]*)" (?P<location>host|container)'
 ))
 def step_wait_port_listening(port: str, host: str, location: str):

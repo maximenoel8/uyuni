@@ -11,8 +11,8 @@ and appstream namespaces.
 
 import time
 
-from pytest_bdd import given, when, then, parsers
-from support.remote_nodes_env import get_target
+from pytest_bdd import given, when, then, parsers, step
+from support.remote_nodes_env import get_target, get_system_name
 from support.commonlib import repeat_until_timeout
 from support.env import DEFAULT_TIMEOUT
 
@@ -21,18 +21,11 @@ from support.env import DEFAULT_TIMEOUT
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _get_system_name(host: str) -> str:
-    """Return the full hostname for a logical host name."""
-    try:
-        node = get_target(host)
-        return node.full_hostname
-    except (NotImplementedError, KeyError):
-        return host
 
 
 def _get_system_id(api_test, host: str) -> int:
     """Return the numeric system ID for a host via the API."""
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     return api_test.system.retrieve_server_id(system_name)
 
 
@@ -54,13 +47,13 @@ def step_delete_all_imported_terminals(api_test):
 
 @when(parsers.re(r'I delete "(?P<host>[^"]*)" system using the api'))
 def step_delete_system_using_api(api_test, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     api_test.system.delete_systems_by_name([system_name])
 
 
 @given(parsers.re(r'I want to operate on this "(?P<host>[^"]*)"'))
 def step_want_to_operate_on(api_test, scenario_state, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     matches = api_test.system.search_by_name(system_name)
     first_match = matches[0] if matches else None
     assert first_match is not None, f"Could not find system with hostname {system_name}"
@@ -71,7 +64,7 @@ def step_want_to_operate_on(api_test, scenario_state, host: str):
     r'I call system\.bootstrap\(\) on host "(?P<host>[^"]*)" and salt-ssh "(?P<salt_ssh_enabled>[^"]*)"'
 ))
 def step_bootstrap_system(api_test, host: str, salt_ssh_enabled: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     salt_ssh = (salt_ssh_enabled == "enabled")
     akey = "1-SUSE-SSH-KEY-x86_64" if salt_ssh else "1-SUSE-KEY-x86_64"
     result = api_test.system.bootstrap_system(system_name, akey, salt_ssh)
@@ -104,7 +97,7 @@ def step_bootstrap_salt_minion_wrong_key(api_test):
 
 @when(parsers.re(r'I schedule a highstate for "(?P<host>[^"]*)" via API'))
 def step_schedule_highstate_via_api(api_test, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     node_id = api_test.system.retrieve_server_id(system_name)
     date_high = api_test.date_now()
     api_test.system.schedule_apply_highstate(node_id, date_high, False)
@@ -114,7 +107,7 @@ def step_schedule_highstate_via_api(api_test, host: str):
     r'I unsubscribe "(?P<host>[^"]*)" from configuration channel "(?P<channel>[^"]*)"'
 ))
 def step_unsubscribe_from_config_channel(api_test, scenario_state, host: str, channel: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     node_id = api_test.system.retrieve_server_id(system_name)
     api_test.system.config.remove_channels([node_id], [channel])
 
@@ -266,7 +259,7 @@ def step_remove_role(api_test, luser: str, rolename: str):
     assert result == 1, f"user.remove_role returned {result!r}"
 
 
-@given(parsers.re(
+@when(parsers.re(
     r'I create a user with name "(?P<user>[^"]*)" and password "(?P<password>[^"]*)"'
     r'(?: with roles "(?P<roles_string>[^"]*)")?'
 ))
@@ -897,7 +890,7 @@ def step_channel_contains_file(api_test, channel: str, file: str):
     r'"(?P<host>[^"]*)" should be subscribed to channel "(?P<channel>[^"]*)"'
 ))
 def step_should_be_subscribed(api_test, host: str, channel: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     result = api_test.configchannel.list_subscribed_systems(channel)
     count = sum(1 for item in result if item["name"] == system_name)
     assert count == 1, f"'{host}' not subscribed to channel '{channel}'"
@@ -907,7 +900,7 @@ def step_should_be_subscribed(api_test, host: str, channel: str):
     r'"(?P<host>[^"]*)" should not be subscribed to channel "(?P<channel>[^"]*)"'
 ))
 def step_should_not_be_subscribed(api_test, host: str, channel: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     result = api_test.configchannel.list_subscribed_systems(channel)
     count = sum(1 for item in result if item["name"] == system_name)
     assert count == 0, f"'{host}' should not be subscribed to channel '{channel}'"

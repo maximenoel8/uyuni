@@ -27,10 +27,10 @@ Feature: Prepare the containerized branch server for PXE booting
 
   Scenario: Let the server know about the new IP and FQDN of the containerized proxy
     Given I am authorized for the "Admin" section
-    When I am on the Systems overview page of this "proxy"
+    And I am on the Systems overview page of this "proxy"
     And I follow "Details" in the content area
     And I follow "Hardware" in the content area
-    And I click on "Schedule Hardware Refresh"
+    When I click on "Schedule Hardware Refresh"
     Then I should see a "You have successfully scheduled a hardware profile refresh" text
     When I wait until event "Hardware List Refresh scheduled by admin" is completed
     And I wait until there is no Salt job calling the module "hardware.profileupdate" on "proxy"

@@ -13,7 +13,7 @@ import os
 from pytest_bdd import given, when, then, parsers
 
 from support.file_management import file_inject, file_extract, generate_temp_file
-from support.remote_nodes_env import get_target
+from support.remote_nodes_env import get_target, get_system_name
 from support.env import DEFAULT_TIMEOUT
 
 
@@ -105,7 +105,6 @@ def step_file_should_contain(filename: str, content: str, host: str):
     r'from the (?P<target_type>server|proxy)'
 ))
 def step_bootstrap_using_bootstrap_script(host: str, key: str, target_type: str):
-    from support.remote_nodes_env import get_system_name
     from support.commonlib import deb_host, rh_host
 
     # Choose target: use server if proxy is not defined or target_type is server

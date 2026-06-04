@@ -15,7 +15,7 @@ import os
 
 from pytest_bdd import given, when, then, parsers
 
-from support.remote_nodes_env import get_target
+from support.remote_nodes_env import get_target, get_system_name
 from support.commonlib import repeat_until_timeout, rh_host, deb_host, transactional_system
 from support.env import DEFAULT_TIMEOUT, USE_SALT_BUNDLE
 
@@ -24,13 +24,6 @@ from support.env import DEFAULT_TIMEOUT, USE_SALT_BUNDLE
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _get_system_name(host: str) -> str:
-    """Return the full hostname for a logical host name."""
-    try:
-        node = get_target(host)
-        return node.full_hostname
-    except (NotImplementedError, KeyError):
-        return host
 
 
 def _salt_call_bin() -> str:
@@ -69,7 +62,7 @@ def _salt_master_pillar_get(key: str) -> str:
 
 @given(parsers.re(r'the Salt master can reach "(?P<minion>[^"]*)"'))
 def step_salt_master_can_reach(minion: str):
-    system_name = _get_system_name(minion)
+    system_name = get_system_name(minion)
     server = get_target("server")
 
     def _ping():
@@ -184,7 +177,7 @@ def step_wait_salt_master_sees_minion(key_timeout: str, minion: str, key_type: s
     cmd = f"salt-key --list {key_type}"
 
     def _check():
-        system_name = _get_system_name(minion)
+        system_name = get_system_name(minion)
         if not system_name:
             return None
         output, code = get_target("server").run(cmd, check_errors=False)
@@ -218,7 +211,7 @@ def step_wait_salt_client_inactive(minion: str):
 
 @when(parsers.re(r'I wait until Salt master can reach "(?P<minion>[^"]*)"'))
 def step_wait_until_salt_master_can_reach(minion: str):
-    system_name = _get_system_name(minion)
+    system_name = get_system_name(minion)
     get_target("server").run_until_ok(
         f"bash -c 'until timeout 5s salt {system_name} test.ping; do :; done'"
     )
@@ -242,7 +235,7 @@ def step_wait_no_salt_job(minion: str):
 
 @when(parsers.re(r'I delete "(?P<host>[^"]*)" key in the Salt master'))
 def step_delete_key_salt_master(scenario_state, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     output, _code = get_target("server").run(
         f"salt-key -y -d {system_name}", check_errors=False
     )
@@ -251,7 +244,7 @@ def step_delete_key_salt_master(scenario_state, host: str):
 
 @when(parsers.re(r'I accept "(?P<host>[^"]*)" key in the Salt master'))
 def step_accept_key_salt_master(host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     get_target("server").run(f"salt-key -y --accept={system_name}*")
 
 
@@ -266,7 +259,7 @@ def step_list_all_salt_keys():
 
 @when(parsers.re(r'I get OS information of "(?P<host>[^"]*)" from the Master'))
 def step_get_os_information(scenario_state, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     output, _code = get_target("server").run(
         f"salt {system_name} grains.get osfullname"
     )
@@ -298,7 +291,7 @@ def step_output_contains_os(scenario_state, host: str):
 
 @when(parsers.re(r'I apply state "(?P<state>[^"]*)" to "(?P<host>[^"]*)"'))
 def step_apply_state(state: str, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     get_target("server").run(f"salt {system_name} state.apply {state}")
 
 
@@ -330,21 +323,21 @@ def step_salt_master_listening(scenario_state, port: str):
 
 @then(parsers.re(r'"(?P<host>.*?)" should not be registered'))
 def step_should_not_be_registered(api_test, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     names = [s["name"] for s in api_test.system.list_systems()]
     assert system_name not in names, f"'{host}' should not be registered but is"
 
 
 @then(parsers.re(r'"(?P<host>.*?)" should be registered'))
 def step_should_be_registered(api_test, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     names = [s["name"] for s in api_test.system.list_systems()]
     assert system_name in names, f"'{host}' is not registered"
 
 
 @then(parsers.re(r'"(?P<host>.*?)" should have been reformatted'))
 def step_should_have_been_reformatted(host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     output, _code = get_target("server").run(
         f"salt {system_name} file.file_exists /intact"
     )
@@ -390,7 +383,7 @@ def step_click_on_run(page):
 
 @when(parsers.re(r'I expand the results for "(?P<host>[^"]*)"'))
 def step_expand_results(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     page.click(f"div[id='{system_name}']")
 
 
@@ -401,7 +394,7 @@ def step_enter_command(page, cmd: str):
 
 @when(parsers.re(r'I enter target "(?P<host>[^"]*)"'))
 def step_enter_target(page, host: str):
-    value = _get_system_name(host)
+    value = get_system_name(host)
     page.fill("input[name='target']", value)
 
 
@@ -409,7 +402,7 @@ def step_enter_target(page, host: str):
     r'I should see "(?P<text>[^"]*)" in the command output for "(?P<host>[^"]*)"'
 ))
 def step_see_text_in_command_output(page, text: str, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     locator = page.locator(f"pre[id='{system_name}-results']")
     content = locator.text_content()
     assert text in content, (
@@ -442,7 +435,7 @@ def step_uninstall_formula(package: str):
 
 @when(parsers.re(r'I synchronize all Salt dynamic modules on "(?P<host>[^"]*)"'))
 def step_sync_salt_modules(host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     get_target("server").run(f"salt {system_name} saltutil.sync_all")
 
 
@@ -772,14 +765,14 @@ def step_download_no_error(scenario_state):
 
 @when(parsers.re(r'I reject "(?P<host>[^"]*)" from the Pending section'))
 def step_reject_from_pending(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     xpath = f"//tr[td[contains(.,'{system_name}')]]//button[@aria-label = 'Reject']"
     page.click(f"xpath={xpath}")
 
 
 @when(parsers.re(r'I delete "(?P<host>[^"]*)" from the Rejected section'))
 def step_delete_from_rejected(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     xpath = f"//tr[td[contains(.,'{system_name}')]]//button[@aria-label = 'Delete']"
     page.click(f"xpath={xpath}")
 
@@ -798,14 +791,14 @@ def step_see_fingerprint(page, host: str):
 
 @when(parsers.re(r'I accept "(?P<host>[^"]*)" key'))
 def step_accept_key_ui(page, host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     xpath = f"//tr[td[contains(.,'{system_name}')]]//button[@aria-label = 'Accept']"
     page.click(f"xpath={xpath}")
 
 
 @when(parsers.re(r'I refresh page until I see "(?P<minion>[^"]*?)" hostname as text'))
 def step_refresh_until_see_hostname(page, minion: str):
-    system_name = _get_system_name(minion)
+    system_name = get_system_name(minion)
 
     def _check():
         page.reload()
@@ -817,7 +810,7 @@ def step_refresh_until_see_hostname(page, minion: str):
 
 @when(parsers.re(r'I refresh page until I do not see "(?P<minion>[^"]*?)" hostname as text'))
 def step_refresh_until_not_see_hostname(page, minion: str):
-    system_name = _get_system_name(minion)
+    system_name = get_system_name(minion)
 
     def _check():
         page.reload()
@@ -902,7 +895,7 @@ def step_disable_repos_after_salt(host: str):
 
 @then(parsers.re(r'I run spacecmd listeventhistory for "(?P<host>[^"]*)"'))
 def step_spacecmd_list_event_history(host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     get_target("server").run("spacecmd -u admin -p admin clear_caches")
     get_target("server").run(
         f"spacecmd -u admin -p admin system_listeventhistory {system_name}"
@@ -961,7 +954,7 @@ def step_full_salt_minion_cleanup(host: str):
 ))
 def step_install_pillar_top_file(files: str, host: str):
     from support.file_management import inject_salt_pillar_file, generate_temp_file
-    system_name = "*" if host == "*" else _get_system_name(host)
+    system_name = "*" if host == "*" else get_system_name(host)
     script = f"base:\n  '{system_name}':\n"
     for f in re.split(r",\s*", files):
         script += f"    - '{f}'\n"
@@ -1039,7 +1032,7 @@ def step_purge_salt_minion_after_migration(host: str):
 
 @when(parsers.re(r'I apply highstate on "(?P<host>[^"]*)"'))
 def step_apply_highstate(host: str):
-    system_name = _get_system_name(host)
+    system_name = get_system_name(host)
     if "ssh_minion" in host:
         cmd = "mgr-salt-ssh"
     elif any(k in host for k in ("minion", "build", "proxy")):

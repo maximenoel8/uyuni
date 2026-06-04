@@ -13,7 +13,7 @@ from system_monitoring_steps.rb needed by sle_minion.feature.
 
 from pytest_bdd import given, when, then, parsers
 
-from support.remote_nodes_env import get_target
+from support.remote_nodes_env import get_target, get_system_name
 from support.commonlib import repeat_until_timeout
 from support.embedded_steps.navigation_helper import (
     follow_left_menu,
@@ -417,7 +417,6 @@ def step_see_table_line_two(page, arg1: str, arg2: str):
 
 @then(parsers.re(r'a table line should contain system "(?P<host>[^"]*)", "(?P<text>[^"]*)"'))
 def step_table_line_contains_system(page, host: str, text: str):
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host)
     row = page.locator(
         f"xpath=//div[contains(@class, 'table-responsive')]//tr[.//td[contains(.,'{system_name}')]]"
@@ -434,7 +433,6 @@ def step_table_line_contains_system(page, host: str, text: str):
     r'refreshing the page'
 ))
 def step_wait_until_see_host_name(page, seconds: str, host: str):
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host)
 
     def _not_loading():
@@ -456,7 +454,6 @@ def step_wait_until_see_host_name(page, seconds: str, host: str):
 
 @then(parsers.re(r'I should see "(?P<host>[^"]*)" via spacecmd'))
 def step_should_see_via_spacecmd(host: str):
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host)
     server = get_target("server")
 
@@ -474,7 +471,6 @@ def step_should_see_via_spacecmd(host: str):
 
 @then(parsers.re(r'I should see "(?P<host>[^"]*)" as link'))
 def step_should_see_as_link(page, host: str):
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host)
     assert page.get_by_role("link", name=system_name).count(), \
         f"Link '{system_name}' not found on page"

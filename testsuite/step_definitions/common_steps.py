@@ -21,7 +21,7 @@ from support.commonlib import (
     deb_host,
     repeat_until_timeout,
 )
-from support.remote_nodes_env import get_target
+from support.remote_nodes_env import get_target, get_system_name
 from support.env import DEFAULT_TIMEOUT
 
 
@@ -92,7 +92,6 @@ def step_ipv6_address_should_be_correct(page, host: str):
 
 @then(parsers.re(r'the system ID for "(?P<host>[^"]*)" should be correct'))
 def step_system_id_should_be_correct(page, api_test, host: str):
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host)
     results = api_test.system.search_by_name(system_name)
     client_id = str(results[0]["id"])
@@ -101,7 +100,6 @@ def step_system_id_should_be_correct(page, api_test, host: str):
 
 @then(parsers.re(r'the system name for "(?P<host>[^"]*)" should be correct'))
 def step_system_name_should_be_correct(page, host: str):
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host)
     assert check_text(page, system_name), f"System name {system_name} not found on page"
 
@@ -111,6 +109,7 @@ def step_system_name_should_be_correct(page, host: str):
 # ---------------------------------------------------------------------------
 
 @when(parsers.re(r'I wait until event "(?P<event>[^"]*)" is completed'))
+@then(parsers.re(r'I wait until event "(?P<event>[^"]*)" is completed'))
 def step_wait_until_event_completed(page, event: str):
     step_wait_at_most_until_event_completed(page, str(DEFAULT_TIMEOUT), event)
 
@@ -226,19 +225,6 @@ def step_up2date_logs_no_traceback(host: str):
     cmd = "if grep 'Traceback' /var/log/up2date ; then exit 1; else exit 0; fi"
     _out, code = node.run(cmd)
     assert code == 0, "Traceback error found, check the client up2date logs"
-
-
-# ---------------------------------------------------------------------------
-# Action chains / radio buttons
-# ---------------------------------------------------------------------------
-
-@when(parsers.re(r'I check radio button "(?P<radio_button>.*?)"'))
-def step_common_check_radio_button(page, radio_button: str):
-    locator = page.get_by_role("radio", name=radio_button)
-    if locator.is_checked():
-        print(f"Warning: Radio button '{radio_button}' is already checked")
-    else:
-        locator.check()
 
 
 # ---------------------------------------------------------------------------

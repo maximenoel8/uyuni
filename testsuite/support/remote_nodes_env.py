@@ -56,3 +56,11 @@ def get_target(host: str, *, refresh: bool = False) -> "RemoteNode":
     if node is None or refresh:
         node = RemoteNode(host)
     return node
+
+
+def get_system_name(host: str) -> str:
+    """Return the fully-qualified hostname for a logical host name."""
+    try:
+        return get_target(host).full_hostname
+    except (NotImplementedError, KeyError):
+        return host

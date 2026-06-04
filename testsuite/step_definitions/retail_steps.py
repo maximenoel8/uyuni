@@ -13,7 +13,7 @@ import re
 
 from pytest_bdd import given, when, then, parsers
 
-from support.remote_nodes_env import get_target
+from support.remote_nodes_env import get_target, get_system_name
 from support.commonlib import repeat_until_timeout, check_text
 from support.env import DEFAULT_TIMEOUT
 
@@ -213,7 +213,6 @@ def step_accept_pxeboot_key():
 @when("I install the GPG key of the test packages repository on the PXE boot minion")
 def step_install_gpg_key_pxeboot():
     from support.file_management import file_inject
-    from support.remote_nodes_env import get_system_name
     file_name = "uyuni.key"
     source = os.path.join(os.path.dirname(__file__), f"../features/upload_files/{file_name}")
     dest = f"/tmp/{file_name}"
@@ -647,7 +646,6 @@ def step_image_exists_on_branch_server(host: str):
 
 def _execute_expect_command_proxy(host: str, script: str, context: str):
     """Run an expect script on the proxy node against the given host."""
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host) if host not in ("pxeboot_minion",) else host
     get_target("proxy").run(f"expect -f /tmp/{script} {system_name} {context}")
 

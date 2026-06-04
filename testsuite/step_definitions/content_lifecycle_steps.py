@@ -13,7 +13,7 @@ import os
 from pytest_bdd import given, when, then, parsers
 
 from support.commonlib import check_text, click_button_and_wait, wait_for_ajax, repeat_until_timeout
-from support.remote_nodes_env import get_target
+from support.remote_nodes_env import get_target, get_system_name
 from support.env import DEFAULT_TIMEOUT
 
 
@@ -215,7 +215,6 @@ def step_deploy_testing_playbooks(host: str):
 
 @when(parsers.re(r'I enter the reactivation key of "(?P<host>[^"]*)"'))
 def step_enter_reactivation_key(page, api_test, host: str):
-    from support.remote_nodes_env import get_system_name
     system_name = get_system_name(host)
     node_id = api_test.system.retrieve_server_id(system_name)
     react_key = api_test.system.obtain_reactivation_key(node_id)

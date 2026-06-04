@@ -54,16 +54,12 @@ def step_kubernetes_cluster_ready(target: str):
     assert code == 0, f"Kubernetes cluster is not ready or uyuni namespace is missing on {target}"
 
 
-@then(parsers.re(
+# Alias for "And" prefix
+@when(parsers.re(
     r'(?:the|I wait until the) "(?P<name>.*)" deployment on "(?P<target>.*)" '
     r'(?:becomes|should become) ready within (?P<mins>.*) minutes'
 ))
-def step_deployment_ready_within(name: str, target: str, mins: str):
-    _wait_for_deployment(target, name, int(mins))
-
-
-# Alias for "And" prefix
-@when(parsers.re(
+@given(parsers.re(
     r'(?:the|I wait until the) "(?P<name>.*)" deployment on "(?P<target>.*)" '
     r'(?:becomes|should become) ready within (?P<mins>.*) minutes'
 ))
@@ -361,6 +357,7 @@ def step_downloaded_tftp_content_matches(target: str, context_store):
 
 
 @when(parsers.re(r'I remove the sanity-check file from the TFTP boot root on "(?P<target>.*)"'))
+@then(parsers.re(r'I remove the sanity-check file from the TFTP boot root on "(?P<target>.*)"'))
 def step_remove_tftp_sanity_file(target: str, context_store):
     server_pod = _get_pod_name(target, "server")
     filename = context_store.get("tftp_probe_filename", "uyuni-tftp-sanity-probe.txt")
