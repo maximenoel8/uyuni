@@ -11,7 +11,7 @@ and appstream namespaces.
 
 import time
 
-from pytest_bdd import given, when, then, parsers, step
+from pytest_bdd import given, when, then, parsers
 from support.remote_nodes_env import get_target, get_system_name
 from support.commonlib import repeat_until_timeout
 from support.env import DEFAULT_TIMEOUT

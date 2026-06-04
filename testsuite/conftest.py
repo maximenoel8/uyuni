@@ -116,7 +116,9 @@ def browser(playwright_instance):
     if IS_CLOUD_PROVIDER:
         args.append(f"--user-data-dir=/tmp/chrome_profile_{os.getpid()}")
 
-    b = playwright_instance.chromium.launch(headless=not DEBUG_MODE, args=args)
+    executable_path = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH") or None
+    b = playwright_instance.chromium.launch(headless=not DEBUG_MODE, args=args,
+                                            executable_path=executable_path)
     yield b
     b.close()
 
