@@ -135,10 +135,97 @@ Scenarios tagged with a host that has no env var set are automatically skipped.
 
 All commands must be run from the `testsuite/` directory.
 
+### Using the wrapper script (recommended)
+
+`run_testsuite.py` is a convenience wrapper around pytest that handles report
+configuration, output directories, and environment variables:
+
+```bash
+# List available run sets
+./run_testsuite.py --list
+
+# Run a group — equivalent to: rake cucumber:core
+./run_testsuite.py core
+
+# Run with Cucumber HTML report (multiple-cucumber-html-reporter)
+./run_testsuite.py core --report both
+
+# Run a single feature
+./run_testsuite.py --feature srv_first_settings
+
+# Run in headed (visible) browser
+./run_testsuite.py core --debug
+
+# Stop on first failure, short tracebacks
+./run_testsuite.py core -x -- --tb=short
+
+# Custom output directory
+./run_testsuite.py core --output-dir /tmp/myresults
+```
+
+All output goes to `results/` by default:
+- `results/cucumber.json` — Cucumber-format report
+- `results/report.html` — embedded-screenshot HTML report (with `--report html`)
+- `results/html/index.html` — Cucumber HTML report (with `--report both`)
+- `results/screenshots/` — failure screenshots
+
+### Run a named group (run_set) — CI equivalent of `rake cucumber:<name>`
+
+Use `--run-set=<name>` to run exactly the features listed in `run_sets/<name>.yml`,
+in the order defined there. This is the direct replacement for the Rake targets used
+in Jenkins:
+
+| Jenkins (`rake cucumber:<name>`) | Python (`pytest --run-set=<name>`) |
+|---|---|
+| `rake cucumber:core` | `pytest --run-set=core` |
+| `rake cucumber:reposync` | `pytest --run-set=reposync` |
+| `rake cucumber:proxy` | `pytest --run-set=proxy` |
+| `rake cucumber:init_clients` | `pytest --run-set=init_clients` |
+| `rake cucumber:secondary` | `pytest --run-set=secondary` |
+| `rake cucumber:finishing` | `pytest --run-set=finishing` |
+| `rake cucumber:sanity_check` | `pytest --run-set=sanity_check` |
+| `rake parallel:init_clients` | `pytest --run-set=init_clients` |
+
+**Full CI stage replacement:**
+
+```bash
+# Before (Ruby/Cucumber):
+cd /root/spacewalk/testsuite; ${exports} rake cucumber:core
+
+# After (Python/pytest) — drop-in for Jenkins Cucumber Reports Plugin:
+cd /root/uyuni/testsuite; ${exports} pytest --run-set=core \
+    --cucumberjson=${resultdirbuild}/cucumber.json -v
+```
+
+The `--cucumberjson` output is consumed directly by the Jenkins Cucumber Reports Plugin
+— point it at the JSON file exactly as before.
+
+The `--run-set` option reads the YAML, deselects any features not listed, and runs
+the remaining ones in declaration order. The `testpaths = features` setting in
+`pytest.ini` means no explicit path argument is needed.
+
+**Terracumber stage (drop-in replacement):**
+
+```groovy
+// Before:
+sh "./terracumber-cli ${common_params} --logfile ${resultdirbuild}/testsuite.log \
+    --runstep cucumber \
+    --cucumber-cmd 'cd /root/spacewalk/testsuite; ${env.exports} rake cucumber:core'"
+
+// After:
+sh "./terracumber-cli ${common_params} --logfile ${resultdirbuild}/testsuite.log \
+    --runstep cucumber \
+    --cucumber-cmd 'cd /root/uyuni/testsuite; ${env.exports} \
+        ./run_testsuite.py core --output-dir ${resultdirbuild}'"
+```
+
+The wrapper writes `${resultdirbuild}/cucumber.json` automatically — point the Jenkins
+Cucumber Reports Plugin at that file as before.
+
 ### Full suite
 
 ```bash
-pytest features/ -v
+pytest -v
 ```
 
 ### A feature directory
@@ -148,6 +235,11 @@ pytest features/core/ -v
 pytest features/secondary/ -v
 pytest features/init_clients/ -v
 ```
+
+Features within a directory are executed in the order defined in the corresponding
+`run_sets/*.yml` file (e.g. `run_sets/core.yml` for `features/core/`). The order is
+enforced at collection time via `conftest.py` — no manual ordering is needed and the
+feature files do not need numeric prefixes.
 
 ### Single feature file
 
@@ -167,23 +259,51 @@ selected; scenarios from other files in the same directory are deselected.
 > collect test items from Gherkin files. Always target the `test_features.py` in the
 > same directory and filter with `-k "feature_stem"`.
 
-### HTML report with embedded screenshots
+### Cucumber JSON report (recommended — same format as Ruby runner)
 
-Generate a self-contained HTML report (similar to Cucumber's HTML report). On failure,
-the screenshot taken at the moment of the error is embedded directly in the report:
+`pytest-bdd` generates Cucumber-compatible JSON natively via `--cucumberjson`.
+This is the same format consumed by the **Jenkins Cucumber Reports Plugin** and
+`multiple-cucumber-html-reporter` — no changes to Jenkins configuration needed.
+
+```bash
+pytest --run-set=core --cucumberjson=results/cucumber.json -v
+```
+
+**Generate a Cucumber-style HTML report locally:**
+
+```bash
+# Install once
+npm install -g multiple-cucumber-html-reporter
+
+# Generate after a run
+multiple-cucumber-html-reporter \
+    --reportPath reports/ \
+    --jsonDir results/ \
+    --reportName "SUMA Core Testsuite"
+# → open reports/index.html
+```
+
+The HTML report shows feature/scenario hierarchy, step-level pass/fail, tags, and
+durations — identical to the Cucumber HTML report the team already knows.
+
+**Combined run + report command:**
+
+```bash
+pytest --run-set=core --cucumberjson=results/cucumber.json -v && \
+    multiple-cucumber-html-reporter --reportPath reports/ --jsonDir results/
+```
+
+### HTML report with embedded screenshots (alternative)
+
+For a self-contained single-file report with screenshots embedded as base64:
 
 ```bash
 pytest features/core/test_features.py -k "srv_first_settings" -v \
     --html=report.html --self-contained-html
 ```
 
-Open `report.html` in a browser. Each failed scenario shows:
-- The full Python traceback
-- The Playwright step that timed out
-- An embedded screenshot of the browser at the moment of failure
-
-The `--self-contained-html` flag bundles all assets (including screenshots as base64) into
-a single file you can copy off the controller without needing the `screenshots/` directory.
+On failure each scenario shows the full traceback and an embedded screenshot.
+Use `--cucumberjson` for CI; use `--html` for quick local debugging.
 
 ### Dry run (collect without executing)
 
@@ -206,8 +326,9 @@ DEBUG=true pytest features/secondary/ -k "allcli_action_chain" -v
 
 | Path | Format | Description |
 |---|---|---|
+| `results/cucumber.json` | Cucumber JSON | Pass `--cucumberjson=results/cucumber.json` — consumed by Jenkins Cucumber Reports Plugin and `multiple-cucumber-html-reporter` |
 | `screenshots/` | PNG | Captured automatically on scenario failure |
-| `report.html` | HTML | Self-contained report with embedded screenshots (pass `--html=report.html --self-contained-html`) |
+| `report.html` | HTML | Self-contained single-file report with embedded screenshots — pass `--html=report.html --self-contained-html` |
 | `api.log` | Text | All XML-RPC/HTTP API calls with timestamps |
 
 ---

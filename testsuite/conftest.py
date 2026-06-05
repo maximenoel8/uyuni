@@ -26,6 +26,39 @@ import time
 import pytest
 from pathlib import Path
 
+# ---------------------------------------------------------------------------
+# Run-set ordering: parse run_sets/*.yml to get canonical feature file order
+# ---------------------------------------------------------------------------
+
+def _build_feature_order() -> dict:
+    """Return {abs_feature_path: global_sort_index} from all run_set YAMLs."""
+    run_sets_root = Path(__file__).parent / "run_sets"
+    order: dict = {}
+    index = 0
+    for yml in sorted(run_sets_root.rglob("*.yml")):
+        for line in yml.read_text(errors="replace").splitlines():
+            line = line.strip()
+            if line.startswith("- features/"):
+                abs_path = str(Path(__file__).parent / line[2:])
+                if abs_path not in order:
+                    order[abs_path] = index
+                    index += 1
+    return order
+
+
+_FEATURE_ORDER: dict | None = None
+
+
+def _feature_sort_key(item) -> int:
+    global _FEATURE_ORDER
+    if _FEATURE_ORDER is None:
+        _FEATURE_ORDER = _build_feature_order()
+    func = getattr(item, "function", None)
+    bdd_scenario = getattr(func, "__scenario__", None)
+    if bdd_scenario is not None:
+        return _FEATURE_ORDER.get(str(bdd_scenario.feature.filename), 999999)
+    return 999999
+
 from support.env import (
     APP_HOST, CAPYBARA_TIMEOUT, DEBUG_MODE, DEFAULT_TIMEOUT,
     SCREENSHOT_DIR, CODE_COVERAGE_MODE, QUALITY_INTELLIGENCE_MODE,
@@ -329,6 +362,35 @@ _RHEL10_TAGS = {
 }
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--run-set",
+        action="store",
+        default=None,
+        metavar="NAME",
+        help=(
+            "Run only the features listed in run_sets/<NAME>.yml, in order. "
+            "Equivalent to 'rake cucumber:<NAME>'. "
+            "Example: --run-set=core, --run-set=sanity_check"
+        ),
+    )
+
+
+def _load_run_set(name: str) -> list[str]:
+    """Return ordered list of absolute feature file paths for a run_set name."""
+    run_sets_root = Path(__file__).parent / "run_sets"
+    matches = list(run_sets_root.rglob(f"{name}.yml"))
+    if not matches:
+        raise ValueError(f"Run set '{name}' not found under {run_sets_root}")
+    yml = matches[0]
+    paths = []
+    for line in yml.read_text(errors="replace").splitlines():
+        line = line.strip()
+        if line.startswith("- features/"):
+            paths.append(str(Path(__file__).parent / line[2:]))
+    return paths
+
+
 def pytest_configure(config):
     """Register all tag markers and populate session cache."""
     for tag in _HOST_TAG_MAP:
@@ -352,6 +414,21 @@ def pytest_configure(config):
 
 
 def pytest_collection_modifyitems(config, items):
+    run_set_name = config.getoption("--run-set", default=None)
+    if run_set_name:
+        allowed = set(_load_run_set(run_set_name))
+        selected, deselected = [], []
+        for item in items:
+            func = getattr(item, "function", None)
+            bdd_scenario = getattr(func, "__scenario__", None)
+            if bdd_scenario is not None and str(bdd_scenario.feature.filename) in allowed:
+                selected.append(item)
+            else:
+                deselected.append(item)
+        if deselected:
+            config.hook.pytest_deselected(items=deselected)
+        items[:] = selected
+
     for item in items:
         func = getattr(item, "function", None)
         bdd_scenario = getattr(func, "__scenario__", None)
@@ -403,6 +480,9 @@ def pytest_collection_modifyitems(config, items):
             if not proxy_not_transactional and not sp7_present:
                 item.add_marker(pytest.mark.skip(
                     reason="@run_if_proxy_not_transactional_or_sles15sp7_minion not met"))
+
+    # Sort by run_set order (stable: scenarios within a feature keep their relative order)
+    items.sort(key=_feature_sort_key)
 
 
 # ---------------------------------------------------------------------------
