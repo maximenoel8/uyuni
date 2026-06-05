@@ -21,7 +21,7 @@ Feature: Verify that Salt mgrcompat state works when the new module.run syntax i
     Given I am authorized
 
   Scenario: Remove mgrcompat module from minion synced modules and schedule Hardware Refresh
-    Given I remove "minion/extmods/states/mgrcompat.py" from salt cache on "sle_minion"
+    When I remove "minion/extmods/states/mgrcompat.py" from salt cache on "sle_minion"
     And I remove "minion/extmods/states/__pycache__/mgrcompat*" from salt cache on "sle_minion"
     And I am on the Systems overview page of this "sle_minion"
     When I follow "Hardware"
@@ -31,7 +31,7 @@ Feature: Verify that Salt mgrcompat state works when the new module.run syntax i
     And I wait until there is no Salt job calling the module "hardware.profileupdate" on "sle_minion"
 
   Scenario: Remove saltutil grain and mgrcompat module from minion and schedule Hardware Refresh
-    Given I remove "minion/extmods/states/mgrcompat.py" from salt cache on "sle_minion"
+    When I remove "minion/extmods/states/mgrcompat.py" from salt cache on "sle_minion"
     And I remove "minion/extmods/states/__pycache__/mgrcompat*" from salt cache on "sle_minion"
     And I store "grains: {__suse_reserved_saltutil_states_support: False}" into file "custom_grains.conf" in salt minion config directory on "sle_minion"
     And I refresh salt-minion grains on "sle_minion"
@@ -52,7 +52,7 @@ Feature: Verify that Salt mgrcompat state works when the new module.run syntax i
     Then "sle_minion" should not be registered
 
   Scenario: Enable new module.run syntax on the minion and perform registration
-    Given I store "use_superseded: [module.run]" into file "custom_modulerun.conf" in salt minion config directory on "sle_minion"
+    When I store "use_superseded: [module.run]" into file "custom_modulerun.conf" in salt minion config directory on "sle_minion"
     When I follow the left menu "Systems > Bootstrapping"
     Then I should see a "Bootstrap Minions" text
     When I enter the hostname of "sle_minion" as "hostname"

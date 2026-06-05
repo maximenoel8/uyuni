@@ -157,7 +157,7 @@ def step_bootstrap_using_bootstrap_script(host: str, key: str, target_type: str)
 # Hosts file
 # ---------------------------------------------------------------------------
 
-@then(parsers.re(r'I remove server hostname from hosts file on "(?P<host>[^"]*)"'))
+@when(parsers.re(r'I remove server hostname from hosts file on "(?P<host>[^"]*)"'))
 def step_remove_server_hostname_from_hosts(host: str):
     server_hostname = get_target("server").full_hostname
     node = get_target(host)

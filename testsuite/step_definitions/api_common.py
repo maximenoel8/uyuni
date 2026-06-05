@@ -596,7 +596,7 @@ def step_delete_all_action_chains(api_test):
         api_test.actionchain.delete_chain(label)
 
 
-@then(parsers.re(r'I rename the action chain with label "(?P<old_label>[^"]*)" to "(?P<new_label>[^"]*)" via API'))
+@when(parsers.re(r'I rename the action chain with label "(?P<old_label>[^"]*)" to "(?P<new_label>[^"]*)" via API'))
 def step_rename_action_chain(api_test, old_label: str, new_label: str):
     api_test.actionchain.rename_chain(old_label, new_label)
 
@@ -727,7 +727,7 @@ def step_see_scheduled_action(api_test, label: str):
     assert label in names, f"Scheduled action '{label}' not found in {names}"
 
 
-@then("I cancel all scheduled actions via API")
+@when("I cancel all scheduled actions via API")
 def step_cancel_all_scheduled_actions(api_test):
     actions = [
         a for a in api_test.schedule.list_in_progress_actions()
@@ -742,7 +742,7 @@ def step_cancel_all_scheduled_actions(api_test):
                 api_test.schedule.fail_system_action(system["server_id"], action["id"])
 
 
-@then("I wait until there are no more scheduled actions listed via API")
+@when("I wait until there are no more scheduled actions listed via API")
 def step_wait_no_scheduled_actions(api_test):
     def _check():
         actions = api_test.schedule.list_in_progress_actions()
@@ -783,17 +783,17 @@ def step_set_power_management_value(api_test, scenario_state, value: str, hkey: 
     )
 
 
-@then("I turn power on")
+@when("I turn power on")
 def step_turn_power_on(api_test, scenario_state):
     api_test.system.provisioning.powermanagement.power_on(scenario_state["client_id"])
 
 
-@then("I turn power off")
+@when("I turn power off")
 def step_turn_power_off(api_test, scenario_state):
     api_test.system.provisioning.powermanagement.power_off(scenario_state["client_id"])
 
 
-@then("I do power management reboot")
+@when("I do power management reboot")
 def step_power_management_reboot(api_test, scenario_state):
     api_test.system.provisioning.powermanagement.reboot(scenario_state["client_id"])
 

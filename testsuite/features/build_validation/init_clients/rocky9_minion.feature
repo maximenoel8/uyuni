@@ -40,4 +40,4 @@ Feature: Bootstrap a Rocky 9 Salt minion
 
   Scenario: Check events history for failures on Rocky 9 Salt minion
     Given I am on the Systems overview page of this "rocky9_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

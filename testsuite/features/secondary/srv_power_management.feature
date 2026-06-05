@@ -8,7 +8,7 @@
 Feature: IPMI Power management
 
   Scenario: Fake an IPMI host
-    When the server starts mocking an IPMI host
+    Given the server starts mocking an IPMI host
 
   Scenario: Log in as admin user
     Given I am authorized for the "Admin" section
@@ -79,7 +79,7 @@ Feature: IPMI Power management
     And the cobbler report should contain "Power Management Type          : ipmilan" for "sle_minion"
 
   Scenario: Check power management SSM operation
-    And I follow the left menu "Systems > System Set Manager > Overview"
+    When I follow the left menu "Systems > System Set Manager > Overview"
     When I follow "power management operations" in the content area
     Then I should see "sle_minion" as link
     And I should see a "Power On" button
@@ -87,7 +87,7 @@ Feature: IPMI Power management
     And I should see a "Reboot" button
 
   Scenario: Cleanup: reset IPMI values
-    Given I want to operate on this "sle_minion"
+    When I want to operate on this "sle_minion"
     When I set power management value "" for "powerAddress"
     And I set power management value "" for "powerUsername"
     And I set power management value "" for "powerPassword"
@@ -97,7 +97,7 @@ Feature: IPMI Power management
     And the cobbler report should contain "Power Management Type          : ipmilan" for "sle_minion"
 
   Scenario: Cleanup: tear down the IPMI host
-    When the server stops mocking an IPMI host
+    Given the server stops mocking an IPMI host
 
   Scenario: Cleanup: remove remaining systems from SSM after power management tests
     When I click on the clear SSM button

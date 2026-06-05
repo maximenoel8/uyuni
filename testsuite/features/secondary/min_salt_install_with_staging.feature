@@ -32,9 +32,9 @@ Feature: Install a package on the SLES minion with staging enabled
     When I follow the left menu "Admin > Task Schedules"
     And I follow "errata-cache-default"
     And I follow "errata-cache-bunch"
-    Then I click on "Single Run Schedule"
+    When I click on "Single Run Schedule"
     And I should see a "bunch was scheduled" text
-    Then I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
+    When I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
 
   Scenario: Enable content staging
     When I follow the left menu "Admin > Organizations"

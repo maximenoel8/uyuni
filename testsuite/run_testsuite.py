@@ -117,9 +117,9 @@ def _build_pytest_cmd(args: argparse.Namespace, output_dir: Path) -> list[str]:
     if args.gherkin:
         cmd.append("--gherkin-terminal-reporter")
 
-    # Cucumber JSON
+    # Cucumber JSON — named output_pytest.json so index.cjs picks it up (output_*.json pattern)
     if args.report in ("cucumber", "both"):
-        cmd.append(f"--cucumberjson={output_dir / 'cucumber.json'}")
+        cmd.append(f"--cucumberjson={output_dir / 'output_pytest.json'}")
 
     # pytest-html
     if args.report in ("html", "both"):
@@ -136,35 +136,40 @@ def _build_pytest_cmd(args: argparse.Namespace, output_dir: Path) -> list[str]:
 
 
 def _generate_mchr(output_dir: Path, title: str) -> None:
-    """Generate HTML from Cucumber JSON using multiple-cucumber-html-reporter."""
-    json_path = output_dir / "cucumber.json"
+    """Generate HTML from Cucumber JSON using index.cjs (calls multiple-cucumber-html-reporter programmatically)."""
+    import shutil
+    json_path = output_dir / "output_pytest.json"
     if not json_path.exists():
-        print("  (no cucumber.json to process)")
+        print("  (no output_pytest.json to process)")
         return
 
+    index_cjs = TESTSUITE_DIR / "index.cjs"
+    if not index_cjs.exists():
+        print(f"  Note: {index_cjs} not found — skipping Cucumber HTML report.")
+        return
+
+    # index.cjs writes to cucumber_report/ relative to cwd (TESTSUITE_DIR)
+    report_src = TESTSUITE_DIR / "cucumber_report"
     html_dir = output_dir / "html"
-    html_dir.mkdir(exist_ok=True)
 
     try:
         result = subprocess.run(
-            [
-                "npx", "--yes", "multiple-cucumber-html-reporter",
-                "--reportPath", str(html_dir),
-                "--jsonDir", str(output_dir),
-                "--reportName", title,
-                "--displayDuration", "true",
-            ],
+            ["node", str(index_cjs), str(output_dir)],
             capture_output=True,
             text=True,
-            timeout=60,
+            timeout=120,
+            cwd=TESTSUITE_DIR,
         )
-        if result.returncode == 0:
+        if result.returncode == 0 and report_src.exists():
+            html_dir.mkdir(exist_ok=True)
+            shutil.copytree(str(report_src), str(html_dir), dirs_exist_ok=True)
             print(f"  Cucumber HTML report → {html_dir}/index.html")
         else:
-            print(f"  Warning: multiple-cucumber-html-reporter failed:\n{result.stderr[:300]}")
+            print(f"  Warning: index.cjs failed (exit {result.returncode}):\n{result.stderr[:300]}")
+            if result.stdout:
+                print(result.stdout[:200])
     except FileNotFoundError:
-        print("  Note: npx not found — skipping multiple-cucumber-html-reporter.")
-        print("  Install with: npm install -g multiple-cucumber-html-reporter")
+        print("  Note: node not found — skipping Cucumber HTML report.")
     except subprocess.TimeoutExpired:
         print("  Warning: HTML report generation timed out.")
 
@@ -221,7 +226,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     print("─" * 60)
     print("Output:")
     if args.report in ("cucumber", "both"):
-        p = output_dir / "cucumber.json"
+        p = output_dir / "output_pytest.json"
         if p.exists():
             print(f"  Cucumber JSON  → {p}")
     if args.report in ("html", "both"):

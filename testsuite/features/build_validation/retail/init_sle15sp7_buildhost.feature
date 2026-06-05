@@ -50,4 +50,4 @@ Feature: Prepare buildhost and build OS image for SLES 15 SP7
 
   Scenario: Check events history for failures on SLES 15 SP7 minion
     Given I am on the Systems overview page of this "sle15sp7_buildhost"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

@@ -39,4 +39,4 @@ Feature: Migrate a SLES 15 SP6 Salt SSH minion to 15 SP7
 
   Scenario: Check events history for failures on SSH minion
     Given I am on the Systems overview page of this "sle15sp6_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

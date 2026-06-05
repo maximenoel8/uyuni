@@ -8,7 +8,7 @@ Feature: Sanity check that all logfiles exist
   I want to watch different logfiles
 
   Scenario: All logfiles should be available
-    Then I wait until file "/var/log/rhn/rhn_web_ui.log" exists on server
+    When I wait until file "/var/log/rhn/rhn_web_ui.log" exists on server
     And I wait until file "/var/log/rhn/rhn_web_api.log" exists on server
     And I wait until file "/var/log/rhn/rhn_web_frontend.log" exists on server
     And I wait until file "/var/log/rhn/rhn_taskomatic_daemon.log" exists on server

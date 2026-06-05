@@ -26,7 +26,7 @@ Feature: Register a salt-ssh system via API
 
 @proxy
   Scenario: Block direct access from server to sshminion to test proxy as jumphost
-    Given I block connections from "server" on "ssh_minion"
+    When I block connections from "server" on "ssh_minion"
 
   Scenario: Bootstrap a SLES SSH minion via API
     When I call system.bootstrap() on host "ssh_minion" and salt-ssh "enabled"
@@ -49,11 +49,11 @@ Feature: Register a salt-ssh system via API
 
   Scenario: Check spacecmd system ID of SSH minion bootstrapped via API
     Given I am on the Systems overview page of this "ssh_minion"
-    Then I run spacecmd listeventhistory for "ssh_minion"
+    When I run spacecmd listeventhistory for "ssh_minion"
 
   Scenario: Check events history for failures on SSH minion after API bootstrap
     Given I am on the Systems overview page of this "ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page
 
 @susemanager
   Scenario: API bootstrap: subscribe SSH minion to base channel

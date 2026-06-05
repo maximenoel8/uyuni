@@ -58,4 +58,4 @@ Feature: Bootstrap a Debian-like minion and do some basic operations on it
 
   Scenario: Check events history for failures on Debian-like minion
     Given I am on the Systems overview page of this "deblike_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

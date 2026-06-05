@@ -109,7 +109,6 @@ def step_system_name_should_be_correct(page, host: str):
 # ---------------------------------------------------------------------------
 
 @when(parsers.re(r'I wait until event "(?P<event>[^"]*)" is completed'))
-@then(parsers.re(r'I wait until event "(?P<event>[^"]*)" is completed'))
 def step_wait_until_event_completed(page, event: str):
     step_wait_at_most_until_event_completed(page, str(DEFAULT_TIMEOUT), event)
 

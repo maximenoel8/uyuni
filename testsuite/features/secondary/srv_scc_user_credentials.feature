@@ -65,8 +65,8 @@ Feature: SCC user credentials in the Setup Wizard
     And I wait for the trash icon to appear for "SCC user"
     And I ask to delete the credentials for "SCC user"
     And I click on "Delete" in "Are you sure you want to delete these credentials?" modal
-    Then I wait until I do not see "SCC user" text
+    When I wait until I do not see "SCC user" text
     When I wait for the trash icon to appear for "invalidgeeko"
     And I ask to delete the credentials for "invalidgeeko"
     And I click on "Delete" in "Are you sure you want to delete these credentials?" modal
-    Then I wait until I do not see "invalidgeeko" text
+    When I wait until I do not see "invalidgeeko" text

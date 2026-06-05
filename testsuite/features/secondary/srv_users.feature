@@ -68,7 +68,7 @@ Feature: Manage users
   Scenario: Add roles
     When I follow the left menu "Users > User List > Active"
     And I follow "user1"
-    When the "role_satellite_admin" checkbox should be disabled
+    Then the "role_satellite_admin" checkbox should be disabled
     And I check "role_org_admin"
     And I check "role_system_group_admin"
     And I check "role_channel_admin"
@@ -94,7 +94,7 @@ Feature: Manage users
   Scenario: Add roles
     When I follow the left menu "Users > User List > Active"
     And I follow "user1"
-    When the "role_satellite_admin" checkbox should be disabled
+    Then the "role_satellite_admin" checkbox should be disabled
     And I check "role_org_admin"
     And I check "role_system_group_admin"
     And I check "role_channel_admin"

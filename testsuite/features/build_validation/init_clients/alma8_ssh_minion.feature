@@ -41,4 +41,4 @@ Feature: Bootstrap a Alma 8 Salt SSH minion
 
   Scenario: Check events history for failures on Alma 8 Salt SSH minion
     Given I am on the Systems overview page of this "alma8_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

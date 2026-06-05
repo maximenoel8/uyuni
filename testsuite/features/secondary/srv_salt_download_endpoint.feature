@@ -8,7 +8,7 @@ Feature: Endpoint to download packages
   I want to download packages from the channels
 
   Scenario: Download package, user without token
-    Given I try to download "virgo-dummy-2.0-1.1.noarch.rpm" from channel "fake-rpm-suse-channel"
+    When I try to download "virgo-dummy-2.0-1.1.noarch.rpm" from channel "fake-rpm-suse-channel"
     Then the download should get a 403 response
 
   Scenario: Download package, user with a valid token for the org

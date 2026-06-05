@@ -893,7 +893,7 @@ def step_disable_repos_after_salt(host: str):
 # Spacecmd event history
 # ---------------------------------------------------------------------------
 
-@then(parsers.re(r'I run spacecmd listeventhistory for "(?P<host>[^"]*)"'))
+@when(parsers.re(r'I run spacecmd listeventhistory for "(?P<host>[^"]*)"'))
 def step_spacecmd_list_event_history(host: str):
     system_name = get_system_name(host)
     get_target("server").run("spacecmd -u admin -p admin clear_caches")

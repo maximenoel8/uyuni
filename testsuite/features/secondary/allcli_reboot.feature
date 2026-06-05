@@ -32,7 +32,7 @@ Feature: Reboot systems managed by Uyuni
     Then I should see a "System Reboot Confirmation" text
     And I should see a "Reboot system" button
     When I click on "Reboot system"
-    Then I wait and check that "ssh_minion" has rebooted
+    When I wait and check that "ssh_minion" has rebooted
 
   Scenario: Schedule a reboot on a SLES Salt minion
     Given I am on the Systems overview page of this "sle_minion"

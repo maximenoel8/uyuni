@@ -75,7 +75,7 @@ Feature: Create organizations, users, groups, and activation keys using Salt sta
 
 @skip_if_containerized_server
   Scenario: Cleanup: uninstall the uyuni-config formula from the server
-    And I manually uninstall the "uyuni-config" formula from the server
+    When I manually uninstall the "uyuni-config" formula from the server
 
   Scenario: Cleanup: all organizations were successfully removed
     When I follow the left menu "Admin > Organizations"

@@ -8,7 +8,7 @@
 Feature: Redfish Power management
 
   Scenario: Setup a Redfish host
-    When the controller starts mocking a Redfish host
+    Given the controller starts mocking a Redfish host
 
   Scenario: Log in as admin user
     Given I am authorized for the "Admin" section
@@ -75,7 +75,7 @@ Feature: Redfish Power management
     And the cobbler report should contain "Power Management Type          : redfish" for "sle_minion"
 
   Scenario: Check power management SSM operation for Redfish
-    And I follow the left menu "Systems > System Set Manager > Overview"
+    When I follow the left menu "Systems > System Set Manager > Overview"
     When I follow "power management operations" in the content area
     Then I should see "sle_minion" as link
     And I should see a "Power On" button
@@ -83,7 +83,7 @@ Feature: Redfish Power management
     And I should see a "Reboot" button
 
   Scenario: Cleanup: reset Redfish values
-    Given I want to operate on this "sle_minion"
+    When I want to operate on this "sle_minion"
     When I set power management value "" for "powerAddress"
     And I set power management value "" for "powerUsername"
     And I set power management value "" for "powerPassword"
@@ -94,7 +94,7 @@ Feature: Redfish Power management
     And the cobbler report should contain "Power Management Type          : ipmilan" for "sle_minion"
 
   Scenario: Cleanup: tear down the Redfish host
-    When the controller stops mocking a Redfish host
+    Given the controller stops mocking a Redfish host
 
   Scenario: Cleanup: remove remaining systems from SSM after Redfish power management tests
     When I click on the clear SSM button

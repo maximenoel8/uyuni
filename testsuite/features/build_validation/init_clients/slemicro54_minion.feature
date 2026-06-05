@@ -65,4 +65,4 @@ Feature: Bootstrap a SLE Micro 5.4 Salt minion
 
   Scenario: Check events history for failures on SLE Micro 5.4 minion
     Given I am on the Systems overview page of this "slemicro54_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

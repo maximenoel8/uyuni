@@ -7,7 +7,7 @@
 Feature: IPMI Power management API
 
   Scenario: Setup an IPMI host for API test
-    When the server starts mocking an IPMI host
+    Given the server starts mocking an IPMI host
     And I want to operate on this "sle_minion"
 
   Scenario: Check the power management settings for API test
@@ -42,4 +42,4 @@ Feature: IPMI Power management API
     And the cobbler report should contain "Power Management Type          : ipmilan" for "sle_minion"
 
   Scenario: Cleanup: tear down the IPMI host for API test
-    When the server stops mocking an IPMI host
+    Given the server stops mocking an IPMI host

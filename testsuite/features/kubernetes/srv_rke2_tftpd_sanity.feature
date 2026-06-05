@@ -13,7 +13,7 @@ Feature: RKE2 TFTP container sanity checks on the server
     Then the "tftp" service on "server" should have at least one active endpoint
 
   Scenario: TFTP serves a file placed in the boot root
-    Given I create a sanity-check file in the TFTP boot root on "server"
+    When I create a sanity-check file in the TFTP boot root on "server"
     When I download the sanity-check file via TFTP from "server"
     Then the downloaded TFTP content should match the expected sanity-check content on "server"
     And I remove the sanity-check file from the TFTP boot root on "server"

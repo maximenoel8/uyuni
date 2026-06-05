@@ -16,7 +16,7 @@ Feature: Recurring Actions
     And I enter "This is a state channel to be used in recurring actions" as "cofDescription"
     And I enter "enable_ip_forwarding:\n  cmd.run:\n    - name: echo 1 > /proc/sys/net/ipv4/conf/all/forwarding" in the editor
     And I click on "Create Config State Channel"
-    Then I wait until I see "Channel Properties" text
+    When I wait until I see "Channel Properties" text
     And I wait until I see "My State Channel for Recurring Actions" text
 
   Scenario: Enable IP forwarding through a custom state recurring action
@@ -34,12 +34,12 @@ Feature: Recurring Actions
     And I wait until I see "Edit State Ranks" text
     And I click on "Confirm"
     And I click on "Create Schedule"
-    Then I wait until I see "Schedule successfully created" text
+    When I wait until I see "Schedule successfully created" text
     And I should see a "IP forwarding custom state recurring action" text
     And I should see a "Minion" text
     When I follow "Events"
     And I follow "History"
-    Then I wait at most 420 seconds until event "Apply recurring states [manager_org_1.statechannel-recurring] schedule" is completed
+    When I wait at most 420 seconds until event "Apply recurring states [manager_org_1.statechannel-recurring] schedule" is completed
     And file "/proc/sys/net/ipv4/conf/all/forwarding" should contain "1" on "sle_minion"
 
   Scenario: Edit the IP forwarding custom state recurring action
@@ -55,12 +55,12 @@ Feature: Recurring Actions
     And I wait until I see "Edit State Ranks" text
     And I click on "Confirm"
     And I click on "Update Schedule"
-    Then I wait until I see "Schedule successfully updated" text
+    When I wait until I see "Schedule successfully updated" text
     And I should see a "custom_state_schedule_name_changed" text
     And I should see a "Minion" text
     When I follow "Events"
     And I follow "History"
-    Then I wait at most 420 seconds until event "Apply recurring states [util.syncstates] scheduled" is completed
+    When I wait at most 420 seconds until event "Apply recurring states [util.syncstates] scheduled" is completed
     And I wait until I see "SLS: util.syncstates" text
 
 # This fails in github actions...
@@ -82,7 +82,7 @@ Feature: Recurring Actions
     When I click the "custom_state_schedule_name_changed" item delete button
     And I wait until I see "Delete Recurring Action Schedule" text
     And I click on the red confirmation button
-    Then I wait until I see "Schedule 'custom_state_schedule_name_changed' has been deleted." text
+    When I wait until I see "Schedule 'custom_state_schedule_name_changed' has been deleted." text
 
   Scenario: Create a minion Highstate Recurring Action
     When I am on the "Recurring Actions" page of this "sle_minion"
@@ -95,7 +95,7 @@ Feature: Recurring Actions
     And I enter 1 minutes from now as "time-daily_time"
     And I click on the "disabled" toggler
     And I click on "Create Schedule"
-    Then I wait until I see "Schedule successfully created" text
+    When I wait until I see "Schedule successfully created" text
     And I should see a "Minion Highstate Recurring Action" text
     And I should see a "Minion" text
     When I follow "Events"
@@ -112,7 +112,7 @@ Feature: Recurring Actions
     And I select "Wednesday" from "date_weekly"
     And I enter "01:35" as "time-weekly_time"
     And I click on "Update Schedule"
-    Then I wait until I see "Schedule successfully updated" text
+    When I wait until I see "Schedule successfully updated" text
     And I should see a "schedule_name_minion" text
     And I should see a "Minion" text
     And I should see a "0 35 1 ? * 4" text
@@ -136,7 +136,7 @@ Feature: Recurring Actions
     And I follow first "Join"
     And I check the first row in the list
     And I click on "Join Groups"
-    Then I wait until I see "1 system groups added" text
+    When I wait until I see "1 system groups added" text
 
   Scenario: Pre-requisite: subscribe system to Fake Channel
     Given I am on the Systems overview page of this "sle_minion"
@@ -185,14 +185,14 @@ Feature: Recurring Actions
     And I wait until I see "Edit State Ranks" text
     And I click on "Confirm"
     And I click on "Create Schedule"
-    Then I wait until I see "Schedule successfully created" text
+    When I wait until I see "Schedule successfully created" text
     And I should see a "Recurring action to keep Recurring-Action-test-group uptodate" text
     And I should see a "Group" text
     When I am on the "Events" page of this "sle_minion"
     And I follow "History"
-    Then I wait until I see the event "Apply recurring states [uptodate] scheduled" completed during last minute, refreshing the page
+    When I wait until I see the event "Apply recurring states [uptodate] scheduled" completed during last minute, refreshing the page
     When I am on the Systems overview page of this "sle_minion"
-    Then I wait at most 500 seconds until I do not see "System is up to date" text, refreshing the page
+    When I wait at most 500 seconds until I do not see "System is up to date" text, refreshing the page
 
 @susemanager
   Scenario: Cleanup: subscribe system back to default base channel
@@ -249,7 +249,7 @@ Feature: Recurring Actions
     And I check radio button "schedule-hourly"
     And I enter "35" as "minutes"
     And I click on "Update Schedule"
-    Then I wait until I see "Schedule successfully updated" text
+    When I wait until I see "Schedule successfully updated" text
     And I should see a "schedule_name_group" text
     And I should see a "Group" text
     And I should see a "0 35 * ? * *" text
@@ -282,12 +282,12 @@ Feature: Recurring Actions
     And I wait until I see "Edit State Ranks" text
     And I click on "Confirm"
     And I click on "Create Schedule"
-    Then I wait until I see "Schedule successfully created" text
+    When I wait until I see "Schedule successfully created" text
     And I should see a "schedule_name" text
     And I should see a "Organization" text
     When I am on the "Events" page of this "sle_minion"
     And I follow "History"
-    Then I wait until I see the event "Apply recurring states [packages.profileupdate] scheduled" completed during last minute, refreshing the page
+    When I wait until I see the event "Apply recurring states [packages.profileupdate] scheduled" completed during last minute, refreshing the page
 
   Scenario: Edit the yourorg Recurring Action
     When I follow the left menu "Home > My Organization > Recurring Actions"
@@ -299,7 +299,7 @@ Feature: Recurring Actions
     And I select "7" from "date_monthly"
     And I enter "05:17" as "time-monthly_time"
     And I click on "Update Schedule"
-    Then I wait until I see "Schedule successfully updated" text
+    When I wait until I see "Schedule successfully updated" text
     And I should see a "schedule_name_edit" text
     And I should see a "Organization" text
     And I should see a "0 17 5 7 * ?" text
@@ -319,7 +319,7 @@ Feature: Recurring Actions
     When I click the "schedule_name" item delete button
     And I wait until I see "Delete Recurring Action Schedule" text
     And I click on the red confirmation button
-    Then I wait until I see "Schedule 'schedule_name_edit' has been deleted." text
+    When I wait until I see "Schedule 'schedule_name_edit' has been deleted." text
     And I should see a "No schedules created. Use Create to add a schedule" text
 
   Scenario: Create an admin org Recurring Action
@@ -340,12 +340,12 @@ Feature: Recurring Actions
     And I wait until I see "Edit State Ranks" text
     And I click on "Confirm"
     And I click on "Create Schedule"
-    Then I wait until I see "Schedule successfully created" text
+    When I wait until I see "Schedule successfully created" text
     And I should see a "schedule_name" text
     And I should see a "Organization" text
     When I am on the "Events" page of this "sle_minion"
     And I follow "History"
-    Then I wait until I see the event "Apply recurring states [hardware.profileupdate] scheduled" completed during last minute, refreshing the page
+    When I wait until I see the event "Apply recurring states [hardware.profileupdate] scheduled" completed during last minute, refreshing the page
 
   Scenario: Edit the admin org Recurring Action
     When I follow the left menu "Admin > Organizations"
@@ -358,7 +358,7 @@ Feature: Recurring Actions
     And I check radio button "schedule-cron"
     And I enter "0 0 15 3 * ?" as "cron"
     And I click on "Update Schedule"
-    Then I wait until I see "Schedule successfully updated" text
+    When I wait until I see "Schedule successfully updated" text
     And I should see a "schedule_name_org" text
     And I should see a "Organization" text
     And I should see a "0 0 15 3 * ?" text
@@ -399,7 +399,7 @@ Feature: Recurring Actions
     When I click the "schedule_name_org" item delete button
     And I wait until I see "Delete Recurring Action Schedule" text
     And I click on the red confirmation button
-    Then I wait until I see "Schedule 'schedule_name_org' has been deleted." text
+    When I wait until I see "Schedule 'schedule_name_org' has been deleted." text
 
   Scenario: Cleanup: Delete the group Recurring Action
     When I follow the left menu "Systems > System Groups"
@@ -409,7 +409,7 @@ Feature: Recurring Actions
     When I click the "schedule_name_group" item delete button
     And I wait until I see "Delete Recurring Action Schedule" text
     And I click on the red confirmation button
-    Then I wait until I see "Schedule 'schedule_name_group' has been deleted." text
+    When I wait until I see "Schedule 'schedule_name_group' has been deleted." text
     And I should see a "No schedules created. Use Create to add a schedule" text
 
   Scenario: Cleanup: Delete the minion Highstate Recurring Action
@@ -418,7 +418,7 @@ Feature: Recurring Actions
     When I click the "schedule_name_minion" item delete button
     And I wait until I see "Delete Recurring Action Schedule" text
     And I click on the red confirmation button
-    Then I wait until I see "Schedule 'schedule_name_minion' has been deleted." text
+    When I wait until I see "Schedule 'schedule_name_minion' has been deleted." text
     And I should see a "No schedules created. Use Create to add a schedule" text
 
   Scenario: Cleanup: Delete the system group created for group recurring action tests

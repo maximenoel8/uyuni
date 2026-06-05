@@ -70,7 +70,7 @@ Feature: Move a SSH minion from a proxy to direct connection
 
   Scenario: Change connection to a proxy
     # be sure that the old events are older than 1 minute
-    Given I wait for "120" seconds
+    When I wait for "120" seconds
     Given I am on the Systems overview page of this "ssh_minion"
     When I follow "Details" in the content area
     And I follow "Connection" in the content area
@@ -96,4 +96,4 @@ Feature: Move a SSH minion from a proxy to direct connection
 
   Scenario: Check events history for failures on the minion
     Given I am on the Systems overview page of this "ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

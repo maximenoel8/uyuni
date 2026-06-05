@@ -14,15 +14,15 @@ Feature: Empty minion profile operations
     When I call system.create_system_profile() with name "empty-profile-hostname" and hostname "min-retail.mgr.suse.de"
 
   Scenario: Check the created empty minion profiles in Unprovisioned Systems page
-    And I follow the left menu "System > System List > Unprovisioned Systems"
+    When I follow the left menu "System > System List > Unprovisioned Systems"
     And I wait until I see "empty-profile" text, refreshing the page
     And I wait until I see "00:11:22:33:44:55" text
     And I wait until I see "empty-profile-hostname" text
 
   Scenario: Check the empty profiles has the hostname set
-    And I follow the left menu "System > System List > Unprovisioned Systems"
+    When I follow the left menu "System > System List > Unprovisioned Systems"
     And I follow "empty-profile-hostname"
-    Then I wait until I see "min-retail.mgr.suse.de" text, refreshing the page
+    When I wait until I see "min-retail.mgr.suse.de" text, refreshing the page
 
   Scenario: Check the empty minion profiles visible via API
     When I call system.list_empty_system_profiles()

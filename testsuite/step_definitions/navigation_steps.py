@@ -580,7 +580,7 @@ def step_wait_until_not_see_name_refreshing(page, host: str):
     repeat_until_timeout(_attempt, message=f"Text '{system_name}' is still visible")
 
 
-@then(parsers.re(r'I wait until I see the (?P<type>VNC|spice) graphical console$'))
+@when(parsers.re(r'I wait until I see the (?P<type>VNC|spice) graphical console$'))
 def step_wait_graphical_console(page, type: str):
     def _attempt():
         if page.locator("xpath=//canvas").count() > 0:
@@ -943,7 +943,7 @@ def step_should_be_logged_in(page):
     )
 
 
-@then("I am logged in")
+@when("I am logged in")
 def step_am_logged_in(page):
     assert page.locator("xpath=//a[@href='/rhn/Logout.do']").first.is_visible(), (
         "User is not logged in"
@@ -991,7 +991,7 @@ def step_table_row_should_contain(page, arg1: str, arg2: str):
     )
 
 
-@then(parsers.re(r'I wait until table row for "(?P<arg1>[^"]*)" contains "(?P<arg2>[^"]*)"'))
+@when(parsers.re(r'I wait until table row for "(?P<arg1>[^"]*)" contains "(?P<arg2>[^"]*)"'))
 def step_wait_table_row_contains(page, arg1: str, arg2: str):
     xpath = f"//tr[.//*[contains(.,'{arg1}')]]"
     scope = page.locator(f"xpath={xpath}").first
@@ -1053,7 +1053,6 @@ def step_wait_table_row_has_button_default(page, text: str, button: str):
 
 
 @when(parsers.re(r'I wait until table row contains a "(?P<text>[^"]*)" text$'))
-@then(parsers.re(r'I wait until table row contains a "(?P<text>[^"]*)" text$'))
 def step_wait_table_row_contains_text(page, text: str):
     xpath = f"//tr[.//td[contains(.,'{text}')]]"
     page.locator(f"xpath={xpath}").first.wait_for(
@@ -1347,12 +1346,12 @@ def step_select_repo(page, repo: str):
     toggle_checkbox_in_list(page, "check", repo)
 
 
-@then(parsers.re(r'I check the row with the "(?P<text>[^"]*)" link$'))
+@when(parsers.re(r'I check the row with the "(?P<text>[^"]*)" link$'))
 def step_check_row_with_link(page, text: str):
     toggle_checkbox_in_list(page, "check", text)
 
 
-@then(parsers.re(r'I check the row with the "(?P<text>[^"]*)" text$'))
+@when(parsers.re(r'I check the row with the "(?P<text>[^"]*)" text$'))
 def step_check_row_with_text(page, text: str):
     toggle_checkbox_in_list(page, "check", text)
 
@@ -1389,7 +1388,7 @@ def step_click_red_confirmation(page):
     page.locator("button.btn-danger").first.click()
 
 
-@then("I click on the filter button until page does not contain")
+@when("I click on the filter button until page does not contain")
 def step_click_filter_until_not_contains_noop(page):
     """This step is superseded by the parsers.re variant below."""
 
@@ -1747,7 +1746,7 @@ def step_check_blackbox_exporter(page):
 # Service endpoint visit
 # ---------------------------------------------------------------------------
 
-@then(parsers.re(r'I visit "(?P<service>[^"]*)" endpoint of this "(?P<host>[^"]*)"'))
+@when(parsers.re(r'I visit "(?P<service>[^"]*)" endpoint of this "(?P<host>[^"]*)"'))
 def step_visit_service_endpoint(page, service: str, host: str):
     node = get_target(host)
     system_name = get_system_name(host)

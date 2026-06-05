@@ -32,7 +32,7 @@ Feature: Migrate a SLES 15 SP6 Salt minion to 15 SP7
     And I wait at most 600 seconds until event "Product Migration" is completed
     And I wait until event "Package List Refresh" is completed
     And I follow "Details" in the content area
-    Then I wait until I see "SUSE Linux Enterprise Server 15 SP7" text, refreshing the page
+    When I wait until I see "SUSE Linux Enterprise Server 15 SP7" text, refreshing the page
     And vendor change should be enabled for product migration on "sle15sp6_minion"
 
   Scenario: Detect latest Salt changes on the SLES minion
@@ -40,4 +40,4 @@ Feature: Migrate a SLES 15 SP6 Salt minion to 15 SP7
 
   Scenario: Check events history for failures on SLES minion
     Given I am on the Systems overview page of this "sle15sp6_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

@@ -10,7 +10,7 @@ Feature: Bootstrap a SLES 15 SP5 minion without the Salt bundle
   Scenario: Bootstrap the minion without the Salt bundle
     When I wait at most 1000 seconds until Salt master sees "salt_migration_minion" as "unaccepted"
     And I follow the left menu "Salt > Keys"
-    Then I wait at most 120 seconds until I see "salt-migration" text
+    When I wait at most 120 seconds until I see "salt-migration" text
     When I accept "salt_migration_minion" key
     And I list all Salt keys shown on the Salt master
     And I am on the Systems page

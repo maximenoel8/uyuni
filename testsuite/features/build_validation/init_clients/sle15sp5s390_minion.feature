@@ -44,4 +44,4 @@ Feature: Bootstrap a SLES 15 SP5 s390x Salt minion
 
   Scenario: Check events history for failures on SLES 15 SP5 s390x minion
     Given I am on the Systems overview page of this "sle15sp5s390_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

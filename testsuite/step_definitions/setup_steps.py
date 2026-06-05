@@ -655,7 +655,7 @@ def step_wait_until_checked(page, text: str):
         repeat_until_timeout(_checked, timeout=5, message=f"Couldn't find checked {text}")
 
 
-@then("I check the first notification message")
+@when("I check the first notification message")
 def step_check_first_notification_message(page):
     from support.commonlib import count_table_items
     if count_table_items(page) == "0":
@@ -687,7 +687,6 @@ def step_mark_as_read_via_button(page, target_button: str):
             "Expected '1 message read status updated successfully.' text"
 
 
-@then("I check for failed events on history event page")
 @when("I check for failed events on history event page")
 def step_check_for_failed_events(page):
     from support.commonlib import check_text

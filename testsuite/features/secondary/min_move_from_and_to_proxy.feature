@@ -65,7 +65,7 @@ Feature: Move a minion from a proxy to direct connection
 
   Scenario: Change connection back to a proxy via SSM
     # be sure that the old events are older than 1 minute
-    Given I wait for "120" seconds
+    When I wait for "120" seconds
     When I follow the left menu "Systems > System List > All"
     And I click on the clear SSM button
     And I check the "sle_minion" client
@@ -97,4 +97,4 @@ Feature: Move a minion from a proxy to direct connection
 
   Scenario: Check events history for failures on the minion
     Given I am on the Systems overview page of this "sle_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

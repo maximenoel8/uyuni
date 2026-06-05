@@ -41,7 +41,6 @@ from support.constants import (
 # ---------------------------------------------------------------------------
 
 @when("I turn off disable_local_repos for all clients")
-@then("I turn off disable_local_repos for all clients")
 def step_turn_off_disable_local_repos():
     """Write pillar and install top file — mirrors the Ruby step."""
     server = get_target("server")
@@ -717,7 +716,6 @@ def step_wait_container_active(service: str):
 
 
 @when(parsers.re(r'I wait until "(?P<service>[^"]*)" service is active on "(?P<host>[^"]*)"'))
-@then(parsers.re(r'I wait until "(?P<service>[^"]*)" service is active on "(?P<host>[^"]*)"'))
 def step_wait_service_active(service: str, host: str):
     node = get_target(host)
     node.run_until_ok(f"systemctl is-active {service}")
@@ -1355,7 +1353,7 @@ def step_wait_file_exists_on_server(file: str):
     )
 
 
-@then(parsers.re(r'I wait and check that "(?P<host>[^"]*)" has rebooted'))
+@when(parsers.re(r'I wait and check that "(?P<host>[^"]*)" has rebooted'))
 def step_wait_check_rebooted(host: str):
     node = get_target(host)
     reboot_timeout = 800
@@ -1819,7 +1817,7 @@ def step_wait_package_installed_spacecmd(pkg: str, client: str):
     repeat_until_timeout(_check, timeout=600, message=f"package {pkg} is not installed yet")
 
 
-@then(parsers.re(r'I wait until package "(?P<pkg>[^"]*)" is removed from "(?P<client>[^"]*)" via spacecmd'))
+@when(parsers.re(r'I wait until package "(?P<pkg>[^"]*)" is removed from "(?P<client>[^"]*)" via spacecmd'))
 def step_wait_package_removed_spacecmd(pkg: str, client: str):
     node = get_target(client)
     system_name = node.full_hostname
@@ -2060,7 +2058,7 @@ def step_block_connections(blockhost: str, target: str):
     node.run(f"iptables -A INPUT -s {blkhost.public_ip} -j DROP")
 
 
-@then(parsers.re(r'I flush firewall on "(?P<target>[^"]*)"'))
+@when(parsers.re(r'I flush firewall on "(?P<target>[^"]*)"'))
 def step_flush_firewall(target: str):
     get_target(target).run("iptables -F INPUT")
 
@@ -2403,7 +2401,7 @@ def step_remove_via_api(package: str, host: str):
 # Health check metrics / grafana
 # ---------------------------------------------------------------------------
 
-@then(parsers.re(r'I check that the health check tool exposes metrics on "(?P<host>[^"]*)"'))
+@when(parsers.re(r'I check that the health check tool exposes metrics on "(?P<host>[^"]*)"'))
 def step_health_check_exposes_metrics(host: str):
     node = get_target(host)
     node.run(

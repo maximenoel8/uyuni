@@ -154,7 +154,7 @@ Feature: Build container images and CVE audit them
     And I select the hostname of "build_host" from "buildHostId"
     And I click on "submit-btn"
     And I wait until no Salt job is running on "build_host"
-    Then I wait until I see "GUI_BUILT_IMAGE" text
+    When I wait until I see "GUI_BUILT_IMAGE" text
     And I wait at most 900 seconds until image "suse_real_key" with version "GUI_BUILT_IMAGE" is built successfully via API
     And I wait at most 300 seconds until image "suse_real_key" with version "GUI_BUILT_IMAGE" is inspected successfully via API
 
@@ -167,7 +167,7 @@ Feature: Build container images and CVE audit them
     And I select the hostname of "build_host" from "buildHostId"
     And I click on "submit-btn"
     And I wait until no Salt job is running on "build_host"
-    Then I wait until I see "GUI_DOCKERADMIN" text
+    When I wait until I see "GUI_DOCKERADMIN" text
     And I wait at most 900 seconds until image "suse_real_key" with version "GUI_DOCKERADMIN" is built successfully via API
     And I wait at most 300 seconds until image "suse_real_key" with version "GUI_DOCKERADMIN" is inspected successfully via API
 

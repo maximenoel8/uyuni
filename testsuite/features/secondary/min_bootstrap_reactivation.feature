@@ -31,7 +31,7 @@ Feature: Bootstrapping with reactivation key
     And I should see a "seems to already exist, please check!" text
 
   Scenario: Bootstrap should fail when system already exists in the server
-    Given I delete "sle_minion" key in the Salt master
+    When I delete "sle_minion" key in the Salt master
     When I follow the left menu "Systems > Bootstrapping"
     Then I should see a "Bootstrap Minions" text
     When I enter the hostname of "sle_minion" as "hostname"
@@ -71,7 +71,7 @@ Feature: Bootstrapping with reactivation key
     When I perform a full salt minion cleanup on "sle_minion"
 
   Scenario: Cleanup: bootstrap a SLES minion after reactivation tests
-    And I follow the left menu "Systems > Bootstrapping"
+    When I follow the left menu "Systems > Bootstrapping"
     Then I should see a "Bootstrap Minions" text
     When I enter the hostname of "sle_minion" as "hostname"
     And I enter "22" as "port"

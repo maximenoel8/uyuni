@@ -72,7 +72,7 @@ Feature: Bootstrap a SSH-managed Red Hat-like minion and do some basic operation
 
   Scenario: Check events history for failures on SSH-managed Red Hat-like minion
     Given I am on the Systems overview page of this "rhlike_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page
 
   Scenario: Run a remote command on the SSH-managed Red Hat-like minion
     When I follow the left menu "Salt > Remote Commands"
@@ -89,7 +89,7 @@ Feature: Bootstrap a SSH-managed Red Hat-like minion and do some basic operation
 
   Scenario: Check events history for failures on SSH-managed Red Hat-like minion
     Given I am on the Systems overview page of this "rhlike_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page
 
   Scenario: Cleanup: delete the SSH-managed Red Hat-like minion
     When I am on the Systems overview page of this "rhlike_minion"

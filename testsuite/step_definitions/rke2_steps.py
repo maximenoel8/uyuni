@@ -357,7 +357,6 @@ def step_downloaded_tftp_content_matches(target: str, context_store):
 
 
 @when(parsers.re(r'I remove the sanity-check file from the TFTP boot root on "(?P<target>.*)"'))
-@then(parsers.re(r'I remove the sanity-check file from the TFTP boot root on "(?P<target>.*)"'))
 def step_remove_tftp_sanity_file(target: str, context_store):
     server_pod = _get_pod_name(target, "server")
     filename = context_store.get("tftp_probe_filename", "uyuni-tftp-sanity-probe.txt")

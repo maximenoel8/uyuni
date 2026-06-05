@@ -44,4 +44,4 @@ Feature: Bootstrap an openSUSE 16.0 ARM Salt minion
 
   Scenario: Check events history for failures on openSUSE 16.0 ARM minion
     Given I am on the Systems overview page of this "opensuse160arm_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

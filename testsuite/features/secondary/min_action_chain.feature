@@ -230,7 +230,7 @@ Feature: Action chains on Salt minions
     And I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
 
   Scenario: Add operations to the action chain via API for Salt minions
-    Given I want to operate on this "sle_minion"
+    When I want to operate on this "sle_minion"
     When I create an action chain with label "salt_minion_api_chain" via API 
     And I add a package install to the action chain via API
     And I add a package removal to the action chain via API
@@ -243,7 +243,7 @@ Feature: Action chains on Salt minions
     And I delete the action chain via API
 
   Scenario: Run an action chain via API on Salt minion
-    Given I want to operate on this "sle_minion"
+    When I want to operate on this "sle_minion"
     When I create an action chain with label "salt_minion_multiple_scripts" via API
     And I add the script "echo -n 1 >> /tmp/action_chain.log" to the action chain via API
     And I add the script "echo -n 2 >> /tmp/action_chain.log" to the action chain via API

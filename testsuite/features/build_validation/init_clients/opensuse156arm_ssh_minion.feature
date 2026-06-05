@@ -38,4 +38,4 @@ Feature: Bootstrap a openSUSE 15.6 ARM Salt SSH minion
 
   Scenario: Check events history for failures on openSUSE 15.6 ARM SSH minion
     Given I am on the Systems overview page of this "opensuse156arm_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

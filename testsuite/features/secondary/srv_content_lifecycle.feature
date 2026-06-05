@@ -99,14 +99,14 @@ Feature: Content lifecycle
     And I enter "dev_label" as "label"
     And I enter "dev_desc" as "description"
     And I click on "Save"
-    Then I wait until I see "dev_name" text
+    When I wait until I see "dev_name" text
     And I should see a "dev_desc" text
     When I click on "Add Environment"
     And I enter "prod_name" as "name"
     And I enter "prod_label" as "label"
     And I enter "prod_desc" as "description"
     And I click on "Save"
-    Then I wait until I see "prod_name" text
+    When I wait until I see "prod_name" text
     And I should see a "prod_desc" text
     When I click on "Add Environment"
     And I enter "qa_name" as "name"
@@ -114,7 +114,7 @@ Feature: Content lifecycle
     And I enter "qa_desc" as "description"
     And I select "prod_name" from "predecessorLabel"
     And I click on "Save"
-    Then I wait until I see "qa_name" text
+    When I wait until I see "qa_name" text
     And I should see a "qa_desc" text
 
 @susemanager
@@ -152,11 +152,11 @@ Feature: Content lifecycle
     When I click promote from Development to QA
     Then I should see a "Version 1: test version message 1" text
     And I click on "Promote environment" in "Promote version 1 into qa_name" modal
-    Then I wait at most 600 seconds until I see "Built" text in the environment "qa_name"
+    When I wait at most 600 seconds until I see "Built" text in the environment "qa_name"
     When I click promote from QA to Production
     Then I should see a "Version 1: test version message 1" text
     And I click on "Promote environment" in "Promote version 1 into prod_name" modal
-    Then I wait at most 600 seconds until I see "Built" text in the environment "prod_name"
+    When I wait at most 600 seconds until I see "Built" text in the environment "prod_name"
 
 # flaky test
 @skip_if_github_validation
@@ -169,25 +169,25 @@ Feature: Content lifecycle
     And I enter "Fake-Base-Channel-SUSE-like" in the placeholder "Search a channel"
     And I add the "Fake-Base-Channel-SUSE-like" channel to sources
     And I click on "Save"
-    Then I wait until I see "Fake-Base-Channel-SUSE-like" text
+    When I wait until I see "Fake-Base-Channel-SUSE-like" text
     And I wait until I see "Build (1)" text
     And I should see a "Version 2: (draft - not built) - Check the changes below" text
     When I click on "Build (1)"
-    Then I wait until I see "Version 2 history" text
+    When I wait until I see "Version 2 history" text
     When I enter "test version message 2" as "message"
     And I click the environment build button
-    Then I wait until I see "Version 2: test version message 2" text in the environment "dev_name"
+    When I wait until I see "Version 2: test version message 2" text in the environment "dev_name"
     And I wait at most 600 seconds until I see "Built" text in the environment "dev_name"
     When I click promote from Development to QA
     Then I should see a "Version 2: test version message 2" text
     And I click on "Promote environment" in "Promote version 2 into qa_name" modal
     And I wait for "1" second
-    Then I wait at most 600 seconds until I see "Built" text in the environment "qa_name"
+    When I wait at most 600 seconds until I see "Built" text in the environment "qa_name"
     When I click promote from QA to Production
     Then I should see a "Version 2: test version message 2" text
     And I click on "Promote environment" in "Promote version 2 into prod_name" modal
     And I wait for "1" second
-    Then I wait at most 600 seconds until I see "Built" text in the environment "prod_name"
+    When I wait at most 600 seconds until I see "Built" text in the environment "prod_name"
 
 
   Scenario: Create a CLM filter of type Package(NEVRA) that allows packages whose version and release number are lower to a defined one

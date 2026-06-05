@@ -50,7 +50,7 @@ Feature: CVE Audit on SLE Salt Minions
     And I should see a "Status" button
     And I should see a "Name" button
     And I should see a "extra CVE data update" link
-    Then I follow "Install a new patch on this system" on "sle_minion" row
+    When I follow "Install a new patch on this system" on "sle_minion" row
     And I should see a "Relevant Patches" text
 
   Scenario: Search for an unknown CVE number
@@ -61,7 +61,7 @@ Feature: CVE Audit on SLE Salt Minions
     Then I should see a "The specified CVE number was not found" text
 
   Scenario: Select a system for the System Set Manager
-    And I click on the clear SSM button
+    When I click on the clear SSM button
     And I follow the left menu "Audit > CVE Audit"
     And I select "1999" from "cveIdentifierYear"
     And I enter "9999" as "cveIdentifierId"
@@ -100,7 +100,7 @@ Feature: CVE Audit on SLE Salt Minions
     And I wait until event "Patch Update: milkyway-dummy-2345" is completed
 
   Scenario: List systems by patch status via API after patch
-    And I call audit.list_systems_by_patch_status() with CVE identifier "CVE-1999-9999"
+    When I call audit.list_systems_by_patch_status() with CVE identifier "CVE-1999-9999"
     Then I should get status "PATCHED" for "sle_minion"
 
   Scenario: Cleanup: remove installed packages

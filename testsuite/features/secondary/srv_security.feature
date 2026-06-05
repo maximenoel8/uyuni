@@ -22,5 +22,5 @@ Feature: Basic web security measures and recommendations
     And the response header "X-Permitted-Cross-Domain-Policies" should be "master-only"
 
   Scenario: Obsolete and problematic headers for static content
-    Given I retrieve a "javascript" static resource
+    When I retrieve a "javascript" static resource
     Then the response header "X-WebKit-CSP" should not be present

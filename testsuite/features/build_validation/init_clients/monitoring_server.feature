@@ -44,14 +44,14 @@ Feature: Bootstrap the monitoring server
 
   Scenario: Check events history for failures on monitoring server
     Given I am on the Systems overview page of this "monitoring_server"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page
 
   Scenario: Test Prometheus formula on monitoring server
     Given I am on the Systems overview page of this "monitoring_server"
     When I follow "Formulas" in the content area
     And I check the "prometheus" formula
     And I click on "Save"
-    Then I wait until I see "Formula saved" text
+    When I wait until I see "Formula saved" text
     When I follow "Prometheus" in the content area
     And I click on "Expand All Sections"
     And I enter "admin" as "Username"
@@ -72,7 +72,7 @@ Feature: Bootstrap the monitoring server
     When I follow "Formulas" in the content area
     And I check the "grafana" formula
     And I click on "Save"
-    Then I wait until I see "Formula saved" text
+    When I wait until I see "Formula saved" text
     When I follow "Grafana" in the content area
     And I click on "Expand All Sections"
     And I enter the "monitoring_server" hostname as the Prometheus URL

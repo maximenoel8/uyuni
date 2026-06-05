@@ -41,4 +41,4 @@ Feature: Bootstrap a SL Micro 6.0 Salt SSH minion
 
   Scenario: Check events history for failures on SL Micro 6.0 SSH minion
     Given I am on the Systems overview page of this "slmicro60_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

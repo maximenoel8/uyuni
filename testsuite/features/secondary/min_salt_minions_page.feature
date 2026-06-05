@@ -40,7 +40,7 @@ Feature: Management of minion keys
     And I should see a "pending" text
 
   Scenario: Reject and delete the pending key
-    And I follow the left menu "Salt > Keys"
+    When I follow the left menu "Salt > Keys"
     And I reject "sle_minion" from the Pending section
     And I wait at most 10 seconds until Salt master sees "sle_minion" as "rejected"
     Then I should see a "rejected" text
@@ -71,7 +71,7 @@ Feature: Management of minion keys
     And I follow "Delete System"
     Then I should see a "Confirm System Profile Deletion" text
     When I click on "Delete Profile"
-    Then I wait until I see "Cleanup timed out. Please check if the machine is reachable." text
+    When I wait until I see "Cleanup timed out. Please check if the machine is reachable." text
     When I click on "Delete Profile Without Cleanup" in "An error occurred during cleanup" modal
     And I wait until I see "has been deleted" text
     Then "sle_minion" should not be registered

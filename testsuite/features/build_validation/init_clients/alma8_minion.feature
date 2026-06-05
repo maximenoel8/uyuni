@@ -40,4 +40,4 @@ Feature: Bootstrap a Alma 8 Salt minion
 
   Scenario: Check events history for failures on Alma 8 Salt minion
     Given I am on the Systems overview page of this "alma8_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

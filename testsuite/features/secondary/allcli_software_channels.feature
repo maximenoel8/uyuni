@@ -31,7 +31,7 @@ Feature: Channel subscription via SSM
     When I schedule action to 3 minutes from now
     And I click on "Confirm"
     And I remember when I scheduled an action
-    Then I wait until I see "Channel Changes Actions" text
+    When I wait until I see "Channel Changes Actions" text
     And a table line should contain system "sle_minion", "Scheduled"
 
 @sle_minion
@@ -57,7 +57,7 @@ Feature: Channel subscription via SSM
     When I schedule action to 3 minutes from now
     And I click on "Confirm"
     And I remember when I scheduled an action
-    Then I wait until I see "Channel Changes Actions" text
+    When I wait until I see "Channel Changes Actions" text
     And a table line should contain system "sle_minion", "Scheduled"
 
 @sle_minion

@@ -33,9 +33,9 @@ Feature: Install a package on the Debian-like minion with staging enabled
     When I follow the left menu "Admin > Task Schedules"
     And I follow "errata-cache-default"
     And I follow "errata-cache-bunch"
-    Then I click on "Single Run Schedule"
+    When I click on "Single Run Schedule"
     And I should see a "bunch was scheduled" text
-    Then I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
+    When I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
 
   Scenario: Enable content staging for Debian-like minion
     When I follow the left menu "Admin > Organizations"
@@ -74,7 +74,7 @@ Feature: Install a package on the Debian-like minion with staging enabled
     And I wait for "virgo-dummy-2.0" to be installed on "deblike_minion"
 
   Scenario: Cleanup: remove virgo-dummy and orion-dummy packages from Debian-like minion
-    And I remove package "orion-dummy" from this "deblike_minion"
+    When I remove package "orion-dummy" from this "deblike_minion"
     And I remove package "virgo-dummy" from this "deblike_minion"
     And I disable repository "test_repo_deb_pool" on this "deblike_minion"
     And I run "apt update" on "deblike_minion"

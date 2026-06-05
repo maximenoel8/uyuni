@@ -32,7 +32,7 @@ Feature: Install a package and a patch on the SUSE client via Salt through the U
     When I follow "Software" in the content area
     And I follow "List / Remove" in the content area
     And I enter "virgo-dummy" as the filtered package name
-    Then I click on the filter button until page does contain "virgo-dummy" text
+    When I click on the filter button until page does contain "virgo-dummy" text
     When I follow the left menu "Admin > Task Schedules"
     And I follow "errata-cache-default"
     And I follow "errata-cache-bunch"
