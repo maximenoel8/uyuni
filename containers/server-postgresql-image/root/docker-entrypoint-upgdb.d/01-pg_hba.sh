@@ -26,10 +26,8 @@ if [ -f "$NAMESPACE_FILE" ] ; then
 host all all .kube-system.svc.cluster.local reject"
 else
     # podman
-    # INTERNAL_ACCESS=uyuni-server
+    INTERNAL_ACCESS=uyuni-server
 
-    # allow all access in 5.1.4 to allow more time testing correct access handling
-    INTERNAL_ACCESS=all
     EXTERNAL_RULES=""
 fi
 
@@ -40,6 +38,8 @@ if [ -z "$(sed -n "/include_if_exists pg_hba_custom.conf/p" "$HBA_FILE")" ]; the
     S="[[:space:]]\{1,\}"
     CUSTOM_CONFIG=$(sed -e "/^local${S}all${S}all${S}peer/d" \
                         -e "/^local${S}replication${S}all${S}peer/d" \
+                        -e "/^local${S}all${S}all${S}trust/d" \
+                        -e "/^local${S}replication${S}all${S}trust/d" \
                         -e "/^host${S}all${S}all${S}.*scram-sha-256/d" \
                         "$HBA_FILE")
     echo "$CUSTOM_CONFIG" > "${CUSTOM_HBA_FILE}.bak"
