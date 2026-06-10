@@ -47,6 +47,7 @@ def _build_feature_order() -> dict:
 
 
 _FEATURE_ORDER: dict | None = None
+_RUN_SET_ALLOWED: set | None = None
 
 
 def _feature_sort_key(item) -> int:
@@ -389,6 +390,25 @@ def _load_run_set(name: str) -> list[str]:
         if line.startswith("- features/"):
             paths.append(str(Path(__file__).parent / line[2:]))
     return paths
+
+
+def pytest_ignore_collect(collection_path, config):
+    """Skip directories that contain no feature files from the active run-set."""
+    global _RUN_SET_ALLOWED
+    run_set_name = config.getoption("--run-set", default=None)
+    if not run_set_name or not collection_path.is_dir():
+        return None
+    if _RUN_SET_ALLOWED is None:
+        try:
+            _RUN_SET_ALLOWED = set(_load_run_set(run_set_name))
+        except ValueError:
+            _RUN_SET_ALLOWED = set()
+    if not _RUN_SET_ALLOWED:
+        return None
+    path_prefix = str(collection_path) + "/"
+    if any(p.startswith(path_prefix) for p in _RUN_SET_ALLOWED):
+        return None
+    return True
 
 
 def pytest_configure(config):
