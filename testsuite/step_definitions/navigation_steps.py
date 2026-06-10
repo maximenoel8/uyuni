@@ -621,7 +621,7 @@ def step_close_last_window(page, context):
 
 @when(parsers.re(r'I check "(?P<identifier>[^"]*)"$'))
 def step_check_checkbox(page, identifier: str):
-    cb = page.locator(f"#{identifier}").first
+    cb = page.locator(f"#{identifier}, input[name='{identifier}']").first
     if not cb.is_checked():
         cb.check()
     assert cb.is_checked(), f"Checkbox {identifier} not checked."
@@ -629,7 +629,7 @@ def step_check_checkbox(page, identifier: str):
 
 @when(parsers.re(r'I uncheck "(?P<identifier>[^"]*)"$'))
 def step_uncheck_checkbox(page, identifier: str):
-    cb = page.locator(f"#{identifier}").first
+    cb = page.locator(f"#{identifier}, input[name='{identifier}']").first
     if cb.is_checked():
         cb.uncheck()
     assert not cb.is_checked(), f"Checkbox {identifier} not unchecked."
