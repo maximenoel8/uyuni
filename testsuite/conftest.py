@@ -151,7 +151,11 @@ def browser(playwright_instance):
         args.append(f"--user-data-dir=/tmp/chrome_profile_{os.getpid()}")
 
     executable_path = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH") or None
-    b = playwright_instance.chromium.launch(headless=not DEBUG_MODE, args=args,
+    has_display = bool(os.environ.get("DISPLAY"))
+    launch_headless = not DEBUG_MODE or not has_display
+    if DEBUG_MODE and not has_display:
+        print("No DISPLAY detected — running headless despite DEBUG mode. Connect to remote debugging port for inspection.")
+    b = playwright_instance.chromium.launch(headless=launch_headless, args=args,
                                             executable_path=executable_path)
     yield b
     b.close()
