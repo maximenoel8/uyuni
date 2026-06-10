@@ -108,6 +108,9 @@ def _build_pytest_cmd(args: argparse.Namespace, output_dir: Path) -> list[str]:
     # Single feature keyword filter
     if args.feature:
         cmd += ["-k", args.feature]
+        # build_validation uses .template files and has many subdirs with identical
+        # test_features.py names — skip it entirely when not running a full run-set.
+        cmd += ["--ignore=features/build_validation"]
 
     # Verbosity
     if not args.quiet:
