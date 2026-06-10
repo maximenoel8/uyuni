@@ -434,10 +434,26 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers",
         "flaky: marks scenarios known to be occasionally flaky (informational only, no skip)")
+    config.addinivalue_line("markers", "qase: Qase.io test case ID (injected by qase_import.py case map)")
     _init_session_cache()
 
 
 def pytest_collection_modifyitems(config, items):
+    # Qase case map: inject pytest.mark.qase(case_id) markers when QASE_CASE_MAP
+    # env var points to the JSON file produced by ext-tools/qase_import.py.
+    # Only active when the env var is set; safe to leave in place otherwise.
+    _qase_map_path = os.environ.get("QASE_CASE_MAP")
+    _qase_map: dict[str, int] = {}
+    if _qase_map_path and Path(_qase_map_path).exists():
+        import json as _json
+        _qase_map = _json.loads(Path(_qase_map_path).read_text())
+    if _qase_map:
+        for item in items:
+            _func = getattr(item, "function", None)
+            _scenario = getattr(_func, "__scenario__", None)
+            if _scenario and _scenario.name in _qase_map:
+                item.add_marker(pytest.mark.qase(_qase_map[_scenario.name]))
+
     run_set_name = config.getoption("--run-set", default=None)
     if run_set_name:
         allowed = set(_load_run_set(run_set_name))

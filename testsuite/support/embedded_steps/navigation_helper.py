@@ -33,7 +33,17 @@ def follow_left_menu(page, menu_path: str):
     if page.url == "about:blank":
         page.goto(APP_HOST, wait_until="domcontentloaded")
     parts = [p.strip() for p in menu_path.split(">")]
-    for part in parts:
+    for i, part in enumerate(parts):
+        is_last = (i == len(parts) - 1)
+        if not is_last:
+            # Intermediate section: only expand if next item is not already visible.
+            # If already expanded, clicking again would collapse it.
+            next_link = page.get_by_role("link", name=parts[i + 1]).first
+            try:
+                if next_link.is_visible(timeout=500):
+                    continue
+            except Exception:
+                pass
         page.get_by_role("link", name=part).first.click()
     wait_for_ajax(page)
 
@@ -98,13 +108,20 @@ def enter_text_in_field(page, text: str, field: str):
 
 
 def click_on(page, text: str):
-    """Click a button or link by visible text."""
-    try:
-        page.get_by_role("button", name=text).first.click()
-        wait_for_ajax(page)
-    except Exception:
-        page.get_by_role("link", name=text).first.click()
-        wait_for_ajax(page)
+    """Click a button or link by visible text or element ID (mirrors Capybara's click_on)."""
+    for locator_fn in [
+        lambda: page.get_by_role("button", name=text).first,
+        lambda: page.get_by_role("link", name=text).first,
+        lambda: page.locator(f"#{text}").first,
+    ]:
+        try:
+            loc = locator_fn()
+            loc.click(timeout=2000)
+            wait_for_ajax(page)
+            return
+        except Exception:
+            continue
+    raise AssertionError(f"Could not find button, link, or element with id '{text}'")
 
 
 def follow_href(page, href: str):

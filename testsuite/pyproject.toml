@@ -11,6 +11,7 @@ dependencies = [
     "prometheus-client>=0.20",
     "redis>=5.0",
     "pytest-html>=4.0",
+    "qase-pytest>=6.0",
 ]
 
 [tool.setuptools.packages.find]
