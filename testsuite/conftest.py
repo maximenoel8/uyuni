@@ -397,11 +397,35 @@ def _load_run_set(name: str) -> list[str]:
 
 
 def pytest_ignore_collect(collection_path, config):
-    """Skip directories that contain no feature files from the active run-set."""
-    global _RUN_SET_ALLOWED
-    run_set_name = config.getoption("--run-set", default=None)
-    if not run_set_name or not collection_path.is_dir():
+    """Skip directories that contain no feature files from the active run-set.
+
+    build_validation and github_validation use subdirectory-per-group layouts
+    with identical test_features.py names. Without --run-set they are never the
+    target of a run so skip them always to avoid module-name collisions from
+    stale __pycache__.
+    """
+    if not collection_path.is_dir():
         return None
+
+    _ALWAYS_SKIP = {"build_validation", "github_validation"}
+    if collection_path.name in _ALWAYS_SKIP:
+        run_set_name = config.getoption("--run-set", default=None)
+        if not run_set_name:
+            return True
+        # With a run-set: only include if the run-set references files under it
+        global _RUN_SET_ALLOWED
+        if _RUN_SET_ALLOWED is None:
+            try:
+                _RUN_SET_ALLOWED = set(_load_run_set(run_set_name))
+            except ValueError:
+                _RUN_SET_ALLOWED = set()
+        path_prefix = str(collection_path) + "/"
+        return None if any(p.startswith(path_prefix) for p in _RUN_SET_ALLOWED) else True
+
+    run_set_name = config.getoption("--run-set", default=None)
+    if not run_set_name:
+        return None
+    global _RUN_SET_ALLOWED
     if _RUN_SET_ALLOWED is None:
         try:
             _RUN_SET_ALLOWED = set(_load_run_set(run_set_name))
