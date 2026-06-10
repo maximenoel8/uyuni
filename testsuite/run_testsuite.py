@@ -17,12 +17,16 @@ Terracumber equivalent:
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 TESTSUITE_DIR = Path(__file__).parent.resolve()
 RUN_SETS_DIR = TESTSUITE_DIR / "run_sets"
+
+# openSUSE packages Node as 'node20'; other distros use 'node'
+_NODE_BIN = shutil.which("node") or shutil.which("node20") or "node"
 DEFAULT_OUTPUT_DIR = TESTSUITE_DIR / "results"
 
 
@@ -137,7 +141,6 @@ def _build_pytest_cmd(args: argparse.Namespace, output_dir: Path) -> list[str]:
 
 def _generate_mchr(output_dir: Path, title: str) -> None:
     """Generate HTML from Cucumber JSON using index.cjs (calls multiple-cucumber-html-reporter programmatically)."""
-    import shutil
     json_path = output_dir / "output_pytest.json"
     if not json_path.exists():
         print("  (no output_pytest.json to process)")
@@ -154,7 +157,7 @@ def _generate_mchr(output_dir: Path, title: str) -> None:
 
     try:
         result = subprocess.run(
-            ["node", str(index_cjs), str(output_dir)],
+            [_NODE_BIN, str(index_cjs), str(output_dir)],
             capture_output=True,
             text=True,
             timeout=120,
