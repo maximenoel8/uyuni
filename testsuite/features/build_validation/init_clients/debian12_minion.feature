@@ -42,4 +42,4 @@ Feature: Bootstrap a Debian 12 Salt minion
 
   Scenario: Check events history for failures on Debian 12 minion
     Given I am on the Systems overview page of this "debian12_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

@@ -29,4 +29,4 @@ Feature: Bootstrap a Ubuntu 24.04 Salt SSH minion
 
   Scenario: Check events history for failures on SSH-managed Ubuntu 24.04 minion
     Given I am on the Systems overview page of this "ubuntu2404_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

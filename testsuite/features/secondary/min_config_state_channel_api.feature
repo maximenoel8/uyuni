@@ -14,5 +14,5 @@ Feature: Configuration state channels via API
     Then I should get file contents "touch /root/foobar:\n  cmd.run:\n    - creates: /root/foobar"
 
   Scenario: Cleanup: remove state channels via API
-    Then I delete channel "statechannel1" via API without error control
+    When I delete channel "statechannel1" via API without error control
     And I delete channel "statechannel2" via API without error control

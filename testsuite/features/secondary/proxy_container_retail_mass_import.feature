@@ -33,7 +33,7 @@ Feature: Mass import of Retail terminals behind a containerized proxy
     # Workaround: Increase timeout temporarily get rid of timeout issues
     And I wait at most 350 seconds until Salt master sees "pxeboot_minion" as "unaccepted"
     And I accept key of pxeboot minion in the Salt master
-    Then I follow the left menu "Systems > System List > All"
+    When I follow the left menu "Systems > System List > All"
     And I wait until I see the name of "pxeboot_minion", refreshing the page
 
   Scenario: Check connection from bootstrapped terminal to proxy

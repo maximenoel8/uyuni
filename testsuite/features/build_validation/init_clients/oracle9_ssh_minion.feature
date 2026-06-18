@@ -45,4 +45,4 @@ Feature: Bootstrap a Oracle 9 Salt SSH minion
 
   Scenario: Check events history for failures on Oracle 9 Salt SSH minion
     Given I am on the Systems overview page of this "oracle9_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

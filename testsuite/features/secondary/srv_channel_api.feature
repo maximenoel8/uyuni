@@ -45,8 +45,8 @@ Feature: API "channel" namespace and sub-namespaces
 
   @rhlike_minion
   Scenario: List modular channels via the API
-    When channel "Fake-Base-Channel-AppStream" is present in the modular channels listed via the API
+    Then channel "Fake-Base-Channel-AppStream" is present in the modular channels listed via the API
 
   @rhlike_minion
   Scenario: List available module streams for a given channel via the API
-    When "scorpio" module streams "2.0, 2.1" are available for channel "fake-base-channel-appstream" via the API
+    Then "scorpio" module streams "2.0, 2.1" are available for channel "fake-base-channel-appstream" via the API

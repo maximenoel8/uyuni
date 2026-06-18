@@ -11,7 +11,9 @@ RUN zypper ref -f && \
       wget \
       ruby3.3 \
       ruby3.3-devel \
-      python-devel \
+      python3 \
+      python3-devel \
+      python3-pip \
       autoconf \
       ca-certificates-mozilla \
       automake \
@@ -57,3 +59,9 @@ RUN gem env
 # TODO: Adjust the URL/branch before merging!
 RUN curl https://raw.githubusercontent.com/uyuni-project/uyuni/master/testsuite/Gemfile -o Gemfile && bundle.ruby3.3 install --verbose && rm Gemfile
 RUN gem list
+
+# Python testsuite dependencies
+RUN curl https://raw.githubusercontent.com/uyuni-project/uyuni/master/testsuite/pyproject.toml -o pyproject.toml && \
+    pip3 install --break-system-packages . && \
+    playwright install chromium && \
+    rm pyproject.toml

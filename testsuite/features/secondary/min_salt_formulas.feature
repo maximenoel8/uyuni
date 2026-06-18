@@ -92,7 +92,7 @@ Feature: Use salt formulas
      And the pillar data for "keyboard_and_language:language" should be "English (US)" on "sle_minion"
 
   Scenario: Apply the reset formula via the highstate
-     And I follow "States" in the content area
+     When I follow "States" in the content area
      And I click on "Apply Highstate"
      Then I should see a "Applying the highstate has been scheduled." text
      When I wait until event "Apply highstate scheduled" is completed

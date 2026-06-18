@@ -46,4 +46,4 @@ Feature: Bootstrap a Liberty Linux 9 Salt SSH minion
 
   Scenario: Check events history for failures on Liberty Linux 9 Salt SSH minion
     Given I am on the Systems overview page of this "liberty9_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

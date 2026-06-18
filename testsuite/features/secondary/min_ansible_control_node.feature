@@ -30,7 +30,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I follow "Properties" in the content area
     And I check "ansible_control_node"
     And I click on "Update Properties"
-    Then I wait until I see "Ansible Control Node type has been applied." text
+    When I wait until I see "Ansible Control Node type has been applied." text
 
   Scenario: Check that the automatic Ansible inventory refresh succeeds
     Given I am on the Systems overview page of this "sle_minion"
@@ -63,7 +63,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I follow "Inventories" in the content area
     And I wait until I see "/srv/playbooks/orion_dummy/hosts" text
     And I click on the inventory accordion for "/srv/playbooks/orion_dummy/hosts"
-    Then I wait until I see "myself" text
+    When I wait until I see "myself" text
 
   Scenario: Discover playbooks and display them
     Given I am on the Systems overview page of this "sle_minion"
@@ -71,7 +71,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I follow "Playbooks" in the content area
     And I wait until I see "/srv/playbooks" text
     And I click on "/srv/playbooks"
-    Then I wait until I see "/srv/playbooks/orion_dummy/playbook_orion_dummy.yml" text
+    When I wait until I see "/srv/playbooks/orion_dummy/playbook_orion_dummy.yml" text
     And I wait until I see "/srv/playbooks/basic_tests.yml" text
 
   Scenario: Run a playbook using custom inventory
@@ -102,7 +102,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I wait until I see "Playbook execution has been scheduled" text
     And I wait for "2" seconds
     And I follow "scheduled" in the content area
-    Then I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
+    When I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
     When I follow "1 system"
     And I wait until I see the system name of "sle_minion"
     And I follow this "sle_minion" link
@@ -131,7 +131,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I wait until I see "Playbook execution has been scheduled" text
     And I wait for "2" seconds
     And I follow "scheduled" in the content area
-    Then I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
+    When I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
     When I follow "1 system"
     And I wait until I see the system name of "sle_minion"
     And I follow this "sle_minion" link
@@ -161,7 +161,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I wait until I see "Playbook execution has been scheduled" text
     And I wait for "2" seconds
     And I follow "scheduled" in the content area
-    Then I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
+    When I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
     When I follow "1 system"
     And I wait until I see the system name of "sle_minion"
     And I follow this "sle_minion" link
@@ -194,7 +194,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I wait until I see "Playbook execution has been scheduled" text
     And I wait for "2" seconds
     And I follow "scheduled" in the content area
-    Then I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
+    When I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
     When I follow "1 system"
     And I wait until I see the system name of "sle_minion"
     And I follow this "sle_minion" link
@@ -218,7 +218,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I wait until I see "Playbook execution has been scheduled" text
     And I wait for "2" seconds
     And I follow "scheduled" in the content area
-    Then I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
+    When I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
     When I follow "1 system"
     And I wait until I see the system name of "sle_minion"
     And I follow this "sle_minion" link
@@ -248,7 +248,7 @@ Feature: Operate an Ansible control node in a normal minion
     And I wait until I see "Playbook execution has been scheduled" text
     And I wait for "2" seconds
     And I follow "scheduled" in the content area
-    Then I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
+    When I wait until I see "1 system successfully completed this action" text or "1 system failed to complete this action" text, refreshing the page
     When I follow "1 system"
     And I wait until I see the system name of "sle_minion"
     And I follow this "sle_minion" link

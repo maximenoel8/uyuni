@@ -34,7 +34,7 @@ Feature: Report database
     And I should not be able to "delete" data in a ReportDB "view" as a read-only user
 
   Scenario: ReportDB admin user can't access product database from external machine
-    Given I know the ReportDB admin user credentials
+    When I know the ReportDB admin user credentials
     Then I should be able to connect to the ReportDB with the ReportDB admin user
     And I should not be able to connect to product database with the ReportDB admin user
 

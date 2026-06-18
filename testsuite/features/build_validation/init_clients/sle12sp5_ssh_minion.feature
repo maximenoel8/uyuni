@@ -38,4 +38,4 @@ Feature: Bootstrap a SLES 12 SP5 Salt SSH minion
 
   Scenario: Check events history for failures on SLES 12 SP5 SSH minion
     Given I am on the Systems overview page of this "sle12sp5_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

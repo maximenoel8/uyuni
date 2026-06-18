@@ -57,4 +57,4 @@ Feature: Bootstrap a Red Hat-like minion and do some basic operations on it
 
   Scenario: Check events history for failures on Red Hat-like minion
     Given I am on the Systems overview page of this "rhlike_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

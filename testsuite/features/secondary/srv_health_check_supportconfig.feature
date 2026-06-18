@@ -17,7 +17,7 @@ Feature: Health Check tool based on a supportconfig
 
   Scenario: Health Check containers are healthy and running
     When I wait until port "9000" is listening on "localhost" host
-    Then I wait until port "3100" is listening on "localhost" host
+    When I wait until port "3100" is listening on "localhost" host
     And I wait until port "9081" is listening on "localhost" host
     And I wait until port "3000" is listening on "localhost" host
 

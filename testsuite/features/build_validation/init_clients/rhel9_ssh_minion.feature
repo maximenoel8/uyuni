@@ -40,4 +40,4 @@ Feature: Bootstrap a Rhel 9 SSH minion
 
   Scenario: Check events history for failures on Rhel 9 SSH minion
     Given I am on the Systems overview page of this "rhel9_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

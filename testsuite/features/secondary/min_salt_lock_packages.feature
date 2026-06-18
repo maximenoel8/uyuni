@@ -156,5 +156,5 @@ Feature: Lock packages on SLES salt minion
     And package "orion-dummy-1.1-1.1" is reported as unlocked
 
   Scenario: Cleanup: remove packages after testing locks
-    Then I remove package "orion-dummy" from this "sle_minion"
+    When I remove package "orion-dummy" from this "sle_minion"
     And I remove package "milkyway-dummy" from this "sle_minion"

@@ -30,9 +30,9 @@ Feature: Salt package states
     When I follow the left menu "Admin > Task Schedules"
     And I follow "errata-cache-default"
     And I follow "errata-cache-bunch"
-    Then I click on "Single Run Schedule"
+    When I click on "Single Run Schedule"
     And I should see a "bunch was scheduled" text
-    Then I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
+    When I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
 
   Scenario: Accepted minion has a base channel
     Given I am on the Systems overview page of this "sle_minion"
@@ -51,7 +51,7 @@ Feature: Salt package states
     And I change the state of "milkyway-dummy" to "Removed" and ""
     Then I should see a "1 Change" text
     And I click save
-    Then I wait until I see "Package states have been saved." text
+    When I wait until I see "Package states have been saved." text
     And I click apply
     And I wait for "milkyway-dummy" to be uninstalled on "sle_minion"
 
@@ -66,7 +66,7 @@ Feature: Salt package states
     And I change the state of "milkyway-dummy" to "Installed" and ""
     Then I should see a "1 Change" text
     And I click save
-    Then I wait until I see "Package states have been saved." text
+    When I wait until I see "Package states have been saved." text
     And I click apply
     And I wait for "milkyway-dummy" to be installed on "sle_minion"
 
@@ -81,7 +81,7 @@ Feature: Salt package states
     And I change the state of "virgo-dummy" to "Installed" and "Any"
     Then I should see a "1 Change" text
     And I click save
-    Then I wait until I see "Package states have been saved." text
+    When I wait until I see "Package states have been saved." text
     And I click apply
     And I wait for "virgo-dummy-1.0" to be installed on "sle_minion"
 
@@ -96,7 +96,7 @@ Feature: Salt package states
     And I change the state of "andromeda-dummy" to "Installed" and "Latest"
     Then I should see a "1 Change" text
     And I click save
-    Then I wait until I see "Package states have been saved." text
+    When I wait until I see "Package states have been saved." text
     And I click apply
     And I wait for "andromeda-dummy-2.0-1.1" to be installed on "sle_minion"
 
@@ -141,7 +141,7 @@ Feature: Salt package states
     And I change the state of "virgo-dummy" to "Unmanaged" and ""
     And I change the state of "andromeda-dummy" to "Unmanaged" and ""
     And I click save
-    Then I wait until I see "Package states have been saved." text
+    When I wait until I see "Package states have been saved." text
 
   Scenario: Cleanup: remove old packages from SLES minion
     When I disable repository "test_repo_rpm_pool" on this "sle_minion"

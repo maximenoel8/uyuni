@@ -55,4 +55,4 @@ Feature: Bootstrap a build host via the GUI
 
   Scenario: Check events history for failures on SLES build host
     Given I am on the Systems overview page of this "build_host"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

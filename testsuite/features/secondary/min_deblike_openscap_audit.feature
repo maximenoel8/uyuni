@@ -81,4 +81,4 @@ Feature: OpenSCAP audit of Debian-like Salt minion
     When I remove OpenSCAP dependencies from "deblike_minion"
 
   Scenario: Cleanup: remove all the necessary repositories for OpenSCAP on Debian-like minion
-    And I disable Debian-like "universe" repository on "deblike_minion"
+    When I disable Debian-like "universe" repository on "deblike_minion"

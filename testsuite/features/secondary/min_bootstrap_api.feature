@@ -42,7 +42,7 @@ Feature: Register a Salt minion via API
 
   Scenario: Check spacecmd system ID of minion bootstrapped via API
     Given I am on the Systems overview page of this "sle_minion"
-    Then I run spacecmd listeventhistory for "sle_minion"
+    When I run spacecmd listeventhistory for "sle_minion"
 
 @susemanager
   Scenario: API bootstrap: subscribe to base channel
@@ -79,7 +79,7 @@ Feature: Register a Salt minion via API
 
   Scenario: Check events history for failures on SLES minion after API bootstrap
     Given I am on the Systems overview page of this "sle_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page
 
   Scenario: Bootstrap via API a non-existing system
     When I call system.bootstrap() on unknown host, I should get an API fault

@@ -104,7 +104,7 @@ Feature: Bootstrap a Salt minion via the GUI with an activation key
 
   Scenario: Check system ID of bootstrapped minion
     Given I am on the Systems overview page of this "sle_minion"
-    Then I run spacecmd listeventhistory for "sle_minion"
+    When I run spacecmd listeventhistory for "sle_minion"
 
 @susemanager
   Scenario: Verify that minion bootstrapped with base channel
@@ -134,7 +134,7 @@ Feature: Bootstrap a Salt minion via the GUI with an activation key
     And I change the state of "perseus-dummy" to "Unmanaged" and ""
     Then I should see a "2 Changes" text
     When I click save
-    Then I wait until I see "Package states have been saved." text
+    When I wait until I see "Package states have been saved." text
     And I click apply
     And I remove package "orion-dummy" from this "sle_minion"
     And I remove package "perseus-dummy" from this "sle_minion"
@@ -154,4 +154,4 @@ Feature: Bootstrap a Salt minion via the GUI with an activation key
 
   Scenario: Check events history for failures on SLES minion with activation key
     Given I am on the Systems overview page of this "sle_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

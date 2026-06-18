@@ -38,4 +38,4 @@ Feature: Bootstrap a SLES 16.0 Salt SSH minion
 
   Scenario: Check events history for failures on SLES 16.0 SSH minion
     Given I am on the Systems overview page of this "sle160_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

@@ -29,7 +29,7 @@ Feature: Operate an Ansible control node in SSH minion
     When I follow "Properties" in the content area
     And I check "ansible_control_node"
     And I click on "Update Properties"
-    Then I wait until I see "Ansible Control Node type has been applied." text
+    When I wait until I see "Ansible Control Node type has been applied." text
 
   Scenario: Apply highstate and check that Ansible is installed
     Given I am on the Systems overview page of this "ssh_minion"
@@ -58,7 +58,7 @@ Feature: Operate an Ansible control node in SSH minion
     And I follow "Inventories" in the content area
     And I wait until I see "/srv/playbooks/orion_dummy/hosts" text
     And I click on the inventory accordion for "/srv/playbooks/orion_dummy/hosts"
-    Then I wait until I see "myself" text
+    When I wait until I see "myself" text
 
   Scenario: Discover playbooks and display them
     Given I am on the Systems overview page of this "ssh_minion"
@@ -66,7 +66,7 @@ Feature: Operate an Ansible control node in SSH minion
     And I follow "Playbooks" in the content area
     And I wait until I see "/srv/playbooks" text
     And I click on "/srv/playbooks"
-    Then I wait until I see "/srv/playbooks/orion_dummy/playbook_orion_dummy.yml" text
+    When I wait until I see "/srv/playbooks/orion_dummy/playbook_orion_dummy.yml" text
 
   Scenario: Run a playbook using custom inventory
     Given I am on the Systems overview page of this "ssh_minion"

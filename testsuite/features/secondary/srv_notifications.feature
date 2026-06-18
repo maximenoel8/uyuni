@@ -10,19 +10,19 @@ Feature: Test the notification/notification-messages feature
   Scenario: Check the unread notification counter is correct
     When I follow the left menu "Home > Notification Messages"
     And I wait until I see "The server has collected the following notification messages." text
-    Then I follow "Unread Messages"
+    When I follow "Unread Messages"
     And the notification badge and the table should count the same amount of messages
 
   Scenario: Delete notification-messages
     When I follow the left menu "Home > Notification Messages"
     And I wait until I see "The server has collected the following notification messages." text
-    Then I follow "All Messages"
-    Then I check the first notification message
+    When I follow "All Messages"
+    When I check the first notification message
     And I delete it via the "Delete" button
 
   Scenario: Flag a notification-message as read
     When I follow the left menu "Home > Notification Messages"
     And I wait until I see "The server has collected the following notification messages." text
-    Then I follow "All Messages"
-    Then I check the first notification message
+    When I follow "All Messages"
+    When I check the first notification message
     And I mark as read it via the "Mark as Read" button

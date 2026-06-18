@@ -47,7 +47,7 @@ Feature: Salt SSH action chain
   Scenario: Create a custom action chain for the SSH minion
     When I create an action chain with label "minssh_action_chain" via API  
     And I follow the left menu "Schedule > Action Chains"
-    Then I wait until I see "minssh_action_chain" text
+    When I wait until I see "minssh_action_chain" text
 
   Scenario: Add a patch installation to the action chain on SSH minion
     Given I am on the Systems overview page of this "ssh_minion"
@@ -169,7 +169,7 @@ Feature: Salt SSH action chain
     When I follow the left menu "Schedule > Action Chains"
     And I wait until I see "minssh_action_chain" text
     And I follow "minssh_action_chain"
-    Then I click on "Save and Schedule"
+    When I click on "Save and Schedule"
     And I should see a "Action Chain minssh_action_chain has been scheduled for execution." text
 
   Scenario: Verify that the action chain was executed successfully
@@ -198,7 +198,7 @@ Feature: Salt SSH action chain
     When I follow the left menu "Schedule > Action Chains"
     And I follow "minssh_action_chain_to_delete"
     And I follow "Delete Action Chains" in the content area
-    Then I click on "Delete"
+    When I click on "Delete"
 
   Scenario: Cleanup: roll back action chain effects on SSH minion
     Given I am on the Systems overview page of this "ssh_minion"
@@ -224,7 +224,7 @@ Feature: Salt SSH action chain
     And I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
 
   Scenario: Add operations to the action chain via API for SSH minions
-    Given I want to operate on this "ssh_minion"
+    When I want to operate on this "ssh_minion"
     When I create an action chain with label "minssh_api_chain" via API
     And I add a package install to the action chain via API
     And I add a package removal to the action chain via API
@@ -236,7 +236,7 @@ Feature: Salt SSH action chain
     And I delete the action chain via API
 
   Scenario: Run an action chain via API on SSH minion
-    And I want to operate on this "ssh_minion"
+    When I want to operate on this "ssh_minion"
     When I create an action chain with label "minssh_multiple_scripts" via API
     And I add the script "echo -n 1 >> /tmp/action_chain.log" to the action chain via API
     And I add the script "echo -n 2 >> /tmp/action_chain.log" to the action chain via API
@@ -244,7 +244,7 @@ Feature: Salt SSH action chain
     And I add the script "touch /tmp/action_chain_done" to the action chain via API
     Then I should be able to see all these actions in the action chain via API
     When I schedule the action chain via API
-    Then I wait until there are no more action chains listed via API
+    When I wait until there are no more action chains listed via API
     When I wait until file "/tmp/action_chain_done" exists on "ssh_minion"
     Then file "/tmp/action_chain.log" should contain "123" on "ssh_minion"
     When I wait until there are no more scheduled actions listed via API

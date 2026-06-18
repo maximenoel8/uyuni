@@ -61,7 +61,7 @@ Feature: Setup containerized proxy
     When I run "mgrpxy install podman /tmp/proxy_container_config.tar.gz" on "proxy"
 
   Scenario: Wait until containerized proxy service is active
-    And I wait until "uyuni-proxy-pod" service is active on "proxy"
+    When I wait until "uyuni-proxy-pod" service is active on "proxy"
     And I wait until "uyuni-proxy-httpd" service is active on "proxy"
     And I wait until "uyuni-proxy-salt-broker" service is active on "proxy"
     And I wait until "uyuni-proxy-squid" service is active on "proxy"

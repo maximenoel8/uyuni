@@ -49,7 +49,7 @@ Feature: Software channels and repositories management
     And I should not see a "hibernate-channel" text
     And I enter "Hibernate test channel" as "Channel Name"
     And I click on "Update Channel"
-    Then I wait until I see "Channel Hibernate test channel updated." text
+    When I wait until I see "Channel Hibernate test channel updated." text
 
   Scenario: Modify the repository of the channel Hibernate
     When I follow the left menu "Software > Manage > Repositories"
@@ -57,7 +57,7 @@ Feature: Software channels and repositories management
     And I enter "hibernate-repository" as "label"
     And I select "deb" from "contenttype"
     And I click on "Update Repository"
-    Then I wait until I see "Repository updated successfully" text
+    When I wait until I see "Repository updated successfully" text
 
   Scenario: Check the Hibernate channel and repositories
     When I follow the left menu "Software > Manage > Channels"
@@ -76,7 +76,7 @@ Feature: Software channels and repositories management
     And I follow "Delete Repository"
     And I should see a "Confirm Repository Delete" text
     And I click on "Delete Repository"
-    Then I wait until I see "Repository deleted successfully" text
+    When I wait until I see "Repository deleted successfully" text
 
   Scenario: Cleanup: Delete Hibernate repository from Channels
     When I follow the left menu "Software > Manage > Channels"
@@ -86,7 +86,7 @@ Feature: Software channels and repositories management
     And I follow "Delete Repository"
     And I should see a "Confirm Repository Delete" text
     And I click on "Delete Repository"
-    Then I wait until I see "Repository deleted successfully" text
+    When I wait until I see "Repository deleted successfully" text
 
   Scenario: Cleanup: Delete Hibernate channel
     When I follow the left menu "Software > Manage > Channels"
@@ -94,7 +94,7 @@ Feature: Software channels and repositories management
     And I follow "Delete Channel"
     And I should see a "Delete Channel" text
     And I click on "Delete Channel"
-    Then I wait until I see "Channel Hibernate test channel has been deleted." text
+    When I wait until I see "Channel Hibernate test channel has been deleted." text
 
 @skip_if_github_validation
   # server log contains hibernate excepcions, please remove the skip when it's fixed

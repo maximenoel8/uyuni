@@ -38,7 +38,7 @@ Feature: Migrate a SLE Micro 5.5 Salt minion to SL Micro 6.2
     And I wait until event "Package List Refresh" is completed
     And I reboot the "slemicro55_minion" minion through the web UI
     And I follow "Details" in the content area
-    Then I wait until I see "SUSE Linux Micro 6.2 x86_64" text, refreshing the page
+    When I wait until I see "SUSE Linux Micro 6.2 x86_64" text, refreshing the page
     And vendor change should be enabled for product migration on "slemicro55_minion"
 
   Scenario: Verify the SLE Micro minion is subscribed to SL Micro 6.2 child channels
@@ -53,4 +53,4 @@ Feature: Migrate a SLE Micro 5.5 Salt minion to SL Micro 6.2
 
   Scenario: Check events history for failures on the SLE Micro minion
     Given I am on the Systems overview page of this "slemicro55_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

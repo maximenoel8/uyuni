@@ -20,4 +20,4 @@ Feature: Restart the spacewalk services via UI
     And I wait until I see "restarting. If this page" text
     And I wait at most "300" seconds until I do not see "restarting. If this page" text
     And I refresh the page
-    Then I follow the left menu "Admin > Manager Configuration > Restart"
+    When I follow the left menu "Admin > Manager Configuration > Restart"

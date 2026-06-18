@@ -60,7 +60,7 @@ Feature: Monitor MLM environment with Prometheus on a Red Hat-like Salt minion
     When I follow "Formulas" in the content area
     And I uncheck the "prometheus-exporters" formula
     And I click on "Save"
-    Then I wait until I see "Formula saved" text
+    When I wait until I see "Formula saved" text
 
 @skip_if_github_validation
   Scenario: Cleanup: apply highstate after test monitoring on the Red Hat-like minion

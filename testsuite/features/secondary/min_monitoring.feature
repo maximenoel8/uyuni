@@ -23,7 +23,7 @@ Feature: Monitor MLM environment with Prometheus on a SLE Salt minion
     And I check the "prometheus" formula
     And I check the "prometheus-exporters" formula
     And I click on "Save"
-    Then I wait until I see "Formula saved" text
+    When I wait until I see "Formula saved" text
 
   Scenario: Configure Prometheus formula
     When I follow "Formulas" in the content area
@@ -68,10 +68,10 @@ Feature: Monitor MLM environment with Prometheus on a SLE Salt minion
     And I uncheck the "prometheus" formula
     And I uncheck the "prometheus-exporters" formula
     And I click on "Save"
-    Then I wait until I see "Formula saved" text
+    When I wait until I see "Formula saved" text
 
   Scenario: Cleanup: apply highstate after test monitoring
-    And I follow "States" in the content area
+    When I follow "States" in the content area
     And I click on "Apply Highstate"
     Then I should see a "Applying the highstate has been scheduled." text
     And I wait until event "Apply highstate scheduled" is completed

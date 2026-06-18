@@ -52,7 +52,7 @@ Feature: Ubuntu 24.04: Universe and Main Noble Repositories Integration
     Then I should see a "repository information was successfully updated" text
 
   Scenario: Perform partial sync of python3-rpm and its dependencies into the Noble channel
-    And I use spacewalk-repo-sync to sync channel "ubuntu-2404-noble-amd64" including "python3-rpm librpm9t64 librpmbuild9t64 librpmio9t64 librpmsign9t64 rpm-common liblua5.3-0 libfsverity0" packages
+    When I use spacewalk-repo-sync to sync channel "ubuntu-2404-noble-amd64" including "python3-rpm librpm9t64 librpmbuild9t64 librpmio9t64 librpmsign9t64 rpm-common liblua5.3-0 libfsverity0" packages
     When I wait until the channel "ubuntu-2404-noble-amd64" has been synced
 
   Scenario: Verify that all synchronized channels have their dependencies solved

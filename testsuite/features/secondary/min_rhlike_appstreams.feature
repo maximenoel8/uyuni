@@ -47,7 +47,7 @@ Feature: Native AppStreams support for Red Hat-like Salt minion
     And I wait until the table contains "FINISHED" or "SKIPPED" followed by "FINISHED" in its first rows
 
   Scenario: Verify that modular packages do not appear as upgrade options when AppStreams are disabled
-    And I am on the "Software" page of this "rhlike_minion"
+    When I am on the "Software" page of this "rhlike_minion"
     And I follow "Packages"
     And I follow "Upgrade"
     Then I should not see a "scorpio-dummy-2" text
@@ -68,7 +68,7 @@ Feature: Native AppStreams support for Red Hat-like Salt minion
     And I follow "Software" in the content area
     And I follow "Packages"
     And I follow "Upgrade"
-    Then I wait until I see "scorpio-dummy-2.0" text, refreshing the page
+    When I wait until I see "scorpio-dummy-2.0" text, refreshing the page
     And I should see a "scorpio:2.0" text
     And I check "scorpio-dummy-2.0" in the list
     And I click on "Upgrade Packages"

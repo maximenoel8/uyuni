@@ -42,4 +42,4 @@ Feature: Bootstrap a Amazon 2023 Salt SSH minion
 
   Scenario: Check events history for failures on Amazon 2023 Salt SSH minion
     Given I am on the Systems overview page of this "amazon2023_ssh_minion"
-    Then I check for failed events on history event page
+    When I check for failed events on history event page

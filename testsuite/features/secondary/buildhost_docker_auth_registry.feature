@@ -20,7 +20,7 @@ Feature: Build image with authenticated registry
     And I check "useCredentials"
     And I enter URI, username and password for registry
     And I click on "create-btn"
-    Then I wait until I see "registry" text
+    When I wait until I see "registry" text
 
   @scc_credentials
   Scenario: Create a profile for the authenticated image store as Docker admin
@@ -31,7 +31,7 @@ Feature: Build image with authenticated registry
     And I select "1-SUSE-KEY-x86_64" from "activationKey"
     And I enter "Docker/authprofile" relative to profiles as "path"
     And I click on "create-btn"
-    Then I wait until I see "auth_registry_profile" text
+    When I wait until I see "auth_registry_profile" text
 
   @scc_credentials
   Scenario: Build an image in the authenticated image store
@@ -40,7 +40,7 @@ Feature: Build image with authenticated registry
     And I enter "latest" as "version"
     And I select the hostname of "build_host" from "buildHostId"
     And I click on "submit-btn"
-    Then I wait until I see "auth_registry_profile" text
+    When I wait until I see "auth_registry_profile" text
     # Verify the status of images in the authenticated image store
     When I wait at most 900 seconds until image "auth_registry_profile" with version "latest" is built successfully via API
     And I wait at most 300 seconds until image "auth_registry_profile" with version "latest" is inspected successfully via API
@@ -50,7 +50,7 @@ Feature: Build image with authenticated registry
 
 @skip_if_github_validation
   Scenario: Check the list of packages is not empty
-    And the list of packages of image "auth_registry_profile" with version "latest" is not empty
+    Then the list of packages of image "auth_registry_profile" with version "latest" is not empty
 
   @scc_credentials
   Scenario: Cleanup: remove Docker profile for the authenticated image store
