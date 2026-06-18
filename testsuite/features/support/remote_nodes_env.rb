@@ -11,6 +11,9 @@ custom_repos_path = "#{File.dirname(__FILE__)}/../upload_files/custom_repositori
 raise ArgumentError, 'Server IP address or domain name variable empty' if ENV['SERVER'].nil?
 
 warn 'Proxy IP address or domain name variable empty' if ENV['PROXY'].nil?
+warn 'Server2 IP address or domain name variable empty' if ENV['SERVER2'].nil?
+warn 'Server3 IP address or domain name variable empty' if ENV['SERVER3'].nil?
+warn 'Server4 IP address or domain name variable empty' if ENV['SERVER4'].nil?
 unless File.exist?(custom_repos_path)
   warn 'Minion IP address or domain name variable empty' if ENV['MINION'].nil?
   warn 'Buildhost IP address or domain name variable empty' if ENV['BUILD_HOST'].nil?
