@@ -16,6 +16,7 @@
 package com.redhat.rhn.manager.system.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.redhat.rhn.common.hibernate.HibernateFactory;
@@ -91,6 +92,15 @@ public class AnsibleManagerTest extends BaseTestCaseWithUser {
         HibernateFactory.getSession().flush();
         HibernateFactory.getSession().evict(path);
         assertEquals(path, AnsibleManager.lookupAnsiblePathById(path.getId(), user).get());
+    }
+
+    @Test
+    void testCreateAnsiblePathWithoutRefresh() throws Exception {
+        MinionServer minion = createAnsibleControlNode(user);
+        AnsiblePath path = ansibleManager.createAnsiblePath("inventory", minion, "/tmp/test-no-refresh", false);
+
+        assertNotNull(path);
+        assertEquals("/tmp/test-no-refresh", path.getPath().toString());
     }
 
     /**
