@@ -1,4 +1,4 @@
-FROM opensuse/leap:15.6@sha256:b084d6e29d975ce9123fd52bd201ac020628797f2772e9171ef76f33cc92d591
+FROM docker.io/opensuse/leap:15.6@sha256:b084d6e29d975ce9123fd52bd201ac020628797f2772e9171ef76f33cc92d591
 # Ruby 3 devel repos
 RUN zypper -n ar -f --no-gpgcheck http://download.opensuse.org/repositories/devel:/languages:/ruby/15.6/ ruby_devel
 RUN zypper -n ar -f --no-gpgcheck http://download.opensuse.org/repositories/devel:/languages:/ruby:/extensions/15.6/ rubey_devel_extensions
@@ -62,6 +62,6 @@ RUN npm install -g playwright@${PLAYWRIGHT_VERSION} && \
     playwright install chromium
 ENV PLAYWRIGHT_CLI_EXECUTABLE_PATH=/usr/local/bin/playwright
 
-# TODO: Adjust the URL/branch before merging!
-RUN curl https://raw.githubusercontent.com/uyuni-project/uyuni/master/testsuite/Gemfile -o Gemfile && bundle.ruby3.3 install --verbose && rm Gemfile
+ARG GEMFILE_BRANCH=master
+RUN curl https://raw.githubusercontent.com/uyuni-project/uyuni/${GEMFILE_BRANCH}/testsuite/Gemfile -o Gemfile && bundle.ruby3.3 install --verbose && rm Gemfile
 RUN gem list

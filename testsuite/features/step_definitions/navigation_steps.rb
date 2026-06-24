@@ -1014,6 +1014,11 @@ When(/^I enter "([^"]*)" as the filtered formula name$/) do |input|
   find('input[placeholder=\'Filter by formula name\']').set(input)
 end
 
+When(/^I filter "([^"]*)" username$/) do |input|
+  find('input[placeholder=\'Filter by Username: \']').set(input)
+  step 'I click on the filter button'
+end
+
 When(/^I enter the package for "([^"]*)" as the filtered package name$/) do |host|
   filter_by_package_name(PACKAGE_BY_CLIENT[host])
 end
@@ -1110,14 +1115,14 @@ end
 # Test if a checkbox is checked
 #
 Then(/^I should see "([^"]*)" as checked$/) do |arg1|
-  raise ScriptError, "#{arg1} is unchecked" unless has_checked_field?(arg1)
+  raise ScriptError, "#{arg1} is unchecked" unless has_checked_field?(arg1, disabled: :all)
 end
 
 #
 # Test if a checkbox is unchecked
 #
 Then(/^I should see "([^"]*)" as unchecked$/) do |arg1|
-  raise ScriptError, "#{arg1} is checked" unless has_unchecked_field?(arg1)
+  raise ScriptError, "#{arg1} is checked" unless has_unchecked_field?(arg1, disabled: :all)
 end
 
 #

@@ -51,19 +51,26 @@ When(/^I add the "([^"]*)" channel to sources$/) do |channel|
 end
 
 When(/^I click the "([^"]*)" item (.*?) button$/) do |name, action|
-  button =
+  icon_class =
     case action
-    when /details/ then 'i[contains(@class, \'fa-list\')]'
-    when /edit/ then 'i[contains(@class, \'fa-edit\')]'
-    when /delete/ then 'i[contains(@class, \'fa-trash\')]'
+    when /details/ then 'fa-list'
+    when /edit/ then 'fa-edit'
+    when /delete/ then 'fa-trash'
     else raise ScriptError, "Unknown element with description '#{action}'"
     end
 
-  td_element = find(:xpath, "//td[contains(text(), '#{name}')]")
-  raise ScriptError, "xpath: #{name} item not found" unless td_element
+  xpath = "//tr[td[contains(text(), '#{name}')]]//button[i[contains(@class, '#{icon_class}')]]"
 
-  button_element = td_element.find(:xpath, "./ancestor::tr/td/button/#{button} | ./ancestor::tr/td/div/button/#{button}")
-  raise ScriptError, "xpath: #{action} button not found" unless button_element.click
+  attempts = 0
+  begin
+    find(:xpath, xpath).click
+  rescue Playwright::Error => e
+    raise unless e.message.include?('not attached to the DOM')
+
+    attempts += 1
+    retry if attempts < 3
+    raise
+  end
 end
 
 When(/^I click the "([^"]*)" item (.*?) button if exists$/) do |name, action|

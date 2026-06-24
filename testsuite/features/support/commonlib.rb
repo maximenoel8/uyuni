@@ -214,6 +214,28 @@ rescue Capybara::ModalNotFound
 end
 
 #
+# Waits for any page transition triggered by a preceding click to complete.
+# Handles both Senna SPA transitions (.senna-loading) and hard navigations.
+#
+def wait_for_page_transition
+  # Grace period: both the Senna loading class and a hard navigation are set up
+  # asynchronously after the click (e.g. React fires an API call before bouncing
+  # window.location). Without this, both checks below pass vacuously against the
+  # old, already-loaded page.
+  sleep 0.3
+  begin
+    warn 'Timeout: Waiting AJAX transition' unless has_no_css?('.senna-loading', wait: 20)
+  rescue StandardError => e
+    $stdout.puts e.message # context may be destroyed mid-check by a hard navigation
+  end
+  begin
+    page.driver.with_playwright_page { |pw_page| pw_page.wait_for_load_state(state: 'load', timeout: 30_000) }
+  rescue Playwright::Error
+    # No navigation occurred, or the page is already loaded -- acceptable
+  end
+end
+
+#
 # Clicks a button and waits for any AJAX transition to complete.
 #
 # @param locator [String] (optional) The locator for the button element.
@@ -224,20 +246,10 @@ def click_button_and_wait(locator = nil, **options)
   rescue Playwright::Error => e
     raise unless e.message.include?('Timeout') && locator
 
-    # Playwright's action timeout fired while waiting for the post-click navigation to settle
-    # (common on slow JSP pages like Cobbler where form processing exceeds 11 s).
-    # The click itself was dispatched and the form submitted -- just wait for the resulting
-    # page navigation to finish instead of re-clicking (the button is gone on the new page).
     warn "click_button_and_wait: Playwright action timeout for '#{locator}' -- waiting for page load to complete"
-    page.driver.with_playwright_page do |pw_page|
-      pw_page.wait_for_load_state(state: 'load', timeout: 60_000)
-    end
+    page.driver.with_playwright_page { |pw_page| pw_page.wait_for_load_state(state: 'load', timeout: 60_000) }
   end
-  begin
-    warn 'Timeout: Waiting AJAX transition (click link)' unless has_no_css?('.senna-loading', wait: 20)
-  rescue StandardError => e
-    $stdout.puts e.message # Skip errors related to .senna-loading element
-  end
+  wait_for_page_transition
 end
 
 #
@@ -255,18 +267,7 @@ def click_link_and_wait(locator = nil, force: false, **options)
   else
     click_link(locator, **options)
   end
-  begin
-    warn 'Timeout: Waiting AJAX transition (click link)' unless has_no_css?('.senna-loading', wait: 20)
-  rescue StandardError => e
-    $stdout.puts e.message # Skip errors related to .senna-loading element
-  end
-  begin
-    # Playwright dispatches the click and returns before Senna's AJAX navigation updates
-    # the DOM. Wait for domcontentloaded so the next step sees the new page content.
-    page.driver.with_playwright_page { |pw_page| pw_page.wait_for_load_state(state: 'domcontentloaded', timeout: 5_000) }
-  rescue Playwright::Error
-    # No navigation occurred or already at domcontentloaded -- acceptable
-  end
+  wait_for_page_transition
 end
 
 #
@@ -283,14 +284,19 @@ def click_link_or_button_and_wait(locator = nil, **options)
   end
 end
 
-# Capybara Node Element extension to override click method, clicking and then waiting for ajax transition
+# Capybara Node Element extension to override click method,
+# clicking and then waiting for the Senna SPA transition to complete
 module CapybaraNodeElementExtension
   def click
     super
+    # Senna adds .senna-loading asynchronously after the click.
+    # Wait a short moment for it to appear (it may legitimately never
+    # appear for non-navigating clicks), then wait for it to be gone.
+    has_css?('.senna-loading', wait: 1)
     begin
       warn 'Timeout: Waiting AJAX transition (click link)' unless has_no_css?('.senna-loading', wait: 20)
     rescue StandardError => e
-      $stdout.puts e.message # Skip errors related to .senna-loading element
+      $stdout.puts e.message
     end
   end
 end
