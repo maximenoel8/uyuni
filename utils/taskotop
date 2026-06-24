@@ -621,8 +621,10 @@ def format_elapsed_time(rowdata, data_key, width):
     if rowdata["end_time"]:
         end = rowdata["end_time"]
 
-    td = end.replace(tzinfo=None) - rowdata["start_time"].replace(tzinfo=None)
-    seconds = int((td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6)
+    td = end.astimezone() - rowdata["start_time"].astimezone()
+    seconds = int(
+        (td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6
+    )
     if HUMAN_READABLE:
         return seconds_to_hms_string(seconds)
     return "{0}s".format(seconds)
@@ -630,7 +632,7 @@ def format_elapsed_time(rowdata, data_key, width):
 
 def format_datetime(rowdata, data_key, width):
     if rowdata[data_key]:
-        return rowdata[data_key].strftime('%Y-%m-%d %H:%M:%S')
+        return rowdata[data_key].astimezone().strftime("%Y-%m-%d %H:%M:%S")
     return ""
 
 
