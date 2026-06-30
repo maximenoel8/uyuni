@@ -82,18 +82,12 @@ Team Lead to handle the following tasks:
   - [ ] https://build.opensuse.org/groups/uyuni-maintainers
   - [ ] https://build.opensuse.org/groups/salt-maintainers
 - Git Workflow: Until this [issue is fixed](https://github.com/openSUSE/openSUSE-git/issues/140), also prepare PRs to remove the leaver (or replace it if the leaver is the last one, as you will need a new maintainer) from the following places:
-  - [ ] https://src.suse.de/products/SLFO/src/branch/slfo-main/_maintainership.json (this is `slfo-main` branch, do it from `slfo-X.Y` branches as well)
   - [ ] https://src.suse.de/products/MultiLinuxManagerTools-SL-Micro/src/branch/6/workflow.config and the same file in all `6*` branches
-  - [ ] https://src.suse.de/Galaxy/MLMTools/src/branch/mlmtools_sle16-stable/workflow.config and the same file in all `mlmtools_sle16-*` branches
-    - [ ] After the PRs are merged, forward them to https://src.suse.de/products/MLMTools-products
-  - [ ] https://src.suse.de/Galaxy/SUSE_Multi-Linux_Manager/src/branch/5.1/workflow.config and the same file in all branches
-     - [ ] After the PRs are merged, forward them to https://src.suse.de/products/SUSE_Multi-Linux_Manager
-  - [ ] https://src.suse.de/Galaxy/SUSE_Multi-Linux_Manager-packages/src/branch/mlm-5.2/workflow.config and the same file in all branches
-     - [ ] After the PRs are merged, forward them to https://src.suse.de/products/SUSE_Multi-Linux_Manager-packages
-  - [ ] https://src.suse.de/products/SUSE_Multi-Linux_Manager-pubclouds/src/branch/5.1/workflow.config and the same file in all branches
-  - [ ] https://src.suse.de/products/ManagerToolsBetaForMicro/src/branch/6/workflow.config and the same file in all branches
-  - [ ] https://src.suse.de/products/ManagerToolsForMicro/src/branch/6/workflow.config and the same file in all branches
-  - [ ] https://src.opensuse.org/saltbundle/_ObsPrj/src/branch/bundle/_maintainership.json and the same file in all branches
+  - [ ] https://src.suse.de/products/MLMTools-products/src/branch/mlmtools_sle16-stable/workflow.config and the same file in all maintained branches
+  - [ ] https://src.suse.de/products/SUSE_Multi-Linux_Manager/src/branch/mlm_sle16-5.2/workflow.config and the same file in all maintained branches
+  - [ ] https://src.suse.de/products/SUSE_Multi-Linux_Manager-packages/src/branch/mlm-5.2/workflow.config and the same file for all maintained branches
+  - [ ] https://src.suse.de/products/ManagerToolsBetaForMicro/src/branch/6/workflow.config and the same file in all maintained branches
+  - [ ] https://src.suse.de/products/ManagerToolsForMicro/src/branch/6/workflow.config and the same file in all maintained branches
 - [ ] Internal:
   - [ ] Remove SSH public key from the [galaxy/infrastructure repository](https://gitlab.suse.de/galaxy/infrastructure/-/blob/master/srv/pillar/team-ssh-pubkeys.sls)
   - [ ] Remove SSH public key from the [OPS-Service/repository](https://gitlab.suse.de/OPS-Service/salt/-/blob/production/pillar/ssh_keys/groups/suma-infra.sls) (make sure you also remove the key from the `users` folder)
