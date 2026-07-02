@@ -101,5 +101,8 @@ if [ -f $SSL_KEY ] ; then
     postgres_reconfig "ssl_key_file" "'$SSL_KEY'"
 fi
 
-echo "postgresql.conf updated"
+if test -n "$TZ"; then
+    postgres_reconfig "log_timezone" "$TZ"
+fi
 
+echo "postgresql.conf updated"
