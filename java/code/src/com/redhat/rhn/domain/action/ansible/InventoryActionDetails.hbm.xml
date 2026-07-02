@@ -12,7 +12,7 @@
                 <param name="increment_size">1</param>
             </generator>
         </id>
-        <property name="inventoryPath" column="inventory_path" type="string" />
+        <property name="inventoryPath" column="inventory_path" type="string" not-null="true" />
         <property name="created" type="timestamp" insert="false" update="false" />
         <property name="modified" type="timestamp" insert="false" update="false" />
         <many-to-one name="parentAction" column="action_id" class="com.redhat.rhn.domain.action.Action"
