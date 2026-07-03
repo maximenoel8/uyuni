@@ -71,22 +71,13 @@ A few of the tasks are to be done by the new joiner and will be marked as such w
   - [ ] Add to https://build.opensuse.org/groups/uyuni-maintainers (releng)
   - [ ] Add to https://build.opensuse.org/groups/salt-maintainers (Ion & releng)
 - Git Workflow: Until this [issue is fixed](https://github.com/openSUSE/openSUSE-git/issues/140), also prepare PRs to add the joiner to the following places:
-  - For package maintenance, consider if the joiner will help comaintaining any packages (as an example tomcat11, or monitoring packages):
-    - [ ] https://src.suse.de/products/SLFO/src/branch/slfo-main/_maintainership.json (this is `slfo-main` branch, do it from `slfo-X.Y` branches as well) and add the joiner where relevant
-  - For release engineering (add the joiner where `deneb-alpha` is):
-    - [ ] https://src.suse.de/products/SLFO/src/branch/slfo-main/_maintainership.json (this is `slfo-main` branch, do it from `slfo-X.Y` branches as well)
   - For release engineering:
     - [ ] https://src.suse.de/products/MultiLinuxManagerTools-SL-Micro/src/branch/6/workflow.config and the same file in all `6*` branches
-    - [ ] https://src.suse.de/Galaxy/MLMTools/src/branch/mlmtools_sle16-stable/workflow.config and the same file in all `mlmtools_sle16-*` branches
-      - [ ] After the PRs are merged, forward them to https://src.suse.de/products/MLMTools-products
-    - [ ] https://src.suse.de/Galaxy/SUSE_Multi-Linux_Manager and the same file in all branches
-       - [ ] After the PRs are merged, forward them to https://src.suse.de/products/SUSE_Multi-Linux_Manager
-    - [ ] https://src.suse.de/Galaxy/SUSE_Multi-Linux_Manager-packages/src/branch/mlm-5.2/workflow.config and the same file in all branches
-      - [ ] After the PRs are merged, forward them to https://src.suse.de/products/SUSE_Multi-Linux_Manager-packages
-    - [ ] https://src.suse.de/products/SUSE_Multi-Linux_Manager-pubclouds/src/branch/5.1/workflow.config and the same file in all branches
-    - [ ] https://src.suse.de/products/ManagerToolsBetaForMicro/src/branch/6/workflow.config and the same file in all branches
-    - [ ] https://src.suse.de/products/ManagerToolsForMicro/src/branch/6/workflow.config and the same file in all branches
-    - [ ] https://src.opensuse.org/saltbundle/_ObsPrj/src/branch/bundle/_maintainership.json and the same file in all branches
+    - [ ] https://src.suse.de/products/MLMTools-products/src/branch/mlmtools_sle16-stable/workflow.config and the same file in all maintained branches
+    - [ ] https://src.suse.de/products/SUSE_Multi-Linux_Manager/src/branch/mlm_sle16-5.2/workflow.config and the same file in all maintained branches
+    - [ ] https://src.suse.de/products/SUSE_Multi-Linux_Manager-packages/src/branch/mlm-5.2/workflow.config and the same file for all maintained branches
+    - [ ] https://src.suse.de/products/ManagerToolsBetaForMicro/src/branch/6/workflow.config and the same file in all maintained branches
+    - [ ] https://src.suse.de/products/ManagerToolsForMicro/src/branch/6/workflow.config and the same file in all maintained branches
 - [ ] Schedule new joiner meetups with at least one [member from each squad](https://confluence.suse.com/x/OIGAOQ), with the PO and with the architect (optionally with Director, PM and TLs)
 - [ ] QE specific:
   - [ ] IBS/OBS: Add to the https://build.suse.de/groups/qam-manager group
