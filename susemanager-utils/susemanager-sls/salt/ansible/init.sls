@@ -22,7 +22,7 @@ mgr_ansible_installed:
 
 {%- if 'ansible.targets' in salt %}
 mgr_ansible_inventory_refresh:
-  module.run:
+  mgrcompat.module_run:
     - name: event.send
     - tag: salt/beacon/{{ grains['id'] }}/inotify//etc/ansible/hosts
     - onlyif:
