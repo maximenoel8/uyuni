@@ -12,7 +12,8 @@ BEGIN
         context,
         arch
     FROM suseAppStream
-    WHERE channel_id = from_channel_id;
+    WHERE channel_id = from_channel_id
+    ON CONFLICT (channel_id, name, stream, version, context, arch) DO NOTHING;
 
     -- Clone the Packages
     INSERT INTO suseAppstreamPackage (module_id, package_id)
@@ -27,7 +28,8 @@ BEGIN
                            AND old_as.context = new_as.context
                            AND old_as.arch = new_as.arch
                            AND new_as.channel_id = to_channel_id
-    WHERE old_as.channel_id = from_channel_id;
+    WHERE old_as.channel_id = from_channel_id
+    ON CONFLICT ON CONSTRAINT uq_as_pkg_module DO NOTHING;
 
     -- Clone the RPMs
     INSERT INTO suseAppstreamApi (module_id, rpm)
@@ -42,7 +44,8 @@ BEGIN
                            AND old_as.context = new_as.context
                            AND old_as.arch = new_as.arch
                            AND new_as.channel_id = to_channel_id
-    WHERE old_as.channel_id = from_channel_id;
+    WHERE old_as.channel_id = from_channel_id
+    ON CONFLICT ON CONSTRAINT uq_as_api DO NOTHING;
 
 END;
 $$
