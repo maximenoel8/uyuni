@@ -13,7 +13,13 @@ import localRules from "./eslint-local-rules/index.js";
 const isProduction = process.env.NODE_ENV === "production";
 
 export default defineConfig([
-  globalIgnores(["html/src/dist/**/*", "html/src/vendors/**/*", "html/javascript/**/*"]),
+  globalIgnores([
+    "html/src/dist/**/*",
+    "html/src/storybook/generated/**/*",
+    "html/src/vendors/**/*",
+    "html/javascript/**/*",
+    "storybook-static/**/*",
+  ]),
   eslint.configs.recommended,
   // In the future, it would be nice to use `tseslint.configs.recommended` here, but legacy code is too far from that for now
   tseslint.configs.stylistic,
