@@ -1,0 +1,12 @@
+[Unit]
+Description=Initialize Java NSS FIPS configuration
+Before=tomcat.service
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/java-fips-init.sh
+
+[Install]
+WantedBy=multi-user.target

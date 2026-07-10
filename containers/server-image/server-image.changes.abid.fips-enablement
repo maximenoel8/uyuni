@@ -1,0 +1,3 @@
+- Configure Java strong SecureRandom to use the NSS FIPS
+  provider on FIPS-enabled hosts so DB connections (SCRAM-SHA-256)
+  work under FIPS (bsc#1270035)
