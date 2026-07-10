@@ -102,6 +102,7 @@ ADD --chown=root:root root.tar.gz /
 
 # Initialize environments to sync configuration and package files to persistent volumes
 RUN systemctl enable timezone_alignment && \
+    systemctl enable java-fips-init && \
     uyuni-configfiles-sync init /etc/apache2/ && \
     uyuni-configfiles-sync init /etc/cobbler/ && \
     uyuni-configfiles-sync init /etc/postfix/ && \
