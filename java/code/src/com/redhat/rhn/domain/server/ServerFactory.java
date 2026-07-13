@@ -1063,13 +1063,34 @@ public class ServerFactory extends HibernateFactory {
      * @return return the first Server found if any
      */
     public static Optional<Server> findByAnyFqdn(Set<String> fqdns) {
-        for (String fqdn : fqdns) {
-            Optional<Server> server = findByFqdn(fqdn);
-            if (server.isPresent()) {
-                return server;
-            }
+        if (fqdns == null || fqdns.isEmpty()) {
+            return Optional.empty();
         }
-        return Optional.empty();
+        List<Server> servers = listByAnyFqdn(fqdns);
+        if (servers.isEmpty()) {
+            return Optional.empty();
+        }
+        if (servers.size() == 1) {
+            return Optional.of(servers.get(0));
+        }
+
+        List<String> serverDetails = new ArrayList<>();
+        for (Server s : servers) {
+            List<String> fqdnNames = s.getFqdns().stream().map(ServerFQDN::getName).toList();
+            serverDetails.add(String.format("Server [ID: %d, Name: %s, FQDNs: %s]",
+                    s.getId(), s.getName(), fqdnNames));
+        }
+        LOG.error("Conflicting servers found for FQDN set {}: {}", fqdns, serverDetails);
+
+        Optional<Server> preferred = servers.stream()
+                .filter(s -> s.getFqdns().stream()
+                        .anyMatch(f -> f.isPrimary() && fqdns.stream()
+                                .anyMatch(req -> req.equalsIgnoreCase(f.getName()))))
+                    .findFirst();
+        Server selected = preferred.orElse(servers.get(0));
+        LOG.warn("Selected server: Server [ID: {}, Name: {}]",
+                selected.getId(), selected.getName());
+        return Optional.of(selected);
     }
 
     /**
@@ -1097,8 +1118,10 @@ public class ServerFactory extends HibernateFactory {
      * @return the Server found
      */
     public static Optional<Server> findByFqdn(String name) {
-        return Optional.ofNullable(name)
-                .map(n -> SINGLETON.lookupObjectByNamedQuery("Server.findByFqdn", Map.of("name", name)));
+        if (name == null) {
+            return Optional.empty();
+        }
+        return findByAnyFqdn(Set.of(name));
     }
 
     /**
