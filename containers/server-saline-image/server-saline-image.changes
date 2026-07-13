@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 13 14:54:23 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.15
+  * Add org.uyuni.version LABEL to the image
+
+-------------------------------------------------------------------
 Wed May 27 12:02:05 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.14
