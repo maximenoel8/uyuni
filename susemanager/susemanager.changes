@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 13 17:21:58 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.18-0
+  * Add bootstrap repository definition for SLE and Leap 16.1
+
+-------------------------------------------------------------------
 Wed May 27 11:51:11 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.17-0
