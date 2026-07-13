@@ -12118,13 +12118,13 @@ Per a esmenar aquesta situació, afegiu credencials SCC lt;a href""/rhn/admin/se
         <source>Processing of a PXE event failed</source>
         <target state="translated">El processament d'un esdeveniment PXE ha fallat.</target>
       </trans-unit>
-    <trans-unit id="user.admin.access" xml:space="preserve">
+      <trans-unit id="user.admin.access" xml:space="preserve">
         <source>Admin Access</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      </body>
+        <target state="translated">Accés d'administrador</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
