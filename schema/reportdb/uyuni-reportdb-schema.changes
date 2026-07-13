@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 09 18:01:13 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.7-0
+  * Increase url on table repository (bsc#1259230)
+
+-------------------------------------------------------------------
 Sat Jan 17 01:33:32 CET 2026 - marina.latini@suse.com
 
 - version 5.1.6-0

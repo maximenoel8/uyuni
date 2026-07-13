@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue May 26 15:31:00 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.5-0
+  * Fix delete of a reportdb user with uyuni-setup-reportdb-user
+    (bsc#1261841)
+
+-------------------------------------------------------------------
 Sat Jan 17 01:33:59 CET 2026 - marina.latini@suse.com
 
 - version 5.1.4-0

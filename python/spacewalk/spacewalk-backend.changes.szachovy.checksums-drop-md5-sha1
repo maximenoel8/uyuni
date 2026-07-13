@@ -1,1 +1,0 @@
-- security(checksums): drop md5 and sha1 from checksum choices (bsc#1234567)

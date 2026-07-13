@@ -101,11 +101,8 @@ if [ -f $SSL_KEY ] ; then
     postgres_reconfig "ssl_key_file" "'$SSL_KEY'"
 fi
 
+if test -n "$TZ"; then
+    postgres_reconfig "log_timezone" "$TZ"
+fi
+
 echo "postgresql.conf updated"
-
-cat "$HBA_FILE" <<EOT
-local replication,postgres all trust
-host all all all scram-sha-256
-EOT
-
-echo "pg_hba.conf updated"

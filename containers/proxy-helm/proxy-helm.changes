@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 26 15:46:29 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.14
+  * Move TFTP server to its own pod on server and proxy (bsc#1261902)
+
+-------------------------------------------------------------------
 Mon Apr 27 10:36:06 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.13

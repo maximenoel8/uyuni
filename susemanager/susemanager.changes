@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Wed May 27 11:51:11 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.17-0
+  * Add SUSE LibertyLinux 9.6 x86_64 bootstrap repository definition
+  * Remove spacewalk-diskcheck enablement
+  * Use correct CA for Report DB (bsc#1260806)
+  * Relicense mgr-salt-ssh under Apache-2.0 and move it
+    to a separated package named susemanager-tools-salt
+  * Fix and add license files for susemanager and subpackages
+
+-------------------------------------------------------------------
 Mon Apr 27 08:56:59 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.16-0

@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Wed May 27 12:35:59 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.15
+  * Healthcheck on disk usage based on taskomatic (bsc#1238890)
+  * Add mozilla-nss-sysinit to Dockerfile required for FIPS
+    (bsc#1247707)
+  * Do not get repositories from SCC in the server container
+    (bsc#1242916)
+  * Drop unneeded container-suseconnect
+  * Add "susemanager-tools", "susemanager" and
+    "susemanager-tools-salt" packages to server-image
+
+-------------------------------------------------------------------
 Mon Apr 27 10:47:13 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.14

@@ -45,6 +45,7 @@ public class RhnMockHttpServletRequest extends MockHttpServletRequest {
     private String encoding;
     private String method;
     private Enumeration<String> headerNames;
+    private int contentLength;
 
     /**
      * default constructor
@@ -287,5 +288,19 @@ public class RhnMockHttpServletRequest extends MockHttpServletRequest {
     @Override
     public String getRemoteUser() {
         return null;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int getContentLength() {
+        return contentLength;
+    }
+
+    /**
+     * Sets the content length for this request.
+     * @param length content length in bytes
+     */
+    public void setContentLength(int length) {
+        this.contentLength = length;
     }
 }

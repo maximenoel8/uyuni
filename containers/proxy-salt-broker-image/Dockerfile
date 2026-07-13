@@ -4,12 +4,6 @@
 ARG BASE=registry.suse.com/bci/bci-base:15.6
 FROM $BASE AS fat
 
-ARG PRODUCT_REPO
-
-# Add distro and product repos
-COPY add_repos.sh /usr/bin
-RUN sh add_repos.sh ${PRODUCT_REPO}
-
 # Main packages
 RUN zypper --gpg-auto-import-keys --non-interactive install --auto-agree-with-licenses \
         spacewalk-proxy-salt \
@@ -36,7 +30,7 @@ LABEL org.opencontainers.image.created="%BUILDTIME%"
 LABEL org.opencontainers.image.vendor="${VENDOR}"
 LABEL org.opencontainers.image.url="${URL}"
 LABEL org.opencontainers.image.name=proxy-salt-broker-image
-LABEL org.opencontainers.image.version=5.1.14
+LABEL org.opencontainers.image.version=5.1.15
 LABEL org.openbuildservice.disturl="%DISTURL%"
 LABEL org.opensuse.reference="${REFERENCE_PREFIX}/proxy-salt-broker:${PRODUCT_VERSION}.%RELEASE%"
 # endlabelprefix

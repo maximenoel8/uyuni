@@ -1,4 +1,24 @@
 -------------------------------------------------------------------
+Wed May 27 11:54:17 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.21-0
+  * UI changes to support migration from SLES 15 to SLES 16
+  * Fixed issue causing a blank tab to appear in the
+    Image Building Details page (bsc#1253032)
+  * Minor UI improvements and fixed spinning icon glitch
+    in Admin → Setup Wizard
+  * Fixed an issue where the "Create Token" modal could
+    become unresponsive when opened
+  * Fixed an issue causing all existing tokens to be
+    deleted in a loop
+  * Improved visibility of all parent rows in permissions table
+  * Enhance buttons placement for a more intuitive experience
+  * Healthcheck on disk usage based on taskomatic (bsc#1238890)
+  * Align subscription matching page warning with dashboard
+    warning for expiring subscriptions (bsc#1257894)
+  * Add missing fragment import (bsc#1264966)
+
+-------------------------------------------------------------------
 Mon Apr 27 10:34:50 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.20-0

@@ -15,7 +15,6 @@ import os
 # pylint: disable-next=wrong-import-position
 import suma_minion
 
-
 suma_minion.__opts__ = {}
 suma_minion.__context__ = {}
 suma_minion.psycopg2 = MagicMock()
@@ -99,6 +98,7 @@ def test_reading_postgres_opts_in__get_cursor():
             "pass": "test_pass",
             "db": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }
     }
     with patch.object(suma_minion, "__opts__", test_opts), patch(
@@ -112,6 +112,7 @@ def test_reading_postgres_opts_in__get_cursor():
             "password": "test_pass",
             "dbname": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }
 
     pg_connect_mock.reset_mock()
@@ -127,6 +128,7 @@ def test_reading_postgres_opts_in__get_cursor():
             "password": "test_pass",
             "dbname": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }
 
 
@@ -142,6 +144,7 @@ def test_using_context_in__get_cursor():
             "pass": "test_pass",
             "db": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }
     }
     with patch.object(suma_minion, "__opts__", {"id": "foobar_master", **test_opts}), patch(
@@ -157,6 +160,7 @@ def test_using_context_in__get_cursor():
             "password": "test_pass",
             "dbname": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }
 
         pg_connect_mock.reset_mock()
@@ -171,6 +175,7 @@ def test_using_context_in__get_cursor():
             "password": "test_pass",
             "dbname": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }
         assert not "suma_minion_cnx" in suma_minion.__context__
 
@@ -188,6 +193,7 @@ def test_using_context_in__get_cursor():
             "password": "test_pass",
             "dbname": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }
 
         pg_connect_mock.reset_mock()
@@ -228,4 +234,5 @@ def test_using_context_in__get_cursor():
             "password": "test_pass",
             "dbname": "test_db",
             "port": 1234,
+            "sslmode": "disable",
         }

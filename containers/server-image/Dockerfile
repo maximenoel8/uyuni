@@ -11,7 +11,7 @@ ARG PRODUCT_PATTERN_PREFIX="patterns-uyuni"
 ARG USEPYTHON="python3"
 
 # Extra packages can be added via project configuration
-ARG EXTRAPACKAGES
+ARG EXTRAPACKAGES=""
 
 # Create stable static UID and GID for salt, tomcat, apache (wwwrun)...
 RUN groupadd -r --gid 10550 susemanager && \
@@ -27,7 +27,7 @@ RUN useradd -r -s /usr/sbin/nologin -G susemanager,www -g tomcat -d /usr/share/t
   useradd -r -s /usr/sbin/nologin -g tftp -d /srv/tftpboot --uid 10555 tftp
 
 # Main packages
-RUN echo "rpm.install.excludedocs = yes" >>/etc/zypp/zypp.conf && \
+RUN set -euo pipefail; \
     zypper ref && zypper --non-interactive up && \
     zypper --gpg-auto-import-keys --non-interactive install --auto-agree-with-licenses --force-resolution \
         ${EXTRAPACKAGES} \
@@ -67,6 +67,9 @@ RUN echo "rpm.install.excludedocs = yes" >>/etc/zypp/zypp.conf && \
         sssd-ad \
         sssd-dbus \
         sssd-ipa \
+        susemanager \
+        susemanager-tools \
+        susemanager-tools-salt \
         sssd-krb5 \
         sssd-ldap \
         sssd-tools \
@@ -78,7 +81,9 @@ RUN echo "rpm.install.excludedocs = yes" >>/etc/zypp/zypp.conf && \
         virtual-host-gatherer-VMware \
         virtual-host-gatherer-libcloud \
         virtualization-formulas \
+        mozilla-nss-sysinit \
         zchunk && \
+    (rpm -e container-suseconnect || true) && \
     systemctl enable prometheus-node_exporter && \
     systemctl enable sssd && \
     rm /etc/krb5.conf.d/crypto-policies && \
@@ -90,12 +95,14 @@ RUN echo "rpm.install.excludedocs = yes" >>/etc/zypp/zypp.conf && \
 # The RemoveIPC was needed for postgresql, not sure if it is safe to remove now that it's in its own container
     mkdir -p /etc/systemd/logind.conf.d/ && \
     printf "[Login]\nRemoveIPC=no" >/etc/systemd/logind.conf.d/disable-removeipc.conf && \
+    zypper --non-interactive removerepo --all; \
     rm -rf /var/log/{alternatives.log,lastlog,tallylog,suseconnect.log,zypper.log,zypp/history,YaST2}
 
 ADD --chown=root:root root.tar.gz /
 
 # Initialize environments to sync configuration and package files to persistent volumes
 RUN systemctl enable timezone_alignment && \
+    systemctl enable java-fips-init && \
     uyuni-configfiles-sync init /etc/apache2/ && \
     uyuni-configfiles-sync init /etc/cobbler/ && \
     uyuni-configfiles-sync init /etc/postfix/ && \
@@ -121,7 +128,7 @@ LABEL org.opencontainers.image.description="All-in-one ${PRODUCT} server image"
 LABEL org.opencontainers.image.created="%BUILDTIME%"
 LABEL org.opencontainers.image.vendor="${VENDOR}"
 LABEL org.opencontainers.image.url="${URL}"
-LABEL org.opencontainers.image.version=5.1.14
+LABEL org.opencontainers.image.version=5.1.15
 LABEL org.openbuildservice.disturl="%DISTURL%"
 LABEL org.opensuse.reference="${REFERENCE_PREFIX}/server:${PRODUCT_VERSION}.%RELEASE%"
 # endlabelprefix

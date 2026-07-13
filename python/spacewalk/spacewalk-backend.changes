@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue May 26 15:22:11 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.17-0
+  * Healthcheck on disk usage based on taskomatic (bsc#1238890)
+  * Kickstart profile for RHEL 8 requires venv-salt-minion
+    instead of salt-minion (bsc#1259474)
+  * security(checksums): drop md5 and sha1 from checksum choices (bsc#1234567)
+  * Use PBKDF2-SHA256 (600000 iterations) for new
+    password hashes; verify legacy SHA-256 crypt(3)
+    hashes transparently
+
+-------------------------------------------------------------------
 Mon Mar 23 08:44:27 CET 2026 - marina.latini@suse.com
 
 - version 5.1.16-0

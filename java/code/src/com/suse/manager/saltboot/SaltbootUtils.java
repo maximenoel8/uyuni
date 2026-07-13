@@ -210,8 +210,10 @@ public final class SaltbootUtils {
      * @param imageInfo image info
      * @param distros list of existing distributions
      * @param con Cobbler connection
+     * @throws SaltbootException Throws SaltbootException describing the failure.
      */
-    public static void createSaltbootDistro(ImageInfo imageInfo, List<Distro> distros, CobblerConnection con) {
+    public static void createSaltbootDistro(ImageInfo imageInfo, List<Distro> distros, CobblerConnection con)
+        throws SaltbootException {
         String nameVR = makeCobblerNameVR(imageInfo);
         String nameV = makeCobblerNameV(imageInfo);
         String name = makeCobblerName(imageInfo);
@@ -366,10 +368,18 @@ public final class SaltbootUtils {
         p.save();
     }
 
+    /**
+     * Update cobbler profiles for given group
+     * @param con CobblerConnection
+     * @param saltbootGroup ServerGroup of the saltboot group
+     * @param parentProfile Image profile of distro or default profile
+     * @param onlyMissing If true, existing groups will be skipped.
+     * @throws SaltbootException Throws SaltbootException describing the failure.
+     */
     static void updateGroupProfile(CobblerConnection con,
                                            ServerGroup saltbootGroup,
                                            String parentProfile,
-                                           boolean onlyMissing) {
+                                           boolean onlyMissing) throws SaltbootException {
         // Validate parentProfile exists
         Profile profile = Profile.lookupByName(con, parentProfile);
         if (profile == null) {

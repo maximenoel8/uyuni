@@ -229,6 +229,20 @@ Feature: Sanity checks
     And "alma9_ssh_minion" should communicate with the server using public interface
     And the clock from "alma9_ssh_minion" should be exact
 
+@alma10_minion
+  Scenario: The Alma 10 Salt minion is healthy
+    Then "alma10_minion" should have a FQDN
+    And reverse resolution should work for "alma10_minion"
+    And "alma10_minion" should communicate with the server using public interface
+    And the clock from "alma10_minion" should be exact
+
+@alma10_ssh_minion
+  Scenario: The Alma 10 Salt SSH minion is healthy
+    Then "alma10_ssh_minion" should have a FQDN
+    And reverse resolution should work for "alma10_ssh_minion"
+    And "alma10_ssh_minion" should communicate with the server using public interface
+    And the clock from "alma10_ssh_minion" should be exact
+
 @amazon2023_minion
   Scenario: The Amazon 2023 Salt minion is healthy
     Then "amazon2023_minion" should have a FQDN
@@ -285,6 +299,20 @@ Feature: Sanity checks
     And "oracle9_ssh_minion" should communicate with the server using public interface
     And the clock from "oracle9_ssh_minion" should be exact
 
+@oracle10_minion
+  Scenario: The Oracle 10 Salt minion is healthy
+    Then "oracle10_minion" should have a FQDN
+    And reverse resolution should work for "oracle10_minion"
+    And "oracle10_minion" should communicate with the server using public interface
+    And the clock from "oracle10_minion" should be exact
+
+@oracle10_ssh_minion
+  Scenario: The Oracle 10 Salt SSH minion is healthy
+    Then "oracle10_ssh_minion" should have a FQDN
+    And reverse resolution should work for "oracle10_ssh_minion"
+    And "oracle10_ssh_minion" should communicate with the server using public interface
+    And the clock from "oracle10_ssh_minion" should be exact
+
 @rhel9_minion
   Scenario: The Red Hat Linux 9 Salt minion is healthy
     Then "rhel9_minion" should have a FQDN
@@ -327,6 +355,20 @@ Feature: Sanity checks
     And "rocky9_ssh_minion" should communicate with the server using public interface
     And the clock from "rocky9_ssh_minion" should be exact
 
+@rocky10_minion
+  Scenario: The Rocky 10 Salt minion is healthy
+    Then "rocky10_minion" should have a FQDN
+    And reverse resolution should work for "rocky10_minion"
+    And "rocky10_minion" should communicate with the server using public interface
+    And the clock from "rocky10_minion" should be exact
+
+@rocky10_ssh_minion
+  Scenario: The Rocky 10 Salt SSH minion is healthy
+    Then "rocky10_ssh_minion" should have a FQDN
+    And reverse resolution should work for "rocky10_ssh_minion"
+    And "rocky10_ssh_minion" should communicate with the server using public interface
+    And the clock from "rocky10_ssh_minion" should be exact
+
 @ubuntu2204_minion
   Scenario: The Ubuntu 22.04 minion is healthy
     Then "ubuntu2204_minion" should have a FQDN
@@ -368,6 +410,20 @@ Feature: Sanity checks
     And reverse resolution should work for "debian12_ssh_minion"
     And "debian12_ssh_minion" should communicate with the server using public interface
     And the clock from "debian12_ssh_minion" should be exact
+
+@debian13_minion
+  Scenario: The Debian 13 minion is healthy
+    Then "debian13_minion" should have a FQDN
+    And reverse resolution should work for "debian13_minion"
+    And "debian13_minion" should communicate with the server using public interface
+    And the clock from "debian13_minion" should be exact
+
+@debian13_ssh_minion
+  Scenario: The Debian 13 Salt SSH minion is healthy
+    Then "debian13_ssh_minion" should have a FQDN
+    And reverse resolution should work for "debian13_ssh_minion"
+    And "debian13_ssh_minion" should communicate with the server using public interface
+    And the clock from "debian13_ssh_minion" should be exact
 
 @opensuse156arm_minion
   Scenario: The openSUSE 15.6 ARM minion is healthy

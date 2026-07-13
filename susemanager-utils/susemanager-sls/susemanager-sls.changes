@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue May 26 15:24:05 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.25-0
+  * Added salt states to support migration from SLES 15 to SLES 16
+  * Ignore podman interfaces when resolving FQDNs (bsc#1262720)
+  * Fix GPG key import on first key deploy (bsc#1259482)
+  * Use either ansible-core or ansible packages
+    for Ansible Control node, prefer ansible-core (bsc#1259087)
+  * Fix CPU reporting for ppc64le clients (bsc#1259521)
+  * Fix refresh of virtual instance information (bsc#1261723)
+
+-------------------------------------------------------------------
 Mon Mar 23 08:35:04 CET 2026 - marina.latini@suse.com
 
 - version 5.1.24-0

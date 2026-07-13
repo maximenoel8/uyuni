@@ -34,7 +34,7 @@ LABEL org.opencontainers.image.description="${PRODUCT} server migration image"
 LABEL org.opencontainers.image.created="%BUILDTIME%"
 LABEL org.opencontainers.image.vendor="${VENDOR}"
 LABEL org.opencontainers.image.url="${URL}"
-LABEL org.opencontainers.image.version=5.1.13
+LABEL org.opencontainers.image.version=5.1.14
 LABEL org.openbuildservice.disturl="%DISTURL%"
 LABEL org.opensuse.reference="${REFERENCE_PREFIX}/server-migration-14-16:${PRODUCT_VERSION}.%RELEASE%"
 # endlabelprefix

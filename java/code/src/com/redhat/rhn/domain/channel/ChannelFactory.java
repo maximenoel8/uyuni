@@ -38,6 +38,7 @@ import com.redhat.rhn.manager.content.ContentSyncManager;
 import com.redhat.rhn.manager.content.MgrSyncUtils;
 import com.redhat.rhn.manager.ssm.SsmChannelDto;
 
+import com.suse.manager.model.hub.ChannelInfoDTO;
 import com.suse.manager.model.hub.ChannelInfoDetailsJson;
 import com.suse.manager.model.hub.HubFactory;
 import com.suse.scc.SCCEndpoints;
@@ -66,6 +67,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -1555,10 +1557,7 @@ public class ChannelFactory extends HibernateFactory {
             }
         }
         else {
-            // clone appstreams
-            if (AppStreamsManager.listChannelAppStreams(to.getId()).isEmpty()) {
-                AppStreamsManager.cloneAppStreams(to, from);
-            }
+            AppStreamsManager.cloneAppStreams(to, from);
             if (!to.isModular()) {
                 Modules modules = new Modules();
                 modules.setChannel(to);
@@ -1949,5 +1948,59 @@ public class ChannelFactory extends HibernateFactory {
                     hubFactory.lookupIssHub().orElse(null));
         }
         return channel;
+    }
+
+    /**
+     * Retrieves a list of channels that the specified user has permission to access.
+     *
+     * @param user the {@link User}
+     * @return a {@link List} of {@link ChannelInfoDTO} objects representing the
+     * channels the user can access; may be empty if no channels are found.
+     */
+    public static List<ChannelInfoDTO> getAccessibleChannels(User user) {
+        return getSession().createNativeQuery("""
+                  SELECT c.id
+                            , c.name
+                            , c.label
+                            , c.parent_channel
+                            , ca.name AS architecture
+                            , org.id AS org_id
+                            , org.name AS org_name
+                            , cl.original_id
+                    FROM suseChannelUserRoleView SCURV
+                            INNER JOIN rhnChannel c ON c.id = SCURV.channel_id
+                            INNER JOIN rhnChannelArch ca ON c.channel_arch_id = ca.id
+                            LEFT JOIN web_customer org ON org.id = c.org_id
+                            LEFT JOIN rhnChannelCloned cl ON c.id = cl.id
+                   WHERE SCURV.user_id = :user_id
+                            AND SCURV.deny_reason IS NULL
+                            AND SCURV.role = 'subscribe'
+                """, Tuple.class)
+                .addSynchronizedEntityClass(Channel.class)
+                .addSynchronizedEntityClass(ClonedChannel.class)
+                .addSynchronizedEntityClass(ChannelArch.class)
+                .addSynchronizedEntityClass(Org.class)
+                .setParameter("user_id", user.getId())
+                .addScalar("id", StandardBasicTypes.LONG)
+                .addScalar("name", StandardBasicTypes.STRING)
+                .addScalar(LABEL, StandardBasicTypes.STRING)
+                .addScalar("parent_channel", StandardBasicTypes.LONG)
+                .addScalar("architecture", StandardBasicTypes.STRING)
+                .addScalar(ORG_ID, StandardBasicTypes.LONG)
+                .addScalar("org_name", StandardBasicTypes.STRING)
+                .addScalar("original_id", StandardBasicTypes.LONG)
+                .stream()
+                // Convert the Tuple into a proper DTO
+                .map(tuple -> new ChannelInfoDTO(
+                        tuple.get("id", Long.class),
+                        tuple.get("name", String.class),
+                        tuple.get(LABEL, String.class),
+                        tuple.get("parent_channel", Long.class),
+                        tuple.get("architecture", String.class),
+                        tuple.get(ORG_ID, Long.class),
+                        tuple.get("org_name", String.class),
+                        tuple.get("original_id", Long.class)
+                ))
+                .toList();
     }
 }

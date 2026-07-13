@@ -9,6 +9,22 @@ require 'rubygems'
 require_relative 'constants'
 require_relative 'api_test'
 
+# Switch the active Capybara session and app_host to a different server for the
+# duration of the block. Each server gets its own isolated browser session
+# (separate cookies, history), so two servers can be logged into simultaneously.
+#
+# Usage:
+#   using_server('server2') do
+#     visit('/rhn/YourRhn.do')
+#   end
+#   # default session (server) is automatically restored after the block
+def using_server(host)
+  Capybara.using_session(host) do
+    Capybara.app_host = "https://#{get_target(host).full_hostname}"
+    yield
+  end
+end
+
 # Returns the current URL of the driver.
 #
 # @return [String] The current URL.
@@ -139,7 +155,26 @@ end
 # @param timeout [Integer] The maximum time to wait for the text to become visible (default: Capybara.default_max_wait_time).
 # @return [Boolean] Returns true if the text is visible, false otherwise.
 def check_text?(text1, text2: nil, timeout: Capybara.default_max_wait_time)
-  has_text?(text1, wait: timeout) || (!text2.nil? && has_text?(text2, wait: timeout))
+  # WORKAROUND: Chrome 134+ raises Capybara::ElementNotFound, StaleElementReferenceError, or
+  # NoMethodError (CDP response type mismatch) during page navigation, bypassing Capybara's
+  # synchronize() retry mechanism. All three are caught and retried. All other exceptions still
+  # propagate. Uses a plain Time.now loop instead of repeat_until_timeout / Timeout.timeout to
+  # avoid interrupting WebDriver mid-call, which corrupts the Selenium session.
+  deadline = Time.now + timeout
+  while Time.now < deadline
+    begin
+      return true if has_text?(text1, wait: 1)
+      return true if !text2.nil? && has_text?(text2, wait: 1)
+    rescue Capybara::ElementNotFound,
+           Selenium::WebDriver::Error::StaleElementReferenceError,
+           Selenium::WebDriver::Error::NoSuchElementError,
+           NoMethodError
+
+      # page mid-navigation, let it settle and retry
+      sleep 2
+    end
+  end
+  false
 end
 
 # Formats the detail message with optional last result and report result.
@@ -942,6 +977,7 @@ end
 # @param hostname String The hostname of the requested system
 # @param package String The package name where it will trigger an upgrade
 def trigger_upgrade(hostname, package)
+  get_target('server').run('spacecmd -u admin -p admin clear_caches', check_errors: false)
   get_target('server').run("spacecmd -u admin -p admin system_upgradepackage #{hostname} #{package} -y", check_errors: true)
 end
 
@@ -950,6 +986,7 @@ end
 # @param hostname String The hostname of the requested system
 # @param package String The package name to install
 def trigger_install(hostname, package)
+  get_target('server').run('spacecmd -u admin -p admin clear_caches', check_errors: false)
   get_target('server').run("spacecmd -u admin -p admin system_installpackage #{hostname} #{package} -y", check_errors: true)
 end
 
@@ -958,6 +995,7 @@ end
 # @param hostname String The hostname of the requested system
 # @param package String The package name to remove
 def trigger_remove(hostname, package)
+  get_target('server').run('spacecmd -u admin -p admin clear_caches', check_errors: false)
   get_target('server').run("spacecmd -u admin -p admin system_removepackage #{hostname} #{package} -y", check_errors: true)
 end
 

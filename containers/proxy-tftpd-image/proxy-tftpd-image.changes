@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed May 27 12:05:14 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.14
+  * Use custom entry id for grub saltboot entries
+    (bsc#1258382, bsc#1208800)
+  * Remove unused repos
+
+-------------------------------------------------------------------
 Mon Apr 27 10:44:01 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.13

@@ -1,0 +1,2 @@
+- Make inventory path not nullable in
+  rhnActionInventory (bsc1268309)

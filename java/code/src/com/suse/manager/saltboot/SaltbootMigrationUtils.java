@@ -31,20 +31,38 @@ import org.cobbler.Profile;
 import org.cobbler.SystemRecord;
 import org.cobbler.XmlRpcException;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class SaltbootMigrationUtils {
     private static final Logger LOG = LogManager.getLogger(SaltbootMigrationUtils.class);
-    private SaltbootMigrationUtils() { }
 
-    private static String getOldNamingScheme(ImageInfo imageInfo) {
+    private final Set<String> oldDistroNames = new HashSet<>();
+    private final Set<String> oldProfileNames = new HashSet<>();
+    private final Map<Profile, Profile> distroProfilesMap = new HashMap<>();
+
+    private final CobblerConnection cobblerConnection;
+
+    private SaltbootMigrationUtils() {
+        this.cobblerConnection = CobblerXMLRPCHelper.getUncachedAutomatedConnection();
+    }
+
+    private SaltbootMigrationUtils(CobblerConnection con) {
+        this.cobblerConnection = con;
+    }
+
+    private String getOldNamingScheme(ImageInfo imageInfo) {
         return imageInfo.getOrg().getId() + "-" +
                 imageInfo.getName() + "-" +
                 imageInfo.getVersion() + "-" +
                 imageInfo.getRevisionNumber();
     }
 
-    private static void migrateSaltbootDistros(CobblerConnection con) throws SaltbootMigrationException {
+    private void migrateSaltbootDistros() throws SaltbootMigrationException {
+        CobblerConnection con = cobblerConnection;
         List<Distro> distros = Distro.list(con);
         boolean allOk = true;
         con.transactionBegin();
@@ -66,15 +84,11 @@ public class SaltbootMigrationUtils {
                     String oldName = getOldNamingScheme(imageInfo);
                     Profile oldDistroProfile = Profile.lookupByName(con, oldName);
                     if (oldDistroProfile != null) {
-                        migrateSaltbootSystems(con, oldDistroProfile, newDistroProfile);
-                        oldDistroProfile.remove();
+                        distroProfilesMap.put(oldDistroProfile, newDistroProfile);
                     }
-                    Distro oldDistro = Distro.lookupByName(con, oldName);
-                    if (oldDistro != null) {
-                        oldDistro.remove();
-                    }
+                    oldDistroNames.add(oldName);
                 }
-                catch (XmlRpcException | SaltbootMigrationException e) {
+                catch (XmlRpcException | SaltbootException | SaltbootMigrationException e) {
                     LOG.error("Error migrating {}-{}-{}", imageInfo.getName(),
                             imageInfo.getVersion(), imageInfo.getRevisionNumber(), e);
                     allOk = false;
@@ -94,25 +108,23 @@ public class SaltbootMigrationUtils {
         }
     }
 
-    private static void migrateSaltbootProfiles(CobblerConnection con) {
+    private void migrateSaltbootProfiles() {
+        CobblerConnection con = cobblerConnection;
         boolean allOk = true;
         con.transactionBegin();
         try {
             for (ServerGroup saltbootGroup : Pillar.getGroupsForCategory(FormulaFactory.SALTBOOT_PILLAR)) {
                 try {
                     String groupImageName = SaltbootUtils.getGroupImageName(saltbootGroup).orElseThrow(
-                            () -> new SaltbootException(String.format(
+                            () -> new SaltbootMigrationException(String.format(
                                     "Cannot get an image for a saltboot group %s under organization %s",
                                     saltbootGroup.getOrg().getId(), saltbootGroup.getName())));
 
                     SaltbootUtils.updateGroupProfile(con, saltbootGroup, groupImageName, false);
-                    Profile oldProfile = Profile.lookupByName(con,
-                            saltbootGroup.getOrg().getId() + "-" + saltbootGroup.getName());
-                    if (oldProfile != null) {
-                        oldProfile.remove();
-                    }
+                    String oldProfileName = saltbootGroup.getOrg().getId() + "-" + saltbootGroup.getName();
+                    oldProfileNames.add(oldProfileName);
                 }
-                catch (XmlRpcException e) {
+                catch (XmlRpcException | SaltbootException | SaltbootMigrationException e) {
                     LOG.error("Error migrating {}", saltbootGroup.getName(), e);
                     allOk = false;
                 }
@@ -131,11 +143,69 @@ public class SaltbootMigrationUtils {
         }
     }
 
-    private static void migrateSaltbootSystems(CobblerConnection con, Profile oldProfile, Profile newProfile) {
-        List<SystemRecord> systems = SystemRecord.listByAssociatedProfile(con, oldProfile.getName());
-        for (SystemRecord system : systems) {
-            system.setProfile(newProfile);
-            system.save();
+    private void migrateSaltbootSystems() {
+        // We need to migrate systems outside of transaction.
+        // Transaction is forcing cobbler to copy the system object and triggering MAC conflict
+        distroProfilesMap.forEach(
+            (oldProfile, newProfile) -> {
+                List<SystemRecord> systems = SystemRecord.listByAssociatedProfile(
+                        cobblerConnection, oldProfile.getName());
+                for (SystemRecord system : systems) {
+                    system.setProfile(newProfile);
+                    system.save();
+                }
+            }
+        );
+    }
+
+    /**
+     * This cleanup method may log errors if our users decided to use or experiment
+     * with Saltboot distros and profiles.
+     * Custom-made profiles are not removed and so parent profiles will fail to be removed too
+     */
+    private void cleanupOldEntries() {
+        CobblerConnection con = cobblerConnection;
+        con.transactionBegin();
+        try {
+            // Group profiles must be removed before distros and their profiles
+            for (String oldProfileName : oldProfileNames) {
+                try {
+                    Profile oldProfile = Profile.lookupByName(con, oldProfileName);
+                    if (oldProfile != null) {
+                        oldProfile.remove();
+                    }
+                }
+                catch (XmlRpcException e) {
+                    LOG.error("Error removing old group profile {}", oldProfileName, e);
+                }
+            }
+            // Distro profiles must be removed before distros themselves
+            for (String oldName : oldDistroNames) {
+                try {
+                    Profile oldDistroProfile = Profile.lookupByName(con, oldName);
+                    if (oldDistroProfile != null) {
+                        oldDistroProfile.remove();
+                    }
+                }
+                catch (XmlRpcException e) {
+                    LOG.error("Error removing old distribution profile {}", oldName, e);
+                }
+            }
+            // Finally remove the distributions
+            for (String oldName : oldDistroNames) {
+                try {
+                    Distro oldDistro = Distro.lookupByName(con, oldName);
+                    if (oldDistro != null) {
+                        oldDistro.remove();
+                    }
+                }
+                catch (XmlRpcException e) {
+                    LOG.error("Error removing old distribution {}", oldName, e);
+                }
+            }
+        }
+        finally {
+            con.transactionCommit();
         }
     }
 
@@ -147,8 +217,7 @@ public class SaltbootMigrationUtils {
      * 3) remove old distro and distro profiles entries
      */
     public static void migrateSaltboot() {
-        CobblerConnection con = CobblerXMLRPCHelper.getUncachedAutomatedConnection();
-        migrateSaltboot(con);
+        new SaltbootMigrationUtils().performMigration();
     }
 
     /**
@@ -156,7 +225,13 @@ public class SaltbootMigrationUtils {
      * @param con Cobbler connection
      */
     public static void migrateSaltboot(CobblerConnection con) {
-        migrateSaltbootDistros(con);
-        migrateSaltbootProfiles(con);
+        new SaltbootMigrationUtils(con).performMigration();
+    }
+
+    private void performMigration() {
+        migrateSaltbootDistros();
+        migrateSaltbootProfiles();
+        migrateSaltbootSystems();
+        cleanupOldEntries();
     }
 }

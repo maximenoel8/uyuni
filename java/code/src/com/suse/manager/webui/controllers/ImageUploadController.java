@@ -26,6 +26,7 @@ import com.redhat.rhn.domain.image.OSImageStoreUtils;
 import com.redhat.rhn.domain.user.User;
 import com.redhat.rhn.manager.EntityExistsException;
 
+import com.suse.manager.webui.services.iface.SaltApi;
 import com.suse.manager.webui.utils.gson.ResultJson;
 
 import com.google.gson.reflect.TypeToken;
@@ -34,10 +35,12 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -51,6 +54,11 @@ import spark.Spark;
 public class ImageUploadController {
 
     private static final Logger LOG = LogManager.getLogger(ImageUploadController.class);
+    private static SaltApi saltApi = GlobalInstanceHolder.SALT_API;
+
+    public static void setSaltApi(SaltApi saltApiIn) {
+        saltApi = saltApiIn;
+    }
 
     private ImageUploadController() { }
 
@@ -83,8 +91,19 @@ public class ImageUploadController {
 
             try {
                 items.stream().forEach(item -> {
-                    if (ImageInfoFactory.lookupDeltaImageFile(user.getOrg(), item.getName()).isPresent() ||
-                        ImageInfoFactory.lookupImageFile(user.getOrg(), item.getName()).isPresent()) {
+                    String submittedName = item.getName();
+                    String safeName = FilenameUtils.getName(submittedName);
+                    if (safeName == null || safeName.trim().isBlank() || !safeName.equals(submittedName)) {
+                        throw new IllegalArgumentException("Invalid filename");
+                    }
+                    Path baseDir = Paths.get(OSImageStoreUtils.getOSImageStorePathForOrg(user.getOrg()))
+                            .toAbsolutePath().normalize();
+                    Path destination = baseDir.resolve(safeName).normalize();
+                    if (!destination.startsWith(baseDir)) {
+                        throw new IllegalArgumentException("Invalid image destination");
+                    }
+                    if (ImageInfoFactory.lookupDeltaImageFile(user.getOrg(), safeName).isPresent() ||
+                        ImageInfoFactory.lookupImageFile(user.getOrg(), safeName).isPresent()) {
                         throw new EntityExistsException("Image file already exists");
                     }
                     DiskFileItem diskFileItem = (DiskFileItem) item;
@@ -92,9 +111,12 @@ public class ImageUploadController {
                         throw new RuntimeException("Can't get uploaded file");
                     }
 
+                    // Ensure the base directory exists
+                    saltApi.mkDir(baseDir, "0755");
+
                     // copy file to final location using salt
-                    GlobalInstanceHolder.SALT_API.copyFile(diskFileItem.getStoreLocation().toPath(),
-                        Paths.get(OSImageStoreUtils.getOSImageStorePathForOrg(user.getOrg()) + item.getName()))
+                    saltApi.copyFile(diskFileItem.getStoreLocation().toPath(),
+                        destination)
                         .orElseThrow(() -> new RuntimeException("Can't move the image file"));
                 });
             }

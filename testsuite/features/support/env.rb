@@ -46,7 +46,7 @@ $context = {}
 
 # Other global variables
 $pxeboot_mac = ENV.fetch('PXEBOOT_MAC', nil)
-$pxeboot_image = ENV.fetch('PXEBOOT_IMAGE', nil) || 'sles15sp3o'
+$pxeboot_image = ENV.fetch('PXEBOOT_IMAGE', nil) || 'sles15sp7o'
 $sle15sp6_terminal_mac = ENV.fetch('SLE15SP6_TERMINAL_MAC', nil)
 $sle15sp7_terminal_mac = ENV.fetch('SLE15SP7_TERMINAL_MAC', nil)
 $private_net = ENV.fetch('PRIVATENET', nil) if ENV['PRIVATENET']
@@ -207,6 +207,13 @@ def web_session_is_active?
   return false unless capybara_session_created?
 
   page.has_selector?('header', wait: 0) || page.has_selector?('#username-field', wait: 0)
+rescue Capybara::ElementNotFound,
+       Selenium::WebDriver::Error::StaleElementReferenceError,
+       Selenium::WebDriver::Error::NoSuchElementError,
+       NoMethodError
+
+  # Chrome 134+ CDP type mismatch during page navigation - page is not in a usable state
+  false
 end
 
 # Take a screenshot and try to log back at suse manager server
@@ -243,7 +250,7 @@ end
 # Relog and visit the previous URL
 def relog_and_visit_previous_url
   begin
-    Timeout.timeout(30) do
+    Timeout.timeout(DEFAULT_TIMEOUT) do
       previous_url = current_url
       step %(I am authorized as "#{$current_user}" with password "#{$current_password}")
       visit previous_url
@@ -336,6 +343,26 @@ Before('@proxy') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['proxy']
 end
 
+Before('@proxy2') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['proxy2']
+end
+
+Before('@proxy3') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['proxy3']
+end
+
+Before('@server2') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['server2']
+end
+
+Before('@server3') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['server3']
+end
+
+Before('@server4') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['server4']
+end
+
 Before('@run_if_proxy_transactional_or_slmicro61_minion') do
   skip_this_scenario unless suse_proxy_transactional? || ENV.key?(ENV_VAR_BY_HOST['slmicro61_minion'])
 end
@@ -390,6 +417,14 @@ Before('@alma9_ssh_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['alma9_ssh_minion']
 end
 
+Before('@alma10_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['alma10_minion']
+end
+
+Before('@alma10_ssh_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['alma10_ssh_minion']
+end
+
 Before('@amazon2023_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['amazon2023_minion']
 end
@@ -422,6 +457,14 @@ Before('@oracle9_ssh_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['oracle9_ssh_minion']
 end
 
+Before('@oracle10_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['oracle10_minion']
+end
+
+Before('@oracle10_ssh_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['oracle10_ssh_minion']
+end
+
 Before('@rhel9_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel9_minion']
 end
@@ -446,6 +489,14 @@ Before('@rocky9_ssh_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rocky9_ssh_minion']
 end
 
+Before('@rocky10_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rocky10_minion']
+end
+
+Before('@rocky10_ssh_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rocky10_ssh_minion']
+end
+
 Before('@ubuntu2204_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['ubuntu2204_minion']
 end
@@ -468,6 +519,14 @@ end
 
 Before('@debian12_ssh_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['debian12_ssh_minion']
+end
+
+Before('@debian13_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['debian13_minion']
+end
+
+Before('@debian13_ssh_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['debian13_ssh_minion']
 end
 
 Before('@sle12sp5_minion') do
@@ -662,6 +721,11 @@ end
 
 Before('@skip_for_transactional_minion') do |scenario|
   skip_this_scenario if scenario.location.file.include?('slemicro') || scenario.location.file.include?('slmicro')
+end
+
+Before('@skip_for_rhel10_like') do |scenario|
+  rhel10_minion_tags = %w[@alma10_minion @alma10_ssh_minion @oracle10_minion @oracle10_ssh_minion @rocky10_minion @rocky10_ssh_minion]
+  skip_this_scenario if rhel10_minion_tags.any? { |tag| scenario.source_tag_names.include?(tag) }
 end
 
 # do some tests only if we have SCC credentials

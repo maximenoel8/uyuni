@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Wed May 27 11:52:21 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.19-0
+  * Added the RBAC mapping for listMigrationTargetsWithChannels
+    end point (jsc#SUMA-320)
+  * Add index on rhnPackage (checksum_id) (bsc#1258041)
+    (gh#uyuni-project/uyuni#11585)
+  * Move Salt > Remote Commands to its own RBAC namespace
+    (bsc#1261305)
+  * Sync package removal permissions in packages API with the Web UI
+    (bsc#1261327)
+  * Add 'unpushed' to rhn_errata_adv_status_ck constraint to
+    allow importing EPEL errata with unpushed status (bsc#1264234)
+  * Healthcheck on disk usage based on taskomatic (bsc#1238890)
+  * Add missing indexes for channels and tokens (bsc#1259590)
+  * Increase source_url on table rhncontentsource (bsc#1259230)
+
+-------------------------------------------------------------------
 Mon Apr 27 17:38:20 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.18-0
