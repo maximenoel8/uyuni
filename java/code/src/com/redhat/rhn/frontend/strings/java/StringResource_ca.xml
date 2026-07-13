@@ -2794,13 +2794,6 @@ lt;/divgt;
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Admin Access" xml:space="preserve">
-        <source>Admin Access</source>
-        <target state="translated">Accés a administrador</target>
-        <context-group name="ctx">
-          <context context-type="sourcefile">/rhn/account/UserDetails</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="neverinparens" xml:space="preserve">
         <source>(never)</source>
         <target state="translated">(mai)</target>
@@ -12125,6 +12118,13 @@ Per a esmenar aquesta situació, afegiu credencials SCC lt;a href""/rhn/admin/se
         <source>Processing of a PXE event failed</source>
         <target state="translated">El processament d'un esdeveniment PXE ha fallat.</target>
       </trans-unit>
-    </body>
+    <trans-unit id="user.admin.access" xml:space="preserve">
+        <source>Admin Access</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/account/UserDetails</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      </body>
   </file>
 </xliff>

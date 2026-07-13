@@ -2793,13 +2793,6 @@ appstream 채널에 대한 cdn-sync를 요청한 후 다시 시도하십시오.
         </context-group>
         <target>활성화 키 관리자</target>
       </trans-unit>
-      <trans-unit id="Admin Access" xml:space="preserve">
-        <source>Admin Access</source>
-        <context-group name="ctx">
-          <context context-type="sourcefile">/rhn/account/UserDetails</context>
-        </context-group>
-        <target>관리 액세스</target>
-      </trans-unit>
       <trans-unit id="neverinparens" xml:space="preserve">
         <source>(never)</source>
         <context-group name="ctx">
@@ -12123,6 +12116,13 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         <source>Processing of a PXE event failed</source>
         <target state="final">PXE 이벤트 처리 실패</target>
       </trans-unit>
-    </body>
+    <trans-unit id="user.admin.access" xml:space="preserve">
+        <source>Admin Access</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/account/UserDetails</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      </body>
   </file>
 </xliff>

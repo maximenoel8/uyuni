@@ -2787,13 +2787,6 @@ and try again.
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Admin Access" xml:space="preserve">
-        <source>Admin Access</source>
-        <target/>
-        <context-group name="ctx">
-          <context context-type="sourcefile">/rhn/account/UserDetails</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="neverinparens" xml:space="preserve">
         <source>(never)</source>
         <target/>
@@ -11999,6 +11992,13 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
   </trans-unit>
       <trans-unit id="pxeeventfailed" xml:space="preserve">
         <source>Processing of a PXE event failed</source>
+      <target state="new"/>
+  </trans-unit>
+      <trans-unit id="user.admin.access" xml:space="preserve">
+        <source>Admin Access</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/account/UserDetails</context>
+        </context-group>
       <target state="new"/>
   </trans-unit>
       </body>

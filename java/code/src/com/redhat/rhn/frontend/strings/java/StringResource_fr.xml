@@ -2754,13 +2754,6 @@ and try again.
         </context-group>
         <target>Administrateur de clés d'activation</target>
       </trans-unit>
-      <trans-unit id="Admin Access" xml:space="preserve">
-        <source>Admin Access</source>
-        <context-group name="ctx">
-          <context context-type="sourcefile">/rhn/account/UserDetails</context>
-        </context-group>
-        <target>Accès d'administration</target>
-      </trans-unit>
       <trans-unit id="neverinparens" xml:space="preserve">
         <source>(never)</source>
         <context-group name="ctx">
@@ -11784,6 +11777,13 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
   </trans-unit>
       <trans-unit id="pxeeventfailed" xml:space="preserve">
         <source>Processing of a PXE event failed</source>
+      <target state="new"/>
+  </trans-unit>
+      <trans-unit id="user.admin.access" xml:space="preserve">
+        <source>Admin Access</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/account/UserDetails</context>
+        </context-group>
       <target state="new"/>
   </trans-unit>
       </body>

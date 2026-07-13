@@ -2794,13 +2794,6 @@ and try again.
         </context-group>
         <target state="translated">激活密钥管理员</target>
       </trans-unit>
-      <trans-unit id="Admin Access" xml:space="preserve">
-        <source>Admin Access</source>
-        <context-group name="ctx">
-          <context context-type="sourcefile">/rhn/account/UserDetails</context>
-        </context-group>
-        <target state="translated">管理访问权限</target>
-      </trans-unit>
       <trans-unit id="neverinparens" xml:space="preserve">
         <source>(never)</source>
         <context-group name="ctx">
@@ -12125,6 +12118,13 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         <source>Processing of a PXE event failed</source>
         <target state="final">PXE 事件处理失败</target>
       </trans-unit>
-    </body>
+    <trans-unit id="user.admin.access" xml:space="preserve">
+        <source>Admin Access</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/account/UserDetails</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      </body>
   </file>
 </xliff>

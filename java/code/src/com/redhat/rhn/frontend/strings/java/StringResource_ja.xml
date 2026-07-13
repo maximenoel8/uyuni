@@ -2791,13 +2791,6 @@ and try again.
         </context-group>
         <target>アクティベーションキーの管理者</target>
       </trans-unit>
-      <trans-unit id="Admin Access" xml:space="preserve">
-        <source>Admin Access</source>
-        <context-group name="ctx">
-          <context context-type="sourcefile">/rhn/account/UserDetails</context>
-        </context-group>
-        <target>管理用アクセス</target>
-      </trans-unit>
       <trans-unit id="neverinparens" xml:space="preserve">
         <source>(never)</source>
         <context-group name="ctx">
@@ -12120,6 +12113,13 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         <source>Processing of a PXE event failed</source>
         <target state="final">PXEイベントの処理に失敗しました</target>
       </trans-unit>
-    </body>
+    <trans-unit id="user.admin.access" xml:space="preserve">
+        <source>Admin Access</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/account/UserDetails</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      </body>
   </file>
 </xliff>
