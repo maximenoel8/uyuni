@@ -1,8 +1,8 @@
 ---
 name: QE - Testing MLM migrations
 about: Use this template for testing MLM migrations
-title: "Test the migration from X to Y"
-labels: ["qe-squad","manual tests"]
+title: "Test the migration from X to Y on "
+labels: ["qe-squad","manual tests", "migration"]
 projects: ["SUSE/32"]
 assignees: ''
 
