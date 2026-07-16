@@ -80,9 +80,13 @@ When(/^I view the subscription list for "([^"]*)"$/) do |user|
 end
 
 When(/^I (deselect|select) "([^"]*)" as a product$/) do |select, product|
-  # click on the checkbox to select the product
+  # click on the checkbox to select the product, but only if it isn't already
+  # in the desired state: Playwright's set() raises "Clicking the checkbox did
+  # not change its state" if a click is forced on a checkbox already at the target state
   xpath = "//span[contains(text(), '#{product}')]/ancestor::div[contains(@class, 'product-details-wrapper')]/div/input[@type='checkbox']"
-  raise ScriptError, "xpath: #{xpath} not found" unless find(:xpath, xpath).set(select == 'select')
+  checkbox = find(:xpath, xpath)
+  desired_state = (select == 'select')
+  checkbox.click if checkbox.checked? != desired_state
 end
 
 When(/^I select or deselect "([^"]*)" beta client tools$/) do |channel|
@@ -130,7 +134,8 @@ end
 When(/^I select the addon "(.*?)"$/) do |addon|
   # click on the checkbox of the sublist to select the addon product
   xpath = "//span[contains(text(), '#{addon}')]/ancestor::div[contains(@class, 'product-details-wrapper')]/div/input[@type='checkbox']"
-  raise ScriptError, "xpath: #{xpath} not found" unless find(:xpath, xpath).set(true)
+  checkbox = find(:xpath, xpath)
+  checkbox.click unless checkbox.checked?
 end
 
 Then(/^I should see that the "(.*?)" product is "(.*?)"$/) do |product, recommended|
@@ -433,7 +438,8 @@ Then(/^I check the first notification message$/) do
   else
     within(:xpath, '//section') do
       row = find(:xpath, '//div[@class="table-responsive"]//tr[.//td]', match: :first)
-      row.find(:xpath, './/input[@type="checkbox"]', match: :first).set(true)
+      checkbox = row.find(:xpath, './/input[@type="checkbox"]', match: :first)
+      checkbox.click unless checkbox.checked?
     end
   end
 end

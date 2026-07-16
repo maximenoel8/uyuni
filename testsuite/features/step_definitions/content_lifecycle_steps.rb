@@ -46,7 +46,9 @@ end
 
 When(/^I add the "([^"]*)" channel to sources$/) do |channel|
   within(:xpath, "//mark[text()='#{channel}']/../../..") do
-    raise ScriptError, 'Add channel failed' unless find(:xpath, './/input[@type="checkbox"]').set(true)
+    checkbox = find(:xpath, './/input[@type="checkbox"]')
+    checkbox.click unless checkbox.checked?
+    raise ScriptError, 'Add channel failed' unless checkbox.checked?
   end
 end
 

@@ -197,11 +197,11 @@ end
 
 When(/^I (check|uncheck) "([^"]*)" by label$/) do |action, label|
   checkbox = find(:xpath, "//label[text()='#{label}']/preceding-sibling::input[@type='checkbox']")
+  desired_state = (action == 'check')
+  checkbox.click if checkbox.checked? != desired_state
   if action == 'check'
-    checkbox.set(true)
     raise ScriptError, "Checkbox #{label} not checked." unless has_checked_field?(label)
   elsif action == 'uncheck'
-    checkbox.set(false)
     raise ScriptError, "Checkbox #{label} not unchecked." unless has_unchecked_field?(label)
   end
 end
@@ -1049,7 +1049,7 @@ When(/^I check row with "([^"]*)" and "([^"]*)" in the list$/) do |text1, text2|
   row = find(:xpath, top_level_xpath_query)
   raise ScriptError, "xpath: #{top_level_xpath_query} not found" if row.nil?
 
-  row.set(true)
+  row.click unless row.checked?
 end
 
 When(/^I uncheck row with "([^"]*)" and "([^"]*)" in the list$/) do |text1, text2|
@@ -1057,20 +1057,22 @@ When(/^I uncheck row with "([^"]*)" and "([^"]*)" in the list$/) do |text1, text
   row = find(:xpath, top_level_xpath_query, match: :first)
   raise ScriptError, "xpath: #{top_level_xpath_query} not found" if row.nil?
 
-  row.set(false)
+  row.click if row.checked?
 end
 
 When(/^I check the second row in the list$/) do
   within(:xpath, '//section') do
     row = find(:xpath, '//div[@class=\'table-responsive\']//tr[2]/td', match: :first)
-    row.find(:xpath, './/input[@type=\'checkbox\']', match: :first).set(true)
+    checkbox = row.find(:xpath, './/input[@type=\'checkbox\']', match: :first)
+    checkbox.click unless checkbox.checked?
   end
 end
 
 When(/^I check the first row in the list$/) do
   within(:xpath, '//section') do
     row = find(:xpath, '//div[@class=\'table-responsive\']//tr[.//td]', match: :first)
-    row.find(:xpath, './/input[@type=\'checkbox\']', match: :first).set(true)
+    checkbox = row.find(:xpath, './/input[@type=\'checkbox\']', match: :first)
+    checkbox.click unless checkbox.checked?
   end
 end
 
@@ -1083,7 +1085,8 @@ When(/^I (check|uncheck) the "([^"]*)" CLM filter$/) do |check_option, text|
     checkbox = find(:xpath, ".//label[contains(text(), '#{text}')]/input[@type='checkbox']")
     raise "#{text} CLM filter not found" if checkbox.nil?
 
-    checkbox.set(check_option == 'check')
+    desired_state = (check_option == 'check')
+    checkbox.click if checkbox.checked? != desired_state
   end
 end
 
