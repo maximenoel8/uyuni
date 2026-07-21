@@ -7831,15 +7831,15 @@ Follow this url to see the full list of inactive systems:
       </trans-unit>
       <trans-unit id="cobbler.powermanagement.power_on" xml:space="preserve">
         <source>Power On</source>
-        <target/>
+        <target state="translated">Ligar</target>
       </trans-unit>
       <trans-unit id="cobbler.powermanagement.power_off" xml:space="preserve">
         <source>Power Off</source>
-        <target/>
+        <target state="translated">Desligar</target>
       </trans-unit>
       <trans-unit id="cobbler.powermanagement.reboot" xml:space="preserve">
         <source>Reboot</source>
-        <target/>
+        <target state="translated">Reiniciar</target>
       </trans-unit>
       <trans-unit id="cobbler.powermanagement.command_failed" xml:space="preserve">
         <source>Cobbler reported a power management error, please check Cobbler logs.</source>
@@ -11942,62 +11942,62 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         </context-group>
         <target state="new"/>
       </trans-unit>
-    <trans-unit id="Add address" xml:space="preserve">
+      <trans-unit id="Add address" xml:space="preserve">
         <source>Add address</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/users/Addresses</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="Edit" xml:space="preserve">
         <source>Edit</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/users/Addresses</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="ARMHF Debian" xml:space="preserve">
         <source>ARMHF Debian</source>
         <target>ARMHF Debian</target>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="diskcheckwarning" xml:space="preserve">
         <source>Disk Check</source>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="notification.diskcheck.summary" xml:space="preserve">
         <source>You are running out of space on your @@PRODUCT_NAME@@ {0}. This is {1}</source>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="notification.diskcheck.details" xml:space="preserve">
         <source>You are running out of space on your @@PRODUCT_NAME@@ {0}. This is {1}. If you run out of disk space, @@PRODUCT_NAME@@ will stop running, and this could lead to a loss of data. @@PRODUCT_NAME@@ will shutdown automatically.</source>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="distupgrade.sles16.migration.success" xml:space="preserve">
         <source>SLES 16 migration completed successfully.{0}</source>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="distupgrade.sles16.migration.success.post_steps" xml:space="preserve">
         <source>Recommended post-migration steps:
 - Check for orphaned/unneeded packages: zypper packages --orphaned --unneeded
 - Check for updated config files: find /etc/ -name '*.rpmnew' -o -name '*.rpmsave'</source>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="distupgrade.sles16.migration.failed" xml:space="preserve">
         <source>SLES 16 migration failed or result not found.{0}</source>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="pxeeventfailed" xml:space="preserve">
         <source>Processing of a PXE event failed</source>
-      <target state="new"/>
-  </trans-unit>
+        <target state="new"/>
+      </trans-unit>
       <trans-unit id="user.admin.access" xml:space="preserve">
         <source>Admin Access</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      </body>
+        <target state="new"/>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
