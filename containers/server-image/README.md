@@ -2,3 +2,6 @@
 
 * Avahi names are not resolved inside the container
 
+## Container Startup and Lifecycle Management
+
+Container initialization and runtime health are managed through the interaction of the `uyuni-check-database.service` systemd unit, container healthchecks, and the `uyuni-server.service` systemd unit. During early startup, the `uyuni-check-database.service` systemd unit checks for critically low disk space and aborts the initialization with a non-zero exit code (1) if space is exhausted, causing the systemd service (configured with `Restart=on-success`) to stop immediately in a failed state rather than restarting endlessly. Conversely, if the system is running and a periodic healthcheck fails, Podman's `--health-on-failure=stop` flag triggers a graceful stop (exit code 0), allowing systemd to automatically restart the service and attempt recovery; if the underlying issue is a full disk, the subsequent restart will be safely caught and halted by the early `uyuni-check-database.service` startup check.

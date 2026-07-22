@@ -202,10 +202,21 @@ ensure_httpd_down() {
     return 0
 }
 
+disk_check() {
+    /usr/bin/spacewalk-diskcheck -f || {
+        RC=$?
+        if [ $RC -eq 3 ]; then
+            echo "Startup aborted: Critically low disk space detected!"
+            exit 1
+        fi
+    }
+}
+
 case $1 in
         ensure-httpd-down) ensure_httpd_down;;
         wait-for-tomcat) wait_for_tomcat;;
         wait-for-database) check_database;;
         check-database) check_database;;
         wait-for-taskomatic) wait_for_taskomatic;;
+        diskcheck) disk_check;;
 esac
