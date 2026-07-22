@@ -3,6 +3,7 @@
 
 @scope_openscap
 @scope_res
+@scope_rhlike
 @rhlike_minion
 Feature: OpenSCAP audit of Red Hat-like Salt minion
   In order to audit a Red Hat-like Salt minion
