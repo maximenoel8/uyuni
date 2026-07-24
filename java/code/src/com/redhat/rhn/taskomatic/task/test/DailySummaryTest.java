@@ -15,7 +15,9 @@
 package com.redhat.rhn.taskomatic.task.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.redhat.rhn.common.db.datasource.ModeFactory;
 import com.redhat.rhn.common.db.datasource.WriteMode;
@@ -25,6 +27,7 @@ import com.redhat.rhn.testing.UserTestUtils;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +56,20 @@ public class DailySummaryTest extends RhnBaseTestCase {
         assertEquals(1, rows);
         rows = ds.dequeueOrg(oid);
         assertEquals(1, rows);
+    }
+
+    @Test
+    void testIsEndOfLifeNotificationPeriod() {
+        LocalDate today = LocalDate.of(2026, 1, 1);
+
+        // More than 6 months before the end of life -> do not notify yet
+        assertFalse(DailySummary.isEndOfLifeNotificationPeriod(today.plusMonths(7), today));
+        // Within the 6 months notification window -> notify
+        assertTrue(DailySummary.isEndOfLifeNotificationPeriod(today.plusMonths(3), today));
+        // End of life reached today -> notify
+        assertTrue(DailySummary.isEndOfLifeNotificationPeriod(today, today));
+        // Already past the end of life -> notify
+        assertTrue(DailySummary.isEndOfLifeNotificationPeriod(today.minusDays(1), today));
     }
 
     @Test
