@@ -43,7 +43,7 @@
 * Could be automated: yes (has been done in openQA but we don't get the qcow2 from it automatically yet)
 1. Install on a x86_64 host **without terraform**, like our customers:
     1. Prepare a fresh disk of at least 180 GB on a VM or a real host
-    1. Install SLE15 SP4 Virtual Machine from an [ISO image](http://dist.suse.de/install/SLE-15-SP3-Full-TEST/) or from some other installation source ([SSC-Proxy only for testing purpose](https://github.com/SUSE/spacewalk/wiki/SCC-QA-proxy#installation-from-scratch-using-scc-proxy-40))
+    1. Install SLE15 SP7 Virtual Machine from an [ISO image](http://dist.suse.de/install/SLE-15-SP7-Full-GM/) or from some other installation source ([SSC-Proxy only for testing purpose](https://github.com/SUSE/spacewalk/wiki/SCC-QA-proxy#installation-from-scratch-using-scc-proxy-40))
     1. At registration screen, register with your employee key (for betas use https://scc.suse.com/dashboard)
     1. When asked, answer you would like to install more repositories
     1. In extra software screen, un-filter the beta versions, and check SUSE Manager server latest version Beta
@@ -116,32 +116,14 @@ The tests that should be considered for future automation have been flagged in t
 
 ___Platform___ | ___Client Type___ | ___Priority___ | ___Automation<br>candidate___ | ___Tests___
 --- | --- | --- | --- | ---
-**SLE 15 SP3** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
+**SLE 15 SP7** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
 ... | Normal Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
 ... | SSH Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-**SLE 15 SP2** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
-... | Normal Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-... | SSH Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-**SLE 15 SP1 LTSS** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
-... | Normal Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-... | SSH Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-**SLE 15 LTSS** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
-... | Normal Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-... | SSH Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
+... | SSH Salt minion tunnel | high | ... | [General client smoke tests](#generalclientsmoke)
 **SLE 12 SP5** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
 ... | Normal Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
 ... | SSH Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
 ... | SSH Salt minion tunnel | high | ... | [General client smoke tests](#generalclientsmoke)
-**SLE 12 SP4** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
-... | Normal Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-... | SSH Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
-... | SSH Salt minion tunnel | high | ... | [General client smoke tests](#generalclientsmoke)
- .. | Retail terminal | high | ... | [General client smoke tests](#generalclientsmoke)
-**SLE 11 SP4** | Traditional | medium | ... | [General client smoke tests](#generalclientsmoke)
-... | Normal Salt minion | medium | ... | [General client smoke tests](#generalclientsmoke)
-... | Retail terminal | high | ... | [General client smoke tests](#generalclientsmoke)
-**SLE 11 SP3** | Traditional | low | ... | [General client smoke tests](#generalclientsmoke)
-... | Normal Salt minion | low | ... | [General client smoke tests](#generalclientsmoke)
 **RES 8** | Traditional | high | ... | [General client smoke tests](#generalclientsmoke)
 ... | Normal Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
 ... | SSH Salt minion | high | ... | [General client smoke tests](#generalclientsmoke)
@@ -307,8 +289,8 @@ and check whether everything continues working.
 1. Register Image Build Host and create images
 1. Configure Branch server
 1. Transfer the images from SUMA Server to the Branch server
-1. Register new SLE12SP5 terminal
-1. Register new SLE15SP1 terminal
+1. Register new SLE15SP6 terminal
+1. Register new SLE15SP7 terminal
 1. Log in to the new terminals
 1. [Execute general client smoke tests on the terminals](#generalclientsmoke)
 
@@ -347,10 +329,10 @@ and check whether everything continues working.
 **Important note:** Option `secure='no'` doesn't turn off secure boot feature. It is necessary to do it via UEFI menu during VM's boot. To enter UEFI configuration menu, just type `exit` in previous UEFI shell command prompt. Then you can disable secure boot.
 
 #### 4.1.2 Registering retail terminal with EFI HTTP booting
-1. This feature is for SLE15SP1 (JeOS7) terminals only, please build kiwi image for it first.
+1. This feature is for SLE15SP6 (JeOS7) terminals only, please build kiwi image for it first.
 1. Follow the same steps from 4.1.1 section, so everything in the VM for retail terminal is ready for EFI booting
 1. Configure DHCP formula as usual and fill `Filename Http:` input field with `http://[branch-server-FQDN-for-private network]/saltboot/boot/shim.efi`
-1. Ensure default initrd is set to SLE15SP1 image (JeOS7). Check this path on branch server: `/srv/saltboot/boot` - both symlinks (initrd.gz and link) should point to files containg JeOS7
+1. Ensure default initrd is set to SLE15SP6 image (JeOS7). Check this path on branch server: `/srv/saltboot/boot` - both symlinks (initrd.gz and link) should point to files containg JeOS7
 1. Change default boot option via UEFI menu during VM's boot and set it to *UEFI HTTPv4*. To enter UEFI configuration menu, press ESC and then type `exit` in UEFI shell command prompt
 1. Restart and boot the terminal. The rest should follow as usual.
 1. If you jump into error message `No mapping found` during booting, try to disable secure boot (see instructions above in section 4.1.1)
@@ -369,10 +351,10 @@ and check whether everything continues working.
 1. It is also suitable to recrate virtual HDD of terminal or restore it from the snapshot before terminals are rebooted
 
 #### 4.1.4. USB stick for booting of retail terminal (instead of HTTP or PXE booting)
-1. This feature is for SLE15SP1 (JeOS7) terminals only, please build kiwi image for it first
+1. This feature is for SLE15SP6 (JeOS7) terminals only, please build kiwi image for it first
 1. Follow the same steps from 4.1.1 section, this feature is available for both: EFI and legacy BIOS based terminals
 1. Modify VM of branch server and add additional storage of size 512 MiB. Make sure it uses **USB bus**
-1. Ensure default image is set to SLE15SP1 (JeOS7). You can do it by executing `salt-call pillar.item image-synchronize` at branch server, output should contain `POS_Image_Graphical7-7.0.0` or similar name
+1. Ensure default image is set to SLE15SP6 (JeOS7). You can do it by executing `salt-call pillar.item image-synchronize` at branch server, output should contain `POS_Image_Graphical7-7.0.0` or similar name
 1. If default image is not set to JeOS7, do it in branch server profile at `Image Synchronization` formula. Then apply highstate
 1. Prepare usb stick by executing `salt-call image_sync_usb.create /dev/sdX` at branch server assuming `/dev/sdX` points to the USB stisk you created in step 3
 1. When this is successfully completed, please remove this storage from branch server's VM and add it to the VM for retail terminal
@@ -419,17 +401,17 @@ WIRELESS_WPA_PSK=<wireless network password>
 * Priority: high
 * Could be automated: to be confirmed
 1. Set up SUMA for Retail
-1. Register terminal using the image for older version of SLE 12 (like SLE 12 SP3)
+1. Register terminal using the image for older version of SLE 15 (like SLE 15 SP6)
 1. Apply highstate on build host to clear kiwi created cache. (If not, older cached packages may be used when kiwi image is build.)
-1. Build a new image for deployment, using newer version of SLE 12 SP4
-1. Assign the new image to the terminal by changing field `OS Image to Deploy` to the name of SLE 12 SP4 image at saltboot formula page on HWTYPE system group of this terminal
+1. Build a new image for deployment, using newer version of SLE 15 SP7
+1. Assign the new image to the terminal by changing field `OS Image to Deploy` to the name of SLE 15 SP7 image at saltboot formula page on HWTYPE system group of this terminal
 1. Restart the terminal
 1. Confrm that the new SLE is running on the terminal
 
 ### 4.3 SUMA for Retail - Migration from SLEPOS
 * Priority: high
 * Could be automated: yes (all steps already done excepted the first 2 ones)
-1. Get an existing XML files from Retail team. Those are currently [provided](https://gitlab.suse.de/SLEPOS/SUMA_Retail/tree/master/doc/migration/test_data). (Prepare two SLE15SP1 based VMs as a branch servers to be used for import.)
+1. Get an existing XML files from Retail team. Those are currently [provided](https://gitlab.suse.de/SLEPOS/SUMA_Retail/tree/master/doc/migration/test_data). (Prepare two SLE15SP6 based VMs as a branch servers to be used for import.)
 1. Check for duplicates in source XML file and also check for too long names (longer than 56 characters) of HWTYPE groups and correct if necessary. (Both is documented in official docs.)
 1. Convert XML to yaml file with ``retail_migration`` command
 1. Edit yaml file to match kiwi images to be used if it is not possible to use the exported ones
@@ -580,14 +562,14 @@ Note: in automation, we already test some parts of this page, but not all
 * Priority: medium
 * Could be automated: yes (a check of the menus already exists: trad_sp_migration.feature)
 1. Make sure all products and channels are fully synchronized
-1. Bootstrap a SLE 12 SP1 traditional client
+1. Bootstrap a SLE 15 SP6 traditional client
 1. In the system overview page, go to Software => SP Migration
 1. Press "Select Channels" button
 1. On next page, if no warning about missing channels, press "Schedule Migration"
 1. First try a dry run
 1. Check that the dry run completes
 1. Redo for real
-1. Check in the system details that the migrated system is now SLE 12 SP3
+1. Check in the system details that the migrated system is now SLE 15 SP7
 1. Check on the system itself the repositories with ``zypper lr``
 
 ### 6.7 Package and System Locking (salt minions)
