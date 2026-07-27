@@ -5,8 +5,9 @@ type CurrentSingleCoCoSettingsResponse = {
   settings: Settings;
 };
 
-type LegacySingleCoCoSettingsResponse = Settings & {
+type LegacySingleCoCoSettingsResponse = Omit<Settings, "attestOnSchedule"> & {
   supported: boolean;
+  attestOnSchedule?: Settings["attestOnSchedule"];
 };
 
 export type SingleCoCoSettingsResponse = CurrentSingleCoCoSettingsResponse | LegacySingleCoCoSettingsResponse;
@@ -18,6 +19,6 @@ export function normalizeSingleCoCoSettingsResponse(
     return response;
   }
 
-  const { supported, ...settings } = response;
-  return { supported, settings };
+  const { supported, attestOnSchedule = false, ...settings } = response;
+  return { supported, settings: { ...settings, attestOnSchedule } };
 }
