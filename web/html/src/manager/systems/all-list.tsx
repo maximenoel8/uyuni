@@ -33,6 +33,7 @@ const DownloadCSVButton = ({ search }) => {
     <LinkButton
       text={t("Download CSV")}
       href={url}
+      download="systems.csv"
       className="btn btn-default"
       icon="spacewalk-icon-download-csv"
       data-senna-off="true"
@@ -70,7 +71,6 @@ export function AllSystems(props: Props) {
             id="addsystem"
             icon="fa-plus"
             className="btn btn-primary"
-            title={t("Add a system")}
             text={t("Add system")}
             href="/rhn/manager/systems/bootstrap"
           />
