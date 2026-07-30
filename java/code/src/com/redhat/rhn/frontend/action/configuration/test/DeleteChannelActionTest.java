@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 public class DeleteChannelActionTest extends RhnMockStrutsTestCase {
     @Test
     public void testExecuteNoFiles() {
-        UserTestUtils.addAccessGroup(user, AccessGroupFactory.CONFIG_ADMIN);
+        UserTestUtils.addAccessGroup(user, AccessGroupFactory.getConfigAdmin());
 
         ConfigChannel cc = ConfigTestUtils.createConfigChannel(user.getOrg());
         ConfigFile cf = ConfigTestUtils.createConfigFile(cc);
