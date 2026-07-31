@@ -328,8 +328,8 @@ When(/^I create an activation key including custom channels for "([^"]*)" via AP
 
   $stdout.puts "Activation key #{key} created" unless key.nil?
 
-  is_ssh_minion = client.include? 'ssh_minion'
-  $api_test.activationkey.details_set?(key, description, base_channel_label, 100, is_ssh_minion ? 'ssh-push' : 'default')
+  is_sshminion = client.include? 'sshminion'
+  $api_test.activationkey.details_set?(key, description, base_channel_label, 100, is_sshminion ? 'ssh-push' : 'default')
   entitlements = client.include?('buildhost') ? ['osimage_build_host'] : ''
   $api_test.activationkey.set_entitlement(key, entitlements) unless entitlements.empty?
 
@@ -345,7 +345,7 @@ When(/^I create an activation key including custom channels for "([^"]*)" via AP
   end
 
   # filter out wrong child channels for SLES15sp6 as normal Minion
-  if client.include? 'sle15sp6'
+  if client.include? 'sles15sp6'
     child_channels.reject! { |channel| channel.include? 'suse-manager-proxy-5.0-pool-x86_64-sp6' }
     child_channels.reject! { |channel| channel.include? 'suse-manager-proxy-5.0-updates-x86_64-sp6' }
     child_channels.reject! { |channel| channel.include? 'suse-manager-retail-branch-server-5.0-pool-x86_64-sp6' }
@@ -360,7 +360,7 @@ When(/^I create an activation key including custom channels for "([^"]*)" via AP
   end
 
   # filter out wrong child channels for SLES15SP7 as normal Minion
-  if client.include? 'sle15sp7'
+  if client.include? 'sles15sp7'
     child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-proxy-sle-5.1-pool-x86_64-sp7' }
     child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-proxy-sle-5.1-updates-x86_64-sp7' }
     child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-retail-branch-server-sle-5.1-pool-x86_64-sp7' }

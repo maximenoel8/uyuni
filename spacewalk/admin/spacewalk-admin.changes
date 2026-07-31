@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 13 14:55:29 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.9-0
+  * Use db_ssl_enabled value consistently
+
+-------------------------------------------------------------------
 Mon Mar 23 08:46:08 CET 2026 - marina.latini@suse.com
 
 - version 5.1.8-0

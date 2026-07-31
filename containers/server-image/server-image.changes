@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jul 13 14:53:01 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.16
+  * Configure Java strong SecureRandom to use the NSS FIPS
+    provider on FIPS-enabled hosts so DB connections (SCRAM-SHA-256)
+    work under FIPS (bsc#1270035)
+
+-------------------------------------------------------------------
 Wed May 27 12:35:59 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.15

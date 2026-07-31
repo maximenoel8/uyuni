@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue Jul 14 09:49:11 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.11-0
+  * Add Ubuntu 26.04 LTS
+
+-------------------------------------------------------------------
+Mon Jul 13 14:59:17 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.10-0
+  * Taskotop now handles timezone (bsc#1267871)
+
+-------------------------------------------------------------------
 Mon Mar 23 08:33:23 CET 2026 - marina.latini@suse.com
 
 - version 5.1.9-0

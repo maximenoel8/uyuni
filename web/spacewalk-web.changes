@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jul 13 17:31:38 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.22-0
+  * Improve product selection checkboxes in the setup UI
+  * Show partial selection state for product trees more accurately
+  * Use db_ssl_enabled value consistently
+
+-------------------------------------------------------------------
 Wed May 27 11:54:17 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.21-0

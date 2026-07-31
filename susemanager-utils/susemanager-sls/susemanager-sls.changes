@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Mon Jul 13 17:32:49 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.26-0
+  * Install ansible and ansible-core depending on their availability
+  * Handle release package for SLE16 correctly depending on the
+    transactional flag
+  * Fix cleanup timeout when deleting minions (bsc#1258567)
+  * Use primary FQDN to contact Build Host (bsc#1247004)
+  * Use db_ssl_enabled value consistently
+  * Prevent inventory refresh before ansible package
+    is installed (bsc#1244141)
+
+-------------------------------------------------------------------
 Tue May 26 15:24:05 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.25-0

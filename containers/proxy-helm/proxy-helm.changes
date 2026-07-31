@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 13 14:16:56 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.15
+  * Chart rebuilt to the newest version with updated dependencies
+    for SUSE Multi-Linux Manager 5.1.5
+
+-------------------------------------------------------------------
 Tue May 26 15:46:29 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.14

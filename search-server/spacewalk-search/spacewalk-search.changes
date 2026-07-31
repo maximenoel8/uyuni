@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 13 14:58:01 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.8-0
+  * Use db_ssl_enabled value consistently
+  * Fix Fine Grained search for hyphenated hostnames (bsc#1257102)
+
+-------------------------------------------------------------------
 Sat Jan 17 01:24:37 CET 2026 - marina.latini@suse.com
 
 - version 5.1.7-0
