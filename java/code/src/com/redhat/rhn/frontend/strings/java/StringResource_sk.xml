@@ -12118,13 +12118,13 @@ Ak chcete túto situáciu napraviť, pridajte prihlasovacie údaje SCC &lt;a hre
         <source>Processing of a PXE event failed</source>
         <target state="translated">Spracovanie udalosti PXE zlyhalo</target>
       </trans-unit>
-    <trans-unit id="user.admin.access" xml:space="preserve">
+      <trans-unit id="user.admin.access" xml:space="preserve">
         <source>Admin Access</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      </body>
+        <target state="translated">Prístup administrátora</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
