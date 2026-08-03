@@ -230,8 +230,9 @@ export class LinkButton extends _ButtonBase<LinkProps> {
         }
       : {};
 
+    const isDownloadTargetBlank = this.props.download && !this.props.target;
     const targetProps: Partial<React.HTMLProps<HTMLAnchorElement>> =
-      this.props.target === "_blank"
+      this.props.target === "_blank" || isDownloadTargetBlank
         ? {
             target: "_blank",
             rel: "noopener noreferrer",
