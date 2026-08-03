@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import com.redhat.rhn.common.hibernate.HibernateFactory;
 import com.redhat.rhn.domain.action.Action;
 import com.redhat.rhn.domain.action.ActionFactory;
 import com.redhat.rhn.domain.action.dup.DistUpgradeAction;
@@ -51,6 +52,7 @@ import com.redhat.rhn.domain.server.InstalledProduct;
 import com.redhat.rhn.domain.server.MinionServer;
 import com.redhat.rhn.domain.server.Server;
 import com.redhat.rhn.domain.server.ServerConstants;
+import com.redhat.rhn.domain.server.ServerFactory;
 import com.redhat.rhn.domain.server.test.MinionServerFactoryTest;
 import com.redhat.rhn.domain.server.test.ServerFactoryTest;
 import com.redhat.rhn.frontend.dto.EssentialChannelDto;
@@ -1168,6 +1170,61 @@ public class DistUpgradeManagerTest extends BaseTestCaseWithUser {
 
         assertTrue(sa.isStatusPickedUp(),
                 "Action must be reset to In Progress while minion is offline after migration start");
+    }
+
+    @Test
+    public void testDryrunRestoreChannels() throws Exception {
+        MinionServer minion = MinionServerFactoryTest.createTestMinionServer(user);
+
+        Channel sles156Channel = ChannelFactoryTest.createTestChannel(user);
+        sles156Channel.setLabel("sles-15.6-channel");
+        Channel sles157Channel = ChannelFactoryTest.createTestChannel(user);
+        sles157Channel.setLabel("sles-15.7-channel");
+        minion.addChannel(sles157Channel);
+        ServerFactory.save(minion);
+        HibernateFactory.getSession().flush();
+
+        DistUpgradeActionDetails det = new DistUpgradeActionDetails();
+
+        DistUpgradeChannelTask subscribeTask = new DistUpgradeChannelTask();
+        subscribeTask.setChannel(sles157Channel);
+        subscribeTask.setTask(DistUpgradeChannelTask.SUBSCRIBE);
+        det.addChannelTask(subscribeTask);
+
+        DistUpgradeChannelTask unsubscribeTask = new DistUpgradeChannelTask();
+        unsubscribeTask.setChannel(sles156Channel);
+        unsubscribeTask.setTask(DistUpgradeChannelTask.UNSUBSCRIBE);
+        det.addChannelTask(unsubscribeTask);
+
+        det.setServer(minion);
+        det.setDryRun(true);
+
+        Map<Long, DistUpgradeActionDetails> detailsMap = new HashMap<>();
+        detailsMap.put(det.getServer().getId(), det);
+
+        var action = (DistUpgradeAction) ActionFactoryTest.createAction(user, ActionFactory.TYPE_DIST_UPGRADE);
+        HibernateFactory.getSession().flush();
+
+        detailsMap.values().stream()
+                .map(DistUpgradeActionDetails::getServer)
+                .forEach(server -> ActionFactory.createAddServerAction(server, action));
+
+        HibernateFactory.getSession().flush();
+        // Add the details and save
+        action.setDetailsMap(detailsMap);
+        ActionFactory.save(action);
+
+        // Simulate SaltUtils prematurely marking the action complete
+        ServerAction sa = action.getServerActions().stream().findFirst().orElseThrow();
+        sa.setStatusCompleted();
+        ActionFactory.save(sa);
+
+        assertEquals(sles157Channel, minion.getBaseChannel());
+
+        // A non-verify result (e.g. the initial sles16.sls state completing)
+        action.handleUpdateServerAction(sa, buildUnrelatedStateResult(), null);
+
+        assertEquals(sles156Channel, minion.getBaseChannel());
     }
 
     /**
