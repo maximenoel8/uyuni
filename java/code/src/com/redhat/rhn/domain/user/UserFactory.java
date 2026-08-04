@@ -111,10 +111,7 @@ public  class UserFactory extends HibernateFactory {
         if (itr.hasNext()) {
             // only care about the first one
             Object[] row = itr.next();
-            User u = createUser();
-            u.setId((Long) row[0]);
-            u.setLogin((String)row[1]);
-            return u;
+            return UserFactory.lookupById((Long) row[0]);
         }
         return null;
     }
