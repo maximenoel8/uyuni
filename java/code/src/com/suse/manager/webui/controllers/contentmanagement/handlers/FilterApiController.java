@@ -51,9 +51,6 @@ import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -226,12 +223,6 @@ public class FilterApiController {
         }
 
         String createCriteriaValue = StringUtils.trimToNull(createFilterRequest.getCriteriaValue());
-        if (!validateCriteriaValue(createFilterRequest.getCriteriaKey(), createCriteriaValue)) {
-            return json(GSON, res, HttpStatus.SC_BAD_REQUEST, ResultJson.error(Collections.emptyList(),
-                    Collections.singletonMap("criteriaValue",
-                            Collections.singletonList("Invalid issue_date format."))),
-                    new TypeToken<>() { });
-        }
 
         FilterCriteria filterCriteria = new FilterCriteria(
                 FilterCriteria.Matcher.lookupByLabel(createFilterRequest.getMatcher()),
@@ -285,12 +276,6 @@ public class FilterApiController {
         FilterRequest updateFilterRequest = FilterHandler.getFilterRequest(req);
 
         String updateCriteriaValue = StringUtils.trimToNull(updateFilterRequest.getCriteriaValue());
-        if (!validateCriteriaValue(updateFilterRequest.getCriteriaKey(), updateCriteriaValue)) {
-            return json(GSON, res, HttpStatus.SC_BAD_REQUEST, ResultJson.error(Collections.emptyList(),
-                    Collections.singletonMap("criteriaValue",
-                            Collections.singletonList("Invalid issue_date format."))),
-                    new TypeToken<>() { });
-        }
 
         FilterCriteria filterCriteria = new FilterCriteria(
                 FilterCriteria.Matcher.lookupByLabel(updateFilterRequest.getMatcher()),
@@ -318,20 +303,6 @@ public class FilterApiController {
         }
 
         return ControllerApiUtils.listFiltersJsonResponse(res, user);
-    }
-
-    private static boolean validateCriteriaValue(String criteriaKey, String criteriaValue) {
-        if (!"issue_date".equals(criteriaKey) || criteriaValue == null || criteriaValue.isEmpty()) {
-            return true;
-        }
-
-        try {
-            OffsetDateTime.parse(criteriaValue, DateTimeFormatter.ISO_DATE_TIME);
-            return true;
-        }
-        catch (DateTimeParseException e) {
-            return false;
-        }
     }
 
     /**
