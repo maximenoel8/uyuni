@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 SUSE LLC
+ * Copyright (c) 2015--2026 SUSE LLC
  *
  * This software is licensed to you under the GNU General Public License,
  * version 2 (GPLv2). There is NO WARRANTY for this software, express or
@@ -7,10 +7,6 @@
  * FOR A PARTICULAR PURPOSE. You should have received a copy of GPLv2
  * along with this software; if not, see
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
- *
- * Red Hat trademarks are not licensed under GPLv2. No permission is
- * granted to use or replicate Red Hat trademarks that are incorporated
- * in this software or its documentation.
  */
 
 package com.redhat.rhn.testing;
@@ -79,6 +75,8 @@ public class SparkTestUtils {
         mockRequest.setSession(new RhnMockHttpSession());
         mockRequest.setRequestURL(requestUrl);
         mockRequest.setupGetMethod("GET");
+        mockRequest.setupScheme("https");
+        mockRequest.setupServerName("locahost");
         mockRequest.setupGetInputStream(new MockServletInputStream());
         setQueryParams(mockRequest, queryParams);
         mockRequest.setupPathInfo(URI.create(requestUrl).getPath());
@@ -281,8 +279,14 @@ public class SparkTestUtils {
         // backing objects
         queryParams.forEach((name, val) -> request.setupAddParameter(name, new String[]{val}));
         // we must convert to a "multi-value map"
-        request.setupGetParameterMap(queryParams.entrySet().stream().collect(
-                Collectors.toMap(v -> v.getKey(), v -> new String[]{v.getValue()})));
+        Map<String, String[]> multiMap = queryParams.entrySet().stream()
+                .collect(Collectors.toMap(v -> v.getKey(), v -> new String[] { v.getValue() }));
+        request.setupGetParameterMap(multiMap);
+
+        String queryString = queryParams.entrySet().stream()
+                .map(entry -> String.format("%s=%s", entry.getKey(), entry.getValue()))
+                .collect(Collectors.joining("&"));
+        request.setupQueryString(queryString);
     }
 
     private static void setMultiValueQueryParams(RhnMockHttpServletRequest request,
