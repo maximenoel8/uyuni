@@ -10,7 +10,9 @@ import { useExpanded } from "./useExpanded";
 
 type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
 function hasChildRows(item: any): item is { children: any[] } {
-  return "children" in item && Array.isArray(item.children) && item.children.length > 0;
+  return (
+    item && typeof item === "object" && "children" in item && Array.isArray(item.children) && item.children.length > 0
+  );
 }
 
 export type TableLoadInfo = {
@@ -212,7 +214,8 @@ export const Table = forwardRef<TableRef, TableProps>((props, ref) => {
                 columnKey="expandable"
                 onClick={() => expanded.toggle(props.identifier(item))}
                 cell={() => {
-                  const hasChildren = "children" in item && item.children.length > 0;
+                  const hasChildren =
+                    !!item && typeof item === "object" && "children" in item && item.children.length > 0;
                   const isExpanded = expanded.has(props.identifier(item));
                   return (
                     <i
