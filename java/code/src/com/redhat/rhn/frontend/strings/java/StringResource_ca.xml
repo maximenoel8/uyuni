@@ -12123,7 +12123,7 @@ Per a esmenar aquesta situació, afegiu credencials SCC lt;a href""/rhn/admin/se
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
-        <target state="translated">Accés d'administrador</target>
+        <target state="translated">Accés d'administració</target>
       </trans-unit>
     </body>
   </file>
