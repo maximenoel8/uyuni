@@ -91,12 +91,12 @@
         <dependency org="manager-51" name="spark-template-jade" rev="2.7.1" />
         <dependency org="manager-51" name="spy" rev="0.8.7" />
         <dependency org="manager-51" name="statistics" rev="1.0.2" />
-        <dependency org="manager-51" name="stax2-api" rev="3.1.4" />
+        <dependency org="manager-51" name="stax2-api" rev="4.3.0" />
         <dependency org="manager-51" name="struts" rev="1.2.9" />
         <dependency org="manager-51" name="taglibs-standard-impl" rev="1.2.5" />
         <dependency org="manager-51" name="taglibs-standard-jstlel" rev="1.2.5" />
         <dependency org="manager-51" name="taglibs-standard-spec" rev="1.2.5" />
-        <dependency org="manager-51" name="woodstox-core-asl" rev="4.4.2" />
+        <dependency org="manager-51" name="woodstox-core" rev="7.2.1" />
         <dependency org="manager-51" name="xalan-j2" rev="2.7.3" />
         <dependency org="manager-51" name="xalan-j2-serializer" rev="2.7.3" />
         <dependency org="manager-51" name="xerces-j2" rev="2.12.2" />

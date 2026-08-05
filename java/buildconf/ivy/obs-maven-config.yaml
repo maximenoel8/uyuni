@@ -280,8 +280,7 @@ artifacts:
   - artifact: statistics
     repository: 51_GA
   - artifact: stax2-api
-    package: woodstox
-    repository: 51_GA
+    repository: 15_SP2_Update
   - artifact: struts
     repository: 51_GA
   - artifact: taglibs-standard-impl
@@ -293,9 +292,8 @@ artifacts:
   - artifact: taglibs-standard-spec
     package: tomcat-taglibs-standard-1_2_5
     repository: 51_GA
-  - artifact: woodstox-core-asl
-    package: woodstox
-    repository: 51_GA
+  - artifact: woodstox-core
+    repository: 15_SP2_Update
   - artifact: xalan-j2
     jar: xalan-j2.jar
     repository: 15_SP2_Update
