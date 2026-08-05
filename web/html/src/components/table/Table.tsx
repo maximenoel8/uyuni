@@ -219,8 +219,9 @@ export const Table = forwardRef<TableRef, TableProps>((props, ref) => {
                   const isExpanded = expanded.has(props.identifier(item));
                   return (
                     <i
-                      className={`expand-icon fa ${isExpanded ? "fa-chevron-down" : "fa-chevron-right"} ${hasChildren ? "visible" : "invisible"
-                        }`}
+                      className={`expand-icon fa ${isExpanded ? "fa-chevron-down" : "fa-chevron-right"} ${
+                        hasChildren ? "visible" : "invisible"
+                      }`}
                     />
                   );
                 }}
