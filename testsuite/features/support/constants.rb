@@ -1534,7 +1534,6 @@ TIMEOUT_BY_CHANNEL_NAME = {
   'opensuse_leap15_6-aarch64-updates' => 60,
   'opensuse-leap-15.6-pool-aarch64' => 4500,
   'opensuse-leap-15.6-updates-aarch64' => 60,
-  'opensuse-leap-16.0-aarch64' => 4500,
   'opensuse_leap15_6-uyuni-client-devel-aarch64' => 120,
   'opensuse_leap15_6-uyuni-client-devel-x86_64' => 120,
   'opensuse_leap15_6-uyuni-client-x86_64' => 120,
