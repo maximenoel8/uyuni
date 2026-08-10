@@ -451,13 +451,23 @@ public class HardwareMapper {
         return sysvalues;
     }
 
-    protected String computeOsStringForS390Arch(Map<String, String> sysvalues) {
-        String osString = sysvalues.entrySet().stream()
+    protected String getOsStringForS390Arch(Map<String, String> sysvalues) {
+        return sysvalues.entrySet().stream()
                 .filter(e -> e.getKey().toLowerCase().contains("control program"))
                 .map(Map.Entry::getValue)
                 .findFirst().orElse("z/VM");
+    }
+
+    protected String computeOsStringForS390Arch(Map<String, String> sysvalues) {
+        String osString = getOsStringForS390Arch(sysvalues);
         int index = osString.indexOf(" ");
         return index > 0 ? osString.substring(0, index) : osString;
+    }
+
+    protected String computeOsVersionStringForS390Arch(Map<String, String> sysvalues) {
+        String osString = getOsStringForS390Arch(sysvalues);
+        int index = osString.indexOf(" ");
+        return index > 0 ? osString.substring(index).replace(" ", "") : "N/A";
     }
 
     protected String getS390ServerFamily(String type) {
