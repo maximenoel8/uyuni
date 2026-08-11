@@ -72,6 +72,7 @@ import com.redhat.rhn.domain.server.Note;
 import com.redhat.rhn.domain.server.ProxyInfo;
 import com.redhat.rhn.domain.server.Server;
 import com.redhat.rhn.domain.server.ServerConstants;
+import com.redhat.rhn.domain.server.ServerFQDN;
 import com.redhat.rhn.domain.server.ServerFactory;
 import com.redhat.rhn.domain.server.ServerGroup;
 import com.redhat.rhn.domain.server.ServerGroupFactory;
@@ -1523,6 +1524,48 @@ public class ServerFactoryTest extends BaseTestCaseWithUser {
         assertEquals(1, servers.size());
         assertEquals(srv.getId(), servers.stream().findFirst().get());
 
+    }
+
+    @Test
+    public void testFindByFqdnConflictWithPrimary() {
+        // Create server 1 (non-primary)
+        Server s1 = createTestServer(user);
+        s1.addFqdn("duplicate.fqdn.com");
+
+        // Create server 2 (primary)
+        Server s2 = createTestServer(user);
+        ServerFQDN s2Primary = new ServerFQDN(s2, "duplicate.fqdn.com");
+        s2Primary.setPrimary(true);
+        s2.getFqdns().add(s2Primary);
+
+        HibernateFactory.getSession().flush();
+        HibernateFactory.getSession().clear();
+
+        // Looking up by FQDN should return the preferred (primary) server
+        Optional<Server> found = ServerFactory.findByFqdn("duplicate.fqdn.com");
+        assertTrue(found.isPresent());
+        assertEquals(s2.getId(), found.get().getId());
+    }
+
+    @Test
+    public void testFindByAnyFqdnConflictWithPrimary() {
+        // Create server 1 (non-primary)
+        Server s1 = createTestServer(user);
+        s1.addFqdn("duplicate.fqdn.com");
+
+        // Create server 2 (primary)
+        Server s2 = createTestServer(user);
+        ServerFQDN s2Primary = new ServerFQDN(s2, "duplicate.fqdn.com");
+        s2Primary.setPrimary(true);
+        s2.getFqdns().add(s2Primary);
+
+        HibernateFactory.getSession().flush();
+        HibernateFactory.getSession().clear();
+
+        // Looking up by Any FQDN should return the preferred (primary) server
+        Optional<Server> found = ServerFactory.findByAnyFqdn(Set.of("duplicate.fqdn.com", "other.fqdn.com"));
+        assertTrue(found.isPresent());
+        assertEquals(s2.getId(), found.get().getId());
     }
 
     @Test

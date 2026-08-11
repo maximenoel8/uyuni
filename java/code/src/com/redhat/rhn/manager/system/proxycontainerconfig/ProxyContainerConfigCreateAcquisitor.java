@@ -89,23 +89,6 @@ public class ProxyContainerConfigCreateAcquisitor implements ProxyContainerConfi
         Set<String> fqdns = new HashSet<>();
         fqdns.add(context.getProxyFqdn());
 
-        Set<String> certNames;
-        SSLCertPair proxyCertKey = context.getProxyCertKey();
-        if (proxyCertKey != null && proxyCertKey.getCertificate() != null) {
-            // Get the cnames from the certificate using openssl
-            certNames = context.getCertManager().getNamesFromSslCert(proxyCertKey.getCertificate());
-        }
-        else if (context.getCertData() != null) {
-            certNames = context.getCertData().getAllCnames();
-        }
-        else {
-            certNames = Set.of();
-        }
-        // Filter out SANs which are definitely not FQDN - without any .
-        fqdns.addAll(certNames.stream()
-                .filter(name -> name != null && name.contains("."))
-                .collect(Collectors.toSet()));
-
         Server proxySystem = getOrCreateProxySystem(
                 context.getSystemEntitlementManager(),
                 context.getUser(), context.getProxyFqdn(), fqdns, context.getProxyPort(),
