@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 SUSE LLC
  * Copyright (c) 2009--2014 Red Hat, Inc.
  *
  * This software is licensed to you under the GNU General Public License,
@@ -27,25 +28,22 @@ import com.redhat.rhn.testing.RhnMockHttpSession;
 import com.redhat.rhn.testing.UserTestUtils;
 
 import com.suse.manager.webui.controllers.login.LoginController;
+import com.suse.manager.webui.services.OidcAuthHandler;
 import com.suse.manager.webui.utils.LoginHelper;
 
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.Optional;
 
 import spark.ModelAndView;
 import spark.RequestResponseFactory;
 import spark.Response;
 import spark.routematch.RouteMatch;
 
-/**
- * RequestContextTest
- */
 public class RequestContextTest extends MockObjectTestCase {
 
-    /**
-     */
     @Test
     public final void testGetLoggedInUser() {
         Config.get().setBoolean(ConfigDefaults.SINGLE_SIGN_ON_ENABLED, "false");
@@ -64,76 +62,64 @@ public class RequestContextTest extends MockObjectTestCase {
 
         Response response = RequestResponseFactory.create(new RhnMockHttpServletResponse());
         // logging in
+        LoginController loginController = new LoginController(new OidcAuthHandler(), Optional.empty());
         LoginHelper.successfulLogin(mockRequest, response.raw(), UserTestUtils.findNewUser("testUser", "testOrg" +
                 this.getClass().getSimpleName()));
-        ModelAndView result = LoginController.loginView(RequestResponseFactory.create(match, mockRequest), response);
+        ModelAndView result = loginController.loginView(RequestResponseFactory.create(match, mockRequest), response);
+        @SuppressWarnings("unchecked")
         HashMap<String, String> model = (HashMap<String, String>) result.getModel();
         assertNotNull(session.getAttribute("webUserID"));
-        assertEquals(model.get("url_bounce"), "/rhn/users/UserDetails.do?uid=1");
+        assertEquals("/rhn/users/UserDetails.do?uid=1", model.get("url_bounce"));
         RequestContext requestContext = new RequestContext(RequestResponseFactory.create(match, mockRequest).raw());
         assertNotNull(requestContext.getCurrentUser());
     }
 
-    /**
-     * Tests the pagination: First.
-    */
-    /*public void testProcessPaginationFirst() {
-        MockHttpServletRequest request =
-            new MockHttpServletRequest();
-        request.setupAddParameter("First", "1");
+    @Test
+    public void testProcessPaginationFirst() {
+        RhnMockHttpServletRequest request = new RhnMockHttpServletRequest();
+        request.setupAddParameter("First Page", "not null");
         request.setupAddParameter("first_lower", "1");
         RequestContext requestContext = new RequestContext(request);
         String rc = requestContext.processPagination();
         assertEquals("1", rc);
-    }*/
+    }
 
-    /**
-     * Tests the pagination: Prev.
-     */
-    /*public void testProcessPaginationPrev() {
-        MockHttpServletRequest request =
-            new MockHttpServletRequest();
-        request.setupAddParameter("First", (String) null);
-        request.setupAddParameter("Prev", "1");
+    @Test
+    public void testProcessPaginationPrev() {
+        RhnMockHttpServletRequest request = new RhnMockHttpServletRequest();
+        request.setupAddParameter("First Page", (String) null);
+        request.setupAddParameter("Previous Page", "1");
         request.setupAddParameter("prev_lower", "10");
         RequestContext requestContext = new RequestContext(request);
         String rc = requestContext.processPagination();
         assertEquals("10", rc);
-    }*/
+    }
 
-    /**
-     * Tests the pagination: Last.
-     */
-    /*public void testProcessPaginationLast() {
-        MockHttpServletRequest request =
-            new MockHttpServletRequest();
-        request.setupAddParameter("First", (String)null);
-        request.setupAddParameter("Prev", (String)null);
-        request.setupAddParameter("Next", (String)null);
-        request.setupAddParameter("Last", "1");
+    @Test
+    public void testProcessPaginationLast() {
+        RhnMockHttpServletRequest request = new RhnMockHttpServletRequest();
+        request.setupAddParameter("First Page", (String) null);
+        request.setupAddParameter("Previous Page", (String) null);
+        request.setupAddParameter("Next Page", (String) null);
+        request.setupAddParameter("Last Page", "1");
         request.setupAddParameter("last_lower", "30");
         RequestContext requestContext = new RequestContext(request);
         String rc = requestContext.processPagination();
         assertEquals("30", rc);
-    }*/
+    }
 
-    /**
-     * Tests the pagination: Next.
-     */
-    /*public void testProcessPaginationNext() {
-        MockHttpServletRequest request =
-            new MockHttpServletRequest();
-        request.setupAddParameter("First", (String)null);
-        request.setupAddParameter("Prev", (String)null);
-        request.setupAddParameter("Next", "1");
+    @Test
+    public void testProcessPaginationNext() {
+        RhnMockHttpServletRequest request = new RhnMockHttpServletRequest();
+        request.setupAddParameter("First Page", (String)null);
+        request.setupAddParameter("Prev Page", (String)null);
+        request.setupAddParameter("Next Page", "1");
         request.setupAddParameter("next_lower", "20");
         RequestContext requestContext = new RequestContext(request);
         String rc = requestContext.processPagination();
         assertEquals("20", rc);
-    }*/
+    }
 
-    /**
-     */
     @Test
     public void testbuildPageLink() {
         RhnMockHttpServletRequest request = new RhnMockHttpServletRequest();
@@ -152,5 +138,4 @@ public class RequestContextTest extends MockObjectTestCase {
         assertEquals("http://localhost/rhn/somePage.do?" +
                 "barparam=beer&otherparam=foo&someparam=zzzzz", url);
     }
-
 }
