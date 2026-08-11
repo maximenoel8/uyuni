@@ -11986,7 +11986,7 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
       </trans-unit>
       <trans-unit approved="yes" id="event.proxymigrationfailedparsing" xml:space="preserve">
         <source>Unable to parse uploaded data. See log file for details</source>
-        <target state="final">无法解析上载的数据。请查看日志文件了解详细信息。</target>
+        <target state="final">无法解析上载的数据。请查看日志文件了解详细信息</target>
       </trans-unit>
       <trans-unit approved="yes" id="event.proxymigrationcreated" xml:space="preserve">
         <source>Proxy migration: new configuration created</source>
@@ -12118,13 +12118,13 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         <source>Processing of a PXE event failed</source>
         <target state="final">PXE 事件处理失败</target>
       </trans-unit>
-    <trans-unit id="user.admin.access" xml:space="preserve">
+      <trans-unit id="user.admin.access" xml:space="preserve">
         <source>Admin Access</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      </body>
+        <target state="new"/>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
