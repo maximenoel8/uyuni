@@ -1748,3 +1748,11 @@ EMPTY_CHANNELS = %w[
   managertools-sle15-updates-x86_64-sp4
   managertools-beta-sle15-updates-x86_64-sp4
 ].freeze
+
+# Containers started by the health check tool, as named in its config.toml
+HEALTH_CHECK_CONTAINERS = %w[
+  health_check_loki
+  health_check_promtail
+  health_check_supportconfig_exporter
+  health-check-grafana
+].freeze
