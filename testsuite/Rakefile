@@ -83,6 +83,7 @@ namespace :cucumber do
     # This block executes when the task runs and uses the exact same `html_results` path.
     # This file is used to expose the cucumber html report in Jenkins
     Rake::Task[task_name].enhance do
+      sh "echo '#{html_results}' > #{path_export_file}", verbose: false
       if File.exist?(html_results)
         html_content = File.read(html_results)
         sort_call = 'i.sort(((e,t)=>(e.uri||"").localeCompare(t.uri||"")))'
@@ -93,8 +94,6 @@ namespace :cucumber do
           raise "Could not find sort patch target in #{html_results} — report ordering will be broken. Update sort_call if the formatter was upgraded."
         end
       end
-
-      sh "echo '#{html_results}' > #{path_export_file}", verbose: false
       raise cucumber_error if cucumber_error
     end
   end
