@@ -135,4 +135,4 @@ LABEL org.opensuse.reference="${REFERENCE_PREFIX}/server:${PRODUCT_VERSION}.%REL
 LABEL org.uyuni.version="${PRODUCT_VERSION}"
 
 CMD ["/usr/lib/systemd/systemd"]
-HEALTHCHECK --interval=10s --start-period=180s --timeout=120s --retries=1 CMD ["/usr/bin/healthcheck.sh"]
+HEALTHCHECK --interval=10s --start-period=600s --timeout=120s --retries=1 CMD ["/usr/bin/healthcheck.sh"]
