@@ -238,7 +238,7 @@ end
 
 When(/^I query latest Salt changes on "(.*?)"$/) do |host|
   node = get_target(host)
-  salt = use_salt_bundle ? 'venv-salt-minion' : 'salt'
+  salt = $use_salt_bundle ? 'venv-salt-minion' : 'salt'
   if host == 'server'
     salt = 'salt'
   end
@@ -252,12 +252,12 @@ end
 When(/^I query latest Salt changes on Debian-like system "(.*?)"$/) do |host|
   node = get_target(host)
   salt =
-    if use_salt_bundle
+    if $use_salt_bundle
       'venv-salt-minion'
     else
       'salt'
     end
-  changelog_file = use_salt_bundle ? 'changelog.gz' : 'changelog.Debian.gz'
+  changelog_file = $use_salt_bundle ? 'changelog.gz' : 'changelog.Debian.gz'
   result, _return_code = node.run("zcat /usr/share/doc/#{salt}/#{changelog_file}")
   result.split("\n")[0, 15].each do |line|
     line.force_encoding('UTF-8')
@@ -1406,7 +1406,7 @@ end
 
 When(/^I apply "([^"]*)" local salt state on "([^"]*)"$/) do |state, host|
   node = get_target(host)
-  salt_call = use_salt_bundle ? 'venv-salt-call' : 'salt-call'
+  salt_call = $use_salt_bundle ? 'venv-salt-call' : 'salt-call'
   if host == 'server'
     salt_call = 'salt-call'
   end

@@ -828,12 +828,12 @@ end
 
 # do some tests only if we are using salt bundle
 Before('@salt_bundle') do
-  skip_this_scenario unless use_salt_bundle
+  skip_this_scenario unless $use_salt_bundle
 end
 
 # do some tests only if we are using salt bundle
 Before('@skip_if_salt_bundle') do
-  skip_this_scenario if use_salt_bundle
+  skip_this_scenario if $use_salt_bundle
 end
 
 # do test only if HTTP proxy for Uyuni is defined
