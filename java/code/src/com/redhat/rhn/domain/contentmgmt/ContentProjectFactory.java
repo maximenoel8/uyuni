@@ -553,7 +553,7 @@ public class ContentProjectFactory extends HibernateFactory {
         Stream<Channel> clones = HibernateFactory.getSession()
                 .createQuery("SELECT tgt.channel FROM SoftwareEnvironmentTarget tgt " +
                         "WHERE tgt.contentEnvironment.contentProject = :project " +
-                        "AND tgt.channel.original = :channel")
+                        "AND tgt.channel.original = :channel", Channel.class)
                 .setParameter("project", project)
                 .setParameter("channel", channel)
                 .stream();
@@ -683,7 +683,7 @@ public class ContentProjectFactory extends HibernateFactory {
         return HibernateFactory.getSession()
                 .createQuery("SELECT cp FROM ContentProject cp " +
                         "WHERE cp.id IN (SELECT cpf.project.id FROM ContentProjectFilter cpf " +
-                        "WHERE cpf.filter.id = :fid)")
+                        "WHERE cpf.filter.id = :fid)", ContentProject.class)
                 .setParameter("fid", filter.getId())
                 .list();
     }
@@ -697,7 +697,7 @@ public class ContentProjectFactory extends HibernateFactory {
     public static List<ContentProjectFilter> listFilterProjectsRelation(ContentFilter filter) {
         return HibernateFactory.getSession()
                 .createQuery("SELECT cpf FROM ContentProjectFilter cpf " +
-                        "WHERE cpf.filter.id = :fid")
+                        "WHERE cpf.filter.id = :fid", ContentProjectFilter.class)
                 .setParameter("fid", filter.getId())
                 .list();
     }
