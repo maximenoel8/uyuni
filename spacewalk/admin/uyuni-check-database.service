@@ -5,6 +5,7 @@ After=network-online.target
 Requires=ca-certificates.service
 
 [Service]
+ExecStartPre=/usr/sbin/spacewalk-startup-helper diskcheck
 ExecStart=/usr/sbin/spacewalk-startup-helper check-database 
 Type=oneshot
 IgnoreSIGPIPE=false

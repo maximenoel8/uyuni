@@ -238,7 +238,7 @@ end
 
 When(/^I query latest Salt changes on "(.*?)"$/) do |host|
   node = get_target(host)
-  salt = use_salt_bundle ? 'venv-salt-minion' : 'salt'
+  salt = $use_salt_bundle ? 'venv-salt-minion' : 'salt'
   if host == 'server'
     salt = 'salt'
   end
@@ -252,12 +252,12 @@ end
 When(/^I query latest Salt changes on Debian-like system "(.*?)"$/) do |host|
   node = get_target(host)
   salt =
-    if use_salt_bundle
+    if $use_salt_bundle
       'venv-salt-minion'
     else
       'salt'
     end
-  changelog_file = use_salt_bundle ? 'changelog.gz' : 'changelog.Debian.gz'
+  changelog_file = $use_salt_bundle ? 'changelog.gz' : 'changelog.Debian.gz'
   result, _return_code = node.run("zcat /usr/share/doc/#{salt}/#{changelog_file}")
   result.split("\n")[0, 15].each do |line|
     line.force_encoding('UTF-8')
@@ -600,16 +600,21 @@ When(/^the controller starts mocking a Redfish host$/) do
   file_extract(get_target('server'), crt_path.strip, '/root/controller.crt')
 
   data_dir = "#{File.dirname(__FILE__)}/../upload_files/Redfish-Mockup-Server/data/public-catfish"
+  log_file = '/tmp/redfish_mockup_server.log'
   cmd = "/usr/bin/python3 #{File.dirname(__FILE__)}/../upload_files/Redfish-Mockup-Server/redfishMockupServer.py " \
         "-H #{hostname} -p 8443 " \
         "-S -D #{data_dir} " \
         '--ssl --cert /root/controller.crt --key /root/controller.key ' \
-        '< /dev/null > /dev/null 2>&1 &'
+        "< /dev/null > #{log_file} 2>&1 &"
   `#{cmd}`
-  repeat_until_timeout(timeout: 30, message: 'Redfish mock server did not start on port 8443') do
-    result = `curl -sk --connect-timeout 2 --max-time 3 https://#{hostname}:8443/redfish/v1 2>/dev/null`
-    break unless result.empty?
-    sleep 1
+  begin
+    repeat_until_timeout(timeout: 30, message: 'Redfish mock server did not start on port 8443') do
+      result = `curl -sk --connect-timeout 2 --max-time 3 https://#{hostname}:8443/redfish/v1 2>/dev/null`
+      break unless result.empty?
+      sleep 1
+    end
+  rescue Timeout::Error
+    raise ScriptError, "Redfish mock server did not start on port 8443:\n#{`tail -n 20 #{log_file} 2>&1`}"
   end
 end
 
@@ -1401,7 +1406,7 @@ end
 
 When(/^I apply "([^"]*)" local salt state on "([^"]*)"$/) do |state, host|
   node = get_target(host)
-  salt_call = use_salt_bundle ? 'venv-salt-call' : 'salt-call'
+  salt_call = $use_salt_bundle ? 'venv-salt-call' : 'salt-call'
   if host == 'server'
     salt_call = 'salt-call'
   end
@@ -1660,6 +1665,11 @@ When(/^I wait until port "([^"]*)" is listening on "([^"]*)" (host|container)$/)
   node.run_until_ok("lsof  -i:#{port}", runs_in_container: location == 'container')
 end
 
+When(/^I check that "([^"]*)" (host|container) is listening on TCP port "([^"]*)"$/) do |host, location, port|
+  node = get_target(host)
+  node.run_until_ok("timeout 2 bash -c 'cat < /dev/null > /dev/tcp/$(hostname -f)/#{port}'", runs_in_container: location == 'container')
+end
+
 Then(/^port "([^"]*)" should be (open|closed)$/) do |port, selection|
   _output, code = get_target('server').run("ss --listening --numeric | grep :#{port}", check_errors: false, verbose: true)
   port_opened = code.zero?
@@ -1900,7 +1910,7 @@ end
 When(/^I stop the health check tool on "([^"]*)"$/) do |host|
   node = get_target(host)
   node.run('mgr-health-check stop', check_errors: false, verbose: true)
-  node.run('podman rm -f health_check_loki health_check_promtail health_check_supportconfig_exporter health-check-grafana', check_errors: false)
+  node.run("podman rm -f #{HEALTH_CHECK_CONTAINERS.join(' ')}", check_errors: false)
   node.run('podman network rm -f health-check-network', check_errors: false)
 end
 
@@ -1982,7 +1992,20 @@ end
 
 Then(/^the health check tool (should be|should not be) running on "([^"]*)"$/) do |action, host|
   node = get_target(host)
-  node.run("test $(podman ps | grep health-check | wc -l) == #{action == 'should be' ? '4' : '0'}", check_errors: true, verbose: true)
+  expected = action == 'should be' ? HEALTH_CHECK_CONTAINERS : []
+  running, _code = node.run('podman ps --format "{{.Names}}"', check_errors: true, verbose: true)
+  running_containers = running.lines.map(&:strip).grep(/^health[-_]check/)
+  missing = expected - running_containers
+  unexpected = running_containers - expected
+  next if missing.empty? && unexpected.empty?
+
+  problems = []
+  problems << "not running: #{missing.join(', ')}" unless missing.empty?
+  problems << "unexpectedly running: #{unexpected.join(', ')}" unless unexpected.empty?
+  output, _code = node.run('podman ps -a --format "{{.Names}} {{.Status}}"', check_errors: true)
+  containers = output.lines.map(&:strip).grep(/^health[-_]check/)
+  statuses = containers.empty? ? 'no health check containers found' : containers.join("\n")
+  raise "Health check containers #{problems.join('; ')}\n#{statuses}"
 end
 
 Then(/^podman container "([^"]*)" should be (running|healthy) on "([^"]*)"$/) do |container, state, host|

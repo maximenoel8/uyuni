@@ -321,55 +321,22 @@ When(/^I create an activation key including custom channels for "([^"]*)" via AP
   # Create a key with the base channel for this client
   id = description = "#{client}_key"
   client = 'proxy_nontransactional' if client == 'proxy' && !$is_transactional_server
-  base_channel = BASE_CHANNEL_BY_CLIENT[product][client]
-  base_channel_label = LABEL_BY_BASE_CHANNEL[product][base_channel]
+  client = 'server_nontransactional' if client == 'server' && !$is_transactional_server
+  base_channel_label = LABEL_BY_BASE_CHANNEL[product][BASE_CHANNEL_BY_CLIENT[product][client]]
+
   key = $api_test.activationkey.create(id, description, base_channel_label, 100)
   raise StandardError, 'Error creating activation key via the API' if key.nil?
 
-  $stdout.puts "Activation key #{key} created" unless key.nil?
+  $stdout.puts "Activation key #{key} created"
+  contact_method = client.include?('ssh_minion') ? 'ssh-push' : 'default'
+  success = $api_test.activationkey.details_set?(key, description, base_channel_label, 100, contact_method)
+  raise 'Failed to set activation key details' unless success
 
-  is_sshminion = client.include? 'sshminion'
-  $api_test.activationkey.details_set?(key, description, base_channel_label, 100, is_sshminion ? 'ssh-push' : 'default')
-  entitlements = client.include?('buildhost') ? ['osimage_build_host'] : ''
-  $api_test.activationkey.set_entitlement(key, entitlements) unless entitlements.empty?
+  $api_test.activationkey.set_entitlement(key, ['osimage_build_host']) if client.include?('buildhost')
 
-  # Get the list of child channels for this base channel
-  child_channels = $api_test.channel.software.list_child_channels(base_channel_label)
-
-  # filter out wrong child channels for SLE Micro 5.5 as normal Minion
-  if client.include? 'slemicro55'
-    child_channels.reject! { |channel| channel.include? 'suse-manager-proxy-5.0-pool-x86_64' }
-    child_channels.reject! { |channel| channel.include? 'suse-manager-proxy-5.0-updates-x86_64' }
-    child_channels.reject! { |channel| channel.include? 'suse-manager-retail-branch-server-5.0-pool-x86_64' }
-    child_channels.reject! { |channel| channel.include? 'suse-manager-retail-branch-server-5.0-updates-x86_64' }
-  end
-
-  # filter out wrong child channels for SLES15sp6 as normal Minion
-  if client.include? 'sles15sp6'
-    child_channels.reject! { |channel| channel.include? 'suse-manager-proxy-5.0-pool-x86_64-sp6' }
-    child_channels.reject! { |channel| channel.include? 'suse-manager-proxy-5.0-updates-x86_64-sp6' }
-    child_channels.reject! { |channel| channel.include? 'suse-manager-retail-branch-server-5.0-pool-x86_64-sp6' }
-    child_channels.reject! { |channel| channel.include? 'suse-manager-retail-branch-server-5.0-updates-x86_64-sp6' }
-  end
-
-  # filter out wrong child channels for SL Micro 6.1 as normal Minion
-  if client.include? 'slmicro61'
-    child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-proxy-5.1-x86_64' }
-    child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-retail-branch-server-5.1-x86_64' }
-    child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-server-5.1-x86_64' }
-  end
-
-  # filter out wrong child channels for SLES15SP7 as normal Minion
-  if client.include? 'sles15sp7'
-    child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-proxy-sle-5.1-pool-x86_64-sp7' }
-    child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-proxy-sle-5.1-updates-x86_64-sp7' }
-    child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-retail-branch-server-sle-5.1-pool-x86_64-sp7' }
-    child_channels.reject! { |channel| channel.include? 'suse-multi-linux-manager-retail-branch-server-sle-5.1-updates-x86_64-sp7' }
-  end
-
+  # Attach the child channels appropriate for this client's role
+  child_channels = child_channels_for_activation_key(client, base_channel_label)
   $stdout.puts "Child_channels for #{key}: <#{child_channels}>"
-
-  # Add child channels to the key
   $api_test.activationkey.add_child_channels(key, child_channels)
 end
 

@@ -148,7 +148,7 @@ BuildRequires:  tomcat-lib >= 7
 BuildRequires:  tomcat-taglibs-standard
 BuildRequires:  uyuni-base-server
 BuildRequires:  woodstox-core
-BuildRequires:  mvn(stax:stax-api) = 1.0.1
+BuildRequires:  stax2-api
 BuildRequires:  xalan-j2
 BuildRequires:  xmlsec
 BuildRequires:  (google-gson >= 2.2.4 with google-gson < 2.10.0)
@@ -236,7 +236,7 @@ Requires:       system-lock-formula
 Requires:       tomcat-lib >= 7
 Requires:       tomcat-taglibs-standard
 Requires:       woodstox-core
-Requires:       mvn(stax:stax-api) = 1.0.1
+Requires:       stax2-api
 Requires:       xalan-j2 >= 2.6.0
 Requires:       xerces-j2
 Requires:       xmlsec
