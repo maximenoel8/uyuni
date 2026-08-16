@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Spacewalk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-20 17:53+0200\n"
-"PO-Revision-Date: 2026-08-16 19:13+0000\n"
+"PO-Revision-Date: 2026-08-16 20:13+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/uyuni/backend-5-1/de/>\n"
 "Language: de\n"
@@ -990,7 +990,7 @@ msgstr "   Gesamtgröße: %s"
 #: ../satellite_tools/messages.py:83
 #, python-format
 msgid "      Downloaded %s of %s. Estimated remaining time: %s"
-msgstr ""
+msgstr "      %s von %s heruntergeladen. Geschätzte verbleibende Zeit: %s"
 
 #: ../satellite_tools/messages.py:85
 #, python-format
@@ -1010,7 +1010,7 @@ msgstr ""
 #: ../satellite_tools/messages.py:88
 #, python-format
 msgid "       failed:  %d"
-msgstr ""
+msgstr "       fehlgeschlagen:  %d"
 
 #: ../satellite_tools/messages.py:89
 #, python-format
@@ -1044,12 +1044,11 @@ msgstr ""
 
 #: ../satellite_tools/messages.py:96
 msgid "   * WARNING: this may be a slow process."
-msgstr ""
+msgstr "   * WARNUNG: Dies kann ein langsamer Prozess sein."
 
 #: ../satellite_tools/messages.py:97
-#, fuzzy
 msgid "Linking packages to channels"
-msgstr "Konflikt zwischen Basis-Channels"
+msgstr "Pakete mit Kanälen verknüpfen"
 
 #: ../satellite_tools/messages.py:98
 #, python-format
