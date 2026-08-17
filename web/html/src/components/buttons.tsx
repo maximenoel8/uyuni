@@ -1,4 +1,4 @@
-import * as React from "react";
+import { type HTMLProps, type ReactNode, Component } from "react";
 
 /**
  * Various HTML button components.
@@ -7,9 +7,9 @@ import * as React from "react";
 
 type BaseProps = {
   /** Text to display on the button. */
-  text?: React.ReactNode;
+  text?: ReactNode;
   /** Text to display on the button. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /**
    * FontAwesome icon class of the button. Can also include additional FA classes
    * (sizing, animation etc.).
@@ -38,7 +38,7 @@ type BaseState = {};
 /**
  * Base class for button components.
  */
-class _ButtonBase<P extends BaseProps = BaseProps, S extends BaseState = BaseState> extends React.Component<P, S> {
+class _ButtonBase<P extends BaseProps = BaseProps, S extends BaseState = BaseState> extends Component<P, S> {
   renderIcon() {
     const text = this.props.text ?? this.props.children;
     const margin = text ? "" : " no-margin";
@@ -231,7 +231,7 @@ export class LinkButton extends _ButtonBase<LinkProps> {
       : {};
 
     const isDownloadTargetBlank = this.props.download && !this.props.target;
-    const targetProps: Partial<React.HTMLProps<HTMLAnchorElement>> =
+    const targetProps: Partial<HTMLProps<HTMLAnchorElement>> =
       this.props.target === "_blank" || isDownloadTargetBlank
         ? {
             target: "_blank",
@@ -294,7 +294,7 @@ type DropdownProps = BaseProps & {
   /** Callback function to execute on button click. */
   handler?: (...args: any[]) => any;
 
-  items: React.ReactNode[];
+  items: ReactNode[];
 };
 
 /**

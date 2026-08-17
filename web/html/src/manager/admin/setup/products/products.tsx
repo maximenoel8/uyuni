@@ -1,4 +1,4 @@
-import * as React from "react";
+import { type ReactNode, Component, useEffect, useState } from "react";
 
 import _partition from "lodash/partition";
 
@@ -77,7 +77,7 @@ function reloadData() {
  * Generate the page wrapper, tabs, scc-popup,
  * and everything around the product list except the list
  */
-class ProductsPageWrapper extends React.Component {
+class ProductsPageWrapper extends Component {
   state = {
     issMaster: window.issMaster_flag_from_backend,
     refreshNeeded: window.refreshNeeded_flag_from_backend,
@@ -421,7 +421,7 @@ type ProductsProps = {
 /**
  * Show the products data
  */
-class Products extends React.Component<ProductsProps> {
+class Products extends Component<ProductsProps> {
   state = {
     popupItem: null,
     archCriteria: [] as any[],
@@ -556,7 +556,7 @@ type CheckListProps = {
 /**
  * Generate a custom list of elements for the products data
  */
-class CheckList extends React.Component<CheckListProps> {
+class CheckList extends Component<CheckListProps> {
   isRootLevel = (level) => {
     return DEPRECATED_unsafeEquals(level, 1);
   };
@@ -645,7 +645,7 @@ type CheckListItemProps = {
  * A component to generate a list item which contains
  * all information for a single product
  */
-export class CheckListItem extends React.Component<CheckListItemProps> {
+export class CheckListItem extends Component<CheckListItemProps> {
   state = {
     withRecommended: true,
   };
@@ -807,7 +807,7 @@ export class CheckListItem extends React.Component<CheckListItemProps> {
     const currentItem = this.props.item;
 
     /** generate item selector content **/
-    let selectorContent: React.ReactNode = null;
+    let selectorContent: ReactNode = null;
     if (this.props.bypassProps.isSelectable && currentItem.status === _PRODUCT_STATUS.available) {
       selectorContent = (
         <ProductCheck
@@ -1022,13 +1022,13 @@ export class CheckListItem extends React.Component<CheckListItemProps> {
 }
 
 const ChannelsPopUp = (props) => {
-  const [checked, setChecked] = React.useState<boolean[]>([]);
-  const [installed, setInstalled] = React.useState<boolean>(props.item.status === _PRODUCT_STATUS.installed);
+  const [checked, setChecked] = useState<boolean[]>([]);
+  const [installed, setInstalled] = useState<boolean>(props.item.status === _PRODUCT_STATUS.installed);
 
   const sorted = props.item.channels.sort((a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase()));
   const [mandatoryChannels, optionalChannels] = _partition(sorted, (c) => !c.optional);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setInstalled(props.item.status === _PRODUCT_STATUS.installed);
     setChecked(optionalChannels.map((i) => i.status === _CHANNEL_STATUS.synced));
   }, [props.item]);
@@ -1099,7 +1099,7 @@ const ChannelsPopUp = (props) => {
 };
 
 const decodeChannelStatus = (status) => {
-  let decoded: React.ReactNode = "";
+  let decoded: ReactNode = "";
   switch (status) {
     case _CHANNEL_STATUS.notSynced:
       decoded = <span className="text-muted">{t("not synced")}</span>;

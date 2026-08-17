@@ -1,9 +1,9 @@
-import * as React from "react";
+import type { ReactNode } from "react";
 
 import { MessagesContainer, showErrorToastr, showInfoToastr, showSuccessToastr } from "components/toastr/toastr";
 type SuccessType = boolean | undefined;
 
-export const ContainerConfigMessages = (success: SuccessType, messagesIn: React.ReactNode[], loading: boolean) => {
+export const ContainerConfigMessages = (success: SuccessType, messagesIn: ReactNode[], loading: boolean) => {
   if (success) {
     showSuccessToastr(t("The container based proxy configuration has been generated correctly."));
   } else if (messagesIn.length > 0) {

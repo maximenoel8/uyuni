@@ -1,4 +1,4 @@
-import * as React from "react";
+import type { FC, ReactElement } from "react";
 
 import { ChannelTreeType } from "core/channels/type/channels.type";
 
@@ -31,7 +31,7 @@ type Props = {
   onToggleChannelOpen?: (channelId: number) => void;
 };
 
-const BaseChannel: React.FC<Props> = (props: Props): React.ReactElement => {
+const BaseChannel: FC<Props> = (props: Props): ReactElement => {
   const { base, children } = props.channelTree;
   const { id, name } = base;
 
@@ -44,7 +44,7 @@ const BaseChannel: React.FC<Props> = (props: Props): React.ReactElement => {
     .reduce((total: number, id: number) => total + Number(props.selectedChannelIds.has(id)), 0);
   const totalSelectedCount = Number(isSelected) + selectedChildrenCount;
 
-  function renderBaseChannel(): React.ReactElement {
+  function renderBaseChannel(): ReactElement {
     return (
       <h4
         className={`${styles.base_channel} ${isSelectedBaseChannel ? styles.initial_selected : ""}`}
@@ -78,7 +78,7 @@ const BaseChannel: React.FC<Props> = (props: Props): React.ReactElement => {
     );
   }
 
-  function renderChildren(): React.ReactElement {
+  function renderChildren(): ReactElement {
     if (props.channelTree.children.length === 0) {
       return <EmptyChild key={`empty_child_${id}`} />;
     }

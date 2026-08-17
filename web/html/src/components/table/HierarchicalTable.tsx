@@ -1,5 +1,13 @@
-import * as React from "react";
-import { useState } from "react";
+import {
+  type ReactComponentElement,
+  type ReactElement,
+  type ReactNode,
+  Children,
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useState,
+} from "react";
 
 import { DEPRECATED_unsafeEquals } from "utils/legacy";
 
@@ -28,10 +36,10 @@ type HierarchicalTableProps = {
   identifier: (row: HierarchicalRow) => string | number;
 
   /** The search field to show on the table  */
-  searchField?: React.ReactComponentElement<typeof SearchField>;
+  searchField?: ReactComponentElement<typeof SearchField>;
 
   /** Other filter fields */
-  additionalFilters?: React.ReactNode[];
+  additionalFilters?: ReactNode[];
 
   /** Function to determine which column has expand/collapse controls */
   expandColumnKey?: string;
@@ -61,10 +69,10 @@ type HierarchicalTableProps = {
   indentSize?: number;
 
   /** Children node in the table (Column components) */
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export const HierarchicalTable = React.forwardRef<TableRef, HierarchicalTableProps>((props, ref) => {
+export const HierarchicalTable = forwardRef<TableRef, HierarchicalTableProps>((props, ref) => {
   const {
     className,
     data,
@@ -156,7 +164,7 @@ export const HierarchicalTable = React.forwardRef<TableRef, HierarchicalTablePro
   const treeData = buildTreeStructure(data);
   const visibleRows = getVisibleRows(treeData);
 
-  const renderCellContent = (row: HierarchicalRow, child: React.ReactElement) => {
+  const renderCellContent = (row: HierarchicalRow, child: ReactElement) => {
     // Get the cell content (either from custom renderer or from data property)
     const cellContent = child.props.cell ? child.props.cell(row) : row[child.props.columnKey || ""];
     // Apply special styling for non-leaf or indented nodes
@@ -168,12 +176,12 @@ export const HierarchicalTable = React.forwardRef<TableRef, HierarchicalTablePro
     return cellContent;
   };
 
-  const isColumnElement = (element: React.ReactNode): element is React.ReactElement => {
-    if (!React.isValidElement(element)) return false;
+  const isColumnElement = (element: ReactNode): element is ReactElement => {
+    if (!isValidElement(element)) return false;
     return element.props && ("columnKey" in element.props || "header" in element.props || "cell" in element.props);
   };
 
-  const enhancedChildren = React.Children.map(children, (child) => {
+  const enhancedChildren = Children.map(children, (child) => {
     if (!isColumnElement(child)) return child;
     if (child.props.columnKey === expandColumnKey) {
       const cellRenderer = (row: any) => {
@@ -196,7 +204,7 @@ export const HierarchicalTable = React.forwardRef<TableRef, HierarchicalTablePro
           </div>
         );
       };
-      return React.cloneElement(child, {
+      return cloneElement(child, {
         ...child.props,
         cell: cellRenderer,
       });

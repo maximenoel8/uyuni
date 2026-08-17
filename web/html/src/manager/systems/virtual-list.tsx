@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 
 import { LinkButton } from "components/buttons";
 import { IconTag } from "components/icontag";
@@ -22,7 +22,7 @@ type Props = {
 };
 
 export function VirtualSystems(props: Props) {
-  const [selectedSystems, setSelectedSystems] = React.useState<String[]>([]);
+  const [selectedSystems, setSelectedSystems] = useState<String[]>([]);
 
   const handleSelectedSystems = (items: String[]) => {
     const removed = selectedSystems.filter((item) => !items.includes(item)).map((item) => [item, false]);

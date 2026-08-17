@@ -1,4 +1,4 @@
-import * as React from "react";
+import type { FC, ReactElement } from "react";
 
 import { ChildChannelType } from "core/channels/type/channels.type";
 
@@ -37,7 +37,7 @@ function getTooltip(channelDependencies: ChannelDependencyData): string {
   return tooltip;
 }
 
-const ChildChannel: React.FC<Props> = (props: Props): React.ReactElement => {
+const ChildChannel: FC<Props> = (props: Props): ReactElement => {
   const { id, name, recommended, parentId } = props.channel;
   const identifier = "child_" + id;
 
