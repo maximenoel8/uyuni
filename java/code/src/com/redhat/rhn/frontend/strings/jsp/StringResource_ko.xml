@@ -1532,12 +1532,12 @@
         </context-group>
         <target>바로가기:</target>
       </trans-unit>
-      <trans-unit approved="no" id="header.jsp.knowledgebase" xml:space="preserve">
+      <trans-unit approved="yes" id="header.jsp.knowledgebase" xml:space="preserve">
         <source>Knowledgebase</source>
         <context-group name="ctx">
           <context context-type="sourcefile">./includes/header.jsp</context>
         </context-group>
-        <target state="needs-translation">지식 기반</target>
+        <target state="final">지식 기반</target>
       </trans-unit>
       <trans-unit id="header.jsp.documentation" xml:space="preserve">
         <source>Documentation</source>
@@ -3942,12 +3942,12 @@ button below, and &lt;b&gt;will be unable to log back in&lt;/b&gt;.</source>
         </context-group>
         <target>버그 요약 정보는 4000자 이하이어야 합니다.</target>
       </trans-unit>
-      <trans-unit approved="no" id="errata.edit.error.idLength" xml:space="preserve">
+      <trans-unit approved="yes" id="errata.edit.error.idLength" xml:space="preserve">
         <source>Bug Id cannot be greater than 18 characters.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/errata/manage/Edit.do</context>
         </context-group>
-        <target state="needs-translation">버그 ID는 18자 이하여야 합니다.</target>
+        <target state="final">버그 ID는 18자 이하여야 합니다.</target>
       </trans-unit>
       <trans-unit id="errata.channels.updatechannels" xml:space="preserve">
         <source>Update Channels</source>
@@ -5033,12 +5033,12 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
         <target>요약:</target>
       </trans-unit>
-      <trans-unit approved="no" id="errata.create.jsp.bugurl" xml:space="preserve">
+      <trans-unit approved="yes" id="errata.create.jsp.bugurl" xml:space="preserve">
         <source>Bugzilla URL:</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/errata/manage/Create.do</context>
         </context-group>
-        <target state="needs-translation">Bugzilla URL:</target>
+        <target state="final">Bugzilla URL:</target>
       </trans-unit>
       <trans-unit id="errata.create.jsp.topic" xml:space="preserve">
         <source>Topic&lt;span class="required-form-field"&gt;*&lt;/span&gt;:</source>
@@ -6857,9 +6857,9 @@ organization. You may grant or remove the organization administrator role in the
           <context context-type="sourcefile">/rhn/systems/DuplicateSystemsCompare.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit approved="no" id="System Identity Properties" xml:space="preserve">
+      <trans-unit approved="yes" id="System Identity Properties" xml:space="preserve">
         <source>System Identity Properties</source>
-        <target state="needs-translation">시스템 ID 속성</target>
+        <target state="final">시스템 ID 속성</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/DuplicateSystemsCompare.do</context>
         </context-group>
@@ -6871,9 +6871,9 @@ organization. You may grant or remove the organization administrator role in the
           <context context-type="sourcefile">/rhn/systems/DuplicateSystemsCompare.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit approved="no" id="Extended System Identity Properties" xml:space="preserve">
+      <trans-unit approved="yes" id="Extended System Identity Properties" xml:space="preserve">
         <source>Extended System Identity Properties</source>
-        <target state="needs-translation">확장 시스템 ID 속성</target>
+        <target state="final">확장 시스템 ID 속성</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/DuplicateSystemsCompare.do</context>
         </context-group>
@@ -7763,19 +7763,19 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
         <target>설명</target>
       </trans-unit>
-      <trans-unit approved="no" id="systemsearch_cpu_mhz_lt_column" xml:space="preserve">
+      <trans-unit approved="yes" id="systemsearch_cpu_mhz_lt_column" xml:space="preserve">
         <source>CPU Mhz</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/systems/Search</context>
         </context-group>
-        <target state="needs-translation">CPU Mhz</target>
+        <target state="final">CPU Mhz</target>
       </trans-unit>
-      <trans-unit approved="no" id="systemsearch_cpu_mhz_gt_column" xml:space="preserve">
+      <trans-unit approved="yes" id="systemsearch_cpu_mhz_gt_column" xml:space="preserve">
         <source>CPU Mhz</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/systems/Search</context>
         </context-group>
-        <target state="needs-translation">CPU Mhz</target>
+        <target state="final">CPU Mhz</target>
       </trans-unit>
       <trans-unit approved="yes" id="systemsearch_num_of_cpus_lt_column" xml:space="preserve">
         <source>Number of CPUs</source>
@@ -8224,7 +8224,7 @@ organization. You may grant or remove the organization administrator role in the
           <context context-type="sourcefile">/rhn/systems/details/packages/LockPackages.do</context>
         </context-group>
       </trans-unit>
-      <trans-unit approved="no" id="pkg.lock.summary" xml:space="preserve">
+      <trans-unit approved="yes" id="pkg.lock.summary" xml:space="preserve">
         <source>
                 You can lock packages so they will remain unmodified.
                 However, it is important to keep in mind that requesting a 
@@ -8232,11 +8232,12 @@ organization. You may grant or remove the organization administrator role in the
                 before the lock took action and the package is newer, the
                 lock will be canceled.
         </source>
-        <target state="needs-translation">
+        <target state="final">
                 이제 패키지를 잠궈 수정하지 못하도록 할 수 있습니다.
                 그러나 잠금 요청이 지연될 수 있음에 유의하십시오. 
                 잠금이 수행되기 전에 패키지가 업데이트되고 패키지가
-                보다 최신 버전인 경우 잠금이 취소됩니다.
+                보다 최신 버전인 경우 
+                잠금이 취소됩니다.
         </target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/packages/LockPackages.do</context>
