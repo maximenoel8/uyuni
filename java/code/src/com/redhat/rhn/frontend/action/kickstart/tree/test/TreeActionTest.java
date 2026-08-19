@@ -52,14 +52,14 @@ public class TreeActionTest extends RhnPostMockStrutsTestCase {
 
     @Test
     public void testCreateNonSubmit() throws Exception {
-        UserTestUtils.addAccessGroup(user, AccessGroupFactory.CONFIG_ADMIN);
+        UserTestUtils.addAccessGroup(user, AccessGroupFactory.getConfigAdmin());
         ChannelFactoryTest.createTestChannel(user);
         executeNonSubmit("/kickstart/TreeCreate");
     }
 
     @Test
     public void testCreateSubmit() throws Exception {
-        UserTestUtils.addAccessGroup(user, AccessGroupFactory.CONFIG_ADMIN);
+        UserTestUtils.addAccessGroup(user, AccessGroupFactory.getConfigAdmin());
         Channel c = ChannelFactoryTest.createTestChannel(user);
         executeSubmit("/kickstart/TreeCreate", c);
         verifyActionMessage("tree.create.success");
@@ -67,7 +67,7 @@ public class TreeActionTest extends RhnPostMockStrutsTestCase {
 
     @Test
     public void testCreateRefresh() throws Exception {
-        UserTestUtils.addAccessGroup(user, AccessGroupFactory.CONFIG_ADMIN);
+        UserTestUtils.addAccessGroup(user, AccessGroupFactory.getConfigAdmin());
 
         Channel rhel5BaseChan = createRhel5Channels();
         Channel rhel4BaseChan = createRhel4Channels();

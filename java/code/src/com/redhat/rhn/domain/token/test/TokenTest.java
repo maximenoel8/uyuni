@@ -109,7 +109,7 @@ public class TokenTest extends RhnBaseTestCase {
     public void testConfigChannels() throws Exception {
         Token t = createTestToken();
         User user = UserTestUtils.createUser("testuser1", t.getOrg().getId());
-        UserTestUtils.addAccessGroup(user, AccessGroupFactory.CONFIG_ADMIN);
+        UserTestUtils.addAccessGroup(user, AccessGroupFactory.getConfigAdmin());
 
         // Create a global channel
         ConfigChannel global1 = ConfigTestUtils.createConfigChannel(user.getOrg(),

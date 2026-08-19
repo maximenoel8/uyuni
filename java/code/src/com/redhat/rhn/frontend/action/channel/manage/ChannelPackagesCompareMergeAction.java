@@ -64,7 +64,7 @@ public class ChannelPackagesCompareMergeAction extends ChannelPackagesCompareAct
         Channel schan = ChannelFactory.lookupByIdAndUser(scid, user);
 
         if (!UserManager.verifyChannelAdmin(user, chan)) {
-              throw new PermissionException(AccessGroupFactory.CHANNEL_ADMIN);
+              throw new PermissionException(AccessGroupFactory.getChannelAdmin());
         }
         if (!canAccessChannel(user, schan)) {
             throw new PermissionCheckFailureException();

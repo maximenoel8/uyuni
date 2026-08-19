@@ -79,7 +79,7 @@ public class ConfigChannelSaltManagerLifecycleTest extends BaseTestCaseWithUser 
         this.manager = ConfigChannelSaltManager.getInstance();
         manager.setBaseDirPath(tmpSaltRoot.toAbsolutePath().toString());
         user.getOrg().addRole(RoleFactory.CONFIG_ADMIN);
-        user.addToGroup(AccessGroupFactory.CONFIG_ADMIN);
+        user.addToGroup(AccessGroupFactory.getConfigAdmin());
         TestUtils.saveAndFlush(user);
     }
 
