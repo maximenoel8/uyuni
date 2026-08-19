@@ -69,6 +69,9 @@ BuildRequires:  intltool
 
 %if 0%{?build_py3}
 BuildRequires:  python3
+%if 0%{?suse_version}
+BuildRequires:  fdupes
+%endif
 %if "%{_vendor}" == "debbuild"
 BuildRequires:  python3-dev
 %else
@@ -134,7 +137,9 @@ chmod 0644 %{buildroot}%{python_sitelib}/spacecmd/__init__.py
 
 %if 0%{?suse_version}
 %if 0%{?build_py3}
-%py3_compile -O %{buildroot}/%{python_sitelib}
+python3 -m compileall -q %{buildroot}/%{python_sitelib}
+python3 -O -m compileall -q %{buildroot}/%{python_sitelib}
+%fdupes %{buildroot}/%{python_sitelib}
 %else
 %py_compile -O %{buildroot}/%{python_sitelib}
 %endif
