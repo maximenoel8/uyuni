@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-webpack5";
 
 import { StoryRow, StripedStorySection } from "manager/storybook/layout";
 
-import { Button } from "./index";
+import { Button } from "./buttons";
 
 const buttonClassOptions = [
   "btn-primary",

@@ -26,7 +26,7 @@ The frontend development proxy will serve all local Javascript files with hot re
 npm run proxy https://server.tf.local
 ```
 
-## Storybook and reusable components 
+## Storybook and reusable components
 
 The external Storybook exists to improve frontend development and review workflows without replacing the legacy in-app style guide. It gives new and actively changed React components a standalone place for interactive documentation, args/controls, local regression checks.
 
@@ -50,7 +50,7 @@ The output is written to `storybook-static`.
 
 New or actively changed reusable components should get real `.stories.tsx` stories. Existing `.example.ts` and `.example.tsx` files are kept for compatibility and are wrapped automatically.
 
-## Legacy style guide of reusable components 
+## Legacy style guide of reusable components
 
 We use a style guide to document reusable components. The guide can be accessed at [https://server.tf.local/rhn/manager/storybook](https://server.tf.local/rhn/manager/storybook) (replace `server.tf.local` with your server FQDN).
 
