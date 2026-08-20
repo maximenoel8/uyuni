@@ -140,7 +140,7 @@ public class ConfigChannelSaltManagerLifecycleTest extends BaseTestCaseWithUser 
         server.setConfigChannels(Arrays.asList(channel1, channel2), user);
         ServerFactory.save(server);
 
-        user.addToGroup(AccessGroupFactory.ACTIVATION_KEY_ADMIN);
+        user.addToGroup(AccessGroupFactory.getActivationKeyAdmin());
         ActivationKey key = ActivationKeyManager.getInstance().createNewActivationKey(user, "bsc1272988");
         ConfigChannelListProcessor proc = new ConfigChannelListProcessor();
         proc.add(key.getConfigChannelsFor(user), channel1);
