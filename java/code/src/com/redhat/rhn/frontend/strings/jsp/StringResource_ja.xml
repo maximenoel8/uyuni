@@ -10301,21 +10301,21 @@ Please note that some manual configuration of these scripts may still be require
         <source>Default Distribution Channel Mappings cannot be deleted.</source>
         <target>デフォルトのディストリビューションチャンネルマッピングを削除できません。</target>
       </trans-unit>
-      <trans-unit id="distchannelmap.jsp.summary" xml:space="preserve">
+      <trans-unit id="distchannelmap.jsp.summary" xml:space="preserve" approved="yes">
         <source>Distribution channel mappings are defined as default base channels that clients pick up according to their OS and architecture at registration time. These mappings may be overridden, but not deleted.</source>
-        <target state="needs-adaptation">ディストリビューションチャンネルマッピングは、サーバーがその OS とアーキテクチャーの登録ごとに置かれるデフォルトのベースチャンネルを定義します。デフォルトのディストリビューションチャンネルマッピングは削除されませんが、オーバーライドされる場合があります。</target>
+        <target state="final">ディストリビューションチャンネルマッピングは、クライアントが登録時にOSとアーキテクチャに応じて選択するデフォルトのベースチャンネルとして定義されます。これらのマッピングはオーバーライドできますが、削除できません。</target>
       </trans-unit>
-      <trans-unit id="distchannelmap.jsp.edit.summary" xml:space="preserve">
+      <trans-unit id="distchannelmap.jsp.edit.summary" xml:space="preserve" approved="yes">
         <source>Organization specific Distribution Channel Mappings may be edited here. Default Distribution Channel Mappings cannot be edited. They can only be overridden within every organization.</source>
-        <target state="needs-adaptation">組織固有のディストリビューションチャンネルマッピングはここで編集できます。デフォルトのディストリビューションチャンネルマッピングは編集することができません。すべての組織内でそれらをオーバーライドすることのみが可能です。</target>
+        <target state="final">組織固有のディストリビューションチャンネルマッピングはここで編集できます。デフォルトのディストリビューションチャンネルマッピングは編集できません。すべての組織内でそれらをオーバーライドすることのみが可能です。</target>
       </trans-unit>
       <trans-unit id="distchannelmap.jsp.delete.summary" xml:space="preserve">
         <source>Organization specific Distribution Channel Mapping will be deleted. If it is currently overriding a default channel mapping, the default mapping becomes effective.</source>
         <target>組織固有のディストリビューションチャンネルマッピングは削除されます。デフォルトのマッピングはデフォルトのチャンネルマッピングを現在オーバーライドしている場合のみ、有効になります。</target>
       </trans-unit>
-      <trans-unit id="distchannelmap.jsp.delete.default.summary" xml:space="preserve">
+      <trans-unit id="distchannelmap.jsp.delete.default.summary" xml:space="preserve" approved="yes">
         <source>Default Distribution Channel Mappings cannot be deleted. They can only be overridden within every organization.</source>
-        <target state="needs-adaptation">デフォルトのディストリビューションチャンネルマッピングを削除できません。すべての組織内でそれらをオーバーライドすることのみが可能です。</target>
+        <target state="final">デフォルトのディストリビューションチャンネルマッピングを削除できません。すべての組織内でそれらをオーバーライドすることのみが可能です。</target>
       </trans-unit>
       <trans-unit id="toolbar.create.distchannelmap" xml:space="preserve">
         <source>Create Distribution Channel Mapping</source>
@@ -16668,7 +16668,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
       </trans-unit>
       <trans-unit approved="yes" id="channelOverview.jsp.state.channel.numfiles" xml:space="preserve">
         <source>{0} sls, {1} files</source>
-        <target state="final">{0} 個の SLS, {1} 個のファイル</target>
+        <target state="final">{0} 個の SLS、{1} 個のファイル</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/configuration/ChannelOverview.do</context>
           <context context-type="paramnotes">"36 files, 2 directories, 0 symlinks"</context>
@@ -29978,6 +29978,41 @@ given channel.</source>
         <source>AppArmor profiles will be migrated to SELinux</source>
         <target state="final">AppArmorプロファイルはSELinuxに移行されます</target>
       </trans-unit>
-    </body>
+    <trans-unit id="channel.manage.sync.noerrata-tt.jsp" xml:space="preserve">
+        <source>Do not synchronize patches.</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      <trans-unit id="channel.manage.sync.nostrict-tt.jsp" xml:space="preserve">
+        <source>Allows a channel to deviate from the repository, keeping packages that have been removed from the remote repository.</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      <trans-unit id="channel.manage.sync.latestonly-tt.jsp" xml:space="preserve">
+        <source>Synchronize the latest package version only.</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      <trans-unit id="channel.manage.sync.synckickstart-tt.jsp" xml:space="preserve">
+        <source>This option prepares a directory tree ready for Kickstart auto installation.</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      <trans-unit id="channel.manage.sync.fail-tt.jsp" xml:space="preserve">
+        <source>Stop synchronizing if an error occurs.</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
+        </context-group>
+      <target state="new"/>
+  </trans-unit>
+      </body>
   </file>
 </xliff>

@@ -7834,12 +7834,12 @@ Follow this url to see the full list of inactive systems:
         </context-group>
         <target>保存した設定のないシステムで電力管理を行うことはできません。</target>
       </trans-unit>
-      <trans-unit id="cobbler.powermanagement.no_fence_agents" xml:space="preserve">
+      <trans-unit id="cobbler.powermanagement.no_fence_agents" xml:space="preserve" approved="yes">
         <source>This functionality is only available on @@PRODUCT_NAME@@ servers that have installed "fence agents," which are possibly available as "fence-agents", "fence-agents-all", or "fence-agents-ipmilan" packages depending on your operating system and desired power management infrastructure. Please install the fence agents. If fence agents are not available for your operating system then power management functionality is not supported.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/kickstart/PowerManagement.do</context>
         </context-group>
-        <target state="needs-adaptation">この機能は、「フェンスエージェント」をインストールしている @@PRODUCT_NAME@@ サーバーでのみ利用できます。「フェンスエージェント」は、お使いのオペレーティングシステムおよび必要な電力管理インフラストラクチャーによって、「fence-agents」、「fence-agents-all」、または「fence-agents-ipmilan」パッケージとして使用できる可能性があります。フェンスエージェントをインストールしてください。フェンスエージェントがご使用のオペレーティングシステムで利用できない場合は、電力管理機能はサポートされません。</target>
+        <target state="final">この機能は、「フェンスエージェント」をインストールしている @@PRODUCT_NAME@@ サーバーでのみ利用できます。「フェンスエージェント」は、お使いのオペレーティングシステムおよび必要な電力管理インフラストラクチャによって、「fence-agents」、「fence-agents-all」、または「fence-agents-ipmilan」パッケージとして使用できる可能性があります。フェンスエージェントをインストールしてください。フェンスエージェントがご使用のオペレーティングシステムで利用できない場合、電力管理機能はサポートされません。</target>
       </trans-unit>
       <trans-unit approved="yes" id="cobbler.powermanagement.alom" xml:space="preserve">
         <source>Advanced Lights Out Manager</source>
@@ -10607,9 +10607,9 @@ Alternatively, you will want to download &lt;strong&gt;Incremental Channel Conte
         <source>Calendar with id '{0}' does not exist</source>
         <target state="final">ID '{0}' のカレンダーは存在していません</target>
       </trans-unit>
-      <trans-unit id="maintenance.action.reschedule.error.cancel" xml:space="preserve">
+      <trans-unit id="maintenance.action.reschedule.error.cancel" xml:space="preserve" approved="yes">
         <source>An error occurred trying to cancel affected actions for schedule '{0}'</source>
-        <target state="needs-adaptation">スケジュール '{0}' に対して影響のある処理をキャンセルしようとしている際にエラーが発生しました</target>
+        <target state="final">スケジュール '{0}' に対して影響のある処理をキャンセルしようとしている際にエラーが発生しました</target>
       </trans-unit>
       <trans-unit id="maintenance.action.reschedule.error.fail" xml:space="preserve">
         <source>Operation could not be performed. There are scheduled actions on systems</source>
@@ -12113,15 +12113,22 @@ To amend this situation, please add SCC credentials &lt;a href="/rhn/admin/setup
         <source>Processing of a PXE event failed</source>
         <target state="final">PXEイベントの処理に失敗しました</target>
       </trans-unit>
-    <trans-unit id="user.admin.access" xml:space="preserve">
+      <trans-unit id="user.admin.access" xml:space="preserve" approved="yes">
         <source>Admin Access</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="contentmanagement.invalid_issue_date" xml:space="preserve">
+        <target state="final">管理者アクセス</target>
+      </trans-unit>
+      <trans-unit id="contentmanagement.invalid_issue_date" xml:space="preserve" approved="yes">
         <source>Invalid date format. It must follow ISO 8601 offset format (e.g. 2026-06-04T22:00:00Z).</source>
+        <target state="final">無効な日付形式です。ISO 8601オフセット形式(例: 2026-06-04T22:00:00Z)に従う必要があります。</target>
+      </trans-unit>
+    <trans-unit id="system.entitle.added.peripheral_server" xml:space="preserve">
+        <source>&lt;strong&gt;Peripheral server&lt;/strong&gt; type has been applied.</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/systems/details/Overview.do</context>
+        </context-group>
       <target state="new"/>
   </trans-unit>
       </body>
