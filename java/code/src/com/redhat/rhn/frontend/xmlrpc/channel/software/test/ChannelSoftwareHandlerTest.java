@@ -218,7 +218,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
         handler.setGloballySubscribable(admin, channel.getLabel(), true);
         assertTrue(channel.isGloballySubscribable(admin.getOrg()));
 
-        assertFalse(regular.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN));
+        assertFalse(regular.isMemberOf(AccessGroupFactory.getChannelAdmin()));
         try {
             handler.setGloballySubscribable(regular, channel.getLabel(), false);
             fail();
@@ -336,7 +336,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
         SystemManager.subscribeServerToChannel(admin, s, c);
         flushAndEvict(c);
         flushAndEvict(s);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
 
         Object[] result = csh.listSubscribedSystems(admin, c.getLabel());
         assertTrue(result.length > 0);
@@ -364,7 +364,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testListArches() {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         List<ChannelArch> arches = csh.listArches(admin);
         assertNotNull(arches);
         assertFalse(arches.isEmpty());
@@ -386,7 +386,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testDeleteChannel() throws Exception {
         ChannelSoftwareHandler csh = getMockedHandler();
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         Channel c = ChannelFactoryTest.createTestChannel(admin);
         String label = c.getLabel();
         c = reload(c);
@@ -407,7 +407,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testDeleteClonedChannel() throws Exception {
         ChannelSoftwareHandler csh = getMockedHandler();
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
 
         Channel c = ChannelFactoryTest.createTestChannel(admin);
         Channel cClone1 = ChannelFactoryTest.createTestClonedChannel(c, admin);
@@ -423,7 +423,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testDeleteChannelWithClones() throws Exception {
         ChannelSoftwareHandler csh = getMockedHandler();
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
 
         Channel c = ChannelFactoryTest.createTestChannel(admin);
         Channel cClone1 = ChannelFactoryTest.createTestClonedChannel(c, admin);
@@ -448,7 +448,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testIsGloballySubscribable() throws Exception {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         Channel c = ChannelFactoryTest.createTestChannel(admin);
         assertEquals(1, csh.isGloballySubscribable(admin, c.getLabel()));
         // should be assertTrue
@@ -457,7 +457,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testIsGloballySubscribableNoSuchChannel() {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         try {
             csh.isGloballySubscribable(admin, "notareallabel");
             fail();
@@ -470,7 +470,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testGetDetails() throws Exception {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         Channel c = ChannelFactoryTest.createTestChannel(admin);
         assertNotNull(c);
         assertNull(c.getParentChannel());
@@ -485,7 +485,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testSetDetails() throws Exception {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         Channel c = ChannelFactoryTest.createTestChannel(admin);
         assertNotNull(c);
         assertNull(c.getParentChannel());
@@ -515,7 +515,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
    public void testGetChannelLastBuildById() throws Exception {
        ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-       addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+       addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
        Channel c = ChannelFactoryTest.createTestChannel(admin);
        assertNotNull(c);
        String lastRepoBuild = csh.getChannelLastBuildById(admin, c.getId().intValue());
@@ -555,7 +555,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testCreate() {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         int i = csh.create(admin, "api-test-chan-label",
                 "apiTestChanName", "apiTestSummary", "channel-x86_64", null);
         assertEquals(1, i);
@@ -574,7 +574,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testCreateWithGPGCheckDisabled() {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         int i = csh.create(admin, "api-test-chan-label",
                 "apiTestChanName", "apiTestSummary", "channel-x86_64", null,
                 "sha1", new HashMap<>(), false);
@@ -594,7 +594,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testCreateWithChecksum() {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         int i = csh.create(admin, "api-test-checksum-chan-label",
                 "apiTestCSChanName", "apiTestSummary", "channel-ia32", null, "sha256");
         assertEquals(1, i);
@@ -630,7 +630,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testCreateNullRequiredParams() {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         // null label
         try {
             csh.create(admin, null, "api-test-nonnull", "api test summary",
@@ -666,7 +666,7 @@ public class ChannelSoftwareHandlerTest extends BaseHandlerTestCase {
     @Test
     public void testInvalidChannelNameAndLabel() {
         ChannelSoftwareHandler csh = new ChannelSoftwareHandler(taskomaticApi, xmlRpcSystemHelper);
-        addAccessGroup(admin, AccessGroupFactory.CHANNEL_ADMIN);
+        addAccessGroup(admin, AccessGroupFactory.getChannelAdmin());
         int i;
         try {
             i = csh.create(admin, "api-test-chan-label",

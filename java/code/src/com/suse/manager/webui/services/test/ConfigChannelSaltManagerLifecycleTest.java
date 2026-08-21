@@ -79,7 +79,7 @@ public class ConfigChannelSaltManagerLifecycleTest extends BaseTestCaseWithUser 
         this.manager = ConfigChannelSaltManager.getInstance();
         manager.setBaseDirPath(tmpSaltRoot.toAbsolutePath().toString());
         user.getOrg().addRole(RoleFactory.CONFIG_ADMIN);
-        user.addToGroup(AccessGroupFactory.CONFIG_ADMIN);
+        user.addToGroup(AccessGroupFactory.getConfigAdmin());
         TestUtils.saveAndFlush(user);
     }
 
@@ -140,7 +140,7 @@ public class ConfigChannelSaltManagerLifecycleTest extends BaseTestCaseWithUser 
         server.setConfigChannels(Arrays.asList(channel1, channel2), user);
         ServerFactory.save(server);
 
-        user.addToGroup(AccessGroupFactory.ACTIVATION_KEY_ADMIN);
+        user.addToGroup(AccessGroupFactory.getActivationKeyAdmin());
         ActivationKey key = ActivationKeyManager.getInstance().createNewActivationKey(user, "bsc1272988");
         ConfigChannelListProcessor proc = new ConfigChannelListProcessor();
         proc.add(key.getConfigChannelsFor(user), channel1);

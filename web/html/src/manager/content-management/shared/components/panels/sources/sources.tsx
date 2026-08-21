@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 
 import { isOrgAdmin } from "core/auth/auth.utils";
 import useRoles from "core/auth/use-roles";
@@ -147,7 +146,7 @@ const Sources = (props: SourcesProps) => {
           {props.softwareSources.length > 0 && (
             <Panel headingLevel="h4" title={t("Software Channels")}>
               <div className="col-12 col-xs-12">
-                <React.Fragment>
+                <Fragment>
                   <dl className="row">
                     <dt className="col-2 col-xs-2">Base Channel:</dt>
                     <dd className="col-10 col-xs-10">{renderSourceEntry(props.softwareSources[0])}</dd>
@@ -163,7 +162,7 @@ const Sources = (props: SourcesProps) => {
                       </ul>
                     </dd>
                   </dl>
-                </React.Fragment>
+                </Fragment>
               </div>
             </Panel>
           )}

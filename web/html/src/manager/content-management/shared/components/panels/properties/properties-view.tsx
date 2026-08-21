@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Dialog } from "components/dialog/LegacyDialog";
 import { ModalLink } from "components/dialog/ModalLink";
 
@@ -35,7 +33,7 @@ const PropertiesView = (props: Props) => {
 
   return (
     <div>
-      <React.Fragment>
+      <>
         <dl className="row">
           <dt className="col-2 col-xs-2">{t("Name")}</dt>
           <dd className="col-10 col-xs-10">{propertiesToShow.name}</dd>
@@ -72,7 +70,7 @@ const PropertiesView = (props: Props) => {
             )}
           </dd>
         </dl>
-      </React.Fragment>
+      </>
     </div>
   );
 };

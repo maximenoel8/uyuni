@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 import { AsyncButton, SubmitButton } from "components/buttons";
 import { DEPRECATED_Select } from "components/input";
@@ -27,7 +26,7 @@ export function ProxyConfig({
   registryTagExample,
   hasCertificates,
 }: Readonly<ProxyConfigProps>) {
-  const [messages, setMessages] = useState<React.ReactNode[]>([]);
+  const [messages, setMessages] = useState<ReactNode[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<boolean | undefined>();
   const [isValidated, setIsValidated] = useState(false);

@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { LinkButton } from "components/buttons";
 
 const ToolTip = (props) => <span title={props.title}>{props.content}</span>;

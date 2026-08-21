@@ -1,4 +1,4 @@
-import * as React from "react";
+import { type RefObject, Component, createRef } from "react";
 
 import { Button } from "components/buttons";
 import { Dialog } from "components/dialog/Dialog";
@@ -35,8 +35,8 @@ type State = {
   loading: boolean;
 };
 
-export class SyncOrgsToPeripheralChannel extends React.Component<SyncPeripheralsProps, State> {
-  private tableRef: React.RefObject<TableRef> = React.createRef();
+export class SyncOrgsToPeripheralChannel extends Component<SyncPeripheralsProps, State> {
+  private tableRef: RefObject<TableRef> = createRef();
 
   constructor(props: SyncPeripheralsProps) {
     super(props);

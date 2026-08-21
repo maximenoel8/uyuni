@@ -157,9 +157,9 @@ public class UserTestUtils  {
         Long id = createUser(userName, orgName);
         User usr = UserFactory.lookupById(id);
         if (orgAdmin) {
-            usr.getAccessGroups().addAll(List.of(AccessGroupFactory.CHANNEL_ADMIN,
-                    AccessGroupFactory.SYSTEM_GROUP_ADMIN, AccessGroupFactory.IMAGE_ADMIN,
-                    AccessGroupFactory.ACTIVATION_KEY_ADMIN, AccessGroupFactory.CONFIG_ADMIN));
+            usr.getAccessGroups().addAll(List.of(AccessGroupFactory.getChannelAdmin(),
+                    AccessGroupFactory.getSystemGroupAdmin(), AccessGroupFactory.getImageAdmin(),
+                    AccessGroupFactory.getActivationKeyAdmin(), AccessGroupFactory.getConfigAdmin()));
             usr.addPermanentRole(RoleFactory.ORG_ADMIN);
             UserFactory.save(usr);
         }

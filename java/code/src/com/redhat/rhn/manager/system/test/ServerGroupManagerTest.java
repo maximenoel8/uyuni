@@ -72,7 +72,7 @@ public class ServerGroupManagerTest extends BaseTestCaseWithUser {
             //Great... No privilege won't let you create a server group.
         }
 
-        user.addToGroup(AccessGroupFactory.SYSTEM_GROUP_ADMIN);
+        user.addToGroup(AccessGroupFactory.getSystemGroupAdmin());
         ServerGroup sg = manager.create(user, NAME, DESCRIPTION);
         assertNotNull(sg);
         assertEquals(NAME, sg.getName());
@@ -81,7 +81,7 @@ public class ServerGroupManagerTest extends BaseTestCaseWithUser {
 
     @Test
     public void testAccess() {
-        user.addToGroup(AccessGroupFactory.SYSTEM_GROUP_ADMIN);
+        user.addToGroup(AccessGroupFactory.getSystemGroupAdmin());
         ManagedServerGroup sg = manager.create(user, NAME, DESCRIPTION);
         assertTrue(manager.canAccess(user, sg));
 
@@ -102,7 +102,7 @@ public class ServerGroupManagerTest extends BaseTestCaseWithUser {
 
     @Test
     public void testRemove() {
-        user.addToGroup(AccessGroupFactory.SYSTEM_GROUP_ADMIN);
+        user.addToGroup(AccessGroupFactory.getSystemGroupAdmin());
         ManagedServerGroup sg = manager.create(user, NAME, DESCRIPTION);
         sg = (ManagedServerGroup) reload(sg);
         User newUser = UserTestUtils.createUser("testDiffUser",
@@ -127,7 +127,7 @@ public class ServerGroupManagerTest extends BaseTestCaseWithUser {
         }
 
         manager.dissociateAdmins(sg, admins, user);
-        user.addToGroup(AccessGroupFactory.SYSTEM_GROUP_ADMIN);
+        user.addToGroup(AccessGroupFactory.getSystemGroupAdmin());
         try {
             manager.remove(newUser, sg);
             fail("Permission error. Can't remove if you don't have access");
@@ -149,7 +149,7 @@ public class ServerGroupManagerTest extends BaseTestCaseWithUser {
 
     @Test
     public void testListNoAssociatedAdmins() {
-        user.addToGroup(AccessGroupFactory.SYSTEM_GROUP_ADMIN);
+        user.addToGroup(AccessGroupFactory.getSystemGroupAdmin());
         ServerGroup sg = manager.create(user, NAME, DESCRIPTION);
         TestUtils.flushAndEvict(sg);
         try {
@@ -176,7 +176,7 @@ public class ServerGroupManagerTest extends BaseTestCaseWithUser {
 
     @Test
     public void testAddRemoveAdmins() {
-        user.addToGroup(AccessGroupFactory.SYSTEM_GROUP_ADMIN);
+        user.addToGroup(AccessGroupFactory.getSystemGroupAdmin());
         ManagedServerGroup sg = manager.create(user, NAME, DESCRIPTION);
         User newUser = UserTestUtils.
             createUser("testDiffUser", user.getOrg().getId());

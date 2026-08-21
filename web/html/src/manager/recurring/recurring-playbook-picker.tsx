@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Component } from "react";
 
 import yaml from "js-yaml";
 
@@ -22,7 +22,7 @@ type StateType = {
   editPlaybook: boolean;
 };
 
-class RecurringPlaybookPicker extends React.Component<PropsType, StateType> {
+class RecurringPlaybookPicker extends Component<PropsType, StateType> {
   constructor(props) {
     super(props);
 

@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import { type ReactNode, useContext, useState } from "react";
 
 import { ControlledInput } from "../ControlledInput";
 import { FormContext } from "../form/Form";
@@ -8,7 +7,7 @@ import styles from "./Radio.module.scss";
 
 type RadioOption = {
   /** The label of this option */
-  label: React.ReactNode;
+  label: ReactNode;
   /** The value to set when this option is selected */
   value: string;
   /** Specific title of this option */
@@ -38,7 +37,7 @@ export function Radio(props: Props) {
   const [isPristine, setIsPristine] = useState(true);
 
   const { items, inputClass, ...propsToPass } = props;
-  const formContext = React.useContext(FormContext);
+  const formContext = useContext(FormContext);
   return (
     <InputBase {...propsToPass}>
       {({ setValue, onBlur }) => {
