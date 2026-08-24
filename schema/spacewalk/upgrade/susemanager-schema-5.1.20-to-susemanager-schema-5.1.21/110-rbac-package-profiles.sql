@@ -13,26 +13,8 @@
 UPDATE access.namespace SET description = 'View/compare package profiles'
     WHERE namespace = 'systems.profiles' AND access_mode = 'R';
 
-UPDATE access.namespace SET description = 'Create/modify package profiles'
+UPDATE access.namespace SET description = 'Create/edit package profiles'
     WHERE namespace = 'systems.profiles' AND access_mode = 'W';
-
--- Move package profile related (view) endpoints to 'systems.profiles' namespace
-UPDATE access.endpointNamespace
-    SET namespace_id =
-        (SELECT id FROM access.namespace where namespace = 'systems.profiles' AND access_mode = 'R')
-    WHERE endpoint_id IN
-        (SELECT id FROM access.endpoint WHERE endpoint IN (
-            '/systems/details/packages/profiles/ShowProfiles.do',
-            '/systems/details/packages/profiles/CompareProfiles.do'));
-
--- Move package profile related (modify) endpoints to 'systems.profiles' namespace
-UPDATE access.endpointNamespace
-    SET namespace_id =
-        (SELECT id FROM access.namespace where namespace = 'systems.profiles' AND access_mode = 'W')
-    WHERE endpoint_id IN
-        (SELECT id FROM access.endpoint WHERE endpoint IN (
-            '/systems/details/packages/profiles/Create.do',
-            '/systems/details/packages/profiles/DeleteProfile.do'));
 
 -- Insert missing profile endpoints
 INSERT INTO access.endpoint (class_method, endpoint, http_method, scope, auth_required)
@@ -47,21 +29,54 @@ INSERT INTO access.endpoint (class_method, endpoint, http_method, scope, auth_re
     SELECT '', '/systems/details/packages/profiles/CompareSystems.do', 'POST', 'W', True
     WHERE NOT EXISTS (SELECT 1 FROM access.endpoint WHERE endpoint = '/systems/details/packages/profiles/CompareSystems.do' AND http_method = 'POST');
 
--- Add new profiles to 'systems.profiles' namespace
+-- Add profile endpoints to 'systems.profiles' namespace before removing legacy mappings.
 INSERT INTO access.endpointNamespace (namespace_id, endpoint_id)
-    SELECT ns.id, ep.id FROM access.namespace ns, access.endpoint ep
+    SELECT ns.id, ep.id
+    FROM access.namespace ns
+    CROSS JOIN access.endpoint ep
     WHERE ns.namespace = 'systems.profiles' AND ns.access_mode = 'R'
-    AND ep.endpoint = '/systems/details/packages/profiles/CompareProfiles.do' AND ep.http_method = 'POST'
+    AND ep.endpoint IN (
+        '/systems/details/packages/profiles/ShowProfiles.do',
+        '/systems/details/packages/profiles/CompareProfiles.do',
+        '/systems/details/packages/profiles/CompareSystems.do')
+    AND ep.http_method IN ('GET', 'POST')
+    AND ep.scope = 'W'
     ON CONFLICT DO NOTHING;
 
 INSERT INTO access.endpointNamespace (namespace_id, endpoint_id)
-    SELECT ns.id, ep.id FROM access.namespace ns, access.endpoint ep
-    WHERE ns.namespace = 'systems.profiles' AND ns.access_mode = 'R'
-    AND ep.endpoint = '/systems/details/packages/profiles/CompareSystems.do' AND ep.http_method = 'GET'
+    SELECT ns.id, ep.id
+    FROM access.namespace ns
+    CROSS JOIN access.endpoint ep
+    WHERE ns.namespace = 'systems.profiles' AND ns.access_mode = 'W'
+    AND ep.endpoint IN (
+        '/systems/details/packages/profiles/Create.do',
+        '/systems/details/packages/profiles/DeleteProfile.do')
+    AND ep.http_method IN ('GET', 'POST')
+    AND ep.scope = 'W'
     ON CONFLICT DO NOTHING;
 
-INSERT INTO access.endpointNamespace (namespace_id, endpoint_id)
-    SELECT ns.id, ep.id FROM access.namespace ns, access.endpoint ep
-    WHERE ns.namespace = 'systems.profiles' AND ns.access_mode = 'R'
-    AND ep.endpoint = '/systems/details/packages/profiles/CompareSystems.do' AND ep.http_method = 'POST'
-    ON CONFLICT DO NOTHING;
+-- Remove the replaced package-profile mappings.
+DELETE FROM access.endpointNamespace old_mapping
+USING access.namespace old_namespace, access.endpoint endpoint
+WHERE old_mapping.namespace_id = old_namespace.id
+    AND old_mapping.endpoint_id = endpoint.id
+    AND old_namespace.namespace = 'systems.software.packages'
+    AND old_namespace.access_mode = 'R'
+    AND endpoint.endpoint IN (
+        '/systems/details/packages/profiles/ShowProfiles.do',
+        '/systems/details/packages/profiles/CompareProfiles.do',
+        '/systems/details/packages/profiles/CompareSystems.do')
+    AND endpoint.http_method IN ('GET', 'POST')
+    AND endpoint.scope = 'W';
+
+DELETE FROM access.endpointNamespace old_mapping
+USING access.namespace old_namespace, access.endpoint endpoint
+WHERE old_mapping.namespace_id = old_namespace.id
+    AND old_mapping.endpoint_id = endpoint.id
+    AND old_namespace.namespace = 'systems.software.packages'
+    AND old_namespace.access_mode = 'W'
+    AND endpoint.endpoint IN (
+        '/systems/details/packages/profiles/Create.do',
+        '/systems/details/packages/profiles/DeleteProfile.do')
+    AND endpoint.http_method IN ('GET', 'POST')
+    AND endpoint.scope = 'W';

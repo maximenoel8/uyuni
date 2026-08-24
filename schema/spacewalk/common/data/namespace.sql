@@ -669,7 +669,7 @@ INSERT INTO access.namespace (namespace, access_mode, description)
     VALUES ('systems.profiles', 'R', 'View/compare package profiles')
     ON CONFLICT (namespace, access_mode) DO NOTHING;
 INSERT INTO access.namespace (namespace, access_mode, description)
-    VALUES ('systems.profiles', 'W', 'Create/manage package profiles')
+    VALUES ('systems.profiles', 'W', 'Create/edit package profiles')
     ON CONFLICT (namespace, access_mode) DO NOTHING;
 INSERT INTO access.namespace (namespace, access_mode, description)
     VALUES ('systems.custom_data', 'R', NULL)
