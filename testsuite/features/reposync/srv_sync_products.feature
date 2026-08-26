@@ -81,7 +81,8 @@ Feature: Synchronize products in the products page of the Setup Wizard
     When I use spacewalk-common-channel to add channel "opensuse_leap15_6" with arch "x86_64"
     And I kill running spacewalk-repo-sync for "opensuse_leap15_6-x86_64" channel
     And I use spacewalk-repo-sync to sync channel "opensuse_leap15_6-x86_64" including "python3-ply dmidecode libunwind" packages
-    And I use spacewalk-common-channel to add all "leap15.6-client-tools" channels with arch "x86_64"
+    Then the channel "opensuse_leap15_6-x86_64" should not be empty
+    When I use spacewalk-common-channel to add all "leap15.6-client-tools" channels with arch "x86_64"
     And I wait until all synchronized channels for "leap15.6-client-tools-x86_64" have finished
 
 @containerized_server
