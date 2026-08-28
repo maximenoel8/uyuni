@@ -1,4 +1,4 @@
-import { type ComponentProps, Fragment, useEffect, useState } from "react";
+import { type ComponentProps, useEffect, useState } from "react";
 
 import { Button } from "components/buttons";
 import { closeDialog, Dialog } from "components/dialog/LegacyDialog";
@@ -122,19 +122,21 @@ const FilterEdit = (props: FilterEditProps) => {
   const modalTitle = props.editing ? t("Filter Details") : t("Create a new filter");
 
   return (
-    <Fragment>
-      <ModalButton
-        id={`${props.id}-modal-link`}
-        icon={props.icon}
-        text={props.buttonText}
-        title={props.buttonTitle}
-        target={modalNameId}
-        className={props.className}
-        onClick={() => {
-          setOpen(true);
-          setFormData(props.initialFilterForm);
-        }}
-      />
+    <>
+      {!props.hideButton && (
+        <ModalButton
+          id={`${props.id}-modal-link`}
+          icon={props.icon}
+          text={props.buttonText}
+          title={props.buttonTitle}
+          target={modalNameId}
+          className={props.className}
+          onClick={() => {
+            setOpen(true);
+            setItem(props.initialFilterForm);
+          }}
+        />
+      )}
       <Dialog
         id={modalNameId}
         title={modalTitle}
@@ -201,7 +203,7 @@ const FilterEdit = (props: FilterEditProps) => {
           </Fragment>
         }
       />
-    </Fragment>
+    </>
   );
 };
 
