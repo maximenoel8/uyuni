@@ -6940,8 +6940,8 @@ Follow this url to see the full list of inactive systems:
         </context-group>
       </trans-unit>
       <trans-unit id="system.sdc.missing.config_deploy2" xml:space="preserve">
-        <source>You may ensure that configuration deployment capability will be enabled on this system by selecting this system in the &lt;a href={0}&gt;{1}&lt;/a&gt; screen and then clicking "{2}"</source>
-        <target state="translated">ທ່ານສາມາດໝັ້ນໃຈໄດ້ວ່າຄວາມສາມາດໃນການນຳໃຊ້ການກຳນົດຄ່າຈະຖືກເປີດໃຊ້ງານໃນລະບົບນີ້ ໂດຍການເລືອກລະບົບນີ້ໃນໜ້າຈໍ &lt;a href={0}&gt;{1}&lt;/a&gt; ແລ້ວກົດ "{2}"</target>
+        <source>You may ensure that configuration deployment capability will be enabled on this system by selecting this system in the  &lt;a href={0}&gt;{1}&lt;/a&gt; screen and then clicking "{2}"</source>
+        <target state="needs-adaptation">ທ່ານສາມາດໝັ້ນໃຈໄດ້ວ່າຄວາມສາມາດໃນການນຳໃຊ້ການກຳນົດຄ່າຈະຖືກເປີດໃຊ້ງານໃນລະບົບນີ້ ໂດຍການເລືອກລະບົບນີ້ໃນໜ້າຈໍ &lt;a href={0}&gt;{1}&lt;/a&gt; ແລ້ວກົດ "{2}"</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Activation Key Pages</context>
         </context-group>
@@ -11830,8 +11830,9 @@ For a detailed analysis, please refer to the log files.</source>
         <target state="translated">@@PRODUCT_NAME@@ {0} ໝົດອາຍຸການໃຊ້ງານ (End of Life) ແລ້ວ</target>
       </trans-unit>
       <trans-unit id="notification.endoflife.expired.detail" xml:space="preserve">
-        <source>&lt;p&gt;@@PRODUCT_NAME@@ {0} has reached the end of its lifecycle. General support has ended on &lt;strong&gt;{1}&lt;/strong&gt;. To continue receiving support, this @@PRODUCT_NAME@@ server instance &lt;strong&gt;must be&lt;/strong&gt; upgraded.&lt;/p&gt; &lt;p&gt;For Additional information on how to upgrade @@PRODUCT_NAME@@, please review the section &lt;em&gt;Upgrade&lt;/em&gt; of the &lt;em&gt;Installation/Upgrade Guide&lt;/em&gt; in the official documentation.&lt;/p&gt;</source>
-        <target state="translated">&lt;p&gt;@@PRODUCT_NAME@@ {0} ໄດ້ສິ້ນສຸດວົງຈອນຊີວິດການໃຊ້ງານແລ້ວ. ການສະໜັບສະໜູນທົ່ວໄປໄດ້ສິ້ນສຸດລົງໃນວັນທີ &lt;strong&gt;{1}&lt;/strong&gt;. ເພື່ອຮັບການສະໜັບສະໜູນຕໍ່ໄປ, ອິນສະແຕນຊ໌ເຊີເວີ @@PRODUCT_NAME@@ ນີ້ &lt;strong&gt;ຈະຕ້ອງໄດ້ຮັບ&lt;/strong&gt; ການອັບເກຣດ.&lt;/p&gt; &lt;p&gt;ສຳລັບຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບວິທີອັບເກຣດ @@PRODUCT_NAME@@, ກະລຸນາເບິ່ງທີ່ຫົວຂໍ້ &lt;em&gt;ອັບເກຣດ (Upgrade)&lt;/em&gt; ຂອງ &lt;em&gt;ຄູ່ມືການຕິດຕັ້ງ/ອັບເກຣດ&lt;/em&gt; ໃນເອກະສານທາງການ.&lt;/p&gt;</target>
+        <source>&lt;p&gt;@@PRODUCT_NAME@@ {0} has reached the end of its lifecycle. General support has ended on &lt;strong&gt;{1}&lt;/strong&gt;. To continue receiving support, this @@PRODUCT_NAME@@ server instance &lt;strong&gt;must be&lt;/strong&gt; upgraded.&lt;/p&gt;
+          &lt;p&gt;For Additional information on how to upgrade @@PRODUCT_NAME@@, please review the section &lt;em&gt;Upgrade&lt;/em&gt; of the &lt;em&gt;Installation/Upgrade Guide&lt;/em&gt; in the official documentation.&lt;/p&gt;</source>
+        <target state="needs-adaptation">&lt;p&gt;@@PRODUCT_NAME@@ {0} ໄດ້ສິ້ນສຸດວົງຈອນຊີວິດການໃຊ້ງານແລ້ວ. ການສະໜັບສະໜູນທົ່ວໄປໄດ້ສິ້ນສຸດລົງໃນວັນທີ &lt;strong&gt;{1}&lt;/strong&gt;. ເພື່ອຮັບການສະໜັບສະໜູນຕໍ່ໄປ, ອິນສະແຕນຊ໌ເຊີເວີ @@PRODUCT_NAME@@ ນີ້ &lt;strong&gt;ຈະຕ້ອງໄດ້ຮັບ&lt;/strong&gt; ການອັບເກຣດ.&lt;/p&gt; &lt;p&gt;ສຳລັບຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບວິທີອັບເກຣດ @@PRODUCT_NAME@@, ກະລຸນາເບິ່ງທີ່ຫົວຂໍ້ &lt;em&gt;ອັບເກຣດ (Upgrade)&lt;/em&gt; ຂອງ &lt;em&gt;ຄູ່ມືການຕິດຕັ້ງ/ອັບເກຣດ&lt;/em&gt; ໃນເອກະສານທາງການ.&lt;/p&gt;</target>
       </trans-unit>
       <trans-unit id="notification.diskcheck.summary" xml:space="preserve">
         <source>You are running out of space on your @@PRODUCT_NAME@@ {0}. This is {1}</source>
@@ -11846,8 +11847,9 @@ For a detailed analysis, please refer to the log files.</source>
         <target state="translated">@@PRODUCT_NAME@@ {0} ໃກ້ຈະໝົດອາຍຸການໃຊ້ງານແລ້ວ</target>
       </trans-unit>
       <trans-unit id="notification.endoflife.expiring.detail" xml:space="preserve">
-        <source>&lt;p&gt;@@PRODUCT_NAME@@ {0} is approaching the end of its lifecycle. Please consider upgrading this server instance before general support ends on &lt;strong&gt;{1}&lt;/strong&gt;.&lt;/p&gt; &lt;p&gt;For Additional information on how to upgrade @@PRODUCT_NAME@@, please review the section &lt;em&gt;Upgrade&lt;/em&gt; of the &lt;em&gt;Installation/Upgrade Guide&lt;/em&gt; in the official documentation.&lt;/p&gt;</source>
-        <target state="translated">&lt;p&gt;@@PRODUCT_NAME@@ {0} ໃກ້ຈະສິ້ນສຸດວົງຈອນຊີວິດການໃຊ້ງານແລ້ວ. ກະລຸນາພິຈາລະນາອັບເກຣດອິນສະແຕນຊ໌ເຊີເວີນີ້ກ່ອນທີ່ການສະໜັບສະໜູນທົ່ວໄປຈະສິ້ນສຸດໃນວັນທີ &lt;strong&gt;{1}&lt;/strong&gt;.&lt;/p&gt; &lt;p&gt;ສຳລັບຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບວິທີອັບເກຣດ @@PRODUCT_NAME@@, ກະລຸນາເບິ່ງທີ່ຫົວຂໍ້ &lt;em&gt;ອັບເກຣດ (Upgrade)&lt;/em&gt; ຂອງ &lt;em&gt;ຄູ່ມືການຕິດຕັ້ງ/ອັບເກຣດ&lt;/em&gt; ໃນເອກະສານທາງການ.&lt;/p&gt;</target>
+        <source>&lt;p&gt;@@PRODUCT_NAME@@ {0} is approaching the end of its lifecycle. Please consider upgrading this server instance before general support ends on &lt;strong&gt;{1}&lt;/strong&gt;.&lt;/p&gt;
+          &lt;p&gt;For Additional information on how to upgrade @@PRODUCT_NAME@@, please review the section &lt;em&gt;Upgrade&lt;/em&gt; of the &lt;em&gt;Installation/Upgrade Guide&lt;/em&gt; in the official documentation.&lt;/p&gt;</source>
+        <target state="needs-adaptation">&lt;p&gt;@@PRODUCT_NAME@@ {0} ໃກ້ຈະສິ້ນສຸດວົງຈອນຊີວິດການໃຊ້ງານແລ້ວ. ກະລຸນາພິຈາລະນາອັບເກຣດອິນສະແຕນຊ໌ເຊີເວີນີ້ກ່ອນທີ່ການສະໜັບສະໜູນທົ່ວໄປຈະສິ້ນສຸດໃນວັນທີ &lt;strong&gt;{1}&lt;/strong&gt;.&lt;/p&gt; &lt;p&gt;ສຳລັບຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບວິທີອັບເກຣດ @@PRODUCT_NAME@@, ກະລຸນາເບິ່ງທີ່ຫົວຂໍ້ &lt;em&gt;ອັບເກຣດ (Upgrade)&lt;/em&gt; ຂອງ &lt;em&gt;ຄູ່ມືການຕິດຕັ້ງ/ອັບເກຣດ&lt;/em&gt; ໃນເອກະສານທາງການ.&lt;/p&gt;</target>
       </trans-unit>
       <trans-unit id="scc-data-forwarding.enabled" xml:space="preserve">
         <source>SCC Data Forwarding enabled successfully.</source>
@@ -11898,20 +11900,32 @@ For a detailed analysis, please refer to the log files.</source>
         <target state="translated">&lt;p&gt;ເຊີເວີລູກຂ່າຍ {0} ໄດ້ຍົກເລີກການລົງທະບຽນຈາກຮັບນີ້ແລ້ວ ແລະ ບໍ່ສາມາດຈັດການໃນຖານະເຊີເວີລູກຂ່າຍໄດ້ອີກ..&lt;/p&gt; &lt;p&gt;ການກຳນົດຄ່າການຊິງຄ໌ທີ່ມີຢູ່ທັງໝົດໄດ້ຖືກລຶບອອກແລ້ວ.&lt;/p&gt;</target>
       </trans-unit>
       <trans-unit id="task.action.rejection.reason" xml:space="preserve">
-        <source>This action was not executed because its earliest execution date was too old. When more than {0} hours pass between the scheduling and the picking up, the action is discarded because it is considered no longer relevant. Please reschedule this action if you really want it to be executed.</source>
-        <target state="translated">ການດຳເນີນການນີ້ບໍ່ໄດ້ຖືກປະຕິບັດ ເນື່ອງຈາກວັນທີເລີ່ມການດຳເນີນການເກົ່າເກີນໄປ. ເມື່ອເວລາຜ່ານໄປຫຼາຍກວ່າ {0} ຊົ່ວໂມງລະຫວ່າງການກຳນົດເວລາ ແລະ ການເລີ່ມເຮັດວຽກ, ການດຳເນີນການຈະຖືກຍົກເລີກເພາະຖືວ່າບໍ່ກ່ຽວຂ້ອງອີກຕໍ່ໄປ. ກະລຸນາກຳນົດເວລາໃໝ່ຫາກທ່ານຕ້ອງການດຳເນີນການນີ້ແທ້ໆ.</target>
+        <source>This action was not executed because its earliest execution date was too old. When more than {0} hours pass between the scheduling and the picking up, the action is discarded because it is considered no longer relevant.
+          Please reschedule this action if you really want it to be executed.</source>
+        <target state="needs-adaptation">ການດຳເນີນການນີ້ບໍ່ໄດ້ຖືກປະຕິບັດ ເນື່ອງຈາກວັນທີເລີ່ມການດຳເນີນການເກົ່າເກີນໄປ. ເມື່ອເວລາຜ່ານໄປຫຼາຍກວ່າ {0} ຊົ່ວໂມງລະຫວ່າງການກຳນົດເວລາ ແລະ ການເລີ່ມເຮັດວຽກ, ການດຳເນີນການຈະຖືກຍົກເລີກເພາະຖືວ່າບໍ່ກ່ຽວຂ້ອງອີກຕໍ່ໄປ. ກະລຸນາກຳນົດເວລາໃໝ່ຫາກທ່ານຕ້ອງການດຳເນີນການນີ້ແທ້ໆ.</target>
       </trans-unit>
       <trans-unit id="task.action.rejection.notcompliant" xml:space="preserve">
-        <source>The action you attempted could not be executed because the @@PRODUCT_NAME@@ PAYG system is unable to send accounting data to the cloud provider. For a detailed analysis, please refer to the log files.</source>
-        <target state="translated">ການດຳເນີນການທີ່ທ່ານພະຍາຍາມບໍ່ສາມາດປະຕິບັດໄດ້ ເນື່ອງຈາກລະບົບ @@PRODUCT_NAME@@ PAYG ບໍ່ສາມາດສົ່ງຂໍ້ມູນບັນຊີໄປຍັງຜູ້ໃຫ້ບໍລິການຄລາວໄດ້. ສຳລັບການວິເຄາະລະອຽດ, ກະລຸນາເບິ່ງໄຟລ໌ບັນທຶກ.</target>
+        <source>
+The action you attempted could not be executed because the @@PRODUCT_NAME@@ PAYG system is unable to send accounting data to the cloud provider.
+For a detailed analysis, please refer to the log files.
+	</source>
+        <target state="needs-adaptation">ການດຳເນີນການທີ່ທ່ານພະຍາຍາມບໍ່ສາມາດປະຕິບັດໄດ້ ເນື່ອງຈາກລະບົບ @@PRODUCT_NAME@@ PAYG ບໍ່ສາມາດສົ່ງຂໍ້ມູນບັນຊີໄປຍັງຜູ້ໃຫ້ບໍລິການຄລາວໄດ້. ສຳລັບການວິເຄາະລະອຽດ, ກະລຸນາເບິ່ງໄຟລ໌ບັນທຶກ.</target>
       </trans-unit>
       <trans-unit id="task.action.rejection.notcompliantPaygByos" xml:space="preserve">
-        <source>The action you attempted could not be executed because @@PRODUCT_NAME@@ is PAYG, there are BYOS servers in the current action and currently no SCC credentials are set. To amend this situation, please set SCC credentials for this @@PRODUCT_NAME@@ instance and try again. You can also execute the action only on Pay-as-you-go instances. Bring-your-own-subscription servers detected: {0}.</source>
-        <target state="translated">ການດຳເນີນການທີ່ທ່ານພະຍາຍາມບໍ່ສາມາດປະຕິບັດໄດ້ ເນື່ອງຈາກ @@PRODUCT_NAME@@ ເປັນແບບ PAYG, ແຕ່ມີເຊີເວີ BYOS ໃນການດຳເນີນການນີ້ ແລະ ຍັງບໍ່ໄດ້ຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC. ເພື່ອແກ້ໄຂ, ກະລຸນາຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC ສຳລັບ @@PRODUCT_NAME@@ ນີ້ແລ້ວລອງໃໝ່. ຫຼື ທ່ານສາມາດເລືອກດຳເນີນການສະເພາະອິນສະແຕນຊ໌ Pay-as-you-go ເທົ່ານັ້ນ. ເຊີເວີ Bring-your-own-subscription ທີ່ກວດພົບ: {0}.</target>
+        <source>
+          The action you attempted could not be executed because @@PRODUCT_NAME@@ is PAYG, there are BYOS servers in the current action and currently no SCC credentials are set.
+          To amend this situation, please set SCC credentials for this @@PRODUCT_NAME@@ instance and try again. You can also execute the action only on Pay-as-you-go instances.
+          Bring-your-own-subscription servers detected: {0}.
+        </source>
+        <target state="needs-adaptation">ການດຳເນີນການທີ່ທ່ານພະຍາຍາມບໍ່ສາມາດປະຕິບັດໄດ້ ເນື່ອງຈາກ @@PRODUCT_NAME@@ ເປັນແບບ PAYG, ແຕ່ມີເຊີເວີ BYOS ໃນການດຳເນີນການນີ້ ແລະ ຍັງບໍ່ໄດ້ຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC. ເພື່ອແກ້ໄຂ, ກະລຸນາຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC ສຳລັບ @@PRODUCT_NAME@@ ນີ້ແລ້ວລອງໃໝ່. ຫຼື ທ່ານສາມາດເລືອກດຳເນີນການສະເພາະອິນສະແຕນຊ໌ Pay-as-you-go ເທົ່ານັ້ນ. ເຊີເວີ Bring-your-own-subscription ທີ່ກວດພົບ: {0}.</target>
       </trans-unit>
       <trans-unit id="task.action.rejection.notcompliantPaygByosActionChain" xml:space="preserve">
-        <source>The action chain you attempted could not be executed because @@PRODUCT_NAME@@ is PAYG, there are BYOS servers in the current action chain and currently no SCC credentials are set. To amend this situation, please set SCC credentials for this @@PRODUCT_NAME@@ instance and try again. You can also execute the action chain only on Pay-as-you-go instances. Bring-your-own-subscription servers detected: {0}.</source>
-        <target state="translated">Action chain ທີ່ທ່ານພະຍາຍາມບໍ່ສາມາດປະຕິບັດໄດ້ ເນື່ອງຈາກ @@PRODUCT_NAME@@ ເປັນແບບ PAYG, ແຕ່ມີເຊີເວີ BYOS ໃນ action chain ນີ້ ແລະ ຍັງບໍ່ໄດ້ຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC. ເພື່ອແກ້ໄຂ, ກະລຸນາຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC ສຳລັບ @@PRODUCT_NAME@@ ນີ້ແລ້ວລອງໃໝ່. ຫຼື ທ່ານສາມາດເລືອກດຳເນີນການສະເພາະອິນສະແຕນຊ໌ Pay-as-you-go ເທົ່ານັ້ນ. ເຊີເວີ Bring-your-own-subscription ທີ່ກວດພົບ: {0}.</target>
+        <source>
+          The action chain you attempted could not be executed because @@PRODUCT_NAME@@ is PAYG, there are BYOS servers in the current action chain and currently no SCC credentials are set.
+          To amend this situation, please set SCC credentials for this @@PRODUCT_NAME@@ instance and try again. You can also execute the action chain only on Pay-as-you-go instances.
+          Bring-your-own-subscription servers detected: {0}.
+        </source>
+        <target state="needs-adaptation">Action chain ທີ່ທ່ານພະຍາຍາມບໍ່ສາມາດປະຕິບັດໄດ້ ເນື່ອງຈາກ @@PRODUCT_NAME@@ ເປັນແບບ PAYG, ແຕ່ມີເຊີເວີ BYOS ໃນ action chain ນີ້ ແລະ ຍັງບໍ່ໄດ້ຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC. ເພື່ອແກ້ໄຂ, ກະລຸນາຕັ້ງຄ່າຂໍ້ມູນປະຈຳຕົວ SCC ສຳລັບ @@PRODUCT_NAME@@ ນີ້ແລ້ວລອງໃໝ່. ຫຼື ທ່ານສາມາດເລືອກດຳເນີນການສະເພາະອິນສະແຕນຊ໌ Pay-as-you-go ເທົ່ານັ້ນ. ເຊີເວີ Bring-your-own-subscription ທີ່ກວດພົບ: {0}.</target>
       </trans-unit>
       <trans-unit id="bootstrap.minion.error.conflicting.minionid" xml:space="preserve">
         <source>Systems with conflicting minion ID and machine ID were found ({0}, {1}). Onboarding aborted. Please remove conflicting systems first ({2}, {3})</source>
