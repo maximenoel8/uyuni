@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-21 10:56+0200\n"
+"POT-Creation-Date: 2026-08-28 09:48+0200\n"
 "PO-Revision-Date: 2025-01-20 19:50+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/uyuni/spacecmd/sk/>\n"
@@ -302,20 +302,20 @@ msgid "Contact Method:         %s"
 msgstr "Kontaktná metóda:         %s"
 
 #: ../src/spacecmd/activationkey.py:970 ../src/spacecmd/kickstart.py:426
-#: ../src/spacecmd/system.py:2981
+#: ../src/spacecmd/system.py:3109
 msgid "Software Channels"
 msgstr "Softvérové kanály"
 
 #: ../src/spacecmd/activationkey.py:978 ../src/spacecmd/configchannel.py:809
-#: ../src/spacecmd/configchannel.py:923 ../src/spacecmd/system.py:2990
+#: ../src/spacecmd/configchannel.py:923 ../src/spacecmd/system.py:3119
 msgid "Configuration Channels"
 msgstr "Konfiguračné kanály"
 
-#: ../src/spacecmd/activationkey.py:984 ../src/spacecmd/system.py:2995
+#: ../src/spacecmd/activationkey.py:984 ../src/spacecmd/system.py:3124
 msgid "Entitlements"
 msgstr "Oprávnenia"
 
-#: ../src/spacecmd/activationkey.py:989 ../src/spacecmd/system.py:3001
+#: ../src/spacecmd/activationkey.py:989 ../src/spacecmd/system.py:3130
 msgid "System Groups"
 msgstr "Systémové skupiny"
 
@@ -426,7 +426,6 @@ msgid "File %s exists, confirm overwrite file? (y/n)"
 msgstr "Súbor %s existuje, potvrďte prepísanie súboru? (a/n)"
 
 #: ../src/spacecmd/activationkey.py:1330
-#, python-brace-format
 msgid "Failed to save exported keys to file: {}"
 msgstr "Zlyhalo uloženie exportovaných kľúčov do súboru: {}"
 
@@ -495,7 +494,7 @@ msgstr ""
 "                   potomkov, názvoch konfiguračných kanálov "
 
 #: ../src/spacecmd/activationkey.py:1482 ../src/spacecmd/kickstart.py:461
-#: ../src/spacecmd/system.py:2976
+#: ../src/spacecmd/system.py:3104
 msgid "Activation Keys"
 msgstr "Aktivačné kľúče"
 
@@ -602,7 +601,7 @@ msgstr "použitie: activationkey_setdescription KĽÚČ POPIS"
 msgid "activationkey_setcontactmethod: Set the contact method to use for systems registered with this key."
 msgstr "activationkey_setcontactmethod: Nastaviť kontaktnú metódu, ktorá sa má použiť pre systémy registrované s týmto kľúčom."
 
-#: ../src/spacecmd/activationkey.py:1809 ../src/spacecmd/system.py:4280
+#: ../src/spacecmd/activationkey.py:1809 ../src/spacecmd/system.py:4572
 msgid "Available contact methods: "
 msgstr "Dostupné kontaktné metódy: "
 
@@ -681,8 +680,8 @@ msgstr "použitie: configchannel_listsystems KANÁL"
 
 #: ../src/spacecmd/configchannel.py:82 ../src/spacecmd/configchannel.py:117
 #: ../src/spacecmd/group.py:547 ../src/spacecmd/group.py:601
-#: ../src/spacecmd/group.py:639 ../src/spacecmd/system.py:3212
-#: ../src/spacecmd/system.py:3310
+#: ../src/spacecmd/group.py:639 ../src/spacecmd/system.py:3392
+#: ../src/spacecmd/system.py:3498
 msgid "This version of the API doesn't support this method"
 msgstr "Táto verzia API nepodporuje túto metódu"
 
@@ -881,7 +880,7 @@ msgid "Name:        %s"
 msgstr "Názov:        %s"
 
 #: ../src/spacecmd/configchannel.py:446 ../src/spacecmd/cryptokey.py:252
-#: ../src/spacecmd/group.py:573 ../src/spacecmd/system.py:683
+#: ../src/spacecmd/group.py:573 ../src/spacecmd/system.py:715
 #, python-format
 msgid "Description: %s"
 msgstr "Popis: %s"
@@ -934,7 +933,7 @@ msgstr "Označenie:"
 #: ../src/spacecmd/configchannel.py:482 ../src/spacecmd/cryptokey.py:107
 #: ../src/spacecmd/custominfo.py:60 ../src/spacecmd/custominfo.py:205
 #: ../src/spacecmd/group.py:190 ../src/spacecmd/softwarechannel.py:788
-#: ../src/spacecmd/system.py:3667
+#: ../src/spacecmd/system.py:3873
 msgid "Description:"
 msgstr "Popis:"
 
@@ -1193,8 +1192,8 @@ msgstr "použitie: configchannel_verifyfile KANÁL SÚBOR <SYSTÉMY>"
 msgid "No valid system selected"
 msgstr "Nie je vybraný žiadny platný systém"
 
-#: ../src/spacecmd/configchannel.py:1111 ../src/spacecmd/system.py:514
-#: ../src/spacecmd/system.py:534 ../src/spacecmd/system.py:966
+#: ../src/spacecmd/configchannel.py:1111 ../src/spacecmd/system.py:543
+#: ../src/spacecmd/system.py:564 ../src/spacecmd/system.py:1014
 #, python-format
 msgid "Action ID: %i"
 msgstr "ID akcie: %i"
@@ -1267,7 +1266,6 @@ msgid "Exporting cc %s to %s"
 msgstr "Exportovanie cc %s do %s"
 
 #: ../src/spacecmd/configchannel.py:1266
-#, python-brace-format
 msgid "File '{}' exists, confirm overwrite file? (y/n)"
 msgstr "Súbor '{}' existuje, potvrďte prepísanie súboru? (a/n)"
 
@@ -1589,7 +1587,6 @@ msgid "usage: custominfo_details KEY ..."
 msgstr "použitie: custominfo_details KĽÚČ ..."
 
 #: ../src/spacecmd/custominfo.py:157
-#, python-brace-format
 msgid "No keys matched argument '{}'."
 msgstr "Žiadne kľúče sa nezhodujú s argumentom '{}'."
 
@@ -1675,7 +1672,7 @@ msgstr "Neplatný inštalovaný typ"
 msgid "A path is required"
 msgstr "Vyžaduje sa cesta"
 
-#: ../src/spacecmd/distribution.py:135 ../src/spacecmd/system.py:2639
+#: ../src/spacecmd/distribution.py:135 ../src/spacecmd/system.py:2761
 msgid "A base channel is required"
 msgstr "Vyžaduje sa základný kanál"
 
@@ -1791,11 +1788,11 @@ msgstr ""
 "voľby:\n"
 "  -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/errata.py:117 ../src/spacecmd/system.py:422
-#: ../src/spacecmd/system.py:731 ../src/spacecmd/system.py:887
-#: ../src/spacecmd/system.py:1024 ../src/spacecmd/system.py:1799
-#: ../src/spacecmd/system.py:3821 ../src/spacecmd/system.py:4131
-#: ../src/spacecmd/system.py:4193 ../src/spacecmd/system.py:4358
+#: ../src/spacecmd/errata.py:117 ../src/spacecmd/system.py:448
+#: ../src/spacecmd/system.py:765 ../src/spacecmd/system.py:930
+#: ../src/spacecmd/system.py:1073 ../src/spacecmd/system.py:1883
+#: ../src/spacecmd/system.py:4035 ../src/spacecmd/system.py:4401
+#: ../src/spacecmd/system.py:4468 ../src/spacecmd/system.py:4655
 msgid "Start Time [now]:"
 msgstr "Čas spustenia [teraz]:"
 
@@ -1808,11 +1805,12 @@ msgstr "Žiadne opravy na aplikovanie"
 msgid "Errata             Systems"
 msgstr "Systémy             opráv chýb"
 
-#: ../src/spacecmd/errata.py:172 ../src/spacecmd/system.py:235
-#: ../src/spacecmd/system.py:472 ../src/spacecmd/system.py:826
-#: ../src/spacecmd/system.py:949 ../src/spacecmd/system.py:1104
-#: ../src/spacecmd/system.py:1818 ../src/spacecmd/system.py:3833
-#: ../src/spacecmd/system.py:4377
+#. pylint: disable-next=consider-using-f-string
+#: ../src/spacecmd/errata.py:172 ../src/spacecmd/system.py:262
+#: ../src/spacecmd/system.py:498 ../src/spacecmd/system.py:867
+#: ../src/spacecmd/system.py:997 ../src/spacecmd/system.py:1156
+#: ../src/spacecmd/system.py:1902 ../src/spacecmd/system.py:4049
+#: ../src/spacecmd/system.py:4674
 #, python-format
 msgid "Start Time: %s"
 msgstr "Čas spustenia: %s"
@@ -2065,10 +2063,10 @@ msgstr "group_removesystems: Odstrániť systémy zo skupiny"
 msgid "usage: group_removesystems GROUP <SYSTEMS>"
 msgstr "použitie: group_removesystems SKUPINA <SYSTÉMY>"
 
-#: ../src/spacecmd/group.py:151 ../src/spacecmd/system.py:121
-#: ../src/spacecmd/system.py:237 ../src/spacecmd/system.py:480
-#: ../src/spacecmd/system.py:1511 ../src/spacecmd/system.py:1820
-#: ../src/spacecmd/system.py:4379
+#: ../src/spacecmd/group.py:151 ../src/spacecmd/system.py:137
+#: ../src/spacecmd/system.py:264 ../src/spacecmd/system.py:506
+#: ../src/spacecmd/system.py:1581 ../src/spacecmd/system.py:1904
+#: ../src/spacecmd/system.py:4676
 msgid "Systems"
 msgstr "Systémy"
 
@@ -2078,8 +2076,8 @@ msgstr "Odstrániť tieto systémy [a/N]:"
 
 #: ../src/spacecmd/group.py:164 ../src/spacecmd/schedule.py:386
 #: ../src/spacecmd/ssm.py:88 ../src/spacecmd/ssm.py:136
-#: ../src/spacecmd/ssm.py:186 ../src/spacecmd/system.py:4421
-#: ../src/spacecmd/system.py:4508
+#: ../src/spacecmd/ssm.py:186 ../src/spacecmd/system.py:4725
+#: ../src/spacecmd/system.py:4840
 msgid "No systems found"
 msgstr "Nenašli sa žiadne systémy"
 
@@ -3659,7 +3657,6 @@ msgstr "Pre názov %s nebola nájdená žiadna organizácia"
 #: ../src/spacecmd/org.py:208 ../src/spacecmd/org.py:241
 #: ../src/spacecmd/org.py:275 ../src/spacecmd/org.py:311
 #: ../src/spacecmd/org.py:420 ../src/spacecmd/org.py:456
-#, python-brace-format
 msgid "Organisation '{}' was not found"
 msgstr "Organizácia '{}' nebola nájdená"
 
@@ -3689,7 +3686,6 @@ msgid "No trust organisation found for the name %s"
 msgstr "Pre názov %s nebola nájdená žiadna dôveryhodná organizácia"
 
 #: ../src/spacecmd/org.py:279 ../src/spacecmd/org.py:315
-#, python-brace-format
 msgid "Organisation '{}' to trust for, was not found"
 msgstr "Organizácia '{}', ktorej možno dôverovať, nebola nájdená"
 
@@ -3723,7 +3719,6 @@ msgid "No trusted organisation found for the name %s"
 msgstr "Pre názov %s nebola nájdená žiadna dôveryhodná organizácia"
 
 #: ../src/spacecmd/org.py:354
-#, python-brace-format
 msgid "Trusted organisation '{}' was not found"
 msgstr "Dôveryhodná organizácia '{}' nebola nájdená"
 
@@ -3942,7 +3937,7 @@ msgid "No packages found to remove"
 msgstr "Nenašli sa žiadne balíky na odstránenie"
 
 #: ../src/spacecmd/package.py:210 ../src/spacecmd/package.py:268
-#: ../src/spacecmd/softwarechannel.py:1560 ../src/spacecmd/system.py:951
+#: ../src/spacecmd/softwarechannel.py:1560 ../src/spacecmd/system.py:999
 msgid "Remove these packages [y/N]:"
 msgstr "Odstrániť tieto balíky [a/N]:"
 
@@ -4010,7 +4005,7 @@ msgid "proxy_container_config: create a proxy system and return its configuratio
 msgstr "proxy_container_config: vytvoriť systém proxy a vrátiť jeho konfiguračný súbor"
 
 #: ../src/spacecmd/proxy.py:33
-#, fuzzy
+#, fuzzy, python-format
 #| msgid ""
 #| "usage: proxy_container_config [options] PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL ROOT_CA CRT KEY\n"
 #| "\n"
@@ -4077,7 +4072,7 @@ msgid "proxy_container_config_generate_cert: create a proxy system and return it
 msgstr "proxy_container_config_generate_cert: vytvoriť systém proxy a vrátiť jeho konfiguračný súbor"
 
 #: ../src/spacecmd/proxy.py:90
-#, fuzzy
+#, fuzzy, python-format
 #| msgid ""
 #| "usage: proxy_container_config_generate_cert PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL\n"
 #| "\n"
@@ -4207,7 +4202,6 @@ msgid "Repository SSL Client Key:         %s"
 msgstr "Kľúč klienta SSL repozitára:         %s"
 
 #: ../src/spacecmd/repo.py:103
-#, python-brace-format
 msgid "No repositories found for '{}' query"
 msgstr "Pre dopyt '{}' neboli nájdené žiadne repozitáre"
 
@@ -4428,7 +4422,6 @@ msgid "%s  # Systems"
 msgstr "%s  # Systémy"
 
 #: ../src/spacecmd/report.py:174
-#, python-brace-format
 msgid "No errata found for '{}'"
 msgstr "Nenašli sa žiadne opravy chýb pre '{}'"
 
@@ -4442,28 +4435,28 @@ msgstr "použitie: report_ipaddresses [<SYSTÉMY>]"
 
 #: ../src/spacecmd/report.py:204 ../src/spacecmd/report.py:268
 #: ../src/spacecmd/scap.py:68 ../src/spacecmd/scap.py:210
-#: ../src/spacecmd/system.py:218 ../src/spacecmd/system.py:399
-#: ../src/spacecmd/system.py:584 ../src/spacecmd/system.py:749
-#: ../src/spacecmd/system.py:905 ../src/spacecmd/system.py:1042
-#: ../src/spacecmd/system.py:1170 ../src/spacecmd/system.py:1240
-#: ../src/spacecmd/system.py:1295 ../src/spacecmd/system.py:1394
-#: ../src/spacecmd/system.py:1626 ../src/spacecmd/system.py:1690
-#: ../src/spacecmd/system.py:1734 ../src/spacecmd/system.py:1814
-#: ../src/spacecmd/system.py:1956 ../src/spacecmd/system.py:1998
-#: ../src/spacecmd/system.py:2126 ../src/spacecmd/system.py:2194
-#: ../src/spacecmd/system.py:2277 ../src/spacecmd/system.py:2332
-#: ../src/spacecmd/system.py:2392 ../src/spacecmd/system.py:2451
-#: ../src/spacecmd/system.py:2509 ../src/spacecmd/system.py:2570
-#: ../src/spacecmd/system.py:2649 ../src/spacecmd/system.py:2730
-#: ../src/spacecmd/system.py:2785 ../src/spacecmd/system.py:2888
-#: ../src/spacecmd/system.py:3041 ../src/spacecmd/system.py:3110
-#: ../src/spacecmd/system.py:3164 ../src/spacecmd/system.py:3233
-#: ../src/spacecmd/system.py:3329 ../src/spacecmd/system.py:3429
-#: ../src/spacecmd/system.py:3493 ../src/spacecmd/system.py:3549
-#: ../src/spacecmd/system.py:3725 ../src/spacecmd/system.py:4003
-#: ../src/spacecmd/system.py:4146 ../src/spacecmd/system.py:4208
-#: ../src/spacecmd/system.py:4256 ../src/spacecmd/system.py:4314
-#: ../src/spacecmd/system.py:4373
+#: ../src/spacecmd/system.py:245 ../src/spacecmd/system.py:425
+#: ../src/spacecmd/system.py:616 ../src/spacecmd/system.py:783
+#: ../src/spacecmd/system.py:948 ../src/spacecmd/system.py:1091
+#: ../src/spacecmd/system.py:1223 ../src/spacecmd/system.py:1301
+#: ../src/spacecmd/system.py:1357 ../src/spacecmd/system.py:1464
+#: ../src/spacecmd/system.py:1706 ../src/spacecmd/system.py:1771
+#: ../src/spacecmd/system.py:1819 ../src/spacecmd/system.py:1898
+#: ../src/spacecmd/system.py:2046 ../src/spacecmd/system.py:2090
+#: ../src/spacecmd/system.py:2229 ../src/spacecmd/system.py:2300
+#: ../src/spacecmd/system.py:2387 ../src/spacecmd/system.py:2441
+#: ../src/spacecmd/system.py:2502 ../src/spacecmd/system.py:2563
+#: ../src/spacecmd/system.py:2624 ../src/spacecmd/system.py:2688
+#: ../src/spacecmd/system.py:2771 ../src/spacecmd/system.py:2856
+#: ../src/spacecmd/system.py:2911 ../src/spacecmd/system.py:3020
+#: ../src/spacecmd/system.py:3172 ../src/spacecmd/system.py:3243
+#: ../src/spacecmd/system.py:3343 ../src/spacecmd/system.py:3413
+#: ../src/spacecmd/system.py:3518 ../src/spacecmd/system.py:3628
+#: ../src/spacecmd/system.py:3693 ../src/spacecmd/system.py:3749
+#: ../src/spacecmd/system.py:3935 ../src/spacecmd/system.py:4255
+#: ../src/spacecmd/system.py:4416 ../src/spacecmd/system.py:4483
+#: ../src/spacecmd/system.py:4537 ../src/spacecmd/system.py:4607
+#: ../src/spacecmd/system.py:4670
 msgid "No systems selected"
 msgstr "Žiadne vybrané systémy"
 
@@ -4505,14 +4498,14 @@ msgstr "scap_listxccdfscans: Vrátiť zoznam dokončených skenovaní OpenSCAP p
 msgid "usage: scap_listxccdfscans <SYSTEMS>"
 msgstr "použitie: scap_listxccdfscans <SYSTÉMY>"
 
-#: ../src/spacecmd/scap.py:79 ../src/spacecmd/system.py:613
-#: ../src/spacecmd/system.py:1256 ../src/spacecmd/system.py:1308
-#: ../src/spacecmd/system.py:1407 ../src/spacecmd/system.py:2137
-#: ../src/spacecmd/system.py:2462 ../src/spacecmd/system.py:2520
-#: ../src/spacecmd/system.py:2743 ../src/spacecmd/system.py:2798
-#: ../src/spacecmd/system.py:3054 ../src/spacecmd/system.py:3179
-#: ../src/spacecmd/system.py:3271 ../src/spacecmd/system.py:3354
-#: ../src/spacecmd/system.py:3442
+#: ../src/spacecmd/scap.py:79 ../src/spacecmd/system.py:644
+#: ../src/spacecmd/system.py:1316 ../src/spacecmd/system.py:1370
+#: ../src/spacecmd/system.py:1477 ../src/spacecmd/system.py:2240
+#: ../src/spacecmd/system.py:2574 ../src/spacecmd/system.py:2635
+#: ../src/spacecmd/system.py:2869 ../src/spacecmd/system.py:2924
+#: ../src/spacecmd/system.py:3185 ../src/spacecmd/system.py:3358
+#: ../src/spacecmd/system.py:3451 ../src/spacecmd/system.py:3543
+#: ../src/spacecmd/system.py:3641
 #, python-format
 msgid "System: %s"
 msgstr "Systém: %s"
@@ -4716,7 +4709,7 @@ msgid "Date:      %s"
 msgstr "Dátum:      %s"
 
 #: ../src/spacecmd/schedule.py:283 ../src/spacecmd/schedule.py:380
-#: ../src/spacecmd/system.py:3186
+#: ../src/spacecmd/system.py:3365
 #, python-format
 msgid "Completed: %s"
 msgstr "Dokončené: %s"
@@ -4853,7 +4846,6 @@ msgid "If no date is provided it will delete all archived actions"
 msgstr "Ak nie je zadaný žiadny dátum, vymažú sa všetky archivované akcie"
 
 #: ../src/spacecmd/schedule.py:492
-#, python-brace-format
 msgid "Do you want to delete ({}) archived actions? [y/N]"
 msgstr "Chcete vymazať všetky ({}) archivované akcie? [a/N]"
 
@@ -4874,7 +4866,6 @@ msgid "If no date is provided it will archive all completed actions"
 msgstr "Ak nie je zadaný žiadny dátum, archivujú sa všetky dokončené akcie"
 
 #: ../src/spacecmd/schedule.py:551
-#, python-brace-format
 msgid "Do you want to archive ({}) completed actions? [y/N]"
 msgstr "Chcete archivovať všetky ({}) dokončené akcie? [a/N]"
 
@@ -5320,7 +5311,7 @@ msgstr "                            softvérového kanála, ktoré môžu byť v
 msgid "usage: softwarechannel_listarches"
 msgstr "použitie: softwarechannel_listarches"
 
-#: ../src/spacecmd/softwarechannel.py:660 ../src/spacecmd/system.py:3974
+#: ../src/spacecmd/softwarechannel.py:660 ../src/spacecmd/system.py:4226
 msgid "options:"
 msgstr "voľby:"
 
@@ -6140,12 +6131,10 @@ msgstr "zlúčenie opráv chýb zo softvérového kanála "
 
 #. pylint: disable=len-as-condition
 #: ../src/spacecmd/softwarechannel.py:2578
-#, python-brace-format
 msgid "{} contains no errata which is not already present in {}"
 msgstr "{} neobsahuje žiadne opravy chýb, ktoré nie sú už prítomné v {}"
 
 #: ../src/spacecmd/softwarechannel.py:2583
-#, python-brace-format
 msgid "errata to add to channel {}: "
 msgstr "opravy chýb na pridanie do kanála {}: "
 
@@ -6159,7 +6148,6 @@ msgid " errata to  "
 msgstr " opravy chýb do  "
 
 #: ../src/spacecmd/softwarechannel.py:2594
-#, python-brace-format
 msgid "Perform these changes to channel {} [y/N]:"
 msgstr "Vykonať tieto zmeny v kanáli {} [a/N]:"
 
@@ -6387,63 +6375,63 @@ msgstr "ssm_clear: Odstrániť všetky systémy zo SSM"
 msgid "usage: ssm_clear"
 msgstr "použitie: ssm_clear"
 
-#: ../src/spacecmd/system.py:52
+#: ../src/spacecmd/system.py:55
 msgid "Same"
 msgstr "Rovnaké"
 
-#: ../src/spacecmd/system.py:53
+#: ../src/spacecmd/system.py:56
 msgid "Only here"
 msgstr "Iba tu"
 
-#: ../src/spacecmd/system.py:54
+#: ../src/spacecmd/system.py:57
 msgid "Newer here"
 msgstr "Novšie tu"
 
-#: ../src/spacecmd/system.py:55
+#: ../src/spacecmd/system.py:58
 msgid "Only there"
 msgstr "Iba tam"
 
-#: ../src/spacecmd/system.py:56
+#: ../src/spacecmd/system.py:59
 msgid "Newer there"
 msgstr "Novšie tam"
 
-#: ../src/spacecmd/system.py:76 ../src/spacecmd/system.py:3919
+#: ../src/spacecmd/system.py:83 ../src/spacecmd/system.py:4146
 msgid "Package"
 msgstr "Balík"
 
-#: ../src/spacecmd/system.py:77
+#: ../src/spacecmd/system.py:84
 msgid "This System"
 msgstr "Tento systém"
 
-#: ../src/spacecmd/system.py:78
+#: ../src/spacecmd/system.py:85
 msgid "Other System"
 msgstr "Iný systém"
 
-#: ../src/spacecmd/system.py:79 ../src/spacecmd/system.py:3922
+#: ../src/spacecmd/system.py:86 ../src/spacecmd/system.py:4149
 msgid "Difference"
 msgstr "Rozdiel"
 
-#: ../src/spacecmd/system.py:127
+#: ../src/spacecmd/system.py:144
 msgid "Removing Channels"
 msgstr "Odstránenie kanálov"
 
-#: ../src/spacecmd/system.py:130
+#: ../src/spacecmd/system.py:147
 msgid "Adding Channels"
 msgstr "Pridanie kanálov"
 
-#: ../src/spacecmd/system.py:168
+#: ../src/spacecmd/system.py:184
 msgid "system_list: List all system profiles"
 msgstr "system_list: Vypísať zoznam všetkých systémových profilov"
 
-#: ../src/spacecmd/system.py:169
+#: ../src/spacecmd/system.py:185
 msgid "usage: system_list"
 msgstr "použitie: system_list"
 
-#: ../src/spacecmd/system.py:185
+#: ../src/spacecmd/system.py:212
 msgid "system_reboot: Reboot a system"
 msgstr "system_reboot: Reštartovať systém"
 
-#: ../src/spacecmd/system.py:186
+#: ../src/spacecmd/system.py:213
 msgid ""
 "usage: system_reboot <SYSTEMS> [options])\n"
 "\n"
@@ -6455,51 +6443,51 @@ msgstr ""
 "voľby:\n"
 "  -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:241
+#: ../src/spacecmd/system.py:268
 msgid "Reboot these systems [y/N]:"
 msgstr "Reštartovať tieto systémy [a/N]:"
 
-#: ../src/spacecmd/system.py:257
+#: ../src/spacecmd/system.py:285
 msgid "system_search: List systems that match the given criteria"
 msgstr "system_search: Vypísať zoznam systémov, ktoré vyhovujú zadaným kritériám"
 
-#: ../src/spacecmd/system.py:258
+#: ../src/spacecmd/system.py:286
 msgid "usage: system_search QUERY"
 msgstr "použitie: system_search DOPYT"
 
-#: ../src/spacecmd/system.py:260
+#: ../src/spacecmd/system.py:288
 msgid "Available Fields:"
 msgstr "Dostupné polia:"
 
-#: ../src/spacecmd/system.py:263
+#: ../src/spacecmd/system.py:291
 msgid "Examples:"
 msgstr "Príklady:"
 
-#: ../src/spacecmd/system.py:264
+#: ../src/spacecmd/system.py:292
 msgid "> system_search device:vmware"
 msgstr "> system_search device:vmware"
 
-#: ../src/spacecmd/system.py:265
+#: ../src/spacecmd/system.py:293
 msgid "> system_search ip:192.168.82"
 msgstr "> system_search ip:192.168.82"
 
-#: ../src/spacecmd/system.py:283 ../src/spacecmd/system.py:290
+#: ../src/spacecmd/system.py:312 ../src/spacecmd/system.py:319
 msgid "Invalid query"
 msgstr "Neplatný dopyt"
 
-#: ../src/spacecmd/system.py:326
+#: ../src/spacecmd/system.py:350
 msgid "Invalid search field"
 msgstr "Neplatné vyhľadávacie pole"
 
-#: ../src/spacecmd/system.py:356
+#: ../src/spacecmd/system.py:382
 msgid "system_runscript: Schedule a script to run on the list of"
 msgstr "system_runscript: Naplánovať spustenie skriptu v poskytnutom"
 
-#: ../src/spacecmd/system.py:357
+#: ../src/spacecmd/system.py:383
 msgid "                  systems provided"
 msgstr "                  zozname systémov"
 
-#: ../src/spacecmd/system.py:358
+#: ../src/spacecmd/system.py:384
 msgid ""
 "usage: system_runscript <SYSTEMS> [options])\n"
 "\n"
@@ -6521,240 +6509,240 @@ msgstr ""
 "  -l OZNAČENIE\n"
 "  -f SÚBOR"
 
-#: ../src/spacecmd/system.py:403
+#: ../src/spacecmd/system.py:429
 msgid "User [root]:"
 msgstr "Používateľ [root]:"
 
-#: ../src/spacecmd/system.py:404
+#: ../src/spacecmd/system.py:430
 msgid "Group [root]:"
 msgstr "Skupina [root]:"
 
-#: ../src/spacecmd/system.py:413
+#: ../src/spacecmd/system.py:439
 msgid "Timeout (in seconds) [600]:"
 msgstr "Časový limit (v sekundách) [600]:"
 
-#: ../src/spacecmd/system.py:419
+#: ../src/spacecmd/system.py:445
 msgid "Invalid timeout"
 msgstr "Neplatný časový limit"
 
-#: ../src/spacecmd/system.py:425
+#: ../src/spacecmd/system.py:451
 msgid "Label/Short Description [default]:"
 msgstr "Označenie/Krátky popis [predvolené]:"
 
-#: ../src/spacecmd/system.py:429
+#: ../src/spacecmd/system.py:455
 msgid "Script File [create]:"
 msgstr "Súbor so skriptom [vytvoriť]:"
 
-#: ../src/spacecmd/system.py:442
+#: ../src/spacecmd/system.py:468
 msgid "No script provided"
 msgstr "Nie je poskytnutý žiadny skript"
 
-#: ../src/spacecmd/system.py:461
+#: ../src/spacecmd/system.py:487
 msgid "A script file is required"
 msgstr "Vyžaduje sa súbor so skriptom"
 
-#: ../src/spacecmd/system.py:469
+#: ../src/spacecmd/system.py:495
 #, python-format
 msgid "User:       %s"
 msgstr "Používateľ::       %s"
 
-#: ../src/spacecmd/system.py:470
+#: ../src/spacecmd/system.py:496
 #, python-format
 msgid "Group:      %s"
 msgstr "Skupina:      %s"
 
-#: ../src/spacecmd/system.py:471
+#: ../src/spacecmd/system.py:497
 #, python-format
 msgid "Timeout:    %i seconds"
 msgstr "Časový limit:    %i sekúnd"
 
-#: ../src/spacecmd/system.py:475
+#: ../src/spacecmd/system.py:501
 #, python-format
 msgid "Label:      %s"
 msgstr "Označenie:      %s"
 
-#: ../src/spacecmd/system.py:476
+#: ../src/spacecmd/system.py:502
 msgid "Script Contents"
 msgstr "Obsah skriptov"
 
-#: ../src/spacecmd/system.py:538 ../src/spacecmd/system.py:841
-#: ../src/spacecmd/system.py:969 ../src/spacecmd/system.py:1121
-#: ../src/spacecmd/system.py:1131 ../src/spacecmd/system.py:4539
+#: ../src/spacecmd/system.py:568 ../src/spacecmd/system.py:882
+#: ../src/spacecmd/system.py:1017 ../src/spacecmd/system.py:1173
+#: ../src/spacecmd/system.py:1183 ../src/spacecmd/system.py:4880
 #, python-format
 msgid "Failed to schedule %s"
 msgstr "Nepodarilo sa naplánovať %s"
 
-#: ../src/spacecmd/system.py:541
+#: ../src/spacecmd/system.py:571
 #, python-format
 msgid "Scheduled: %i system(s)"
 msgstr "Naplánované: %i systém(y)"
 
-#: ../src/spacecmd/system.py:548 ../src/spacecmd/utils.py:259
+#: ../src/spacecmd/system.py:578 ../src/spacecmd/utils.py:259
 #, python-format
 msgid "Could not remove %s"
 msgstr "Nepodarilo sa odstrániť %s"
 
-#: ../src/spacecmd/system.py:557
+#: ../src/spacecmd/system.py:588
 msgid "system_listhardware: List the hardware details of a system"
 msgstr "system_listhardware: Vypísať podrobnosti o hardvéri systému"
 
-#: ../src/spacecmd/system.py:558
+#: ../src/spacecmd/system.py:589
 msgid "usage: system_listhardware <SYSTEMS>"
 msgstr "použitie: system_listhardware <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:617
+#: ../src/spacecmd/system.py:648
 msgid "Network"
 msgstr "Sieť"
 
-#: ../src/spacecmd/system.py:626
+#: ../src/spacecmd/system.py:657
 #, python-format
 msgid "Interface:   %s"
 msgstr "Rozhranie:   %s"
 
-#: ../src/spacecmd/system.py:627
+#: ../src/spacecmd/system.py:658
 #, python-format
 msgid "MAC Address: %s"
 msgstr "MAC adresa: %s"
 
-#: ../src/spacecmd/system.py:628
+#: ../src/spacecmd/system.py:659
 #, python-format
 msgid "IP Address:  %s"
 msgstr "IP adresa:  %s"
 
-#: ../src/spacecmd/system.py:629
+#: ../src/spacecmd/system.py:660
 #, python-format
 msgid "Netmask:     %s"
 msgstr "Maska siete:     %s"
 
-#: ../src/spacecmd/system.py:630
+#: ../src/spacecmd/system.py:661
 #, python-format
 msgid "Broadcast:   %s"
 msgstr "Broadcast:   %s"
 
-#: ../src/spacecmd/system.py:631
+#: ../src/spacecmd/system.py:662
 #, python-format
 msgid "Module:      %s"
 msgstr "Modul:      %s"
 
-#: ../src/spacecmd/system.py:635
+#: ../src/spacecmd/system.py:666
 msgid "CPU"
 msgstr "CPU"
 
-#: ../src/spacecmd/system.py:637
+#: ../src/spacecmd/system.py:668
 #, python-format
 msgid "Count:    %i"
 msgstr "Počet:    %i"
 
-#: ../src/spacecmd/system.py:638
+#: ../src/spacecmd/system.py:669
 #, python-format
 msgid "Arch:     %s"
 msgstr "Arch:     %s"
 
-#: ../src/spacecmd/system.py:639
+#: ../src/spacecmd/system.py:670
 #, python-format
 msgid "MHz:      %s"
 msgstr "MHz:      %s"
 
-#: ../src/spacecmd/system.py:640
+#: ../src/spacecmd/system.py:671
 #, python-format
 msgid "Cache:    %s"
 msgstr "Vyrovnávacia pamäť:    %s"
 
-#: ../src/spacecmd/system.py:641
+#: ../src/spacecmd/system.py:672
 #, python-format
 msgid "Vendor:   %s"
 msgstr "Dodávateľ:   %s"
 
-#: ../src/spacecmd/system.py:642
+#: ../src/spacecmd/system.py:673
 #, python-format
 msgid "Model:    %s"
 msgstr "Model:    %s"
 
-#: ../src/spacecmd/system.py:645
+#: ../src/spacecmd/system.py:676
 msgid "Memory"
 msgstr "Pamäť"
 
-#: ../src/spacecmd/system.py:647
+#: ../src/spacecmd/system.py:678
 #, python-format
 msgid "RAM:  %i"
 msgstr "RAM:  %i"
 
-#: ../src/spacecmd/system.py:648
+#: ../src/spacecmd/system.py:679
 #, python-format
 msgid "Swap: %i"
 msgstr "Odkladací priestor: %i"
 
-#: ../src/spacecmd/system.py:652
+#: ../src/spacecmd/system.py:683
 msgid "DMI"
 msgstr "DMI"
 
-#: ../src/spacecmd/system.py:653
+#: ../src/spacecmd/system.py:684
 #, python-format
 msgid "Vendor:       %s"
 msgstr "Dodávateľ:       %s"
 
-#: ../src/spacecmd/system.py:654
+#: ../src/spacecmd/system.py:685
 #, python-format
 msgid "System:       %s"
 msgstr "Systém:       %s"
 
-#: ../src/spacecmd/system.py:655
+#: ../src/spacecmd/system.py:686
 #, python-format
 msgid "Product:      %s"
 msgstr "Produkt:      %s"
 
-#: ../src/spacecmd/system.py:656
+#: ../src/spacecmd/system.py:687
 #, python-format
 msgid "Board:        %s"
 msgstr "Doska:        %s"
 
-#: ../src/spacecmd/system.py:659
+#: ../src/spacecmd/system.py:690
 msgid "Asset"
 msgstr "Majetok"
 
-#: ../src/spacecmd/system.py:665
+#: ../src/spacecmd/system.py:696
 #, python-format
 msgid "BIOS Release: %s"
 msgstr "Vydanie systému BIOS: %s"
 
-#: ../src/spacecmd/system.py:666
+#: ../src/spacecmd/system.py:697
 #, python-format
 msgid "BIOS Vendor:  %s"
 msgstr "Dodávateľ systému BIOS:  %s"
 
-#: ../src/spacecmd/system.py:667
+#: ../src/spacecmd/system.py:698
 #, python-format
 msgid "BIOS Version: %s"
 msgstr "Verzia systému BIOS: %s"
 
-#: ../src/spacecmd/system.py:671
+#: ../src/spacecmd/system.py:702
 msgid "Devices"
 msgstr "Zariadenia"
 
-#: ../src/spacecmd/system.py:681
+#: ../src/spacecmd/system.py:712
 msgid "Description: None"
 msgstr "Popis: Žiadny"
 
-#: ../src/spacecmd/system.py:685
+#: ../src/spacecmd/system.py:717
 #, python-format
 msgid "Driver:      %s"
 msgstr "Ovládač:      %s"
 
-#: ../src/spacecmd/system.py:686
+#: ../src/spacecmd/system.py:718
 #, python-format
 msgid "Class:       %s"
 msgstr "Trieda:       %s"
 
-#: ../src/spacecmd/system.py:687
+#: ../src/spacecmd/system.py:719
 #, python-format
 msgid "Bus:         %s"
 msgstr "Zbernica:         %s"
 
-#: ../src/spacecmd/system.py:695
+#: ../src/spacecmd/system.py:728
 msgid "system_installpackage: Install a package on a system"
 msgstr "system_installpackage: Nainštalovať balík do systému"
 
-#: ../src/spacecmd/system.py:696
+#: ../src/spacecmd/system.py:729
 msgid ""
 "usage: system_installpackage <SYSTEMS> <PACKAGE ...> [options])\n"
 "\n"
@@ -6766,30 +6754,30 @@ msgstr ""
 "voľby:\n"
 "    -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:798
+#: ../src/spacecmd/system.py:835
 msgid "No packages to install"
 msgstr "Žiadne balíky na inštaláciu"
 
-#: ../src/spacecmd/system.py:822
+#: ../src/spacecmd/system.py:862
 #, python-format
 msgid "%s does not have access to all requested packages"
 msgstr "%s nemá prístup ku všetkým požadovaným balíkom"
 
-#: ../src/spacecmd/system.py:828
+#: ../src/spacecmd/system.py:869
 msgid "Install these packages [y/N]:"
 msgstr "Nainštalovať tieto balíky [a/N]:"
 
-#: ../src/spacecmd/system.py:843 ../src/spacecmd/system.py:971
-#: ../src/spacecmd/system.py:1134
+#: ../src/spacecmd/system.py:884 ../src/spacecmd/system.py:1019
+#: ../src/spacecmd/system.py:1185
 #, python-format
 msgid "Scheduled %i system(s)"
 msgstr "Naplánované %i systém(y)"
 
-#: ../src/spacecmd/system.py:851
+#: ../src/spacecmd/system.py:893
 msgid "system_removepackage: Remove a package from a system"
 msgstr "system_removepackage: Odstrániť balík zo systému"
 
-#: ../src/spacecmd/system.py:852
+#: ../src/spacecmd/system.py:894
 msgid ""
 "usage: system_removepackage <SYSTEMS> <PACKAGE ...> [options])\n"
 "\n"
@@ -6801,11 +6789,11 @@ msgstr ""
 "voľby:\n"
 "    -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:979
+#: ../src/spacecmd/system.py:1028
 msgid "system_upgradepackage: Upgrade a package on a system"
 msgstr "system_upgradepackage: Aktualizovať balík v systéme"
 
-#: ../src/spacecmd/system.py:980
+#: ../src/spacecmd/system.py:1029
 msgid ""
 "usage: system_upgradepackage <SYSTEMS> <PACKAGE ...>|* [options]')\n"
 "\n"
@@ -6817,62 +6805,62 @@ msgstr ""
 "voľby:\n"
 "    -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:1065 ../src/spacecmd/system.py:1183
+#: ../src/spacecmd/system.py:1116 ../src/spacecmd/system.py:1236
 #, python-format
 msgid "No upgrades available for %s"
 msgstr "Nie sú k dispozícii žiadne aktualizácie pre %s"
 
-#: ../src/spacecmd/system.py:1088
+#: ../src/spacecmd/system.py:1140
 #, python-format
 msgid "Couldn't get name for package %i"
 msgstr "Nepodarilo sa získať názov balíka %i"
 
-#: ../src/spacecmd/system.py:1097
+#: ../src/spacecmd/system.py:1149
 msgid "Full package update on systems:"
 msgstr "Úplná aktualizácia balíkov v systémoch:"
 
-#: ../src/spacecmd/system.py:1106
+#: ../src/spacecmd/system.py:1158
 msgid "Upgrade these systems/packages [y/N]:"
 msgstr "Aktualizovať tieto systémy/balíky [a/N]:"
 
-#: ../src/spacecmd/system.py:1142
+#: ../src/spacecmd/system.py:1194
 msgid "system_listupgrades: List the available upgrades for a system"
 msgstr "system_listupgrades: Vypísať zoznam dostupných aktualizácií pre systém"
 
-#: ../src/spacecmd/system.py:1143
+#: ../src/spacecmd/system.py:1195
 msgid "usage: system_listupgrades <SYSTEMS>"
 msgstr "použitie: system_listupgrades <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:1211
+#: ../src/spacecmd/system.py:1271
 msgid "system_listinstalledpackages: List the installed packages on a"
 msgstr "system_listinstalledpackages: Vypísať zoznam nainštalovaných balíkov"
 
-#: ../src/spacecmd/system.py:1212
+#: ../src/spacecmd/system.py:1272
 msgid "                              system"
 msgstr "                              v systéme"
 
-#: ../src/spacecmd/system.py:1213
+#: ../src/spacecmd/system.py:1273
 msgid "usage: system_listinstalledpackages <SYSTEMS>"
 msgstr "použitie: system_listinstalledpackages <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:1267
+#: ../src/spacecmd/system.py:1328
 msgid "system_listconfigchannels: List the config channels of a system"
 msgstr "system_listconfigchannels: Vypísať zoznam konfiguračných kanálov systému"
 
-#: ../src/spacecmd/system.py:1268
+#: ../src/spacecmd/system.py:1329
 msgid "usage: system_listconfigchannels <SYSTEMS>"
 msgstr "použitie: system_listconfigchannels <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:1314 ../src/spacecmd/system.py:1417
+#: ../src/spacecmd/system.py:1375 ../src/spacecmd/system.py:1485
 #, python-format
 msgid "%s does not support configuration channels"
 msgstr "%s nepodporuje konfiguračné kanály"
 
-#: ../src/spacecmd/system.py:1351
+#: ../src/spacecmd/system.py:1421
 msgid "system_listconfigfiles: List the managed config files of a system"
 msgstr "system_listconfigfiles: Vypísať zoznam spravovaných konfiguračných súborov systému"
 
-#: ../src/spacecmd/system.py:1352
+#: ../src/spacecmd/system.py:1422
 msgid ""
 "usage: system_listconfigfiles <SYSTEMS>')\n"
 "options:\n"
@@ -6888,24 +6876,24 @@ msgstr ""
 "  -c/--central : vypísať len centrálne spravované súbory\n"
 "  -q/--quiet   : tichý režim (vynechá hlavičku)"
 
-#: ../src/spacecmd/system.py:1440
+#: ../src/spacecmd/system.py:1508
 #, python-format
 msgid "Error, unexpected channel type label %s"
 msgstr "Chyba, neočakávané označenie typu kanála %s"
 
-#: ../src/spacecmd/system.py:1452
+#: ../src/spacecmd/system.py:1522
 msgid "system_addconfigfile: Create a configuration file"
 msgstr "system_addconfigfile: Vytvoriť konfiguračný súbor"
 
-#: ../src/spacecmd/system.py:1453
+#: ../src/spacecmd/system.py:1523
 msgid "Note this is only for system sandbox or locally-managed files"
 msgstr "Poznámka: toto platí len pre systémový sandbox alebo lokálne spravované súbory"
 
-#: ../src/spacecmd/system.py:1454
+#: ../src/spacecmd/system.py:1524
 msgid "Centrally managed files should be created via configchannel_addfile"
 msgstr "Centrálne spravované súbory by sa mali vytvoriť pomocou configchannel_addfile"
 
-#: ../src/spacecmd/system.py:1455
+#: ../src/spacecmd/system.py:1525
 msgid ""
 "usage: system_addconfigfile [SYSTEM] [options]\n"
 "\n"
@@ -6951,28 +6939,28 @@ msgstr ""
 "  ktoré nie sú v XML povolené) je potrebné poslať ako binárne (-b). Vyvinulo sa určité úsilie\n"
 "  na automatickú detekciu súborov, ktoré to vyžadujú, ale možno budete musieť výslovne určiť.\n"
 
-#: ../src/spacecmd/system.py:1522
+#: ../src/spacecmd/system.py:1592
 #, python-format
 msgid "%s is not a valid system"
 msgstr "%s nie je platný systém"
 
-#: ../src/spacecmd/system.py:1532
+#: ../src/spacecmd/system.py:1601
 msgid "System-Sandbox or Locally-Managed? [S/L]:"
 msgstr "Systémový sandbox alebo Lokálne spravované? [S/L]:"
 
-#: ../src/spacecmd/system.py:1548
+#: ../src/spacecmd/system.py:1617
 msgid "Must choose system-sandbox or locally-managed option"
 msgstr "Musíte si zvoliť možnosť systémový sandbox alebo lokálne spravované"
 
-#: ../src/spacecmd/system.py:1553
+#: ../src/spacecmd/system.py:1622
 msgid "Must provide system"
 msgstr "Musíte poskytnúť systém"
 
-#: ../src/spacecmd/system.py:1587
+#: ../src/spacecmd/system.py:1666
 msgid "system_addconfigchannels: Add config channels to a system"
 msgstr "system_addconfigchannels: Pridať konfiguračné kanály do systému"
 
-#: ../src/spacecmd/system.py:1588
+#: ../src/spacecmd/system.py:1667
 msgid ""
 "usage: system_addconfigchannels <SYSTEMS> <CHANNEL ...> [options]\n"
 "\n"
@@ -6986,35 +6974,35 @@ msgstr ""
 "  -t pridá kanály na začiatok zoznamu\n"
 "  -b pridá kanály na koniec zoznamu"
 
-#: ../src/spacecmd/system.py:1632
+#: ../src/spacecmd/system.py:1712
 msgid "Add to top or bottom? [T/b]:"
 msgstr "Pridať na začiatok alebo na koniec? [Z/k]:"
 
-#: ../src/spacecmd/system.py:1656
+#: ../src/spacecmd/system.py:1736
 msgid "system_removeconfigchannels: Remove config channels from a system"
 msgstr "system_removeconfigchannels: Odstrániť konfiguračné kanály zo systému"
 
-#: ../src/spacecmd/system.py:1657
+#: ../src/spacecmd/system.py:1737
 msgid "usage: system_removeconfigchannels <SYSTEMS> <CHANNEL ...>"
 msgstr "použitie: system_removeconfigchannels <SYSTÉMY> <KANÁL ...>"
 
-#: ../src/spacecmd/system.py:1707
+#: ../src/spacecmd/system.py:1789
 msgid "system_setconfigchannelorder: Set the ranked order of configuration channels"
 msgstr "system_setconfigchannelorder: Nastaviť poradie podľa hodnotenia konfiguračných kanálov"
 
-#: ../src/spacecmd/system.py:1708
+#: ../src/spacecmd/system.py:1792
 msgid "usage: system_setconfigchannelorder <SYSTEMS>"
 msgstr "použitie: system_setconfigchannelorder <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:1749
+#: ../src/spacecmd/system.py:1833
 msgid "New Configuration Channels"
 msgstr "Nové konfiguračné kanály"
 
-#: ../src/spacecmd/system.py:1769
+#: ../src/spacecmd/system.py:1853
 msgid "system_deployconfigfiles: Deploy all configuration files for a system"
 msgstr "system_deployconfigfiles: Nasadiť všetky konfiguračné súbory pre systém"
 
-#: ../src/spacecmd/system.py:1770
+#: ../src/spacecmd/system.py:1854
 msgid ""
 "usage: system_deployconfigfiles <SYSTEMS> [options]\n"
 "\n"
@@ -7026,20 +7014,20 @@ msgstr ""
 "voľby:\n"
 "  -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:1824
+#: ../src/spacecmd/system.py:1908
 msgid "Deploy ALL configuration files to these systems [y/N]:"
 msgstr "Nasadiť VŠETKY konfiguračné súbory do týchto systémov [a/N]:"
 
-#: ../src/spacecmd/system.py:1834
+#: ../src/spacecmd/system.py:1916
 #, python-format
 msgid "Scheduled deployment for %i system(s)"
 msgstr "Naplánované nasadenie pre %i systém(y)"
 
-#: ../src/spacecmd/system.py:1842
+#: ../src/spacecmd/system.py:1925
 msgid "system_delete: Delete a system profile"
 msgstr "system_delete: Vymazať systémový profil"
 
-#: ../src/spacecmd/system.py:1843
+#: ../src/spacecmd/system.py:1926
 msgid ""
 "usage: system_delete [options] <SYSTEMS>\n"
 "\n"
@@ -7059,101 +7047,101 @@ msgstr ""
 "             *  'FORCE_DELETE' - skúsiť najprv vyčistiť, ale aj tak vymazať server v prípade chyby\n"
 "    "
 
-#: ../src/spacecmd/system.py:1887
+#: ../src/spacecmd/system.py:1974
 msgid "No systems to delete"
 msgstr "Žiadne systémy na vymazanie"
 
-#: ../src/spacecmd/system.py:1895
+#: ../src/spacecmd/system.py:1982
 #, python-format
 msgid "%s  System ID"
 msgstr "%s  ID systému"
 
-#: ../src/spacecmd/system.py:1895
+#: ../src/spacecmd/system.py:1982
 msgid "Profile"
 msgstr "Profil"
 
-#: ../src/spacecmd/system.py:1903
+#: ../src/spacecmd/system.py:1991
 msgid "Delete these systems [y/N]:"
 msgstr "Vymazať tieto systémy [a/N]:"
 
-#: ../src/spacecmd/system.py:1910
+#: ../src/spacecmd/system.py:1998
 #, python-format
 msgid "%i system(s) scheduled for removal"
 msgstr "%i systém(y) naplánovaný(é) na odstránenie"
 
-#: ../src/spacecmd/system.py:1930
+#: ../src/spacecmd/system.py:2019
 msgid "system_lock: Lock a system"
 msgstr "system_lock: Uzamknúť systém"
 
-#: ../src/spacecmd/system.py:1931
+#: ../src/spacecmd/system.py:2020
 msgid "usage: system_lock <SYSTEMS>"
 msgstr "použitie: system_lock <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:1972
+#: ../src/spacecmd/system.py:2063
 msgid "system_unlock: Unlock a system"
 msgstr "system_unlock: Odomknúť systém"
 
-#: ../src/spacecmd/system.py:1973
+#: ../src/spacecmd/system.py:2064
 msgid "usage: system_unlock <SYSTEMS>"
 msgstr "použitie: system_unlock <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:2014
+#: ../src/spacecmd/system.py:2107
 msgid "system_rename: Rename a system profile"
 msgstr "system_rename: Premenovať systémový profil"
 
-#: ../src/spacecmd/system.py:2015
+#: ../src/spacecmd/system.py:2108
 msgid "usage: system_rename OLDNAME NEWNAME"
 msgstr "použitie: system_rename STARÝ_NÁZOV NOVÝ_NÁZOV"
 
-#: ../src/spacecmd/system.py:2061
+#: ../src/spacecmd/system.py:2156
 msgid "system_refreshpillar: Refresh pillar data of system(s) "
 msgstr "system_refreshpillar: Obnovenie pilierových údajov pre systém(y) "
 
-#: ../src/spacecmd/system.py:2062
+#: ../src/spacecmd/system.py:2157
 msgid "usage: system_refreshpillar [<SYSTEMS>]"
 msgstr "použitie: system_refreshpillar [<SYSTEMS>]"
 
-#: ../src/spacecmd/system.py:2100
+#: ../src/spacecmd/system.py:2202
 msgid "system_listcustomvalues: List the custom values for a system"
 msgstr "system_listcustomvalues: Vypísať zoznam vlastných hodnôt pre systém"
 
-#: ../src/spacecmd/system.py:2101
+#: ../src/spacecmd/system.py:2203
 msgid "usage: system_listcustomvalues <SYSTEMS>"
 msgstr "použitie: system_listcustomvalues <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:2156
+#: ../src/spacecmd/system.py:2260
 msgid "system_addcustomvalue: Set a custom value for a system"
 msgstr "system_addcustomvalue: Nastaviť vlastnú hodnotu pre systém"
 
-#: ../src/spacecmd/system.py:2157
+#: ../src/spacecmd/system.py:2261
 msgid "usage: system_addcustomvalue KEY VALUE <SYSTEMS>"
 msgstr "použitie: system_addcustomvalue KĽÚČ HODNOTA <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:2212
+#: ../src/spacecmd/system.py:2317
 msgid "system_updatecustomvalue: Update a custom value for a system"
 msgstr "system_updatecustomvalue: Aktualizovať vlastnú hodnotu pre systém"
 
-#: ../src/spacecmd/system.py:2213
+#: ../src/spacecmd/system.py:2318
 msgid "usage: system_updatecustomvalue KEY VALUE <SYSTEMS>"
 msgstr "použitie: system_updatecustomvalue KĽÚČ HODNOTA <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:2245
+#: ../src/spacecmd/system.py:2353
 msgid "system_removecustomvalues: Remove a custom value for a system"
 msgstr "system_removecustomvalues: Odstrániť vlastnú hodnotu pre systém"
 
-#: ../src/spacecmd/system.py:2246
+#: ../src/spacecmd/system.py:2354
 msgid "usage: system_removecustomvalues <SYSTEMS> <KEY ...>"
 msgstr "použitie: system_removecustomvalues <SYSTÉMY> <KĽÚČ ...>"
 
-#: ../src/spacecmd/system.py:2282
+#: ../src/spacecmd/system.py:2392
 msgid "Delete these values [y/N]:"
 msgstr "Vymazať tieto hodnoty [a/N]:"
 
-#: ../src/spacecmd/system.py:2300
+#: ../src/spacecmd/system.py:2409
 msgid "system_addnote: Set a note for a system"
 msgstr "system_addnote: Nastaviť poznámku pre systém"
 
-#: ../src/spacecmd/system.py:2301
+#: ../src/spacecmd/system.py:2410
 msgid ""
 "usage: system_addnote <SYSTEM> [options]\n"
 "\n"
@@ -7167,83 +7155,83 @@ msgstr ""
 "  -s PREDMET\n"
 "  -b TELO"
 
-#: ../src/spacecmd/system.py:2336
+#: ../src/spacecmd/system.py:2445
 msgid "Subject of the Note:"
 msgstr "Predmet poznámky:"
 
-#: ../src/spacecmd/system.py:2338
+#: ../src/spacecmd/system.py:2447
 msgid "Note Body (ctrl-D to finish):"
 msgstr "Telo poznámky (ctrl-D na dokončenie):"
 
-#: ../src/spacecmd/system.py:2342
+#: ../src/spacecmd/system.py:2451
 msgid "A subject is required"
 msgstr "Vyžaduje sa predmet"
 
-#: ../src/spacecmd/system.py:2346
+#: ../src/spacecmd/system.py:2455
 msgid "A body is required"
 msgstr "Vyžaduje sa telo"
 
-#: ../src/spacecmd/system.py:2365
+#: ../src/spacecmd/system.py:2474
 msgid "system_deletenotes: Delete notes from a system"
 msgstr "system_deletenotes: Vymazať poznámky zo systému"
 
-#: ../src/spacecmd/system.py:2366
+#: ../src/spacecmd/system.py:2475
 msgid "usage: system_deletenotes <SYSTEM> <ID|*>"
 msgstr "použitie: system_deletenotes <SYSTÉM> <ID|*>"
 
-#: ../src/spacecmd/system.py:2398
+#: ../src/spacecmd/system.py:2508
 msgid "No notes to delete"
 msgstr "Žiadne poznámky na vymazanie"
 
-#: ../src/spacecmd/system.py:2413
+#: ../src/spacecmd/system.py:2523
 #, python-format
 msgid "%s is not a valid note ID"
 msgstr "%s nie je platné ID poznámky"
 
-#: ../src/spacecmd/system.py:2425
+#: ../src/spacecmd/system.py:2536
 msgid "system_listnotes: List the available notes for a system"
 msgstr "system_listnotes: Vypísať zoznam dostupných poznámok pre systém"
 
-#: ../src/spacecmd/system.py:2426
+#: ../src/spacecmd/system.py:2537
 msgid "usage: system_listnotes <SYSTEM>"
 msgstr "použitie: system_listnotes <SYSTÉM>"
 
-#: ../src/spacecmd/system.py:2484
+#: ../src/spacecmd/system.py:2598
 msgid "system_listfqdns: List the associated FQDNs for a system"
 msgstr "system_listfqdns: Vypísať zoznam prislúchajúcich FQDN pre systém"
 
-#: ../src/spacecmd/system.py:2485
+#: ../src/spacecmd/system.py:2599
 msgid "usage: system_listfqdns <SYSTEM>"
 msgstr "použitie: system_listfqdns <SYSTÉM>"
 
-#: ../src/spacecmd/system.py:2537
+#: ../src/spacecmd/system.py:2654
 msgid "system_setbasechannel: Set a system's base software channel"
 msgstr "system_setbasechannel: Nastaviť základný softvérový kanál systému"
 
-#: ../src/spacecmd/system.py:2538
+#: ../src/spacecmd/system.py:2655
 msgid "usage: system_setbasechannel <SYSTEMS> CHANNEL"
 msgstr "použitie: system_setbasechannel <SYSTÉMY> KANÁL"
 
-#: ../src/spacecmd/system.py:2587 ../src/spacecmd/system.py:2676
+#: ../src/spacecmd/system.py:2704 ../src/spacecmd/system.py:2798
 #, python-format
 msgid "System:           %s"
 msgstr "Systém:           %s"
 
-#: ../src/spacecmd/system.py:2588 ../src/spacecmd/system.py:2677
+#: ../src/spacecmd/system.py:2705 ../src/spacecmd/system.py:2799
 #, python-format
 msgid "Old Base Channel: %s"
 msgstr "Starý základný kanál: %s"
 
-#: ../src/spacecmd/system.py:2589 ../src/spacecmd/system.py:2679
+#: ../src/spacecmd/system.py:2706 ../src/spacecmd/system.py:2804
 #, python-format
 msgid "New Base Channel: %s"
 msgstr "Nový základný kanál: %s"
 
-#: ../src/spacecmd/system.py:2608
+#: ../src/spacecmd/system.py:2727
 msgid "system_schedulechangechannels: Schedule changing a system's software channels"
 msgstr "system_schedulechangechannels: Naplánovať zmenu softvérových kanálov systému"
 
-#: ../src/spacecmd/system.py:2609
+#: ../src/spacecmd/system.py:2730
 msgid ""
 "usage: system_setbasechannel <SYSTEMS> [options]\n"
 "\n"
@@ -7259,134 +7247,134 @@ msgstr ""
 "  -c KANÁL_POTOMKA označenia kanálov potomkov (povolené viacnásobné použitie)\n"
 "  -s ČAS_SPUSTENIA predvolený čas je teraz"
 
-#: ../src/spacecmd/system.py:2678
+#: ../src/spacecmd/system.py:2802
 #, python-format
 msgid "Old Child Channels: %s"
 msgstr "Staré kanály potomkov: %s"
 
-#: ../src/spacecmd/system.py:2680
+#: ../src/spacecmd/system.py:2805
 #, python-format
 msgid "New Child channels %s"
 msgstr "Nové kanály potomkov %s"
 
-#: ../src/spacecmd/system.py:2695 ../src/spacecmd/system.py:4392
+#: ../src/spacecmd/system.py:2818 ../src/spacecmd/system.py:4689
 #, python-format
 msgid "Scheduled action id: %s"
 msgstr "Id naplánovanej akcie: %s"
 
-#: ../src/spacecmd/system.py:2702
+#: ../src/spacecmd/system.py:2827
 msgid "system_listbasechannel: List the base channel for a system"
 msgstr "system_listbasechannel: Vypísať zoznam základných kanálov pre systém"
 
-#: ../src/spacecmd/system.py:2703
+#: ../src/spacecmd/system.py:2828
 msgid "usage: system_listbasechannel <SYSTEMS>"
 msgstr "použitie: system_listbasechannel <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:2757
+#: ../src/spacecmd/system.py:2882
 msgid "system_listchildchannels: List the child channels for a system"
 msgstr "system_listchildchannels: Vypísať zoznam kanálov potomkov pre systém"
 
-#: ../src/spacecmd/system.py:2758
+#: ../src/spacecmd/system.py:2883
 msgid "usage: system_listchildchannels <SYSTEMS>"
 msgstr "použitie: system_listchildchannels <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:2812
+#: ../src/spacecmd/system.py:2939
 msgid "system_addchildchannels: Add child channels to a system"
 msgstr "system_addchildchannels: Pridať kanály potomkov do systému"
 
-#: ../src/spacecmd/system.py:2813
+#: ../src/spacecmd/system.py:2940
 msgid "usage: system_addchildchannels <SYSTEMS> <CHANNEL ...>"
 msgstr "použitie: system_addchildchannels <SYSTÉMY> <KANÁL ...>"
 
-#: ../src/spacecmd/system.py:2836
+#: ../src/spacecmd/system.py:2965
 msgid "system_removechildchannels: Remove child channels from a system"
 msgstr "system_removechildchannels: Odstrániť kanály potomkov zo systému"
 
-#: ../src/spacecmd/system.py:2837
+#: ../src/spacecmd/system.py:2966
 msgid "usage: system_removechildchannels <SYSTEMS> <CHANNEL ...>"
 msgstr "použitie: system_removechildchannels <SYSTÉMY> <KANÁL ...>"
 
-#: ../src/spacecmd/system.py:2860
+#: ../src/spacecmd/system.py:2991
 msgid "system_details: Show the details of a system profile"
 msgstr "system_details: Zobraziť podrobnosti o systémovom profile"
 
-#: ../src/spacecmd/system.py:2861
+#: ../src/spacecmd/system.py:2992
 msgid "usage: system_details <SYSTEMS>"
 msgstr "použitie: system_details <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:2914
+#: ../src/spacecmd/system.py:3045
 #, python-format
 msgid "Name:          %s"
 msgstr "Názov:          %s"
 
-#: ../src/spacecmd/system.py:2915
+#: ../src/spacecmd/system.py:3046
 #, python-format
 msgid "System ID:     %i"
 msgstr "ID systému:     %i"
 
-#: ../src/spacecmd/system.py:2918
+#: ../src/spacecmd/system.py:3049
 #, python-format
 msgid "UUID:          %s"
 msgstr "UUID:          %s"
 
-#: ../src/spacecmd/system.py:2920
+#: ../src/spacecmd/system.py:3051
 #, python-format
 msgid "Locked:        %s"
 msgstr "Uzamknutý:        %s"
 
-#: ../src/spacecmd/system.py:2921
+#: ../src/spacecmd/system.py:3052
 #, python-format
 msgid "Registered:    %s"
 msgstr "Registrovaný:    %s"
 
-#: ../src/spacecmd/system.py:2922
+#: ../src/spacecmd/system.py:3053
 #, python-format
 msgid "Last Checkin:  %s"
 msgstr "Posledné prihlásenie:  %s"
 
-#: ../src/spacecmd/system.py:2923
+#: ../src/spacecmd/system.py:3054
 #, python-format
 msgid "OSA Status:    %s"
 msgstr "Stav OSA:    %s"
 
-#: ../src/spacecmd/system.py:2924
+#: ../src/spacecmd/system.py:3055
 #, python-format
 msgid "Last Boot:     %s"
 msgstr "Posledný štart systému:     %s"
 
-#: ../src/spacecmd/system.py:2926
+#: ../src/spacecmd/system.py:3057
 #, python-format
 msgid "Contact Method:%s"
 msgstr "Kontaktná metóda:%s"
 
-#: ../src/spacecmd/system.py:2970
+#: ../src/spacecmd/system.py:3098
 #, python-format
 msgid "Hostname:      %s"
 msgstr "Názov hostiteľa:      %s"
 
-#: ../src/spacecmd/system.py:2971
+#: ../src/spacecmd/system.py:3099
 #, python-format
 msgid "IP Address:    %s"
 msgstr "IP adresa:    %s"
 
-#: ../src/spacecmd/system.py:2972
+#: ../src/spacecmd/system.py:3100
 #, python-format
 msgid "Kernel:        %s"
 msgstr "Jadro:        %s"
 
-#: ../src/spacecmd/system.py:3013
+#: ../src/spacecmd/system.py:3143
 msgid "system_listerrata: List available errata for a system"
 msgstr "system_listerrata: Vypísať zoznam dostupných opráv chýb pre systém"
 
-#: ../src/spacecmd/system.py:3014
+#: ../src/spacecmd/system.py:3144
 msgid "usage: system_listerrata <SYSTEMS>"
 msgstr "použitie: system_listerrata <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:3068
+#: ../src/spacecmd/system.py:3199
 msgid "system_applyerrata: Apply errata to a system"
 msgstr "system_applyerrata: Použiť opravy chýb na systém"
 
-#: ../src/spacecmd/system.py:3069
+#: ../src/spacecmd/system.py:3200
 msgid ""
 "usage: system_applyerrata [options] <SYSTEMS>\n"
 "[ERRATA|search:XXX ...]\n"
@@ -7400,33 +7388,39 @@ msgstr ""
 "voľby:\n"
 "  -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:3131 ../src/spacecmd/system.py:3154
+#: ../src/spacecmd/system.py:3261
+#, fuzzy, python-format
+#| msgid "Can't find system ID for %s"
+msgid "Could not find system IDs for: %s"
+msgstr "Nie je možné nájsť ID systému pre %s"
+
+#: ../src/spacecmd/system.py:3303 ../src/spacecmd/system.py:3331
 msgid "This method is deprecated and will be removed in a future API version. Please use system_listeventhistory instead.\n"
 msgstr "Táto metóda je zastaraná a bude odstránená v budúcej verzii API. Namiesto toho, prosím, použite system_scheduleproductmigration.\n"
 
-#: ../src/spacecmd/system.py:3134
+#: ../src/spacecmd/system.py:3308
 msgid "system_listevents: List the event history for a system"
 msgstr "system_listevents: Vypísať históriu udalostí pre systém"
 
-#: ../src/spacecmd/system.py:3135
+#: ../src/spacecmd/system.py:3309
 msgid "usage: system_listevents <SYSTEMS>"
 msgstr "použitie: system_listevents <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:3185
+#: ../src/spacecmd/system.py:3364
 #, python-format
 msgid "Summary:   %s"
 msgstr "Súhrn:   %s"
 
-#: ../src/spacecmd/system.py:3187
+#: ../src/spacecmd/system.py:3366
 #, python-format
 msgid "Details:   %s"
 msgstr "Podrobnosti:   %s"
 
-#: ../src/spacecmd/system.py:3195
+#: ../src/spacecmd/system.py:3375
 msgid "system_listeventhistory: List the event history for a system"
 msgstr "system_listeventhistory: Vypísať históriu udalostí pre systém"
 
-#: ../src/spacecmd/system.py:3196
+#: ../src/spacecmd/system.py:3376
 msgid ""
 "usage: system_listeventhistory <SYSTEMS> [options]\n"
 "\n"
@@ -7442,178 +7436,179 @@ msgstr ""
 "  -o POSUN preskočí prvé udalosti. Ignoruje sa, ak nie je zadané -l. [Predvolené: 0]\n"
 "  -l OBMEDZENIE obmedzí výsledky na zadaný počet udalostí. [Predvolené: bez obmedzenia]"
 
-#: ../src/spacecmd/system.py:3249
+#: ../src/spacecmd/system.py:3429
 msgid "Invalid offset"
 msgstr "Neplatný posun"
 
-#: ../src/spacecmd/system.py:3256
+#: ../src/spacecmd/system.py:3436
 msgid "Invalid limit"
 msgstr "Neplatné obmedzenie"
 
-#: ../src/spacecmd/system.py:3281
+#: ../src/spacecmd/system.py:3468
 #, python-format
 msgid "Id:           %s"
 msgstr "Id:            %s"
 
-#: ../src/spacecmd/system.py:3282
+#: ../src/spacecmd/system.py:3469
 #, python-format
 msgid "History type: %s"
 msgstr "Typ histórie: %s"
 
-#: ../src/spacecmd/system.py:3283
+#: ../src/spacecmd/system.py:3470
 #, python-format
 msgid "Status:       %s"
 msgstr "Stav:       %s"
 
-#: ../src/spacecmd/system.py:3284
+#: ../src/spacecmd/system.py:3471
 #, python-format
 msgid "Summary:      %s"
 msgstr "Súhrn:      %s"
 
-#: ../src/spacecmd/system.py:3285
+#: ../src/spacecmd/system.py:3472
 #, python-format
 msgid "Completed:    %s"
 msgstr "Dokončené:    %s"
 
-#: ../src/spacecmd/system.py:3293
+#: ../src/spacecmd/system.py:3481
 msgid "system_eventdetails: Retrieve the details of an event for a system"
 msgstr "system_eventdetails: Získať podrobnosti o udalosti pre systém"
 
-#: ../src/spacecmd/system.py:3294
+#: ../src/spacecmd/system.py:3482
 msgid "usage: system_eventdetails <SYSTEM> <EVENT>"
 msgstr "použitie: system_eventdetails <SYSTÉM> <UDALOSŤ>"
 
-#: ../src/spacecmd/system.py:3333
+#: ../src/spacecmd/system.py:3522
 msgid "No event specified"
 msgstr "Nie je zadaná žiadna udalosť"
 
-#: ../src/spacecmd/system.py:3339
+#: ../src/spacecmd/system.py:3528
 msgid "Invalid event id"
 msgstr "Neplatné id udalosti"
 
-#: ../src/spacecmd/system.py:3361
+#. pylint: disable-next=consider-using-f-string
+#: ../src/spacecmd/system.py:3555
 #, python-format
 msgid "No event %s found in the history of system %s"
 msgstr "Nebola nájdená žiadna udalosť %s v histórii systému %s"
 
-#: ../src/spacecmd/system.py:3364
+#: ../src/spacecmd/system.py:3561
 #, python-format
 msgid "Id:              %s"
 msgstr "Id:              %s"
 
-#: ../src/spacecmd/system.py:3366
+#: ../src/spacecmd/system.py:3563
 #, python-format
 msgid "History type:    %s"
 msgstr "Typ histórie:    %s"
 
-#: ../src/spacecmd/system.py:3367
+#: ../src/spacecmd/system.py:3564
 #, python-format
 msgid "Status:          %s"
 msgstr "Stav:          %s"
 
-#: ../src/spacecmd/system.py:3368
+#: ../src/spacecmd/system.py:3565
 #, python-format
 msgid "Summary:         %s"
 msgstr "Súhrn:         %s"
 
-#: ../src/spacecmd/system.py:3370
+#: ../src/spacecmd/system.py:3567
 #, python-format
 msgid "Created:         %s"
 msgstr "Vytvorené:         %s"
 
-#: ../src/spacecmd/system.py:3371
+#: ../src/spacecmd/system.py:3568
 #, python-format
 msgid "Picked up:       %s"
 msgstr "Vyzdvihnuté:       %s"
 
-#: ../src/spacecmd/system.py:3372
+#: ../src/spacecmd/system.py:3569
 #, python-format
 msgid "Completed:       %s"
 msgstr "Vytvorené:       %s"
 
-#: ../src/spacecmd/system.py:3376
+#: ../src/spacecmd/system.py:3573
 #, python-format
 msgid "Earliest action: %s"
 msgstr "Najskoršia akcia: %s"
 
-#: ../src/spacecmd/system.py:3377
+#: ../src/spacecmd/system.py:3574
 #, python-format
 msgid "Result message:  %s"
 msgstr "Správa o výsledku:   %s"
 
-#: ../src/spacecmd/system.py:3378
+#: ../src/spacecmd/system.py:3575
 #, python-format
 msgid "Result code:     %s"
 msgstr "Kód výsledku:     %s"
 
-#: ../src/spacecmd/system.py:3383
+#: ../src/spacecmd/system.py:3580
 msgid "Additional info:"
 msgstr "Ďalšie informácie:"
 
-#: ../src/spacecmd/system.py:3392
+#: ../src/spacecmd/system.py:3589
 #, python-format
 msgid "    Result:          %s"
 msgstr "    Výsledok:          %s"
 
-#: ../src/spacecmd/system.py:3393
+#: ../src/spacecmd/system.py:3590
 #, python-format
 msgid "    Detail:          %s"
 msgstr "    Detail:          %s"
 
-#: ../src/spacecmd/system.py:3401
+#: ../src/spacecmd/system.py:3599
 msgid "system_listentitlements: List the entitlements for a system"
 msgstr "system_listentitlements: Vypísať zoznam oprávnení pre systém"
 
-#: ../src/spacecmd/system.py:3402
+#: ../src/spacecmd/system.py:3600
 msgid "usage: system_listentitlements <SYSTEMS>"
 msgstr "použitie: system_listentitlements <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:3455
+#: ../src/spacecmd/system.py:3654
 msgid "system_addentitlements: Add entitlements to a system"
 msgstr "system_addentitlements: Pridať oprávnenia do systému"
 
-#: ../src/spacecmd/system.py:3456
+#: ../src/spacecmd/system.py:3655
 msgid "usage: system_addentitlements <SYSTEMS> ENTITLEMENT"
 msgstr "použitie: system_addentitlements <SYSTÉMY> OPRÁVNENIE"
 
-#: ../src/spacecmd/system.py:3511
+#: ../src/spacecmd/system.py:3710
 msgid "system_removeentitlement: Remove an entitlement from a system"
 msgstr "system_removeentitlement: Odstrániť oprávnenie zo systému"
 
-#: ../src/spacecmd/system.py:3512
+#: ../src/spacecmd/system.py:3711
 msgid "usage: system_removeentitlement <SYSTEMS> ENTITLEMENT"
 msgstr "použitie: system_removeentitlement <SYSTÉMY> OPRÁVNENIE"
 
-#: ../src/spacecmd/system.py:3567
+#: ../src/spacecmd/system.py:3766
 msgid "system_listpackageprofiles: List all package profiles"
 msgstr "system_listpackageprofiles: Vypísať zoznam všetkých profilov balíkov"
 
-#: ../src/spacecmd/system.py:3568
+#: ../src/spacecmd/system.py:3767
 msgid "usage: system_listpackageprofiles"
 msgstr "použitie: system_listpackageprofiles"
 
-#: ../src/spacecmd/system.py:3587
+#: ../src/spacecmd/system.py:3787
 msgid "system_deletepackageprofile: Delete a package profile"
 msgstr "system_deletepackageprofile: Vymazať profil balíka"
 
-#: ../src/spacecmd/system.py:3588
+#: ../src/spacecmd/system.py:3788
 msgid "usage: system_deletepackageprofile PROFILE"
 msgstr "použitie: system_deletepackageprofile PROFIL"
 
-#: ../src/spacecmd/system.py:3612
+#: ../src/spacecmd/system.py:3816
 msgid "Delete this profile [y/N]:"
 msgstr "Vymazať tento profil [a/N]:"
 
-#: ../src/spacecmd/system.py:3623
+#: ../src/spacecmd/system.py:3827
 #, python-format
 msgid "%s is not a valid profile"
 msgstr "%s nie je platný profil"
 
-#: ../src/spacecmd/system.py:3634
+#: ../src/spacecmd/system.py:3839
 msgid "system_createpackageprofile: Create a package profile"
 msgstr "system_createpackageprofile: Vytvoriť profil balíka"
 
-#: ../src/spacecmd/system.py:3635
+#: ../src/spacecmd/system.py:3840
 msgid ""
 "usage: system_createpackageprofile SYSTEM [options]\n"
 "\n"
@@ -7627,44 +7622,44 @@ msgstr ""
 "  -n NÁZOV\n"
 "  -d POPIS"
 
-#: ../src/spacecmd/system.py:3666
+#: ../src/spacecmd/system.py:3872
 msgid "Profile Label:"
 msgstr "Označenie profilu:"
 
-#: ../src/spacecmd/system.py:3670
+#: ../src/spacecmd/system.py:3876
 msgid "A profile name is required"
 msgstr "Vyžaduje sa názov profilu"
 
-#: ../src/spacecmd/system.py:3674
+#: ../src/spacecmd/system.py:3880
 msgid "A profile description is required"
 msgstr "Vyžaduje sa popis profilu"
 
-#: ../src/spacecmd/system.py:3682
+#: ../src/spacecmd/system.py:3887
 #, python-format
 msgid "Created package profile '%s'"
 msgstr "Vytvorený profil balíka '%s'"
 
-#: ../src/spacecmd/system.py:3690
+#: ../src/spacecmd/system.py:3896
 msgid "system_comparepackageprofile: Compare a system against a package profile"
 msgstr "system_comparepackageprofile: Porovnať systém s profilom balíka"
 
-#: ../src/spacecmd/system.py:3691
+#: ../src/spacecmd/system.py:3897
 msgid "usage: system_comparepackageprofile <SYSTEMS> PROFILE"
 msgstr "použitie: system_comparepackageprofile <SYSTÉMY> PROFIL"
 
-#: ../src/spacecmd/system.py:3754
+#: ../src/spacecmd/system.py:3966
 msgid "system_comparepackages: Compare the packages between two systems"
 msgstr "system_comparepackages: Porovnať balíky medzi dvoma systémami"
 
-#: ../src/spacecmd/system.py:3755
+#: ../src/spacecmd/system.py:3967
 msgid "usage: system_comparepackages SOME_SYSTEM ANOTHER_SYSTEM"
 msgstr "použitie: system_comparepackages NEJAKÝ_SYSTÉM INÝ_SYSTÉM"
 
-#: ../src/spacecmd/system.py:3786
+#: ../src/spacecmd/system.py:4000
 msgid "system_syncpackages: Sync packages between two systems"
 msgstr "system_syncpackages: Synchronizovať balíky medzi dvoma systémami"
 
-#: ../src/spacecmd/system.py:3787
+#: ../src/spacecmd/system.py:4001
 msgid ""
 "usage: system_syncpackages SOURCE TARGET [options]\n"
 "\n"
@@ -7676,85 +7671,86 @@ msgstr ""
 "voľby:\n"
 "    -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:3835
+#: ../src/spacecmd/system.py:4051
 msgid "Sync packages [y/N]:"
 msgstr "Synchronizovať balíky [a/N]:"
 
-#: ../src/spacecmd/system.py:3877
+#: ../src/spacecmd/system.py:4094
 #, python-format
 msgid "Failed to filter package list, package %s"
 msgstr "Zlyhalo filtrovanie zoznamu balíkov, balík %s"
 
-#: ../src/spacecmd/system.py:3878
+#: ../src/spacecmd/system.py:4095
 msgid "found with no arch or arch_label"
 msgstr "nájdený bez arch alebo označenia_arch"
 
-#: ../src/spacecmd/system.py:3920
+#: ../src/spacecmd/system.py:4147
 msgid "System Version"
 msgstr "Verzia systému"
 
-#: ../src/spacecmd/system.py:3921
+#: ../src/spacecmd/system.py:4148
 msgid "Channel Version"
 msgstr "Verzia kanála"
 
-#: ../src/spacecmd/system.py:3943
+#: ../src/spacecmd/system.py:4178
 msgid "Channel_newer_than_system"
 msgstr "Kanál_novší_ako_systém"
 
-#: ../src/spacecmd/system.py:3956
+#: ../src/spacecmd/system.py:4199
 msgid "System_newer_than_channel"
 msgstr "Systém_novší_ako_kanál"
 
-#: ../src/spacecmd/system.py:3965
+#: ../src/spacecmd/system.py:4215
 msgid "Missing_in_channel"
 msgstr "Chýbajúce_v_kanáli"
 
-#: ../src/spacecmd/system.py:3969
+#: ../src/spacecmd/system.py:4221
 msgid "system_comparewithchannel: Compare the installed packages on a"
 msgstr "system_comparewithchannel: Porovnať nainštalované balíky"
 
-#: ../src/spacecmd/system.py:3970
+#: ../src/spacecmd/system.py:4222
 msgid "                           system with those in the channels it is"
 msgstr "                           v systéme s balíkmi v kanáloch,"
 
-#: ../src/spacecmd/system.py:3971
+#: ../src/spacecmd/system.py:4223
 msgid "                           registerd to, or optionally some other"
 msgstr "                           do ktorých je systém zaregistrovaný, alebo voliteľne v niektorom inom"
 
-#: ../src/spacecmd/system.py:3972
+#: ../src/spacecmd/system.py:4224
 msgid "                           channel"
 msgstr "                           kanáli"
 
-#: ../src/spacecmd/system.py:3973
+#: ../src/spacecmd/system.py:4225
 msgid "usage: system_comparewithchannel <SYSTEMS> [options]"
 msgstr "použitie: system_comparewithchannel <SYSTÉMY> [voľby]"
 
-#: ../src/spacecmd/system.py:3975
+#: ../src/spacecmd/system.py:4227
 msgid "         -c/--channel : Specific channel to compare against,"
 msgstr "         -c/--channel : Konkrétny kanál na porovnanie,"
 
-#: ../src/spacecmd/system.py:3976
+#: ../src/spacecmd/system.py:4228
 msgid "                        default is those subscribed to, including"
 msgstr "                        predvolené sú tie, ku ktorým je prihlásený, vrátane"
 
-#: ../src/spacecmd/system.py:3977
+#: ../src/spacecmd/system.py:4229
 msgid "                        child channels"
 msgstr "                        kanálov potomkov"
 
-#: ../src/spacecmd/system.py:4028
+#: ../src/spacecmd/system.py:4285
 msgid "Specified channel does not exist"
 msgstr "Určený kanál neexistuje"
 
-#: ../src/spacecmd/system.py:4039
+#: ../src/spacecmd/system.py:4300
 #, python-format
 msgid "system %s is not subscribed to any channel!"
 msgstr "systém %s nie je prihlásený k žiadnemu kanálu!"
 
-#: ../src/spacecmd/system.py:4041
+#: ../src/spacecmd/system.py:4304
 msgid "Please subscribe to a channel, or specify achannel to compare with"
 msgstr "Prosím, prihláste sa ku kanálu alebo zadajte kanál, s ktorým chcete porovnávať"
 
-#: ../src/spacecmd/system.py:4075
+#. pylint: disable-next=consider-using-f-string
+#: ../src/spacecmd/system.py:4343
 #, python-format
 msgid ""
 "\n"
@@ -7763,11 +7759,11 @@ msgstr ""
 "\n"
 "Systém: %s"
 
-#: ../src/spacecmd/system.py:4101
+#: ../src/spacecmd/system.py:4371
 msgid "system_schedulehardwarerefresh: Schedule a hardware refresh for a system"
 msgstr "system_schedulehardwarerefresh: Naplánovať obnovu hardvéru pre systém"
 
-#: ../src/spacecmd/system.py:4102
+#: ../src/spacecmd/system.py:4372
 msgid ""
 "usage: system_schedulehardwarerefresh <SYSTEMS> [options]\n"
 "\n"
@@ -7779,11 +7775,11 @@ msgstr ""
 "voľby:\n"
 "  -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:4164
+#: ../src/spacecmd/system.py:4437
 msgid "system_schedulepackagerefresh: Schedule a software package refresh for a system"
 msgstr "system_schedulepackagerefresh: Naplánovať obnovu softvérových balíkov pre systém"
 
-#: ../src/spacecmd/system.py:4165
+#: ../src/spacecmd/system.py:4440
 msgid ""
 "usage: system_schedulepackagerefresh <SYSTEMS> [options])\n"
 "\n"
@@ -7795,31 +7791,31 @@ msgstr ""
 "voľby:\n"
 "  -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:4226
+#: ../src/spacecmd/system.py:4504
 msgid "system_show_packageversion: Shows version of installed package on given system(s)"
 msgstr "system_show_packageversion: Zobrazí verziu nainštalovaného balíka v danom systéme(och)"
 
-#: ../src/spacecmd/system.py:4227
+#: ../src/spacecmd/system.py:4507
 msgid "usage: system_show_packageversion <SYSTEM> <PACKAGE>"
 msgstr "použitie: system_show_packageversion <SYSTÉM> <BALÍK>"
 
-#: ../src/spacecmd/system.py:4259
+#: ../src/spacecmd/system.py:4540
 msgid "Package\tVersion\tRelease\tEpoch\tArch\tSystem"
 msgstr "Balík\tVerzia\tVydanie\tObdobie\tArch\tSystém"
 
-#: ../src/spacecmd/system.py:4279
+#: ../src/spacecmd/system.py:4571
 msgid "system_setcontactmethod: Set the contact method for given system(s)."
 msgstr "system_setcontactmethod: Nastaviť kontaktnú metódu pre dané systém(y)."
 
-#: ../src/spacecmd/system.py:4281
+#: ../src/spacecmd/system.py:4573
 msgid "usage: system_setcontactmethod <SYSTEMS> <CONTACT_METHOD>"
 msgstr "použitie: system_setcontactmethod <SYSTÉMY> <KONTAKTNÁ_METÓDA>"
 
-#: ../src/spacecmd/system.py:4330
+#: ../src/spacecmd/system.py:4626
 msgid "system_scheduleapplyconfigchannels: Schedule applying the assigned config channels to the System (Minion only)"
 msgstr "system_scheduleapplyconfigchannels: Naplánovať použitie priradených konfiguračných kanálov do systému (Iba minion)"
 
-#: ../src/spacecmd/system.py:4332
+#: ../src/spacecmd/system.py:4630
 msgid ""
 "usage: scheduleapplyconfigchannels <SYSTEMS> [options]\n"
 "\n"
@@ -7831,55 +7827,55 @@ msgstr ""
 "    voľby:\n"
 "        -s ČAS_SPUSTENIA"
 
-#: ../src/spacecmd/system.py:4383
+#: ../src/spacecmd/system.py:4680
 msgid "Schedule applying config channels to these systems [y/N]:"
 msgstr "Naplánovať použitie konfiguračných kanálov do týchto systémov [a/N]:"
 
-#: ../src/spacecmd/system.py:4400
+#: ../src/spacecmd/system.py:4700
 msgid "system_listmigrationtargets: List possible migration targets for given systems."
 msgstr "system_listmigrationtargets: Vypísať zoznam možných cieľov migrácie pre dané systémy."
 
-#: ../src/spacecmd/system.py:4401
+#: ../src/spacecmd/system.py:4703
 msgid "usage: system_listmigrationtargets <SYSTEMS>"
 msgstr "použitie: system_listmigrationtargets <SYSTÉMY>"
 
-#: ../src/spacecmd/system.py:4427
+#: ../src/spacecmd/system.py:4731
 msgid "WARN: Cannot find system "
 msgstr "POZOR: Nemožno nájsť systém "
 
-#: ../src/spacecmd/system.py:4430
+#: ../src/spacecmd/system.py:4734
 msgid "System "
 msgstr "Systém "
 
-#: ../src/spacecmd/system.py:4434
+#: ../src/spacecmd/system.py:4738
 msgid "  No migration targets"
 msgstr "  Žiadne ciele migrácie"
 
-#: ../src/spacecmd/system.py:4437
+#: ../src/spacecmd/system.py:4741
 msgid "  Target #"
 msgstr "  Cieľ #"
 
-#: ../src/spacecmd/system.py:4438
+#: ../src/spacecmd/system.py:4742
 msgid "    IDs: "
 msgstr "    ID: "
 
-#: ../src/spacecmd/system.py:4439
+#: ../src/spacecmd/system.py:4743
 msgid "    Friendly names: "
 msgstr "    Priateľské názvy: "
 
-#: ../src/spacecmd/system.py:4447 ../src/spacecmd/system.py:4463
+#: ../src/spacecmd/system.py:4754 ../src/spacecmd/system.py:4782
 msgid "This method is deprecated and will be removed in a future API version. Please use system_scheduleproductmigration instead."
 msgstr "Táto metóda je zastaraná a bude odstránená v budúcej verzii API. Namiesto toho, prosím, použite system_scheduleproductmigration."
 
-#: ../src/spacecmd/system.py:4449 ../src/spacecmd/system.py:4465
+#: ../src/spacecmd/system.py:4759 ../src/spacecmd/system.py:4787
 msgid "This method is deprecated and will be removed in a future API version"
 msgstr "Táto metóda je zastaraná a bude odstránená v budúcej verzii API"
 
-#: ../src/spacecmd/system.py:4450
+#: ../src/spacecmd/system.py:4762
 msgid "system_schedulespmigration: Schedule a Service Pack migration for systems."
 msgstr "system_schedulespmigration: Naplánovať migráciu opravného balíka pre systémy."
 
-#: ../src/spacecmd/system.py:4451
+#: ../src/spacecmd/system.py:4766
 msgid ""
 "usage: system_schedulespmigration <SYSTEM> <BASE_CHANNEL_LABEL> <MIGRATION_TARGET> [options] \n"
 "    For MIGRATION_TARGET parameter see system_listmigrationtargets. \n"
@@ -7897,11 +7893,11 @@ msgstr ""
 "        -d zadajte tento príznak, ak chcete vykonať skúšobné spustenie \n"
 "        -c KANÁLY_POTOMKOV (označenia kanálov potomkov oddelené čiarkami (bez medzier))"
 
-#: ../src/spacecmd/system.py:4472
+#: ../src/spacecmd/system.py:4797
 msgid "system_scheduleproductmigration: Schedule a Product migration for systems."
 msgstr "system_scheduleproductmigration: Naplánovať migráciu produktu pre systémy."
 
-#: ../src/spacecmd/system.py:4473
+#: ../src/spacecmd/system.py:4801
 msgid ""
 "usage: system_scheduleproductmigration <SYSTEM> <BASE_CHANNEL_LABEL> <MIGRATION_TARGET> [options] \n"
 "    For MIGRATION_TARGET parameter see system_listmigrationtargets. \n"
@@ -7923,31 +7919,31 @@ msgstr ""
 "        -r zadajte tento príznak, ak chcete odstrániť produkty, ktoré nemajú nasledovníkov \n"
 "        -c KANÁLY_POTOMKOV (označenia kanálov potomkov oddelené čiarkami (bez medzier))"
 
-#: ../src/spacecmd/system.py:4527
+#: ../src/spacecmd/system.py:4860
 msgid "Cannot find system "
 msgstr "Nemožno nájsť systém "
 
-#: ../src/spacecmd/system.py:4527
+#: ../src/spacecmd/system.py:4860
 msgid ". Skipping it."
 msgstr ". Preskakuje sa."
 
-#: ../src/spacecmd/system.py:4530
+#: ../src/spacecmd/system.py:4864
 msgid "Scheduling Product migration for system "
 msgstr "Plánovanie migrácie produktu pre systém "
 
-#: ../src/spacecmd/system.py:4531
+#: ../src/spacecmd/system.py:4865
 msgid "Migration target "
 msgstr "Cieľ migrácie "
 
-#: ../src/spacecmd/system.py:4537
+#: ../src/spacecmd/system.py:4878
 msgid "Scheduled action ID: "
 msgstr "ID plánovanej akcie: "
 
-#: ../src/spacecmd/system.py:4547
+#: ../src/spacecmd/system.py:4891
 msgid "system_bootstrap: Bootstrap a system for management via either Salt or Salt SSH."
 msgstr "system_bootstrap: Zaviesť systém na správu prostredníctvom Salt alebo Salt SSH."
 
-#: ../src/spacecmd/system.py:4548
+#: ../src/spacecmd/system.py:4894
 msgid ""
 "usage: bootstrap [options]\n"
 "\n"
@@ -7979,68 +7975,68 @@ msgstr ""
 "        --saltssh\n"
 "        "
 
-#: ../src/spacecmd/system.py:4582
+#: ../src/spacecmd/system.py:4928
 msgid "Hostname:"
 msgstr "Názov hostiteľa:"
 
-#: ../src/spacecmd/system.py:4583
+#: ../src/spacecmd/system.py:4929
 msgid "Port [22]:"
 msgstr "Port [22]:"
 
-#: ../src/spacecmd/system.py:4586
+#: ../src/spacecmd/system.py:4932
 msgid "SSH User [root]:"
 msgstr "Používateľ SSH [root]:"
 
-#: ../src/spacecmd/system.py:4589
+#: ../src/spacecmd/system.py:4935
 msgid "SSH Password:"
 msgstr "Heslo SSH:"
 
-#: ../src/spacecmd/system.py:4591
+#: ../src/spacecmd/system.py:4937
 msgid "SSH Private Key File:"
 msgstr "Súbor súkromného kľúča SSH:"
 
-#: ../src/spacecmd/system.py:4592
+#: ../src/spacecmd/system.py:4938
 msgid "SSH Private Key Password:"
 msgstr "Heslo súkromného kľúča SSH:"
 
-#: ../src/spacecmd/system.py:4595
+#: ../src/spacecmd/system.py:4941
 msgid "Activation Key:"
 msgstr "Aktivačný kľúč:"
 
-#: ../src/spacecmd/system.py:4598
+#: ../src/spacecmd/system.py:4944
 msgid "Reactivation Key:"
 msgstr "Reaktivačný kľúč:"
 
-#: ../src/spacecmd/system.py:4599
+#: ../src/spacecmd/system.py:4945
 msgid "Proxy System ID:"
 msgstr "ID systému Proxy:"
 
-#: ../src/spacecmd/system.py:4601
+#: ../src/spacecmd/system.py:4947
 msgid "Manage with Salt SSH"
 msgstr "Spravovať pomocou Salt SSH"
 
-#: ../src/spacecmd/system.py:4607
+#: ../src/spacecmd/system.py:4953
 msgid "Provided port must be numeric"
 msgstr "Poskytnutý port musí byť číselný"
 
-#: ../src/spacecmd/system.py:4612
+#: ../src/spacecmd/system.py:4958
 msgid "Hostname must be provided"
 msgstr "Musí byť zadaný názov hostiteľa"
 
-#: ../src/spacecmd/system.py:4615
+#: ../src/spacecmd/system.py:4961
 msgid "Either a SSH Password or a private key must be provided"
 msgstr "Je potrebné zadať buď heslo SSH, alebo súkromný kľúč"
 
-#: ../src/spacecmd/system.py:4623
+#: ../src/spacecmd/system.py:4970
 msgid "Server is not supporting reactivation keys at bootstrap time"
 msgstr "Server nepodporuje reaktivačné kľúče v čase zavádzania"
 
-#: ../src/spacecmd/system.py:4630
-#, python-brace-format
+#. pylint: disable-next=consider-using-f-string
+#: ../src/spacecmd/system.py:4979
 msgid "Bootstrapping '{}'. This may take a while."
 msgstr "Zavádzanie '{}'. To môže chvíľu trvať."
 
-#: ../src/spacecmd/system.py:4644
+#: ../src/spacecmd/system.py:5008
 msgid "Initial phase successfully finished. Check event history for actions still running"
 msgstr "Úvodná fáza bola úspešne ukončená. Skontrolujte históriu udalostí kvôli stále bežiacim akciám"
 
@@ -8392,7 +8388,6 @@ msgid "Skipping usage of common strings: number of substrings differ"
 msgstr "Preskočenie použitia spoločných reťazcov: počet podreťazcov sa líši"
 
 #: ../src/spacecmd/utils.py:928
-#, python-brace-format
 msgid "Parameter {} not a string type, but {}."
 msgstr "Parameter {} nie je typ reťazca, ale {}."
 
