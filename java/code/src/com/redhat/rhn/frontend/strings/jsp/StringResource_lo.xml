@@ -520,36 +520,36 @@
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.jsp.reason1.user" xml:space="preserve">
-        <source>The user requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີຜູ້ໃຊ້ທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ (bookmark) ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງໂດຍກົງ.</target>
+        <source>The user requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີຜູ້ໃຊ້ທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ (bookmark) ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງໂດຍກົງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.activationkey.reason1" xml:space="preserve">
-        <source>The activation key requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີຄີເປີດໃຊ້ງານທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The activation key requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີຄີເປີດໃຊ້ງານທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.servergroup.reason1" xml:space="preserve">
-        <source>The system group requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີກຸ່ມລະບົບທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The system group requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີກຸ່ມລະບົບທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.jsp.reason1.profile" xml:space="preserve">
-        <source>The system profile requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີໂປຣໄຟລ໌ລະບົບທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The system profile requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີໂປຣໄຟລ໌ລະບົບທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.jsp.reason1.channel" xml:space="preserve">
-        <source>The channel requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີຊ່ອງທາງທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The channel requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີຊ່ອງທາງທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
@@ -562,50 +562,50 @@
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.jsp.reason1.errata" xml:space="preserve">
-        <source>The patch requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີແພັດທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The patch requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີແພັດທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.jsp.reason1.action" xml:space="preserve">
-        <source>The action requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີການດຳເນີນການທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The action requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີການດຳເນີນການທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.jsp.reason1.system" xml:space="preserve">
-        <source>The system requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີລະບົບທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The system requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີລະບົບທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.default.reason1" xml:space="preserve">
-        <source>The required data object does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີວັດຖຸຂໍ້ມູນທີ່ຈຳເປັນ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The required data object does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີວັດຖຸຂໍ້ມູນທີ່ຈຳເປັນ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.configchan.reason1" xml:space="preserve">
-        <source>The configuration channel requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີຊ່ອງທາງການຕັ້ງຄ່າທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The configuration channel requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີຊ່ອງທາງການຕັ້ງຄ່າທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.configfile.reason1" xml:space="preserve">
-        <source>The configuration file requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີໄຟລ໌ການຕັ້ງຄ່າທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The configuration file requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີໄຟລ໌ການຕັ້ງຄ່າທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.configrev.reason1" xml:space="preserve">
-        <source>The configuration revision requested does not exist. This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
-        <target state="translated">ບໍ່ມີການປັບປຸງການຕັ້ງຄ່າທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
+        <source>The configuration revision requested does not exist.  This is most likely if you arrived at this page through bookmarks or some other non-hyperlink.</source>
+        <target state="needs-adaptation">ບໍ່ມີການປັບປຸງການຕັ້ງຄ່າທີ່ຮ້ອງຂໍ. ສ່ວນຫຼາຍອາດເປັນຍ້ອນທ່ານເຂົ້າມາໜ້ານີ້ຜ່ານບຸກມາກ ຫຼື ວິທີອື່ນທີ່ບໍ່ແມ່ນການກົດລິ້ງ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
@@ -744,8 +744,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="lookup.issmaster.local.reason1" xml:space="preserve">
-        <source>No local organization with the ID {0} exists on this slave.</source>
-        <target state="translated">ບໍ່ມີອົງກອນທ້ອງຖິ່ນທີ່ມີ ID {0} ໃນສະເລຟນີ້.</target>
+        <source>No local organization with the ID  {0} exists on this slave.</source>
+        <target state="needs-adaptation">ບໍ່ມີອົງກອນທ້ອງຖິ່ນທີ່ມີ ID {0} ໃນສະເລຟນີ້.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Lookup error page</context>
         </context-group>
@@ -6127,8 +6127,8 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.misc.index.migrate.summary" xml:space="preserve">
-        <source>Transfer multiple systems from the current organization to another (trusted) organization in a single action. The transferred systems will no longer be visible in the original organization.</source>
-        <target state="translated">ໂອນຍ້າຍຫຼາຍລະບົບຈາກອົງກອນປັດຈຸບັນໄປຍັງອົງກອນອື່ນ (ທີ່ເຊື່ອຖືໄດ້) ໃນການດຳເນີນການດຽວ. ລະບົບທີ່ຖືກໂອນຍ້າຍຈະບໍ່ສະແດງຢູ່ໃນອົງກອນເດີມອີກຕໍ່ໄປ.</target>
+        <source>Transfer multiple systems from the current organization to another (trusted) organization in a single action.  The transferred systems will no longer be visible in the original organization.</source>
+        <target state="needs-adaptation">ໂອນຍ້າຍຫຼາຍລະບົບຈາກອົງກອນປັດຈຸບັນໄປຍັງອົງກອນອື່ນ (ທີ່ເຊື່ອຖືໄດ້) ໃນການດຳເນີນການດຽວ. ລະບົບທີ່ຖືກໂອນຍ້າຍຈະບໍ່ສະແດງຢູ່ໃນອົງກອນເດີມອີກຕໍ່ໄປ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/ssm/misc/Index.do</context>
         </context-group>
@@ -6204,8 +6204,8 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.misc.index.lock.summary" xml:space="preserve">
-        <source>Systems may be locked or unlocked. Locking prevents changes from the @@PRODUCT_NAME@@ website.</source>
-        <target state="translated">ລະບົບສາມາດຖືກລັອກ ຫຼື ປົດລັອກໄດ້. ການລັອກຈະຊ່ວຍປ້ອງກັນການປ່ຽນແປງ ຜ່ານທາງເວັບໄຊ @@PRODUCT_NAME@@.</target>
+        <source>Systems may be locked or unlocked.  Locking prevents changes from the @@PRODUCT_NAME@@ website.</source>
+        <target state="needs-adaptation">ລະບົບສາມາດຖືກລັອກ ຫຼື ປົດລັອກໄດ້. ການລັອກຈະຊ່ວຍປ້ອງກັນການປ່ຽນແປງ ຜ່ານທາງເວັບໄຊ @@PRODUCT_NAME@@.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/ssm/misc/Index.do</context>
         </context-group>
@@ -6232,8 +6232,8 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.misc.index.delete.summary" xml:space="preserve">
-        <source>Deletes all selected system profiles. All information about these systems will be removed.</source>
-        <target state="translated">ລຶບທຸກໂປຣໄຟລ໌ລະບົບທີ່ເລືອກ. ຂໍ້ມູນທັງໝົດກ່ຽວກັບລະບົບເຫຼົ່ານີ້ຈະຖືກຖອນອອກ.</target>
+        <source>Deletes all selected system profiles.  All information about these systems will be removed.</source>
+        <target state="needs-adaptation">ລຶບທຸກໂປຣໄຟລ໌ລະບົບທີ່ເລືອກ. ຂໍ້ມູນທັງໝົດກ່ຽວກັບລະບົບເຫຼົ່ານີ້ຈະຖືກຖອນອອກ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/ssm/misc/Index.do</context>
         </context-group>
@@ -7133,8 +7133,8 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="duplicate.systems.delete.confirm.message" xml:space="preserve">
-        <source>There may be system profiles selected for deletion below that were not selected on the Duplicate System Profiles page. Please check the list below carefully to prevent accidental deletion of profiles that may have been in the System Set Manager.</source>
-        <target state="translated">ອາດມີໂປຣໄຟລ໌ລະບົບທີ່ຖືກເລືອກເພື່ອລຶບຢູ່ທາງລຸ່ມນີ້ ເຊິ່ງບໍ່ໄດ້ຖືກເລືອກໃນໜ້າໂປຣໄຟລ໌ລະບົບທີ່ຊ້ຳກັນ. ກະລຸນາກວດສອບລາຍຊື່ລຸ່ມນີ້ໃຫ້ລະອຽດ ເພື່ອປ້ອງກັນການລຶບໂປຣໄຟລ໌ທີ່ອາດຈະຢູ່ໃນ System Set Manager ໂດຍບໍ່ໄດ້ຕັ້ງໃຈ.</target>
+        <source> There may be system profiles selected for deletion below that were not selected on the Duplicate System Profiles page. Please check the list below carefully to prevent accidental deletion of profiles that may have been in the System Set Manager.</source>
+        <target state="needs-adaptation">ອາດມີໂປຣໄຟລ໌ລະບົບທີ່ຖືກເລືອກເພື່ອລຶບຢູ່ທາງລຸ່ມນີ້ ເຊິ່ງບໍ່ໄດ້ຖືກເລືອກໃນໜ້າໂປຣໄຟລ໌ລະບົບທີ່ຊ້ຳກັນ. ກະລຸນາກວດສອບລາຍຊື່ລຸ່ມນີ້ໃຫ້ລະອຽດ ເພື່ອປ້ອງກັນການລຶບໂປຣໄຟລ໌ທີ່ອາດຈະຢູ່ໃນ System Set Manager ໂດຍບໍ່ໄດ້ຕັ້ງໃຈ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/DuplicateIPList.do pages</context>
         </context-group>
@@ -7443,8 +7443,8 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="systemgroup.admins.summary" xml:space="preserve">
-        <source>Checked users may administer the systems in this group. Org Admins may always administer all systems. System Group Admins are marked with (*) and may modify all aspects of system groups assigned to them.</source>
-        <target state="translated">ຜູ້ໃຊ້ທີ່ຖືກເລືອກສາມາດດູແລລະບົບໃນກຸ່ມນີ້ໄດ້. ຜູ້ດູແລອົງກອນ (Org Admins) ສາມາດດູແລທຸກລະບົບໄດ້ສະເໝີ. ຜູ້ດູແລກຸ່ມລະບົບຈະຖືກໝາຍດ້ວຍ (*) ແລະ ສາມາດປ່ຽນແປງທຸກດ້ານຂອງກຸ່ມລະບົບທີ່ມອບໝາຍໃຫ້ເຂົາເຈົ້າ.</target>
+        <source>Checked users may administer the systems in this group.  Org Admins may always administer all systems. System Group Admins are marked with (*) and may modify all aspects of system groups assigned to them.</source>
+        <target state="needs-adaptation">ຜູ້ໃຊ້ທີ່ຖືກເລືອກສາມາດດູແລລະບົບໃນກຸ່ມນີ້ໄດ້. ຜູ້ດູແລອົງກອນ (Org Admins) ສາມາດດູແລທຸກລະບົບໄດ້ສະເໝີ. ຜູ້ດູແລກຸ່ມລະບົບຈະຖືກໝາຍດ້ວຍ (*) ແລະ ສາມາດປ່ຽນແປງທຸກດ້ານຂອງກຸ່ມລະບົບທີ່ມອບໝາຍໃຫ້ເຂົາເຈົ້າ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/groups/* pages</context>
         </context-group>
@@ -7457,8 +7457,8 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="systemgroup.erratalist.title" xml:space="preserve">
-        <source>Relevant Patches</source>
-        <target state="translated">ແພັດ (Patches) ທີ່ກ່ຽວຂ້ອງ</target>
+        <source>Relevant Patches </source>
+        <target state="needs-adaptation">ແພັດ (Patches) ທີ່ກ່ຽວຂ້ອງ</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/groups/* pages</context>
         </context-group>
@@ -7872,22 +7872,23 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="system_entitlements.setToManagementEntitled.failure" xml:space="preserve">
-        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) were successfully set to &lt;strong&gt;Management&lt;/strong&gt; entitled, but you do not have enough &lt;strong&gt;Management&lt;/strong&gt; entitlements for the remaining &lt;strong&gt;{1}&lt;/strong&gt; system(s). You may purchase additional management entitlements at &lt;a href="https://www.redhat.com/apps/commerce/rhn/"&gt;&lt;strong&gt;@@PRODUCT_NAME@@ store&lt;/strong&gt;&lt;/a&gt;. After you have additional &lt;strong&gt;Management&lt;/strong&gt; entitlements, you will be able to upgrade these systems.</source>
-        <target state="translated">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບຖືກຕັ້ງເປັນ &lt;strong&gt;Management&lt;/strong&gt; ສຳເລັດແລ້ວ, ແຕ່ທ່ານມີສິດການນຳໃຊ້ &lt;strong&gt;Management&lt;/strong&gt; ບໍ່ພໍສຳລັບອີກ &lt;strong&gt;{1}&lt;/strong&gt; ລະບົບທີ່ເຫຼືອ. ທ່ານສາມາດຊື້ສິດເພີ່ມເຕີມໄດ້ທີ່ &lt;a href="https://www.redhat.com/apps/commerce/rhn/"&gt;&lt;strong&gt;@@PRODUCT_NAME@@ store&lt;/strong&gt;&lt;/a&gt;.</target>
+        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) were successfully set to &lt;strong&gt;Management&lt;/strong&gt; entitled, but you do not have  enough &lt;strong&gt;Management&lt;/strong&gt; entitlements for the remaining &lt;strong&gt;{1}&lt;/strong&gt; system(s). You may purchase additional management entitlements at &lt;a href="https://www.redhat.com/apps/commerce/rhn/"&gt;&lt;strong&gt;@@PRODUCT_NAME@@ store&lt;/strong&gt;&lt;/a&gt;. After you have additional &lt;strong&gt;Management&lt;/strong&gt; entitlements, you will be able to upgrade these systems.
+    </source>
+        <target state="needs-adaptation">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບຖືກຕັ້ງເປັນ &lt;strong&gt;Management&lt;/strong&gt; ສຳເລັດແລ້ວ, ແຕ່ທ່ານມີສິດການນຳໃຊ້ &lt;strong&gt;Management&lt;/strong&gt; ບໍ່ພໍສຳລັບອີກ &lt;strong&gt;{1}&lt;/strong&gt; ລະບົບທີ່ເຫຼືອ. ທ່ານສາມາດຊື້ສິດເພີ່ມເຕີມໄດ້ທີ່ &lt;a href="https://www.redhat.com/apps/commerce/rhn/"&gt;&lt;strong&gt;@@PRODUCT_NAME@@ store&lt;/strong&gt;&lt;/a&gt;.</target>
         <context-group name="ctx2">
           <context context-type="sourcefile">/rhn/systems/SystemEntitlements.do</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system_entitlements.unentitle.success" xml:space="preserve">
-        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) &lt;strong&gt;Unentitled&lt;/strong&gt;.</source>
-        <target state="translated">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບຖືກ &lt;strong&gt;ຍົກເລີກສິດ&lt;/strong&gt; ແລ້ວ.</target>
+        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s)  &lt;strong&gt;Unentitled&lt;/strong&gt;.</source>
+        <target state="needs-adaptation">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບຖືກ &lt;strong&gt;ຍົກເລີກສິດ&lt;/strong&gt; ແລ້ວ.</target>
         <context-group name="ctx2">
           <context context-type="sourcefile">/rhn/systems/SystemEntitlements.do</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system_entitlements.unentitle.failure" xml:space="preserve">
-        <source>Unable to &lt;strong&gt;Unentitle {0}&lt;/strong&gt; system(s).</source>
-        <target state="translated">ບໍ່ສາມາດ &lt;strong&gt;ຍົກເລີກສິດ {0}&lt;/strong&gt; ລະບົບໄດ້.</target>
+        <source>Unable to  &lt;strong&gt;Unentitle {0}&lt;/strong&gt; system(s).</source>
+        <target state="needs-adaptation">ບໍ່ສາມາດ &lt;strong&gt;ຍົກເລີກສິດ {0}&lt;/strong&gt; ລະບົບໄດ້.</target>
         <context-group name="ctx2">
           <context context-type="sourcefile">/rhn/systems/SystemEntitlements.do</context>
         </context-group>
@@ -7921,15 +7922,15 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="system_entitlements.virtualization_host.success" xml:space="preserve">
-        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) set to &lt;strong&gt;Virtualization.&lt;/strong&gt;. &lt;br/&gt; &lt;strong&gt;NOTE: &lt;/strong&gt;If the system previously had Virtualization Platform it has been downgraded to Virtualization.</source>
-        <target state="translated">ຕັ້ງຄ່າ &lt;strong&gt;{0}&lt;/strong&gt; ລະບົບ ເປັນ &lt;strong&gt;Virtualization&lt;/strong&gt; ແລ້ວ.</target>
+        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) set to &lt;strong&gt;Virtualization.&lt;/strong&gt;.  &lt;br/&gt; &lt;strong&gt;NOTE: &lt;/strong&gt;If the system previously had Virtualization Platform it has been downgraded to Virtualization. </source>
+        <target state="needs-adaptation">ຕັ້ງຄ່າ &lt;strong&gt;{0}&lt;/strong&gt; ລະບົບ ເປັນ &lt;strong&gt;Virtualization&lt;/strong&gt; ແລ້ວ.</target>
         <context-group name="ctx2">
           <context context-type="sourcefile">/rhn/systems/SystemEntitlements.do</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system_entitlements.virtualization_host.removed.success" xml:space="preserve">
-        <source>Removed &lt;strong&gt;Virtualization&lt;/strong&gt; from &lt;strong&gt;{0}&lt;/strong&gt; system(s) This will cause any guests associated with the selected host to consume physical Channel and System entitlements.</source>
-        <target state="translated">ລຶບ &lt;strong&gt;Virtualization&lt;/strong&gt; ອອກຈາກ &lt;strong&gt;{0}&lt;/strong&gt; ລະບົບແລ້ວ.</target>
+        <source>Removed &lt;strong&gt;Virtualization&lt;/strong&gt; from &lt;strong&gt;{0}&lt;/strong&gt; system(s)  This will cause any guests associated with the selected host to consume physical Channel and System entitlements.</source>
+        <target state="needs-adaptation">ລຶບ &lt;strong&gt;Virtualization&lt;/strong&gt; ອອກຈາກ &lt;strong&gt;{0}&lt;/strong&gt; ລະບົບແລ້ວ.</target>
         <context-group name="ctx2">
           <context context-type="sourcefile">/rhn/systems/SystemEntitlements.do</context>
         </context-group>
@@ -7977,15 +7978,15 @@ organization. You may grant or remove the organization administrator role in the
         </context-group>
       </trans-unit>
       <trans-unit id="system_entitlements.virtualization.setup_error" xml:space="preserve">
-        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) failed to add &lt;strong&gt;Virtualization(Platform)&lt;/strong&gt;. This was caused by errors attempting to automatically subscribe the system to the @@PRODUCT_NAME@@ Tools and RHEL Virtualization channels which are required for virtualization.</source>
-        <target state="translated">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບບໍ່ສາມາດເພີ່ມສິດ &lt;strong&gt;Virtualization(Platform)&lt;/strong&gt; ໄດ້. ນີ້ເກີດຈາກຂໍ້ຜິດພາດໃນການລົງທະບຽນຊ່ອງທາງທີ່ຈຳເປັນໂດຍອັດຕະໂນມັດ.</target>
+        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) failed to add &lt;strong&gt;Virtualization(Platform)&lt;/strong&gt;.  This was caused by errors attempting to automatically subscribe the system to the @@PRODUCT_NAME@@ Tools and RHEL Virtualization channels which are required for virtualization.</source>
+        <target state="needs-adaptation">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບບໍ່ສາມາດເພີ່ມສິດ &lt;strong&gt;Virtualization(Platform)&lt;/strong&gt; ໄດ້. ນີ້ເກີດຈາກຂໍ້ຜິດພາດໃນການລົງທະບຽນຊ່ອງທາງທີ່ຈຳເປັນໂດຍອັດຕະໂນມັດ.</target>
         <context-group name="ctx2">
           <context context-type="sourcefile">/rhn/systems/SystemEntitlements.do</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system_entitlements.unknown.error" xml:space="preserve">
-        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) failed to add an entitlement. This was caused by an unknown error. Please contact support.</source>
-        <target state="translated">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບບໍ່ສາມາດເພີ່ມສິດໄດ້ ເນື່ອງຈາກຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ສາເຫດ. ກະລຸນາຕິດຕໍ່ຝ່າຍສະໜັບສະໜູນ.</target>
+        <source>&lt;strong&gt;{0}&lt;/strong&gt; system(s) failed to add an entitlement.  This was caused by an unknown error.  Please contact support.</source>
+        <target state="needs-adaptation">&lt;strong&gt;{0}&lt;/strong&gt; ລະບົບບໍ່ສາມາດເພີ່ມສິດໄດ້ ເນື່ອງຈາກຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ສາເຫດ. ກະລຸນາຕິດຕໍ່ຝ່າຍສະໜັບສະໜູນ.</target>
         <context-group name="ctx2">
           <context context-type="sourcefile">/rhn/systems/SystemEntitlements.do</context>
         </context-group>
@@ -9744,8 +9745,8 @@ organization management tools if you choose to remove this role from your login.
         </context-group>
       </trans-unit>
       <trans-unit id="method-create.jsp.summary" xml:space="preserve">
-        <source>Fill out this form to create a new Notification Method. Changes to Probes that use this new Method will require a Scout Config Push.</source>
-        <target state="translated">ຕື່ມຂໍ້ມູນໃສ່ແບບຟອມນີ້ເພື່ອສ້າງວິທີການແຈ້ງເຕືອນໃໝ່. ການປ່ຽນແປງຕົວສຳຫຼວດທີ່ໃຊ້ວິທີການໃໝ່ນີ້ຈະຕ້ອງມີການຍູ້ການກຳນົດຄ່າ Scout (Scout Config Push).</target>
+        <source>Fill out this form to create a new Notification Method.  Changes to Probes that use this new Method will require a Scout Config Push.</source>
+        <target state="needs-adaptation">ຕື່ມຂໍ້ມູນໃສ່ແບບຟອມນີ້ເພື່ອສ້າງວິທີການແຈ້ງເຕືອນໃໝ່. ການປ່ຽນແປງຕົວສຳຫຼວດທີ່ໃຊ້ວິທີການໃໝ່ນີ້ຈະຕ້ອງມີການຍູ້ການກຳນົດຄ່າ Scout (Scout Config Push).</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/monitoring/config/notification/MethodCreate.do</context>
         </context-group>
@@ -10736,8 +10737,8 @@ Please note that some manual configuration of these scripts may still be require
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.kickstart.schedule.heading1.text.jsp" xml:space="preserve">
-        <source>Schedule autoinstall actions for the the selected systems. These actions will re-install the selected systems using the autoinstallation options specified.</source>
-        <target state="translated">ກຳນົດເວລາການປະຕິບັດການຕິດຕັ້ງອັດຕະໂນມັດສຳລັບລະບົບທີ່ເລືອກ. ການປະຕິບັດເຫຼົ່ານີ້ຈະຕິດຕັ້ງລະບົບທີ່ເລືອກຄືນໃໝ່ໂດຍໃຊ້ຕົວເລືອກການຕິດຕັ້ງອັດຕະໂນມັດທີ່ລະບຸໄວ້.</target>
+        <source> Schedule autoinstall actions for the the selected systems. These actions will re-install the selected systems using the autoinstallation options specified.</source>
+        <target state="needs-adaptation">ກຳນົດເວລາການປະຕິບັດການຕິດຕັ້ງອັດຕະໂນມັດສຳລັບລະບົບທີ່ເລືອກ. ການປະຕິບັດເຫຼົ່ານີ້ຈະຕິດຕັ້ງລະບົບທີ່ເລືອກຄືນໃໝ່ໂດຍໃຊ້ຕົວເລືອກການຕິດຕັ້ງອັດຕະໂນມັດທີ່ລະບຸໄວ້.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/ssm/kickstart/ScheduleByProfile.do</context>
           <context context-type="sourcefile">/rhn/systems/ssm/kickstart/ScheduleByIp.do</context>
@@ -10752,8 +10753,8 @@ Please note that some manual configuration of these scripts may still be require
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.kickstart.schedule.ip.heading2.text.jsp" xml:space="preserve">
-        <source>The autoinstallation profile will be automatically selected for each system based upon its network configuration. If no match is found, the organizational default profile will be used if set.</source>
-        <target state="translated">ໂປຣໄຟລ໌ການຕິດຕັ້ງອັດຕະໂນມັດຈະຖືກເລືອກໂດຍອັດຕະໂນມັດສຳລັບແຕ່ລະລະບົບໂດຍອີງຕາມການກຳນົດຄ່າເຄືອຂ່າຍ. ຖ້າບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ, ໂປຣໄຟລ໌ເລີ່ມຕົ້ນຂອງອົງກອນຈະຖືກນຳໃຊ້ (ຖ້າມີການກຳນົດໄວ້).</target>
+        <source>The autoinstallation profile will be automatically selected for each system based upon its network configuration.  If no match is found, the organizational default profile will be used if set.</source>
+        <target state="needs-adaptation">ໂປຣໄຟລ໌ການຕິດຕັ້ງອັດຕະໂນມັດຈະຖືກເລືອກໂດຍອັດຕະໂນມັດສຳລັບແຕ່ລະລະບົບໂດຍອີງຕາມການກຳນົດຄ່າເຄືອຂ່າຍ. ຖ້າບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ, ໂປຣໄຟລ໌ເລີ່ມຕົ້ນຂອງອົງກອນຈະຖືກນຳໃຊ້ (ຖ້າມີການກຳນົດໄວ້).</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/ssm/kickstart/ScheduleByProfile.do</context>
           <context context-type="sourcefile">/rhn/systems/ssm/kickstart/ScheduleByIp.do</context>
@@ -10776,8 +10777,8 @@ Please note that some manual configuration of these scripts may still be require
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.kickstart.distro.cobbler-only.tooltip" xml:space="preserve">
-        <source>Profiles that are not @@PRODUCT_NAME@@-managed are not guaranteed to register systems to @@PRODUCT_NAME@@ after autoinstallation. You may wish to review these autoinstallations (click on the profile name to do so) to confirm whether or not the selected systems will reappear in the @@PRODUCT_NAME@@ system list after autoinstallation.</source>
-        <target state="translated">ໂປຣໄຟລ໌ທີ່ບໍ່ໄດ້ຖືກຈັດການໂດຍ @@PRODUCT_NAME@@ ແມ່ນບໍ່ໄດ້ຮັບປະກັນວ່າຈະລົງທະບຽນລະບົບກັບ @@PRODUCT_NAME@@ ຫຼັງຈາກການຕິດຕັ້ງອັດຕະໂນມັດ. ທ່ານອາດຈະຕ້ອງການກວດສອບການຕິດຕັ້ງອັດຕະໂນມັດເຫຼົ່ານີ້ (ຄລິກທີ່ຊື່ໂປຣໄຟລ໌) ເພື່ອຢືນຢັນວ່າລະບົບທີ່ເລືອກຈະກັບມາປະກົດໃນລາຍການລະບົບຂອງ @@PRODUCT_NAME@@ ຫຼື ບໍ່.</target>
+        <source> Profiles that are not @@PRODUCT_NAME@@-managed are not guaranteed to register systems to @@PRODUCT_NAME@@ after autoinstallation. You may wish to review these autoinstallations (click on the profile name to do so) to confirm whether or not the selected systems will reappear in the @@PRODUCT_NAME@@ system list after autoinstallation.</source>
+        <target state="needs-adaptation">ໂປຣໄຟລ໌ທີ່ບໍ່ໄດ້ຖືກຈັດການໂດຍ @@PRODUCT_NAME@@ ແມ່ນບໍ່ໄດ້ຮັບປະກັນວ່າຈະລົງທະບຽນລະບົບກັບ @@PRODUCT_NAME@@ ຫຼັງຈາກການຕິດຕັ້ງອັດຕະໂນມັດ. ທ່ານອາດຈະຕ້ອງການກວດສອບການຕິດຕັ້ງອັດຕະໂນມັດເຫຼົ່ານີ້ (ຄລິກທີ່ຊື່ໂປຣໄຟລ໌) ເພື່ອຢືນຢັນວ່າລະບົບທີ່ເລືອກຈະກັບມາປະກົດໃນລາຍການລະບົບຂອງ @@PRODUCT_NAME@@ ຫຼື ບໍ່.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/ssm/kickstart/ScheduleByProfile.do</context>
           <context context-type="sourcefile">/rhn/systems/ssm/kickstart/ScheduleByIp.do</context>
@@ -11657,15 +11658,15 @@ Please note that some manual configuration of these scripts may still be require
         </context-group>
       </trans-unit>
       <trans-unit id="kickstart.advanced.filedetails.jsp.tip.edit" xml:space="preserve">
-        <source>Alternatively, you can upload a new version in the '{0}' section below and select '{1}'.</source>
-        <target state="translated">ນອກຈາກນັ້ນ, ທ່ານສາມາດອັບໂຫຼດເວີຊັນໃໝ່ໃນສ່ວນ '{0}' ຂ້າງລຸ່ມນີ້ ແລະ ເລືອກ '{1}'.</target>
+        <source> Alternatively, you can upload a new version in the '{0}' section below and select '{1}'.</source>
+        <target state="needs-adaptation">ນອກຈາກນັ້ນ, ທ່ານສາມາດອັບໂຫຼດເວີຊັນໃໝ່ໃນສ່ວນ '{0}' ຂ້າງລຸ່ມນີ້ ແລະ ເລືອກ '{1}'.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/kickstart/AdvancedMode* pages</context>
         </context-group>
       </trans-unit>
       <trans-unit id="kickstart.advanced.filedetails.jsp.tip.copypaste" xml:space="preserve">
-        <source>If you wish to re-use an existing Autoinstallation Profile we recommend you to copy-paste the template from /var/lib/cobbler/templates instead of from your browser. This will ensure that the template variables will be preserved and the registration process will work properly after the autoinstallation.</source>
-        <target state="translated">ຖ້າທ່ານຕ້ອງການໃຊ້ໂປຣໄຟລ໌ການຕິດຕັ້ງອັດຕະໂນມັດທີ່ມີຢູ່ແລ້ວຄືນໃໝ່, ພວກເຮົາແນະນຳໃຫ້ທ່ານກັອບປີ້ ແລະ ວາງແມ່ແບບຈາກ /var/lib/cobbler/templates ແທນການກັອບປີ້ຈາກບຣາວເຊີຂອງທ່ານ. ນີ້ຈະຊ່ວຍໃຫ້ແນ່ໃຈວ່າຕົວປ່ຽນແມ່ແບບຈະຖືກຮັກສາໄວ້ ແລະ ຂະບວນການລົງທະບຽນຈະເຮັດວຽກໄດ້ຢ່າງຖືກຕ້ອງຫຼັງຈາກການຕິດຕັ້ງອັດຕະໂນມັດ.</target>
+        <source> If you wish to re-use an existing Autoinstallation Profile we recommend you to copy-paste the template from /var/lib/cobbler/templates instead of from your browser.  This will ensure that the template variables will be preserved and the registration process will work properly after the autoinstallation.</source>
+        <target state="needs-adaptation">ຖ້າທ່ານຕ້ອງການໃຊ້ໂປຣໄຟລ໌ການຕິດຕັ້ງອັດຕະໂນມັດທີ່ມີຢູ່ແລ້ວຄືນໃໝ່, ພວກເຮົາແນະນຳໃຫ້ທ່ານກັອບປີ້ ແລະ ວາງແມ່ແບບຈາກ /var/lib/cobbler/templates ແທນການກັອບປີ້ຈາກບຣາວເຊີຂອງທ່ານ. ນີ້ຈະຊ່ວຍໃຫ້ແນ່ໃຈວ່າຕົວປ່ຽນແມ່ແບບຈະຖືກຮັກສາໄວ້ ແລະ ຂະບວນການລົງທະບຽນຈະເຮັດວຽກໄດ້ຢ່າງຖືກຕ້ອງຫຼັງຈາກການຕິດຕັ້ງອັດຕະໂນມັດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/kickstart/AdvancedMode* pages</context>
         </context-group>
@@ -13027,8 +13028,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="snippetcreate.jsp.kickstart_rules_1" xml:space="preserve">
-        <source>&lt;p&gt;In case the kickstart scenario contains any shell script using variables like &lt;code&gt;$(example)&lt;/code&gt; its content should be escaped by using the backslash symbol:&lt;/p&gt; &lt;pre&gt;This is an \$(example) content.&lt;/pre&gt; &lt;p&gt;If variable named &lt;em&gt;"example"&lt;/em&gt; is defined in the kickstart snippet, the templating engine will evaluate &lt;code&gt;"$example"&lt;/code&gt; with its content. If there is no such variable, the content will be left unchanged. Escaping the &lt;code&gt;$&lt;/code&gt; symbol will prevent the templating engine to perform its evaluation as an internal variable.&lt;/p&gt; &lt;p&gt;Long scripts or strings can be escaped by wrapping them with the &lt;code&gt;#raw&lt;/code&gt; and &lt;code&gt;#end raw&lt;/code&gt; directives. For example:&lt;/p&gt;</source>
-        <target state="translated">&lt;p&gt;ໃນກໍລະນີທີ່ kickstart ປະກອບດ້ວຍ shell script ທີ່ໃຊ້ຕົວປ່ຽນ (variable) ຄື &lt;code&gt;$(example)&lt;/code&gt;, ເນື້ອໃນຂອງມັນຄວນຖືກ escape ໂດຍໃຊ້ເຄື່ອງໝາຍ backslash:&lt;/p&gt; &lt;pre&gt;This is an \$(example) content.&lt;/pre&gt; &lt;p&gt;ຖ້າຕົວປ່ຽນຊື່ &lt;em&gt;"example"&lt;/em&gt; ຖືກກຳນົດໄວ້ໃນ kickstart snippet, ລະບົບຈັດການແມ່ແບບຈະແປຄ່າ &lt;code&gt;"$example"&lt;/code&gt; ດ້ວຍເນື້ອໃນຂອງມັນ. ຖ້າບໍ່ມີຕົວປ່ຽນດັ່ງກ່າວ, ເນື້ອໃນຈະຖືກປະໄວ້ຄືເກົ່າ. ການ escape ເຄື່ອງໝາຍ &lt;code&gt;$&lt;/code&gt; ຈະປ້ອງກັນບໍ່ໃຫ້ລະບົບຈັດການແມ່ແບບແປຄ່າມັນເປັນຕົວປ່ຽນພາຍໃນ.&lt;/p&gt; &lt;p&gt;ສະຄຣິບຍາວໆ ຫຼື ຂໍ້ຄວາມ ສາມາດ escape ໄດ້ໂດຍການຫຸ້ມດ້ວຍຄຳສັ່ງ &lt;code&gt;#raw&lt;/code&gt; ແລະ &lt;code&gt;#end raw&lt;/code&gt;. ຕົວຢ່າງ:&lt;/p&gt;</target>
+        <source>&lt;p&gt;In case the kickstart scenario contains any shell script using variables like &lt;code&gt;$(example)&lt;/code&gt; its content should be escaped by using the backslash symbol:&lt;/p&gt; &lt;pre&gt;This is an \$(example) content.&lt;/pre&gt;  &lt;p&gt;If variable named &lt;em&gt;"example"&lt;/em&gt; is defined in the kickstart snippet, the templating engine will  evaluate &lt;code&gt;"$example"&lt;/code&gt; with its content. If there is no such variable, the  content  will be left unchanged. Escaping the &lt;code&gt;$&lt;/code&gt; symbol will prevent the templating engine to perform its evaluation as an internal variable.&lt;/p&gt;  &lt;p&gt;Long scripts or strings can be escaped by wrapping them with the &lt;code&gt;#raw&lt;/code&gt; and &lt;code&gt;#end raw&lt;/code&gt; directives. For example:&lt;/p&gt;</source>
+        <target state="needs-adaptation">&lt;p&gt;ໃນກໍລະນີທີ່ kickstart ປະກອບດ້ວຍ shell script ທີ່ໃຊ້ຕົວປ່ຽນ (variable) ຄື &lt;code&gt;$(example)&lt;/code&gt;, ເນື້ອໃນຂອງມັນຄວນຖືກ escape ໂດຍໃຊ້ເຄື່ອງໝາຍ backslash:&lt;/p&gt; &lt;pre&gt;This is an \$(example) content.&lt;/pre&gt; &lt;p&gt;ຖ້າຕົວປ່ຽນຊື່ &lt;em&gt;"example"&lt;/em&gt; ຖືກກຳນົດໄວ້ໃນ kickstart snippet, ລະບົບຈັດການແມ່ແບບຈະແປຄ່າ &lt;code&gt;"$example"&lt;/code&gt; ດ້ວຍເນື້ອໃນຂອງມັນ. ຖ້າບໍ່ມີຕົວປ່ຽນດັ່ງກ່າວ, ເນື້ອໃນຈະຖືກປະໄວ້ຄືເກົ່າ. ການ escape ເຄື່ອງໝາຍ &lt;code&gt;$&lt;/code&gt; ຈະປ້ອງກັນບໍ່ໃຫ້ລະບົບຈັດການແມ່ແບບແປຄ່າມັນເປັນຕົວປ່ຽນພາຍໃນ.&lt;/p&gt; &lt;p&gt;ສະຄຣິບຍາວໆ ຫຼື ຂໍ້ຄວາມ ສາມາດ escape ໄດ້ໂດຍການຫຸ້ມດ້ວຍຄຳສັ່ງ &lt;code&gt;#raw&lt;/code&gt; ແລະ &lt;code&gt;#end raw&lt;/code&gt;. ຕົວຢ່າງ:&lt;/p&gt;</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/kickstart/cobbler/CobblerSnippetEdit.do</context>
           <context context-type="sourcefile">/rhn/kickstart/cobbler/CobblerSnippetCreate.do</context>
@@ -14243,8 +14244,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="activation-key.jsp.delete.warning" xml:space="preserve">
-        <source>&lt;STRONG&gt;NOTE&lt;/STRONG&gt;: Only systems and profiles known to @@PRODUCT_NAME@@ server will be updated. Kickstarting other entities (e.g., system profiles created using the cobbler command-line tools) which use this key will &lt;STRONG&gt;FAIL&lt;/STRONG&gt; if the key is deleted.</source>
-        <target state="translated">&lt;STRONG&gt;ໝາຍເຫດ&lt;/STRONG&gt;: ຈະມີພຽງລະບົບ ແລະ ໂປຣໄຟລ໌ທີ່ເຊີບເວີ @@PRODUCT_NAME@@ ຮູ້ຈັກເທົ່ານັ້ນທີ່ຈະຖືກອັບເດດ. ການ Kickstarting ສ່ວນປະກອບອື່ນໆ (ຕົວຢ່າງ: ໂປຣໄຟລ໌ລະບົບທີ່ສ້າງຂຶ້ນດ້ວຍເຄື່ອງມື cobbler command-line) ທີ່ໃຊ້ຄີນີ້ນຈະ &lt;STRONG&gt;ຫຼົ້ມເຫຼວ&lt;/STRONG&gt; ຖ້າຄີຖືກລຶບ.</target>
+        <source>&lt;STRONG&gt;NOTE&lt;/STRONG&gt;: Only systems and profiles known to @@PRODUCT_NAME@@ server will be updated.  Kickstarting other entities (e.g., system profiles created using the cobbler command-line tools) which use this key will &lt;STRONG&gt;FAIL&lt;/STRONG&gt; if the key is deleted.</source>
+        <target state="needs-adaptation">&lt;STRONG&gt;ໝາຍເຫດ&lt;/STRONG&gt;: ຈະມີພຽງລະບົບ ແລະ ໂປຣໄຟລ໌ທີ່ເຊີບເວີ @@PRODUCT_NAME@@ ຮູ້ຈັກເທົ່ານັ້ນທີ່ຈະຖືກອັບເດດ. ການ Kickstarting ສ່ວນປະກອບອື່ນໆ (ຕົວຢ່າງ: ໂປຣໄຟລ໌ລະບົບທີ່ສ້າງຂຶ້ນດ້ວຍເຄື່ອງມື cobbler command-line) ທີ່ໃຊ້ຄີນີ້ນຈະ &lt;STRONG&gt;ຫຼົ້ມເຫຼວ&lt;/STRONG&gt; ຖ້າຄີຖືກລຶບ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Activation Key Pages</context>
         </context-group>
@@ -14257,15 +14258,15 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="activation-key.jsp.config-auto-deploy-tooltip" xml:space="preserve">
-        <source>Deploy configuration files to systems on registration</source>
-        <target state="translated">ນຳໃຊ້ໄຟລ໌ຕັ້ງຄ່າໃຫ້ກັບລະບົບໃນເວລາລົງທະບຽນ</target>
+        <source> Deploy configuration files to systems on registration</source>
+        <target state="needs-adaptation">ນຳໃຊ້ໄຟລ໌ຕັ້ງຄ່າໃຫ້ກັບລະບົບໃນເວລາລົງທະບຽນ</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Activation Key Pages</context>
         </context-group>
       </trans-unit>
       <trans-unit id="activation-key.packages.jsp.summary" xml:space="preserve">
-        <source>Any system registered with this activation key will have the packages listed below installed, if those packages are available. Package names may be listed as package name only or may include an extension to specify the desired architecture. There should only one package name included per line.</source>
-        <target state="translated">ທຸກໆລະບົບທີ່ລົງທະບຽນດ້ວຍ activation key ນີ້ ຈະໄດ້ຮັບການຕິດຕັ້ງແພັກເກດທີ່ລະບຸໄວ້ດ້ານລຸ່ມ (ຖ້າມີແພັກເກດນັ້ນໃຫ້ໃຊ້). ຊື່ແພັກເກດສາມາດລະບຸພຽງແຕ່ຊື່ ຫຼື ອາດລວມເອົານາມສະກຸນເພື່ອລະບຸສະຖາປັດຕະຍະກຳ (architecture) ທີ່ຕ້ອງການ. ຄວນລະບຸຊື່ແພັກເກດພຽງໜຶ່ງຊື່ຕໍ່ໜຶ່ງບັນທັດ.</target>
+        <source>Any system registered with this activation key will have the packages listed below installed, if those packages are available. Package names may be listed as package name only or may include an extension to specify the desired architecture.  There should only one package name included per line.</source>
+        <target state="needs-adaptation">ທຸກໆລະບົບທີ່ລົງທະບຽນດ້ວຍ activation key ນີ້ ຈະໄດ້ຮັບການຕິດຕັ້ງແພັກເກດທີ່ລະບຸໄວ້ດ້ານລຸ່ມ (ຖ້າມີແພັກເກດນັ້ນໃຫ້ໃຊ້). ຊື່ແພັກເກດສາມາດລະບຸພຽງແຕ່ຊື່ ຫຼື ອາດລວມເອົານາມສະກຸນເພື່ອລະບຸສະຖາປັດຕະຍະກຳ (architecture) ທີ່ຕ້ອງການ. ຄວນລະບຸຊື່ແພັກເກດພຽງໜຶ່ງຊື່ຕໍ່ໜຶ່ງບັນທັດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/activationkeys/packages/* pages</context>
         </context-group>
@@ -14448,8 +14449,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
       </trans-unit>
       <!-- profiles/details.jsp -->
       <trans-unit id="profile.details.toolbar" xml:space="preserve">
-        <source>Stored Profile:</source>
-        <target state="translated">ໂປຣໄຟລ໌ທີ່ບັນທຶກໄວ້:</target>
+        <source>Stored Profile: </source>
+        <target state="needs-adaptation">ໂປຣໄຟລ໌ທີ່ບັນທຶກໄວ້:</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/profiles/Details.do</context>
         </context-group>
@@ -14741,7 +14742,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.legend">
+      <trans-unit id="system.audit.listscap.jsp.legend" xml:space="preserve">
         <source>Xccdf Legend</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14768,7 +14769,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.pass">
+      <trans-unit id="system.audit.listscap.jsp.pass" xml:space="preserve">
         <source>Pass</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14781,7 +14782,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.fail">
+      <trans-unit id="system.audit.listscap.jsp.fail" xml:space="preserve">
         <source>Fail</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14794,7 +14795,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.error">
+      <trans-unit id="system.audit.listscap.jsp.error" xml:space="preserve">
         <source>Error</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14807,7 +14808,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.unknown">
+      <trans-unit id="system.audit.listscap.jsp.unknown" xml:space="preserve">
         <source>Unknown</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14820,7 +14821,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.notapplicable">
+      <trans-unit id="system.audit.listscap.jsp.notapplicable" xml:space="preserve">
         <source>Not applicable</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14833,7 +14834,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.notchecked">
+      <trans-unit id="system.audit.listscap.jsp.notchecked" xml:space="preserve">
         <source>Not checked</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14846,7 +14847,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.notselected">
+      <trans-unit id="system.audit.listscap.jsp.notselected" xml:space="preserve">
         <source>Not selected</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14859,7 +14860,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.informational">
+      <trans-unit id="system.audit.listscap.jsp.informational" xml:space="preserve">
         <source>Informational</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -14872,7 +14873,7 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
           <context context-type="sourcefile">View of SCAP scans for given system</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system.audit.listscap.jsp.fixed">
+      <trans-unit id="system.audit.listscap.jsp.fixed" xml:space="preserve">
         <source>Fixed</source>
         <context-group name="ctx">
           <context context-type="sourcefile">View of SCAP scans for given system</context>
@@ -15714,8 +15715,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="system.event.timeout" xml:space="preserve">
-        <source>Timeout: &lt;strong&gt;{0}&lt;/strong&gt; seconds</source>
-        <target state="translated">ໝົດເວລາ: &lt;strong&gt;{0}&lt;/strong&gt; ວິນາທີ</target>
+        <source>Timeout:  &lt;strong&gt;{0}&lt;/strong&gt; seconds</source>
+        <target state="needs-adaptation">ໝົດເວລາ: &lt;strong&gt;{0}&lt;/strong&gt; ວິນາທີ</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
@@ -15749,8 +15750,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="system.event.scriptRawOutput" xml:space="preserve">
-        <source>Raw Output:</source>
-        <target state="translated">ຜົນການປະມວນຜົນດິບ:</target>
+        <source>Raw Output: </source>
+        <target state="needs-adaptation">ຜົນການປະມວນຜົນດິບ:</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
@@ -15763,8 +15764,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="system.event.scriptFilteredOutput" xml:space="preserve">
-        <source>Filtered Output:</source>
-        <target state="translated">ຜົນການປະມວນຜົນທີ່ຖືກຄັດຕອງ:</target>
+        <source>Filtered Output: </source>
+        <target state="needs-adaptation">ຜົນການປະມວນຜົນທີ່ຖືກຄັດຕອງ:</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
@@ -15777,15 +15778,15 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="system.event.scapPath" xml:space="preserve">
-        <source>&lt;strong&gt;Path to XCCDF document: &lt;/strong&gt;</source>
-        <target state="translated">&lt;strong&gt;ເສັ້ນທາງໄປຫາເອກະສານ XCCDF: &lt;/strong&gt;</target>
+        <source>&lt;strong&gt;Path to XCCDF document: &lt;/strong&gt; </source>
+        <target state="needs-adaptation">&lt;strong&gt;ເສັ້ນທາງໄປຫາເອກະສານ XCCDF: &lt;/strong&gt;</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system.event.scapOvalFiles" xml:space="preserve">
-        <source>&lt;strong&gt;OVAL files (comma separated): &lt;/strong&gt;</source>
-        <target state="translated">&lt;strong&gt;ໄຟລ໌ OVAL (ຂັ້ນດ້ວຍຈຸດ): &lt;/strong&gt;</target>
+        <source>&lt;strong&gt;OVAL files (comma separated): &lt;/strong&gt; </source>
+        <target state="needs-adaptation">&lt;strong&gt;ໄຟລ໌ OVAL (ຂັ້ນດ້ວຍຈຸດ): &lt;/strong&gt;</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Events Pages</context>
         </context-group>
@@ -15882,55 +15883,55 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <!-- System events legend -->
-      <trans-unit id="system-history-legend.jsp.type.title">
+      <trans-unit id="system-history-legend.jsp.type.title" xml:space="preserve">
         <source>Event Type Legend</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.jsp.type.package">
+      <trans-unit id="system-history-legend.jsp.type.package" xml:space="preserve">
         <source>Package Event</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.jsp.type.errata">
+      <trans-unit id="system-history-legend.jsp.type.errata" xml:space="preserve">
         <source>Errata Event</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.jsp.type.preferences">
+      <trans-unit id="system-history-legend.jsp.type.preferences" xml:space="preserve">
         <source>Preferences Event</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.jsp.type.system">
+      <trans-unit id="system-history-legend.jsp.type.system" xml:space="preserve">
         <source>System Event</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.jsp.status.title">
+      <trans-unit id="system-history-legend.jsp.status.title" xml:space="preserve">
         <source>Event Status Legend</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.status.jsp.ok">
+      <trans-unit id="system-history-legend.status.jsp.ok" xml:space="preserve">
         <source>Complete</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.jsp.status.failed">
+      <trans-unit id="system-history-legend.jsp.status.failed" xml:space="preserve">
         <source>Failure</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="system-history-legend.jsp.status.running">
+      <trans-unit id="system-history-legend.jsp.status.running" xml:space="preserve">
         <source>Activity Occuring</source>
         <context-group name="ctx">
           <context context-type="sourcefile">System Eevents Pages Legend</context>
@@ -15952,8 +15953,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="system.history.snapshot.summary2" xml:space="preserve">
-        <source>Below are a list of snapshots of your system. To rollback to a previous configuration, or to view the changes that would have if you rolled back, click the desired snapshot below.</source>
-        <target state="translated">ລຸ່ມນີ້ແມ່ນລາຍການສະແນັບຊັອດຂອງລະບົບເຈົ້າ. ເພື່ອຍ້ອນກັບ (rollback) ໄປຫາການກຳນົດຄ່າກ່ອນໜ້າ, ຫຼື ເບິ່ງການປ່ຽນແປງທີ່ຈະເກີດຂຶ້ນຖ້າຍ້ອນກັບ, ໃຫ້ກົດເລືອກສະແນັບຊັອດທີ່ຕ້ອງການ.</target>
+        <source>Below are a list of snapshots of your system.  To rollback to a previous configuration, or to view the changes that would have if you rolled back, click the desired snapshot below.</source>
+        <target state="needs-adaptation">ລຸ່ມນີ້ແມ່ນລາຍການສະແນັບຊັອດຂອງລະບົບເຈົ້າ. ເພື່ອຍ້ອນກັບ (rollback) ໄປຫາການກຳນົດຄ່າກ່ອນໜ້າ, ຫຼື ເບິ່ງການປ່ຽນແປງທີ່ຈະເກີດຂຶ້ນຖ້າຍ້ອນກັບ, ໃຫ້ກົດເລືອກສະແນັບຊັອດທີ່ຕ້ອງການ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Snapshot Pages</context>
         </context-group>
@@ -16274,36 +16275,42 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="system.history.snapshot.summary-rollback2" xml:space="preserve">
-        <source>Are you certain you wish to rollback to the selected system snapshot? Doing so will cancel all pending scheduled actions for the system, and the following items will be changed to match the pre-snapshot values:</source>
-        <target state="translated">ເຈົ້າແນ່ໃຈບໍວ່າຕ້ອງການຍ້ອນກັບໄປຫາສະແນັບຊັອດທີ່ເລືອກ? ການເຮັດແບບນີ້ຈະຍົກເລີກ ການດຳເນີນການທີ່ກຳນົດໄວ້ທັງໝົດສຳລັບລະບົບ, ແລະ ລາຍການຕໍ່ໄປນີ້ຈະຖືກປ່ຽນແປງ ໃຫ້ກົງກັບຄ່າກ່ອນໜ້າທີ່ຈະເຮັດສະແນັບຊັອດ:</target>
+        <source>Are you certain you wish to rollback to the selected system snapshot?
+          Doing so will cancel all pending scheduled actions for the system,
+          and the following items will be changed to match the pre-snapshot values:</source>
+        <target state="needs-adaptation">ເຈົ້າແນ່ໃຈບໍວ່າຕ້ອງການຍ້ອນກັບໄປຫາສະແນັບຊັອດທີ່ເລືອກ? ການເຮັດແບບນີ້ຈະຍົກເລີກ ການດຳເນີນການທີ່ກຳນົດໄວ້ທັງໝົດສຳລັບລະບົບ, ແລະ ລາຍການຕໍ່ໄປນີ້ຈະຖືກປ່ຽນແປງ ໃຫ້ກົງກັບຄ່າກ່ອນໜ້າທີ່ຈະເຮັດສະແນັບຊັອດ:</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Snapshot Pages</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system.history.snapshot.sg_removed" xml:space="preserve">
-        <source>One or more of the system groups from the snapshot has been deleted.{0} This may have some effect upon who may manage the system upon rollback.</source>
-        <target state="translated">ກຸ່ມລະບົບໜຶ່ງ ຫຼື ຫຼາຍກຸ່ມຈາກສະແນັບຊັອດໄດ້ຖືກລຶບໄປແລ້ວ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ຜູ້ທີ່ສາມາດຈັດການລະບົບໄດ້ຫຼັງຈາກການຍ້ອນກັບ.</target>
+        <source>One or more of the system groups from the snapshot has been deleted.{0}
+          This may have some effect upon who may manage the system upon rollback.</source>
+        <target state="needs-adaptation">ກຸ່ມລະບົບໜຶ່ງ ຫຼື ຫຼາຍກຸ່ມຈາກສະແນັບຊັອດໄດ້ຖືກລຶບໄປແລ້ວ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ຜູ້ທີ່ສາມາດຈັດການລະບົບໄດ້ຫຼັງຈາກການຍ້ອນກັບ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Snapshot Pages</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system.history.snapshot.channel_removed" xml:space="preserve">
-        <source>One or more of the channels from the snapshot has been deleted.{0} This might affect the ability of the system to rollback to the snapshot package set.</source>
-        <target state="translated">ຊ່ອງທາງໜຶ່ງ ຫຼື ຫຼາຍຊ່ອງທາງຈາກສະແນັບຊັອດໄດ້ຖືກລຶບໄປແລ້ວ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ຄວາມສາມາດຂອງລະບົບໃນການຍ້ອນກັບໄປຫາຊຸດແພັກເກດໃນສະແນັບຊັອດ.</target>
+        <source>One or more of the channels from the snapshot has been deleted.{0}
+          This might affect the ability of the system to rollback to the snapshot package set.</source>
+        <target state="needs-adaptation">ຊ່ອງທາງໜຶ່ງ ຫຼື ຫຼາຍຊ່ອງທາງຈາກສະແນັບຊັອດໄດ້ຖືກລຶບໄປແລ້ວ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ຄວາມສາມາດຂອງລະບົບໃນການຍ້ອນກັບໄປຫາຊຸດແພັກເກດໃນສະແນັບຊັອດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Snapshot Pages</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system.history.snapshot.channel_modified" xml:space="preserve">
-        <source>One or more of the channels from the snapshot has been modified.{0} This might affect the ability of the system to rollback to the snapshot package set.</source>
-        <target state="translated">ຊ່ອງທາງໜຶ່ງ ຫຼື ຫຼາຍຊ່ອງທາງຈາກສະແນັບຊັອດໄດ້ຖືກປ່ຽນແປງ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ຄວາມສາມາດຂອງລະບົບໃນການຍ້ອນກັບໄປຫາຊຸດແພັກເກດໃນສະແນັບຊັອດ.</target>
+        <source>One or more of the channels from the snapshot has been modified.{0}
+          This might affect the ability of the system to rollback to the snapshot package set.</source>
+        <target state="needs-adaptation">ຊ່ອງທາງໜຶ່ງ ຫຼື ຫຼາຍຊ່ອງທາງຈາກສະແນັບຊັອດໄດ້ຖືກປ່ຽນແປງ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ຄວາມສາມາດຂອງລະບົບໃນການຍ້ອນກັບໄປຫາຊຸດແພັກເກດໃນສະແນັບຊັອດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Snapshot Pages</context>
         </context-group>
       </trans-unit>
       <trans-unit id="system.history.snapshot.ns_removed" xml:space="preserve">
-        <source>One or more of the namespaces from the snapshot has been deleted.{0} This may have an effect upon the configuration files that will be deployed upon rollback.</source>
-        <target state="translated">Namespace ໜຶ່ງ ຫຼື ຫຼາຍອັນຈາກສະແນັບຊັອດໄດ້ຖືກລຶບໄປແລ້ວ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ໄຟລ໌ກຳນົດຄ່າທີ່ຈະຖືກນຳໃຊ້ (deploy) ເມື່ອມີການຍ້ອນກັບ.</target>
+        <source>One or more of the namespaces from the snapshot has been deleted.{0}
+          This may have an effect upon the configuration files that will be deployed upon rollback.</source>
+        <target state="needs-adaptation">Namespace ໜຶ່ງ ຫຼື ຫຼາຍອັນຈາກສະແນັບຊັອດໄດ້ຖືກລຶບໄປແລ້ວ.{0} ນີ້ ອາດມີຜົນກະທົບຕໍ່ໄຟລ໌ກຳນົດຄ່າທີ່ຈະຖືກນຳໃຊ້ (deploy) ເມື່ອມີການຍ້ອນກັບ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">System Snapshot Pages</context>
         </context-group>
@@ -16499,8 +16506,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="config.common.sandboxAlt" xml:space="preserve">
-        <source>configuration sandbox</source>
-        <target state="translated">ພື້ນທີ່ທົດລອງກຳນົດຄ່າ (sandbox)</target>
+        <source>configuration sandbox </source>
+        <target state="needs-adaptation">ພື້ນທີ່ທົດລອງກຳນົດຄ່າ (sandbox)</target>
         <context-group name="ctx">
           <context context-type="sourcefile">Configuration Management Pages</context>
         </context-group>
@@ -16622,8 +16629,8 @@ the &lt;strong&gt;@@ENTERPRISE_LINUX_NAME@@ System Administration Guide.&lt;/str
         </context-group>
       </trans-unit>
       <trans-unit id="targetsystems.jsp.summary" xml:space="preserve">
-        <source>The systems listed below do not have files managed via @@PRODUCT_NAME@@ configuration management. For systems to be capable of being managed by @@PRODUCT_NAME@@ configuration management, they need to have particular *-salt-minion packages installed. You can enable configuration management on selected systems by using the 'Enable @@PRODUCT_NAME@@ Configuration Management' button below.</source>
-        <target state="translated">ລະບົບທີ່ລະບຸໄວ້ລຸ່ມນີ້ບໍ່ມີໄຟລ໌ທີ່ຈັດການຜ່ານການຈັດການກຳນົດຄ່າຂອງ @@PRODUCT_NAME@@. ເພື່ອໃຫ້ລະບົບສາມາດຈັດການໂດຍ @@PRODUCT_NAME@@ ໄດ້, ພວກມັນຈຳເປັນຕ້ອງມີ ແພັກເກດ *-salt-minion ຕິດຕັ້ງໄວ້. ເຈົ້າສາມາດເປີດໃຊ້ການຈັດການກຳນົດຄ່າໃນລະບົບທີ່ເລືອກ ໂດຍການໃຊ້ປຸ່ມ 'Enable @@PRODUCT_NAME@@ Configuration Management' ຢູ່ດ້ານລຸ່ມ.</target>
+        <source>The systems listed below do not have files managed via @@PRODUCT_NAME@@ configuration management.  For systems to be capable of being managed by @@PRODUCT_NAME@@ configuration management, they need to have particular *-salt-minion packages installed. You can enable configuration management on selected systems by using the 'Enable @@PRODUCT_NAME@@ Configuration Management' button below.</source>
+        <target state="needs-adaptation">ລະບົບທີ່ລະບຸໄວ້ລຸ່ມນີ້ບໍ່ມີໄຟລ໌ທີ່ຈັດການຜ່ານການຈັດການກຳນົດຄ່າຂອງ @@PRODUCT_NAME@@. ເພື່ອໃຫ້ລະບົບສາມາດຈັດການໂດຍ @@PRODUCT_NAME@@ ໄດ້, ພວກມັນຈຳເປັນຕ້ອງມີ ແພັກເກດ *-salt-minion ຕິດຕັ້ງໄວ້. ເຈົ້າສາມາດເປີດໃຊ້ການຈັດການກຳນົດຄ່າໃນລະບົບທີ່ເລືອກ ໂດຍການໃຊ້ປຸ່ມ 'Enable @@PRODUCT_NAME@@ Configuration Management' ຢູ່ດ້ານລຸ່ມ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/configuration/system/TargetSystems.do</context>
         </context-group>
@@ -19275,8 +19282,8 @@ any of these revisions.  Are you sure you want to do this?</source>
         </context-group>
       </trans-unit>
       <trans-unit id="copycentral.jsp.summary" xml:space="preserve">
-        <source>You may copy &lt;a href="{0}"&gt;Revision {1}&lt;/a&gt; of this file into &lt;strong&gt;centrally-managed config channels&lt;/strong&gt;. When you copy this file into another channel, it will become the newest revision for the file in that channel.</source>
-        <target state="translated">ທ່ານສາມາດຄັດລອກ &lt;a href="{0}"&gt;ສະບັບປັບປຸງ {1}&lt;/a&gt; ຂອງໄຟລ໌ນີ້ເຂົ້າໄປໃນ &lt;strong&gt;ຊ່ອງທາງການກຳນົດຄ່າທີ່ຈັດການແບບສູນກາງ&lt;/strong&gt;. ເມື່ອທ່ານຄັດລອກໄຟລ໌ນີ້ເຂົ້າໄປໃນຊ່ອງທາງອື່ນ, ມັນຈະກາຍເປັນສະບັບປັບປຸງໃໝ່ລ່າສຸດສຳລັບໄຟລ໌ໃນຊ່ອງທາງນັ້ນ.</target>
+        <source>You may copy &lt;a href="{0}"&gt;Revision {1}&lt;/a&gt; of this file into &lt;strong&gt;centrally-managed config channels&lt;/strong&gt;.  When you copy this file into another channel, it will become the newest revision for the file in that channel.</source>
+        <target state="needs-adaptation">ທ່ານສາມາດຄັດລອກ &lt;a href="{0}"&gt;ສະບັບປັບປຸງ {1}&lt;/a&gt; ຂອງໄຟລ໌ນີ້ເຂົ້າໄປໃນ &lt;strong&gt;ຊ່ອງທາງການກຳນົດຄ່າທີ່ຈັດການແບບສູນກາງ&lt;/strong&gt;. ເມື່ອທ່ານຄັດລອກໄຟລ໌ນີ້ເຂົ້າໄປໃນຊ່ອງທາງອື່ນ, ມັນຈະກາຍເປັນສະບັບປັບປຸງໃໝ່ລ່າສຸດສຳລັບໄຟລ໌ໃນຊ່ອງທາງນັ້ນ.</target>
         <context-group name="ctx">
           <context context-type="paramnotes">You may copy Revision 3 of this file into centrally-managed config channels.  When you copy this file into another channel, it will become the newest revision for the file in that channel.</context>
         </context-group>
@@ -19352,8 +19359,8 @@ any of these revisions.  Are you sure you want to do this?</source>
         </context-group>
       </trans-unit>
       <trans-unit id="copylocal.jsp.summary" xml:space="preserve">
-        <source>You may copy &lt;a href="{0}"&gt;Revision {1}&lt;/a&gt; of this file into &lt;strong&gt;locally-managed config channels&lt;/strong&gt;. When you copy this file into another channel, it will become the newest revision for the file in that channel.</source>
-        <target state="translated">ທ່ານສາມາດຄັດລອກ &lt;a href="{0}"&gt;ສະບັບປັບປຸງ {1}&lt;/a&gt; ຂອງໄຟລ໌ນີ້ເຂົ້າໄປໃນ &lt;strong&gt;ຊ່ອງທາງການກຳນົດຄ່າທີ່ຈັດການພາຍໃນເຄື່ອງ&lt;/strong&gt;. ເມື່ອທ່ານຄັດລອກໄຟລ໌ນີ້ເຂົ້າໄປໃນຊ່ອງທາງອື່ນ, ມັນຈະກາຍເປັນສະບັບປັບປຸງໃໝ່ລ່າສຸດສຳລັບໄຟລ໌ໃນຊ່ອງທາງນັ້ນ.</target>
+        <source>You may copy &lt;a href="{0}"&gt;Revision {1}&lt;/a&gt; of this file into &lt;strong&gt;locally-managed config channels&lt;/strong&gt;.  When you copy this file into another channel, it will become the newest revision for the file in that channel.</source>
+        <target state="needs-adaptation">ທ່ານສາມາດຄັດລອກ &lt;a href="{0}"&gt;ສະບັບປັບປຸງ {1}&lt;/a&gt; ຂອງໄຟລ໌ນີ້ເຂົ້າໄປໃນ &lt;strong&gt;ຊ່ອງທາງການກຳນົດຄ່າທີ່ຈັດການພາຍໃນເຄື່ອງ&lt;/strong&gt;. ເມື່ອທ່ານຄັດລອກໄຟລ໌ນີ້ເຂົ້າໄປໃນຊ່ອງທາງອື່ນ, ມັນຈະກາຍເປັນສະບັບປັບປຸງໃໝ່ລ່າສຸດສຳລັບໄຟລ໌ໃນຊ່ອງທາງນັ້ນ.</target>
         <context-group name="ctx">
           <context context-type="paramnotes">You may copy Revision 3 of this file into locally-managed config channels.  When you copy this file into another channel, it will become the newest revision for the file in that channel.</context>
         </context-group>
@@ -19377,8 +19384,8 @@ any of these revisions.  Are you sure you want to do this?</source>
         </context-group>
       </trans-unit>
       <trans-unit id="copysandbox.jsp.summary" xml:space="preserve">
-        <source>You may copy &lt;a href="{0}"&gt;Revision {1}&lt;/a&gt; of this file into &lt;strong&gt;system sandboxes&lt;/strong&gt;. When you copy this file into a sandbox, it will become the newest revision for the file in that sandbox.</source>
-        <target state="translated">ທ່ານສາມາດຄັດລອກ &lt;a href="{0}"&gt;ສະບັບປັບປຸງ {1}&lt;/a&gt; ຂອງໄຟລ໌ນີ້ເຂົ້າໄປໃນ &lt;strong&gt;ແຊນບັອກຂອງລະບົບ&lt;/strong&gt;. ເມື່ອທ່ານຄັດລອກໄຟລ໌ນີ້ເຂົ້າໄປໃນແຊນບັອກ, ມັນຈະກາຍເປັນສະບັບປັບປຸງໃໝ່ລ່າສຸດສຳລັບໄຟລ໌ໃນແຊນບັອກນັ້ນ.</target>
+        <source>You may copy &lt;a href="{0}"&gt;Revision {1}&lt;/a&gt; of this file into &lt;strong&gt;system sandboxes&lt;/strong&gt;.  When you copy this file into a sandbox, it will become the newest revision for the file in that sandbox.</source>
+        <target state="needs-adaptation">ທ່ານສາມາດຄັດລອກ &lt;a href="{0}"&gt;ສະບັບປັບປຸງ {1}&lt;/a&gt; ຂອງໄຟລ໌ນີ້ເຂົ້າໄປໃນ &lt;strong&gt;ແຊນບັອກຂອງລະບົບ&lt;/strong&gt;. ເມື່ອທ່ານຄັດລອກໄຟລ໌ນີ້ເຂົ້າໄປໃນແຊນບັອກ, ມັນຈະກາຍເປັນສະບັບປັບປຸງໃໝ່ລ່າສຸດສຳລັບໄຟລ໌ໃນແຊນບັອກນັ້ນ.</target>
         <context-group name="ctx">
           <context context-type="paramnotes">You may copy Revision 7 of this file into system sandboxes.  When you copy this file into a sandbox, it will become the newest revision for the file in that sandbox.</context>
         </context-group>
@@ -21899,8 +21906,11 @@ any of these revisions.  Are you sure you want to do this?</source>
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.package.remove.select.summary" xml:space="preserve">
-        <source>Packages listed below may be removed from one or more systems. Select one or more and click the &lt;b&gt;Remove Packages&lt;/b&gt; button to schedule package removal.</source>
-        <target state="translated">ແພັກເກດທີ່ລະບຸລຸ່ມນີ້ອາດຈະຖືກລົບອອກຈາກລະບົບຢ່າງໜ້ອຍໜຶ່ງລະບົບ. ເລືອກໜຶ່ງຢ່າງ ຫຼື ຫຼາຍກວ່າ ແລ້ວຄລິກປຸ່ມ &lt;b&gt;ລົບແພັກເກດ&lt;/b&gt; ເພື່ອກຳນົດເວລາການລົບ.</target>
+        <source>Packages listed below may be removed from one or more systems.
+
+             Select one or more and click the &lt;b&gt;Remove Packages&lt;/b&gt; button to schedule package removal.
+          </source>
+        <target state="needs-adaptation">ແພັກເກດທີ່ລະບຸລຸ່ມນີ້ອາດຈະຖືກລົບອອກຈາກລະບົບຢ່າງໜ້ອຍໜຶ່ງລະບົບ. ເລືອກໜຶ່ງຢ່າງ ຫຼື ຫຼາຍກວ່າ ແລ້ວຄລິກປຸ່ມ &lt;b&gt;ລົບແພັກເກດ&lt;/b&gt; ເພື່ອກຳນົດເວລາການລົບ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageRemove.do</context>
         </context-group>
@@ -21921,8 +21931,9 @@ any of these revisions.  Are you sure you want to do this?</source>
       </trans-unit>
       <!-- ssm/packageremoveschedule.jsp -->
       <trans-unit id="ssm.package.remove.schedule.summary" xml:space="preserve">
-        <source>Below is a list of the packages that will be removed, on a per system basis.</source>
-        <target state="translated">ລຸ່ມນີ້ແມ່ນລາຍການແພັກເກດທີ່ຈະຖືກລົບອອກ ໂດຍແຍກຕາມແຕ່ລະລະບົບ.</target>
+        <source>Below is a list of the packages that will be removed, on a per system basis.
+          </source>
+        <target state="needs-adaptation">ລຸ່ມນີ້ແມ່ນລາຍການແພັກເກດທີ່ຈະຖືກລົບອອກ ໂດຍແຍກຕາມແຕ່ລະລະບົບ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageRemove.do</context>
         </context-group>
@@ -21942,8 +21953,8 @@ any of these revisions.  Are you sure you want to do this?</source>
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.package.remove.message.packageremovals" xml:space="preserve">
-        <source>Package removals are being scheduled, it may take several minutes for this to complete.</source>
-        <target state="translated">ກຳລັງກຳນົດເວລາການລົບແພັກເກດ, ອາດໃຊ້ເວລາສອງສາມນາທີເພື່ອໃຫ້ສຳເລັດ.</target>
+        <source>Package removals are being scheduled, it may take several minutes for this to complete. </source>
+        <target state="needs-adaptation">ກຳລັງກຳນົດເວລາການລົບແພັກເກດ, ອາດໃຊ້ເວລາສອງສາມນາທີເພື່ອໃຫ້ສຳເລັດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageRemove.do</context>
         </context-group>
@@ -21964,8 +21975,9 @@ any of these revisions.  Are you sure you want to do this?</source>
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.package.upgrade.select.summary" xml:space="preserve">
-        <source>Select the packages to be upgraded. Only those systems to which the package updates apply will receive the updates.</source>
-        <target state="translated">ເລືອກແພັກເກດທີ່ຈະອັບເກຣດ. ສະເພາະລະບົບທີ່ແພັກເກດອັບເດດນັ້ນກ່ຽວຂ້ອງເທົ່ານັ້ນທີ່ຈະໄດ້ຮັບການອັບເດດ.</target>
+        <source>Select the packages to be upgraded. Only those systems to which the package updates apply will receive the updates.
+         </source>
+        <target state="needs-adaptation">ເລືອກແພັກເກດທີ່ຈະອັບເກຣດ. ສະເພາະລະບົບທີ່ແພັກເກດອັບເດດນັ້ນກ່ຽວຂ້ອງເທົ່ານັ້ນທີ່ຈະໄດ້ຮັບການອັບເດດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageUpgrade.do</context>
         </context-group>
@@ -22000,8 +22012,8 @@ any of these revisions.  Are you sure you want to do this?</source>
       </trans-unit>
       <!-- ssm/packageupgradeschedule.jsp -->
       <trans-unit id="ssm.package.upgrade.message.packageupgrade" xml:space="preserve">
-        <source>Package upgrades are being scheduled, it may take several minutes for this to complete.</source>
-        <target state="translated">ກຳລັງກຳນົດເວລາຍົກລະດັບແພັກເກດ, ອາດຈະໃຊ້ເວລາສອງສາມນາທີເພື່ອໃຫ້ສຳເລັດ.</target>
+        <source>Package upgrades are being scheduled, it may take several minutes for this to complete. </source>
+        <target state="needs-adaptation">ກຳລັງກຳນົດເວລາຍົກລະດັບແພັກເກດ, ອາດຈະໃຊ້ເວລາສອງສາມນາທີເພື່ອໃຫ້ສຳເລັດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageUpgradeSchedule.do</context>
         </context-group>
@@ -22029,8 +22041,11 @@ any of these revisions.  Are you sure you want to do this?</source>
         </context-group>
       </trans-unit>
       <trans-unit id="ssm.package.verify.select.summary" xml:space="preserve">
-        <source>Packages listed below may be verified on one or more systems. Select one or more and click the &lt;b&gt;Verify Packages&lt;/b&gt; button to schedule package verification.</source>
-        <target state="translated">ແພັກເກດທີ່ລະບຸໄວ້ຂ້າງລຸ່ມນີ້ອາດຈະຖືກກວດສອບໃນໜຶ່ງລະບົບ ຫຼື ຫຼາຍກວ່າ. ເລືອກໜຶ່ງຢ່າງ ຫຼື ຫຼາຍກວ່າ ແລ້ວກົດປຸ່ມ &lt;b&gt;ກວດສອບແພັກເກດ&lt;/b&gt; ເພື່ອກຳນົດເວລາກວດສອບແພັກເກດ.</target>
+        <source>Packages listed below may be verified on one or more systems.
+
+            Select one or more and click the &lt;b&gt;Verify Packages&lt;/b&gt; button to schedule package verification.
+         </source>
+        <target state="needs-adaptation">ແພັກເກດທີ່ລະບຸໄວ້ຂ້າງລຸ່ມນີ້ອາດຈະຖືກກວດສອບໃນໜຶ່ງລະບົບ ຫຼື ຫຼາຍກວ່າ. ເລືອກໜຶ່ງຢ່າງ ຫຼື ຫຼາຍກວ່າ ແລ້ວກົດປຸ່ມ &lt;b&gt;ກວດສອບແພັກເກດ&lt;/b&gt; ເພື່ອກຳນົດເວລາກວດສອບແພັກເກດ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageVerify.do</context>
         </context-group>
@@ -22051,8 +22066,9 @@ any of these revisions.  Are you sure you want to do this?</source>
       </trans-unit>
       <!-- ssm/packageverifyschedule.jsp -->
       <trans-unit id="ssm.package.verify.schedule.summary" xml:space="preserve">
-        <source>Below is a list of the packages that will be verified, on a per system basis.</source>
-        <target state="translated">ຂ້າງລຸ່ມນີ້ແມ່ນລາຍຊື່ແພັກເກດທີ່ຈະຖືກກວດສອບ, ໂດຍອີງຕາມແຕ່ລະລະບົບ.</target>
+        <source>Below is a list of the packages that will be verified, on a per system basis.
+         </source>
+        <target state="needs-adaptation">ຂ້າງລຸ່ມນີ້ແມ່ນລາຍຊື່ແພັກເກດທີ່ຈະຖືກກວດສອບ, ໂດຍອີງຕາມແຕ່ລະລະບົບ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ssm/PackageVerifySchedule.do</context>
         </context-group>
@@ -24041,8 +24057,8 @@ Tree Path, Base Channel, ແລະ Installer Generation ຄວນກົງກັ
         </context-group>
       </trans-unit>
       <trans-unit id="sdc.config.subscriptions.jsp.noChannels" xml:space="preserve">
-        <source>No configuration channels are available for subscription. You have either already subscribed this system to all available channels (&lt;a href="{0}"&gt;view subscribed channels&lt;/a&gt;) or you do not have permissions to access any of the available channels.</source>
-        <target state="translated">ບໍ່ມີຊ່ອງທາງການກຳນົດຄ່າໃຫ້ລົງທະບຽນ. ທ່ານອາດຈະໄດ້ລົງທະບຽນລະບົບນີ້ເຂົ້າໃນຊ່ອງທາງທັງໝົດທີ່ມີຢູ່ແລ້ວ (&lt;a href="{0}"&gt;ເບິ່ງຊ່ອງທາງທີ່ລົງທະບຽນແລ້ວ&lt;/a&gt;) ຫຼື ທ່ານບໍ່ມີສິດເຂົ້າເຖິງຊ່ອງທາງໃດໆທີ່ມີຢູ່.</target>
+        <source> No configuration channels are available for subscription. You have either already subscribed this system to all available channels (&lt;a href="{0}"&gt;view subscribed channels&lt;/a&gt;) or you do not have permissions to access any of the available channels.</source>
+        <target state="needs-adaptation">ບໍ່ມີຊ່ອງທາງການກຳນົດຄ່າໃຫ້ລົງທະບຽນ. ທ່ານອາດຈະໄດ້ລົງທະບຽນລະບົບນີ້ເຂົ້າໃນຊ່ອງທາງທັງໝົດທີ່ມີຢູ່ແລ້ວ (&lt;a href="{0}"&gt;ເບິ່ງຊ່ອງທາງທີ່ລົງທະບຽນແລ້ວ&lt;/a&gt;) ຫຼື ທ່ານບໍ່ມີສິດເຂົ້າເຖິງຊ່ອງທາງໃດໆທີ່ມີຢູ່.</target>
         <context-group name="sdc_subscriptions_list">
           <context context-type="sourcefile">/rhn/systems/details/configuration/Overview.do</context>
         </context-group>
@@ -24101,8 +24117,8 @@ Tree Path, Base Channel, ແລະ Installer Generation ຄວນກົງກັ
         </context-group>
       </trans-unit>
       <trans-unit id="common.config.rank.jsp.warning" xml:space="preserve">
-        <source>&lt;strong&gt;Warning:&lt;/strong&gt; You have just selected new configuration channel(s) to subscribe this system to. This system will &lt;strong&gt;not&lt;/strong&gt; be subscribed to these channels until you confirm the subscriptions by determining their ranks and clicking on "{0}" below.</source>
-        <target state="translated">&lt;strong&gt;ຄຳເຕືອນ:&lt;/strong&gt; ທ່ານຫາກໍ່ເລືອກຊ່ອງທາງການກຳນົດຄ່າໃໝ່ເພື່ອລົງທະບຽນໃຫ້ລະບົບນີ້. ລະບົບຈະ &lt;strong&gt;ຍັງບໍ່&lt;/strong&gt; ຖືກລົງທະບຽນເຂົ້າໃນຊ່ອງທາງເຫຼົ່ານີ້ ຈົນກວ່າທ່ານຈະຢືນຢັນການລົງທະບຽນໂດຍການກຳນົດລຳດັບ ແລະ ຄລິກທີ່ "{0}" ຂ້າງລຸ່ມນີ້.</target>
+        <source>&lt;strong&gt;Warning:&lt;/strong&gt; You have just selected new configuration channel(s) to subscribe this system to. This system will &lt;strong&gt;not&lt;/strong&gt; be subscribed to these channels until you confirm the subscriptions by determining their ranks and clicking on "{0}" below. </source>
+        <target state="needs-adaptation">&lt;strong&gt;ຄຳເຕືອນ:&lt;/strong&gt; ທ່ານຫາກໍ່ເລືອກຊ່ອງທາງການກຳນົດຄ່າໃໝ່ເພື່ອລົງທະບຽນໃຫ້ລະບົບນີ້. ລະບົບຈະ &lt;strong&gt;ຍັງບໍ່&lt;/strong&gt; ຖືກລົງທະບຽນເຂົ້າໃນຊ່ອງທາງເຫຼົ່ານີ້ ຈົນກວ່າທ່ານຈະຢືນຢັນການລົງທະບຽນໂດຍການກຳນົດລຳດັບ ແລະ ຄລິກທີ່ "{0}" ຂ້າງລຸ່ມນີ້.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/configuration/RankChannels.do</context>
         </context-group>
@@ -25371,8 +25387,8 @@ Tree Path, Base Channel, ແລະ Installer Generation ຄວນກົງກັ
         </context-group>
       </trans-unit>
       <trans-unit id="isodownload.no-access" xml:space="preserve">
-        <source>The channel you have attempted to access either does not exist, or you are not allowed access. Please recheck the link that brought you to this page.</source>
-        <target state="translated">ຊ່ອງທາງທີ່ເຈົ້າພະຍາຍາມເຂົ້າເຖິງນັ້ນບໍ່ມີຢູ່ ຫຼື ເຈົ້າບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ເຂົ້າເຖິງ. ກະລຸນາກວດສອບລິ້ງທີ່ພາເຈົ້າມາຫາໜ້ານີ້ຄືນໃໝ່.</target>
+        <source>The channel you have attempted to access either does not exist, or you are not allowed access.  Please recheck the link that brought you to this page.</source>
+        <target state="needs-adaptation">ຊ່ອງທາງທີ່ເຈົ້າພະຍາຍາມເຂົ້າເຖິງນັ້ນບໍ່ມີຢູ່ ຫຼື ເຈົ້າບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ເຂົ້າເຖິງ. ກະລຸນາກວດສອບລິ້ງທີ່ພາເຈົ້າມາຫາໜ້ານີ້ຄືນໃໝ່.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/software/channel/downloads/Download.do</context>
         </context-group>
@@ -25786,8 +25802,16 @@ Tree Path, Base Channel, ແລະ Installer Generation ຄວນກົງກັ
         </context-group>
       </trans-unit>
       <trans-unit id="ssmchildsubs.jsp.summary" xml:space="preserve">
-        <source>Below is a list of channels in your organization. &lt;ul&gt; &lt;li&gt;To make no changes for a channel, check Do Nothing for that channel.&lt;/li&gt; &lt;li&gt;To subscribe selected systems to a channel, check Subscribed for that channel.&lt;/li&gt; &lt;li&gt;To unsubscribe selected systems from a channel, check Unsubscribed for that channel.&lt;/li&gt; &lt;/ul&gt; &lt;strong&gt;Note:&lt;/strong&gt; attempts to assign a system to an incompatible channel will fail.</source>
-        <target state="translated">ດ້ານລຸ່ມແມ່ນລາຍການຊ່ອງທາງໃນອົງກອນຂອງທ່ານ. &lt;ul&gt; &lt;li&gt;ຫາກບໍ່ຕ້ອງການປ່ຽນແປງໃດໆ, ໃຫ້ເລືອກ 'ບໍ່ເຮັດຫຍັງ' ສຳລັບຊ່ອງທາງນັ້ນ.&lt;/li&gt; &lt;li&gt;ຫາກຕ້ອງການໃຫ້ລະບົບທີ່ເລືອກຕິດຕາມຊ່ອງທາງ, ໃຫ້ເລືອກ 'ຕິດຕາມ' ສຳລັບຊ່ອງທາງນັ້ນ.&lt;/li&gt; &lt;li&gt;ຫາກຕ້ອງການຍົກເລີກການຕິດຕາມລະບົບທີ່ເລືອກຈາກຊ່ອງທາງ, ໃຫ້ເລືອກ 'ຍົກເລີກການຕິດຕາມ' ສຳລັບຊ່ອງທາງນັ້ນ.&lt;/li&gt; &lt;/ul&gt; &lt;strong&gt;ໝາຍເຫດ:&lt;/strong&gt; ການພະຍາຍາມກຳນົດລະບົບໃຫ້ກັບຊ່ອງທາງທີ່ເຂົ້າກັນບໍ່ໄດ້ຈະລົ້ມເຫຼວ.</target>
+        <source>
+Below is a list of channels in your organization.
+&lt;ul&gt;
+&lt;li&gt;To make no changes for a channel, check Do Nothing for that channel.&lt;/li&gt;
+&lt;li&gt;To subscribe selected systems to a channel, check Subscribed for that channel.&lt;/li&gt;
+&lt;li&gt;To unsubscribe selected systems from a channel, check Unsubscribed for that channel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;Note:&lt;/strong&gt; attempts to assign a system to an incompatible channel will fail.
+        </source>
+        <target state="needs-adaptation">ດ້ານລຸ່ມແມ່ນລາຍການຊ່ອງທາງໃນອົງກອນຂອງທ່ານ. &lt;ul&gt; &lt;li&gt;ຫາກບໍ່ຕ້ອງການປ່ຽນແປງໃດໆ, ໃຫ້ເລືອກ 'ບໍ່ເຮັດຫຍັງ' ສຳລັບຊ່ອງທາງນັ້ນ.&lt;/li&gt; &lt;li&gt;ຫາກຕ້ອງການໃຫ້ລະບົບທີ່ເລືອກຕິດຕາມຊ່ອງທາງ, ໃຫ້ເລືອກ 'ຕິດຕາມ' ສຳລັບຊ່ອງທາງນັ້ນ.&lt;/li&gt; &lt;li&gt;ຫາກຕ້ອງການຍົກເລີກການຕິດຕາມລະບົບທີ່ເລືອກຈາກຊ່ອງທາງ, ໃຫ້ເລືອກ 'ຍົກເລີກການຕິດຕາມ' ສຳລັບຊ່ອງທາງນັ້ນ.&lt;/li&gt; &lt;/ul&gt; &lt;strong&gt;ໝາຍເຫດ:&lt;/strong&gt; ການພະຍາຍາມກຳນົດລະບົບໃຫ້ກັບຊ່ອງທາງທີ່ເຂົ້າກັນບໍ່ໄດ້ຈະລົ້ມເຫຼວ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channel/ssm/ChildSubscriptions.do</context>
         </context-group>
@@ -25863,8 +25887,12 @@ Tree Path, Base Channel, ແລະ Installer Generation ຄວນກົງກັ
         </context-group>
       </trans-unit>
       <trans-unit id="basesub.jsp.summary" xml:space="preserve">
-        <source>As a Channel Administrator, you may change the base channels your systems are subscribed to. Valid channels are either channels created by your organization, or the default @@VENDOR_NAME@@ base channel for your operating system version and processor type. Systems will be unsubscribed from all channels, and subscribed to their new base channels. &lt;p/&gt; &lt;strong&gt;This operation can have a dramatic effect on the packages and patches available to the systems, and should be used with caution.&lt;/strong&gt;</source>
-        <target state="translated">ໃນນາມຜູ້ເບິ່ງແຍງຊ່ອງທາງ, ທ່ານອາດຈະປ່ຽນແປງຊ່ອງທາງພື້ນຖານທີ່ລະບົບຂອງທ່ານຕິດຕາມຢູ່. ຊ່ອງທາງທີ່ຖືກຕ້ອງແມ່ນຊ່ອງທາງທີ່ສ້າງຂຶ້ນໂດຍອົງກອນຂອງທ່ານ ຫຼື ຊ່ອງທາງພື້ນຖານ @@VENDOR_NAME@@ ເລີ່ມຕົ້ນສຳລັບເວີຊັນລະບົບປະຕິບັດການ ແລະ ປະເພດໂປຣເຊດເຊີຂອງທ່ານ. ລະບົບຈະຖືກຍົກເລີກການຕິດຕາມຈາກທຸກຊ່ອງທາງ ແລະ ຈະຕິດຕາມຊ່ອງທາງພື້ນຖານໃໝ່ແທນ. &lt;p/&gt; &lt;strong&gt;ການດຳເນີນການນີ້ອາດມີຜົນກະທົບຢ່າງຫຼວງຫຼາຍຕໍ່ແພັກເກດ ແລະ patch ທີ່ມີໃຫ້ລະບົບ, ຄວນໃຊ້ດ້ວຍຄວາມລະມັດລະວັງ.&lt;/strong&gt;</target>
+        <source>
+As a Channel Administrator, you may change the base channels your systems are subscribed to. Valid channels are either channels created by your organization, or the default @@VENDOR_NAME@@ base channel for your operating system version and processor type. Systems will be unsubscribed from all channels, and subscribed to their new base channels.
+&lt;p/&gt;
+&lt;strong&gt;This operation can have a dramatic effect on the packages and patches available to the systems, and should be used with caution.&lt;/strong&gt;
+          </source>
+        <target state="needs-adaptation">ໃນນາມຜູ້ເບິ່ງແຍງຊ່ອງທາງ, ທ່ານອາດຈະປ່ຽນແປງຊ່ອງທາງພື້ນຖານທີ່ລະບົບຂອງທ່ານຕິດຕາມຢູ່. ຊ່ອງທາງທີ່ຖືກຕ້ອງແມ່ນຊ່ອງທາງທີ່ສ້າງຂຶ້ນໂດຍອົງກອນຂອງທ່ານ ຫຼື ຊ່ອງທາງພື້ນຖານ @@VENDOR_NAME@@ ເລີ່ມຕົ້ນສຳລັບເວີຊັນລະບົບປະຕິບັດການ ແລະ ປະເພດໂປຣເຊດເຊີຂອງທ່ານ. ລະບົບຈະຖືກຍົກເລີກການຕິດຕາມຈາກທຸກຊ່ອງທາງ ແລະ ຈະຕິດຕາມຊ່ອງທາງພື້ນຖານໃໝ່ແທນ. &lt;p/&gt; &lt;strong&gt;ການດຳເນີນການນີ້ອາດມີຜົນກະທົບຢ່າງຫຼວງຫຼາຍຕໍ່ແພັກເກດ ແລະ patch ທີ່ມີໃຫ້ລະບົບ, ຄວນໃຊ້ດ້ວຍຄວາມລະມັດລະວັງ.&lt;/strong&gt;</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channel/ssm/BaseChannelSubscribe.do</context>
         </context-group>
@@ -28943,8 +28971,11 @@ given channel.</source>
         </context-group>
       </trans-unit>
       <trans-unit id="iss.confirmslaveremove.jsp.areyousure" xml:space="preserve">
-        <source>Removing the slave(s) below will remove whatever setup you have done for them, as well as preventing them from being able to synchronize from this @@PRODUCT_NAME@@ instance. This operation cannot be undone - make sure you really want to do this!</source>
-        <target state="translated">ການລຶບ Slave ຂ້າງລຸ່ມນີ້ຈະລຶບການຕັ້ງຄ່າທັງໝົດທີ່ເຈົ້າເຮັດໄວ້ ແລະ ຈະເຮັດໃຫ້ພວກເຂົາບໍ່ສາມາດຊິງໂຄຣໄນຈາກ @@PRODUCT_NAME@@ ນີ້ໄດ້ອີກ. ການດຳເນີນການນີ້ບໍ່ສາມາດກັບຄືນໄດ້ - ກະລຸນາໝັ້ນໃຈວ່າເຈົ້າຕ້ອງການເຮັດແທ້!</target>
+        <source>
+          Removing the slave(s) below will remove whatever setup you have done for them, as well as preventing them from being able to synchronize from this @@PRODUCT_NAME@@ instance.
+          This operation cannot be undone - make sure you really want to do this!
+          </source>
+        <target state="needs-adaptation">ການລຶບ Slave ຂ້າງລຸ່ມນີ້ຈະລຶບການຕັ້ງຄ່າທັງໝົດທີ່ເຈົ້າເຮັດໄວ້ ແລະ ຈະເຮັດໃຫ້ພວກເຂົາບໍ່ສາມາດຊິງໂຄຣໄນຈາກ @@PRODUCT_NAME@@ ນີ້ໄດ້ອີກ. ການດຳເນີນການນີ້ບໍ່ສາມາດກັບຄືນໄດ້ - ກະລຸນາໝັ້ນໃຈວ່າເຈົ້າຕ້ອງການເຮັດແທ້!</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/iss/RemoveSlaveConfirm.do</context>
         </context-group>
@@ -28992,8 +29023,11 @@ given channel.</source>
         </context-group>
       </trans-unit>
       <trans-unit id="iss.confirmmasterremove.jsp.areyousure" xml:space="preserve">
-        <source>Removing the masters below will remove any master-to-slave organization mappings you have created. This operation cannot be undone - make sure you really want to do this!</source>
-        <target state="translated">ການລຶບ Master ຂ້າງລຸ່ມນີ້ຈະລຶບການເຊື່ອມໂຍງອົງກອນລະຫວ່າງ Master ກັບ Slave ທີ່ເຈົ້າສ້າງໄວ້. ການດຳເນີນການນີ້ບໍ່ສາມາດກັບຄືນໄດ້ - ກະລຸນາໝັ້ນໃຈວ່າເຈົ້າຕ້ອງການເຮັດແທ້!</target>
+        <source>
+          Removing the masters below will remove any master-to-slave organization mappings you have created.
+          This operation cannot be undone - make sure you really want to do this!
+          </source>
+        <target state="needs-adaptation">ການລຶບ Master ຂ້າງລຸ່ມນີ້ຈະລຶບການເຊື່ອມໂຍງອົງກອນລະຫວ່າງ Master ກັບ Slave ທີ່ເຈົ້າສ້າງໄວ້. ການດຳເນີນການນີ້ບໍ່ສາມາດກັບຄືນໄດ້ - ກະລຸນາໝັ້ນໃຈວ່າເຈົ້າຕ້ອງການເຮັດແທ້!</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/iss/RemoveMasterConfirm.do</context>
         </context-group>
@@ -29020,8 +29054,10 @@ given channel.</source>
         </context-group>
       </trans-unit>
       <trans-unit id="iss.editmaster.jsp.explanation" xml:space="preserve">
-        <source>Update the details of the master selected below</source>
-        <target state="translated">ອັບເດດລາຍລະອຽດຂອງ Master ທີ່ເລືອກຂ້າງລຸ່ມ</target>
+        <source>
+            Update the details of the master selected below
+          </source>
+        <target state="needs-adaptation">ອັບເດດລາຍລະອຽດຂອງ Master ທີ່ເລືອກຂ້າງລຸ່ມ</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/iss/EditMaster.do</context>
         </context-group>
@@ -29048,8 +29084,13 @@ given channel.</source>
         </context-group>
       </trans-unit>
       <trans-unit id="iss.editmaster.jsp.maporgs.explanation" xml:space="preserve">
-        <source>In order to synchronize channel access-permissions from Master to Slave, each known Master organization must be mapped to a local organization in this @@PRODUCT_NAME@@ instance. On this page the administrator can accomplish this mapping. Note that if a Master organization is not mapped, channels that were restricted to that organization on the Master will be public in this @@PRODUCT_NAME@@ instance.</source>
-        <target state="translated">ເພື່ອຊິງໂຄຣໄນສິດການເຂົ້າເຖິງຊ່ອງທາງຈາກ Master ໄປ Slave, ແຕ່ລະອົງກອນຂອງ Master ທີ່ຮູ້ຈັກຈະຕ້ອງຖືກເຊື່ອມໂຍງກັບອົງກອນພາຍໃນຂອງ @@PRODUCT_NAME@@ ນີ້. ໃນໜ້ານີ້ຜູ້ດູແລລະບົບສາມາດເຮັດການເຊື່ອມໂຍງໄດ້. ໝາຍເຫດ: ຫາກອົງກອນ Master ບໍ່ຖືກເຊື່ອມໂຍງ, ຊ່ອງທາງທີ່ຖືກຈຳກັດໄວ້ສຳລັບອົງກອນນັ້ນໃນ Master ຈະກາຍເປັນຊ່ອງທາງສາທາລະນະໃນ @@PRODUCT_NAME@@ ນີ້.</target>
+        <source>
+          In order to synchronize channel access-permissions from Master to Slave,
+          each known Master organization must be mapped to a local organization in this @@PRODUCT_NAME@@ instance.
+          On this page the administrator can accomplish this mapping.  Note that if a Master organization is not mapped,
+          channels that were restricted to that organization on the Master will be public in this @@PRODUCT_NAME@@ instance.
+          </source>
+        <target state="needs-adaptation">ເພື່ອຊິງໂຄຣໄນສິດການເຂົ້າເຖິງຊ່ອງທາງຈາກ Master ໄປ Slave, ແຕ່ລະອົງກອນຂອງ Master ທີ່ຮູ້ຈັກຈະຕ້ອງຖືກເຊື່ອມໂຍງກັບອົງກອນພາຍໃນຂອງ @@PRODUCT_NAME@@ ນີ້. ໃນໜ້ານີ້ຜູ້ດູແລລະບົບສາມາດເຮັດການເຊື່ອມໂຍງໄດ້. ໝາຍເຫດ: ຫາກອົງກອນ Master ບໍ່ຖືກເຊື່ອມໂຍງ, ຊ່ອງທາງທີ່ຖືກຈຳກັດໄວ້ສຳລັບອົງກອນນັ້ນໃນ Master ຈະກາຍເປັນຊ່ອງທາງສາທາລະນະໃນ @@PRODUCT_NAME@@ ນີ້.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/iss/EditMaster.do</context>
         </context-group>
@@ -29076,8 +29117,11 @@ given channel.</source>
         </context-group>
       </trans-unit>
       <trans-unit id="resetpassword.jsp.error.message" xml:space="preserve">
-        <source>The reset-password link used is invalid. Please contact your @@PRODUCT_NAME@@ administrator for assistance.</source>
-        <target state="translated">ລິ້ງປ່ຽນລະຫັດຜ່ານທີ່ໃຊ້ບໍ່ຖືກຕ້ອງ. ກະລຸນາຕິດຕໍ່ຜູ້ດູແລລະບົບ @@PRODUCT_NAME@@ ເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອ.</target>
+        <source>
+          The reset-password link used is invalid.
+          Please contact your @@PRODUCT_NAME@@ administrator for assistance.
+          </source>
+        <target state="needs-adaptation">ລິ້ງປ່ຽນລະຫັດຜ່ານທີ່ໃຊ້ບໍ່ຖືກຕ້ອງ. ກະລຸນາຕິດຕໍ່ຜູ້ດູແລລະບົບ @@PRODUCT_NAME@@ ເພື່ອຂໍຄວາມຊ່ວຍເຫຼືອ.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ResetLink</context>
         </context-group>
@@ -29118,8 +29162,10 @@ given channel.</source>
         </context-group>
       </trans-unit>
       <trans-unit id="passwordreset.jsp.passwordtip" xml:space="preserve">
-        <source>Passwords can be between {0} and {1} characters, and cannot contain tabs or newlines.</source>
-        <target state="translated">ລະຫັດຜ່ານຕ້ອງມີຄວາມຍາວລະຫວ່າງ {0} ຫາ {1} ຕົວອັກສອນ, ແລະ ບໍ່ສາມາດມີແທັບ (tabs) ຫຼື ຂຶ້ນແຖວໃໝ່.</target>
+        <source>
+          Passwords can be between {0} and {1} characters,
+          and cannot contain tabs or newlines.</source>
+        <target state="needs-adaptation">ລະຫັດຜ່ານຕ້ອງມີຄວາມຍາວລະຫວ່າງ {0} ຫາ {1} ຕົວອັກສອນ, ແລະ ບໍ່ສາມາດມີແທັບ (tabs) ຫຼື ຂຶ້ນແຖວໃໝ່.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/ResetPasswordSubmit</context>
         </context-group>
