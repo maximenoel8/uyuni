@@ -24,8 +24,10 @@ import static java.util.stream.Collectors.toSet;
 
 import com.redhat.rhn.GlobalInstanceHolder;
 import com.redhat.rhn.common.RhnRuntimeException;
+import com.redhat.rhn.common.hibernate.HibernateFactory;
 import com.redhat.rhn.common.messaging.MessageQueue;
 import com.redhat.rhn.common.validator.ValidatorResult;
+import com.redhat.rhn.domain.action.Action;
 import com.redhat.rhn.domain.action.ActionFactory;
 import com.redhat.rhn.domain.action.dup.DistUpgradeAction;
 import com.redhat.rhn.domain.action.dup.DistUpgradeActionDetails;
@@ -440,6 +442,7 @@ public class RegistrationUtils {
         // Check if verify is already running
         Optional<ApplyStatesAction> sles16VerifyAction = pendingServerActions.stream()
                 .map(ServerAction::getParentAction)
+                .map(HibernateFactory::unproxy)
                 .filter(a -> ActionFactory.TYPE_APPLY_STATES.equals(a.getActionType()))
                 .map(ApplyStatesAction.class::cast)
                 .filter(a -> a.getDetails().getMods().contains(ApplyStatesEventMessage.DISTUPGRADE_SLES16_VERIFY))
@@ -480,7 +483,9 @@ public class RegistrationUtils {
      * @return true if the server action is a pending SLES 15 -> SLES 16 migration for the given minion
      */
     private static boolean isSles15To16Migration(ServerAction sa, MinionServer minion) {
-        if (sa.getParentAction() instanceof DistUpgradeAction dup) {
+        Action action = HibernateFactory.unproxy(sa.getParentAction());
+        if (ActionFactory.TYPE_DIST_UPGRADE.equals(action.getActionType())) {
+            DistUpgradeAction dup = (DistUpgradeAction) action;
             DistUpgradeActionDetails details = dup.getDetails(minion.getId());
             return (details != null) && details.isSles15To16Migration();
         }

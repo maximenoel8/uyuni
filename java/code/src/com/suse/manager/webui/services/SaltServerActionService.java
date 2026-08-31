@@ -1369,12 +1369,16 @@ public class SaltServerActionService {
                     // Find the SLES 15.x -> 16.x migration action
                     ActionFactory.listServerActionsForServer(minion, ActionFactory.ALL_PENDING_STATUSES)
                             .stream()
-                            .filter(sa -> sa.getParentAction() instanceof DistUpgradeAction dup &&
-                                    dup.getDetails(minion.getId()) != null &&
-                                    dup.getDetails(minion.getId()).isSles15To16Migration())
+                            .filter(sa -> {
+                                Action act = HibernateFactory.unproxy(sa.getParentAction());
+                                return act instanceof DistUpgradeAction dup &&
+                                        dup.getDetails(minion.getId()) != null &&
+                                        dup.getDetails(minion.getId()).isSles15To16Migration();
+                            })
                             .findFirst()
                             .ifPresentOrElse(sa -> {
-                                DistUpgradeAction dupAction = (DistUpgradeAction) sa.getParentAction();
+                                DistUpgradeAction dupAction =
+                                        (DistUpgradeAction) HibernateFactory.unproxy(sa.getParentAction());
                                 LOG.info("SLES 16 verify: Found pending migration {} for minion {}. Updating...",
                                          dupAction.getId(), minionId);
                                 // Delegate the actual result parsing back to the Action class
