@@ -14,14 +14,12 @@
  */
 package com.suse.manager.reactor.messaging;
 
-import com.redhat.rhn.common.hibernate.HibernateFactory;
 import com.redhat.rhn.common.messaging.EventMessage;
 import com.redhat.rhn.common.messaging.MessageAction;
 import com.redhat.rhn.domain.action.Action;
 import com.redhat.rhn.domain.action.ActionChain;
 import com.redhat.rhn.domain.action.ActionChainFactory;
 import com.redhat.rhn.domain.action.ActionFactory;
-import com.redhat.rhn.domain.action.dup.DistUpgradeAction;
 import com.redhat.rhn.domain.server.MinionServer;
 import com.redhat.rhn.domain.server.MinionServerFactory;
 import com.redhat.rhn.domain.server.VirtualInstance;
@@ -244,14 +242,8 @@ public class JobReturnEventMessageAction implements MessageAction {
                     }
                 }
 
-                boolean isSles15To16Migration = action
-                        .map(HibernateFactory::unproxy)
-                        .filter(a -> a instanceof DistUpgradeAction)
-                        .map(a -> (DistUpgradeAction) a)
-                        .map(DistUpgradeAction::isSles15To16Migration)
-                        .orElse(false);
                 // No package refresh needed for SLES 15 -> 16 migration
-                if (!isSles15To16Migration) {
+                if (!saltServerActionService.isSLES15To16Migration(action)) {
                     schedulePackageRefresh(scheduler, jobReturnEvent.getMinionId(), earliest);
                 }
             }
@@ -295,7 +287,7 @@ public class JobReturnEventMessageAction implements MessageAction {
                     .forEach(ActionChainFactory::delete));
 
         }
-      // For all jobs: update minion last checkin
+        // For all jobs: update minion last checkin
         Optional<MinionServer> minion = MinionServerFactory.findByMinionId(
                 jobReturnEvent.getMinionId());
         if (minion.isPresent()) {
