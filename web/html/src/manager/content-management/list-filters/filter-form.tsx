@@ -69,7 +69,6 @@ const FilterForm = (props: Props) => {
       }}
     >
       <>
-        <MessagesContainer containerId="filter-modal-errors" />
         {props.editing && (
           <Messages
             key="filter-editing-messages"
