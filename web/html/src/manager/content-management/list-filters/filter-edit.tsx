@@ -123,20 +123,18 @@ const FilterEdit = (props: FilterEditProps) => {
 
   return (
     <>
-      {!props.hideButton && (
-        <ModalButton
-          id={`${props.id}-modal-link`}
-          icon={props.icon}
-          text={props.buttonText}
-          title={props.buttonTitle}
-          target={modalNameId}
-          className={props.className}
-          onClick={() => {
-            setOpen(true);
-            setItem(props.initialFilterForm);
-          }}
-        />
-      )}
+      <ModalButton
+        id={`${props.id}-modal-link`}
+        icon={props.icon}
+        text={props.buttonText}
+        title={props.buttonTitle}
+        target={modalNameId}
+        className={props.className}
+        onClick={() => {
+          setOpen(true);
+          setFormData(props.initialFilterForm);
+        }}
+      />
       <Dialog
         id={modalNameId}
         title={modalTitle}
@@ -156,7 +154,7 @@ const FilterEdit = (props: FilterEditProps) => {
         }
         onClosePopUp={() => setOpen(false)}
         buttons={
-          <Fragment>
+          <>
             <div className="w-100">
               {props.editing && (
                 <Button
@@ -200,7 +198,7 @@ const FilterEdit = (props: FilterEditProps) => {
                 />
               </div>
             </div>
-          </Fragment>
+          </>
         }
       />
     </>
