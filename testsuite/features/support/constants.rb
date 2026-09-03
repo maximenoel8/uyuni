@@ -629,6 +629,7 @@ PARENT_CHANNEL_LABEL_TO_SYNC_BY_BASE_CHANNEL = {
     'RES-7-LTSS-Updates for x86_64' => nil,
     'EL9-Pool for x86_64' => 'el9-pool-x86_64',
     'oraclelinux9 for x86_64' => nil,
+    'oraclelinux10 for x86_64' => nil,
     'RHEL8-Pool for x86_64' => nil,
     'rockylinux-8 for x86_64' => nil,
     'rockylinux-9 for x86_64' => nil,
