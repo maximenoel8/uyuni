@@ -133,13 +133,6 @@ spec:
             name: uyuni-tcp
             port:
               number: 80
-        path: /cobbler_api
-        pathType: Prefix
-      - backend:
-          service:
-            name: uyuni-tcp
-            port:
-              number: 80
         path: /cblr
         pathType: Prefix
       - backend:

@@ -124,6 +124,9 @@ public class SSHServiceWorkerTest extends JMockBaseTestCaseWithUser {
             oneOf(sshPushSystemMock).getId();
             will(returnValue(minion.getId()));
 
+            oneOf(sshPushSystemMock).isDistupgrade();
+            will(returnValue(false));
+
             oneOf(sshPushSystemMock).isRebooting();
             will(returnValue(false));
 
@@ -191,6 +194,9 @@ public class SSHServiceWorkerTest extends JMockBaseTestCaseWithUser {
             oneOf(sshPushSystemMock).getId();
             will(returnValue(minion.getId()));
 
+            oneOf(sshPushSystemMock).isDistupgrade();
+            will(returnValue(false));
+
             oneOf(sshPushSystemMock).isRebooting();
             will(returnValue(false));
 
@@ -250,6 +256,9 @@ public class SSHServiceWorkerTest extends JMockBaseTestCaseWithUser {
 
             oneOf(sshPushSystemMock).getId();
             will(returnValue(minion.getId()));
+
+            oneOf(sshPushSystemMock).isDistupgrade();
+            will(returnValue(false));
 
             oneOf(sshPushSystemMock).isRebooting();
             will(returnValue(true));
