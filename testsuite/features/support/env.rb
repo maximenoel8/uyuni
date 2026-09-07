@@ -10,8 +10,8 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'cucumber'
 # require 'simplecov'
-require 'minitest/autorun'
-require 'minitest/unit'
+require 'minitest'
+require 'minitest/assertions'
 require 'securerandom'
 require 'capybara/playwright'
 require 'multi_test'
@@ -149,7 +149,7 @@ Capybara.server_port = 8888 + ENV['TEST_ENV_NUMBER'].to_i
 $stdout.puts "Capybara APP Host: #{Capybara.app_host}:#{Capybara.server_port}"
 
 # enable minitest assertions in steps
-World(MiniTest::Assertions)
+World(Minitest::Assertions)
 
 # Initialize the API client
 $api_test = new_api_client
