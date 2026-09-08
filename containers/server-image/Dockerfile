@@ -95,7 +95,7 @@ RUN set -euo pipefail; \
 # The RemoveIPC was needed for postgresql, not sure if it is safe to remove now that it's in its own container
     mkdir -p /etc/systemd/logind.conf.d/ && \
     printf "[Login]\nRemoveIPC=no" >/etc/systemd/logind.conf.d/disable-removeipc.conf && \
-    zypper --non-interactive removerepo --all; \
+    zypper --non-interactive removerepo --all && \
     rm -rf /var/log/{alternatives.log,lastlog,tallylog,suseconnect.log,zypper.log,zypp/history,YaST2}
 
 ADD --chown=root:root root.tar.gz /
