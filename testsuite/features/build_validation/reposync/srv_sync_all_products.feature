@@ -827,7 +827,7 @@ Feature: Synchronize products in the products page of the Setup Wizard
     And I wait until all synchronized channels for "sl-micro-6.1" have finished
 
 @susemanager
-@run_if_proxy_not_transactional_or_sles15sp7_minion
+@run_if_proxy_not_transactional_or_sles15sp7_minion_or_monitoring_server
   Scenario: Add SUSE Linux Enterprise Server 15 SP7
     Given I am authorized for the "Admin" section
     When I follow the left menu "Admin > Setup Wizard > Products"
