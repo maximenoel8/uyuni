@@ -1945,9 +1945,10 @@ When(/^I wait until a new "([^"]*)" event is completed for "([^"]*)"$/) do |even
 
   target_event = nil
   repeat_until_timeout(message: "Waiting for new '#{event_summary}' event to be created for #{host}") do
-    target_event = get_last_events(host, 10).find do |e|
-      e["id"] > baseline["id"] && e["summary"].include?(event_summary)
-    end
+    target_event =
+      get_last_events(host, 10).find do |e|
+        e["id"] > baseline["id"] && e["summary"].include?(event_summary)
+      end
     break if target_event
 
     sleep 2

@@ -169,7 +169,7 @@ When(/^I restart the network on the PXE boot minion$/) do
   execute_expect_command_proxy('pxeboot_minion', 'restart-network-pxeboot.exp')
 end
 
-When(/^I reboot the (Retail|Cobbler) terminal "([^"]*)" through the interface "([^"]*)"$/) do |context, host, interface|
+When(/^I reboot the (Retail|Cobbler) terminal "([^"]*)" through the interface "([^"]*)"$/) do |context, host, _interface|
   # we might have no or any IPv4 address on that machine
   # convert MAC address to IPv6 link-local address
   case host
