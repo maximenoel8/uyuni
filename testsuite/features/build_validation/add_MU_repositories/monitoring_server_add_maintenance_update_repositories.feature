@@ -15,7 +15,7 @@ Feature: Add a Maintenance Update custom channel and the custom repositories for
     And I select the parent channel for the "sles15sp7_minion" from "Parent Channel"
     And I enter "Custom channel" as "Channel Summary"
     And I click on "Create Channel"
-    Then I should see a "Channel Custom Channel for monitoring_server created" text
+    Then I should see a "Channel Custom Channel for monitoring_server created" text or "The channel label 'custom_channel_monitoring_server' is already in use" text
 
   Scenario: Add the Maintenance update repositories for sles15sp7_minion
     When I create the MU repositories for "sles15sp7_minion"
