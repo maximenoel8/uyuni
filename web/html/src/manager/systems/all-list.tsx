@@ -36,7 +36,7 @@ const DownloadCSVButton = ({ search }) => {
       download="systems.csv"
       className="btn btn-default"
       icon="spacewalk-icon-download-csv"
-      data-senna-off="true"
+      disableSenna
     />
   );
 };

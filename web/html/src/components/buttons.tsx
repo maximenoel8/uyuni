@@ -211,6 +211,9 @@ type LinkProps = BaseProps & {
   /** to treat the link URL as a download  */
   download?: string;
 
+  /** Disable Senna SPA navigation for this link. */
+  disableSenna?: boolean;
+
   /** Callback function to execute on button click. */
   handler?: (...args: any[]) => any;
 };
@@ -249,6 +252,7 @@ export class LinkButton extends _ButtonBase<LinkProps> {
         href={this.props.href}
         onClick={this.props.handler}
         download={this.props.download}
+        data-senna-off={this.props.disableSenna ? "true" : undefined}
         {...targetProps}
         {...tooltipProps}
       >
