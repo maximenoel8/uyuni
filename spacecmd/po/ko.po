@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 09:56+0200\n"
+"POT-Creation-Date: 2026-09-11 09:42+0200\n"
 "PO-Revision-Date: 2025-06-17 07:59+0000\n"
 "Last-Translator: Seeun Lee <selee@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/uyuni/spacecmd/ko/>\n"
@@ -202,7 +202,7 @@ msgid "Description [None]:"
 msgstr "설명 [없음]:"
 
 #: ../src/spacecmd/activationkey.py:756 ../src/spacecmd/distribution.py:96
-#: ../src/spacecmd/softwarechannel.py:903
+#: ../src/spacecmd/softwarechannel.py:910
 msgid "Base Channels"
 msgstr "기본 채널"
 
@@ -320,10 +320,10 @@ msgid "System Groups"
 msgstr "시스템 그룹"
 
 #: ../src/spacecmd/activationkey.py:994 ../src/spacecmd/package.py:206
-#: ../src/spacecmd/package.py:264 ../src/spacecmd/softwarechannel.py:1368
-#: ../src/spacecmd/softwarechannel.py:1474
-#: ../src/spacecmd/softwarechannel.py:1556
-#: ../src/spacecmd/softwarechannel.py:1810
+#: ../src/spacecmd/package.py:264 ../src/spacecmd/softwarechannel.py:1375
+#: ../src/spacecmd/softwarechannel.py:1481
+#: ../src/spacecmd/softwarechannel.py:1563
+#: ../src/spacecmd/softwarechannel.py:1817
 msgid "Packages"
 msgstr "패키지"
 
@@ -426,7 +426,6 @@ msgid "File %s exists, confirm overwrite file? (y/n)"
 msgstr "%s 파일이 있습니다. 파일을 덮어쓰시겠습니까? (y/n)"
 
 #: ../src/spacecmd/activationkey.py:1330
-#, python-brace-format
 msgid "Failed to save exported keys to file: {}"
 msgstr "엑스포트한 키를 파일에 저장하지 못함: {}"
 
@@ -920,7 +919,7 @@ msgstr ""
 #: ../src/spacecmd/custominfo.py:200 ../src/spacecmd/distribution.py:89
 #: ../src/spacecmd/filepreservation.py:71 ../src/spacecmd/group.py:185
 #: ../src/spacecmd/repo.py:353 ../src/spacecmd/repo.py:469
-#: ../src/spacecmd/softwarechannel.py:776
+#: ../src/spacecmd/softwarechannel.py:783
 msgid "Name:"
 msgstr "이름:"
 
@@ -930,7 +929,7 @@ msgstr "레이블:"
 
 #: ../src/spacecmd/configchannel.py:482 ../src/spacecmd/cryptokey.py:107
 #: ../src/spacecmd/custominfo.py:60 ../src/spacecmd/custominfo.py:205
-#: ../src/spacecmd/group.py:190 ../src/spacecmd/softwarechannel.py:788
+#: ../src/spacecmd/group.py:190 ../src/spacecmd/softwarechannel.py:795
 #: ../src/spacecmd/system.py:3873
 msgid "Description:"
 msgstr "설명:"
@@ -965,7 +964,7 @@ msgstr "사용법: configchannel_delete CHANNEL ..."
 msgid "No channels matched argument(s): %s"
 msgstr "인수와 일치하는 채널 없음: %s"
 
-#: ../src/spacecmd/configchannel.py:546 ../src/spacecmd/softwarechannel.py:712
+#: ../src/spacecmd/configchannel.py:546 ../src/spacecmd/softwarechannel.py:719
 msgid "Delete these channels [y/N]:"
 msgstr "이러한 채널을 삭제하시겠습니까 [y/N]:"
 
@@ -1105,14 +1104,14 @@ msgstr ""
 "  바이너리(-b)로 전송되어야 합니다. 이를 위해 파일을 자동 감지하기 위한\n"
 "  노력이 수행되었지만, 사용자가 명시적으로 지정해야 할 수 있습니다.\n"
 
-#: ../src/spacecmd/configchannel.py:814 ../src/spacecmd/softwarechannel.py:795
-#: ../src/spacecmd/softwarechannel.py:916
+#: ../src/spacecmd/configchannel.py:814 ../src/spacecmd/softwarechannel.py:802
 #: ../src/spacecmd/softwarechannel.py:923
+#: ../src/spacecmd/softwarechannel.py:930
 msgid "Select:"
 msgstr "선택:"
 
 #: ../src/spacecmd/configchannel.py:821 ../src/spacecmd/configchannel.py:934
-#: ../src/spacecmd/softwarechannel.py:1352
+#: ../src/spacecmd/softwarechannel.py:1359
 #, python-format
 msgid "%s is not a valid channel"
 msgstr "%s은(는) 유효한 채널이 아닙니다."
@@ -1264,7 +1263,6 @@ msgid "Exporting cc %s to %s"
 msgstr "cc %s을(를) %s(으)로 엑스포트하는 중"
 
 #: ../src/spacecmd/configchannel.py:1266
-#, python-brace-format
 msgid "File '{}' exists, confirm overwrite file? (y/n)"
 msgstr "'{}' 파일이 있습니다. 덮어쓰시겠습니까? (y/n)"
 
@@ -1585,7 +1583,6 @@ msgid "usage: custominfo_details KEY ..."
 msgstr "사용법: custominfo_details KEY ..."
 
 #: ../src/spacecmd/custominfo.py:157
-#, python-brace-format
 msgid "No keys matched argument '{}'."
 msgstr "'{}' 인수와 일치하는 키가 없습니다."
 
@@ -3655,7 +3652,6 @@ msgstr "이름이 %s인 조직을 찾지 못함"
 #: ../src/spacecmd/org.py:208 ../src/spacecmd/org.py:241
 #: ../src/spacecmd/org.py:275 ../src/spacecmd/org.py:311
 #: ../src/spacecmd/org.py:420 ../src/spacecmd/org.py:456
-#, python-brace-format
 msgid "Organisation '{}' was not found"
 msgstr "'{}' 조직을 찾지 못함"
 
@@ -3685,7 +3681,6 @@ msgid "No trust organisation found for the name %s"
 msgstr "이름이 %s인 트러스트 조직을 찾지 못함"
 
 #: ../src/spacecmd/org.py:279 ../src/spacecmd/org.py:315
-#, python-brace-format
 msgid "Organisation '{}' to trust for, was not found"
 msgstr "트러스트 대상인 '{}' 조직을 찾지 못함"
 
@@ -3719,7 +3714,6 @@ msgid "No trusted organisation found for the name %s"
 msgstr "이름이 %s인 트러스트된 조직을 찾지 못함"
 
 #: ../src/spacecmd/org.py:354
-#, python-brace-format
 msgid "Trusted organisation '{}' was not found"
 msgstr "트러스트된 조직 '{}'을(를) 찾지 못함"
 
@@ -3938,7 +3932,7 @@ msgid "No packages found to remove"
 msgstr "제거할 패키지를 찾지 못함"
 
 #: ../src/spacecmd/package.py:210 ../src/spacecmd/package.py:268
-#: ../src/spacecmd/softwarechannel.py:1560 ../src/spacecmd/system.py:999
+#: ../src/spacecmd/softwarechannel.py:1567 ../src/spacecmd/system.py:999
 msgid "Remove these packages [y/N]:"
 msgstr "이 패키지 제거 [y/N]:"
 
@@ -4006,7 +4000,7 @@ msgid "proxy_container_config: create a proxy system and return its configuratio
 msgstr "proxy_container_config: 프록시 시스템을 생성하고 구성 파일을 반환합니다."
 
 #: ../src/spacecmd/proxy.py:33
-#, fuzzy
+#, fuzzy, python-format
 #| msgid ""
 #| "usage: proxy_container_config [options] PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL ROOT_CA CRT KEY\n"
 #| "\n"
@@ -4073,7 +4067,7 @@ msgid "proxy_container_config_generate_cert: create a proxy system and return it
 msgstr "proxy_container_config_generate_cert: 프록시 시스템을 생성하고 구성 파일을 반환합니다."
 
 #: ../src/spacecmd/proxy.py:90
-#, fuzzy
+#, fuzzy, python-format
 #| msgid ""
 #| "usage: proxy_container_config_generate_cert PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL\n"
 #| "\n"
@@ -4203,7 +4197,6 @@ msgid "Repository SSL Client Key:         %s"
 msgstr "저장소 SSL 클라이언트 키:         %s"
 
 #: ../src/spacecmd/repo.py:103
-#, python-brace-format
 msgid "No repositories found for '{}' query"
 msgstr "'{}' 쿼리에 대한 저장소를 찾지 못함"
 
@@ -4424,7 +4417,6 @@ msgid "%s  # Systems"
 msgstr "%s  # 시스템"
 
 #: ../src/spacecmd/report.py:174
-#, python-brace-format
 msgid "No errata found for '{}'"
 msgstr "'{}'에 대한 오류를 찾지 못함"
 
@@ -4849,7 +4841,6 @@ msgid "If no date is provided it will delete all archived actions"
 msgstr "날짜가 제공되지 않으면 보관된 모든 작업이 삭제됩니다."
 
 #: ../src/spacecmd/schedule.py:492
-#, python-brace-format
 msgid "Do you want to delete ({}) archived actions? [y/N]"
 msgstr "보관된 작업({})을 삭제하시겠습니까? [예/아니요]"
 
@@ -4870,7 +4861,6 @@ msgid "If no date is provided it will archive all completed actions"
 msgstr "날짜가 제공되지 않으면 완료된 모든 작업을 보관합니다."
 
 #: ../src/spacecmd/schedule.py:551
-#, python-brace-format
 msgid "Do you want to archive ({}) completed actions? [y/N]"
 msgstr "완료된 작업({})을 보관하시겠습니까? [예/아니요]"
 
@@ -4984,8 +4974,14 @@ msgid "softwarechannel_list: List all available software channels"
 msgstr "softwarechannel_list: 사용할 수 있는 모든 소프트웨어 채널 나열"
 
 #: ../src/spacecmd/softwarechannel.py:59
+#, fuzzy
+#| msgid ""
+#| "usage: softwarechannel_list [options]')\n"
+#| "options:\n"
+#| "  -v verbose (display label and summary)\n"
+#| "  -t tree view (pretty-print(child-channels))\n"
 msgid ""
-"usage: softwarechannel_list [options]')\n"
+"usage: softwarechannel_list [options]\n"
 "options:\n"
 "  -v verbose (display label and summary)\n"
 "  -t tree view (pretty-print(child-channels))\n"
@@ -5018,8 +5014,13 @@ msgid "softwarechannel_listbasechannels: List all base software channels"
 msgstr "softwarechannel_listbasechannels: 모든 기본 소프트웨어 채널 나열"
 
 #: ../src/spacecmd/softwarechannel.py:149
+#, fuzzy
+#| msgid ""
+#| "usage: softwarechannel_listbasechannels [options])\n"
+#| "options:\n"
+#| "  -v verbose (display label and summary)"
 msgid ""
-"usage: softwarechannel_listbasechannels [options])\n"
+"usage: softwarechannel_listbasechannels [options]\n"
 "options:\n"
 "  -v verbose (display label and summary)"
 msgstr ""
@@ -5032,7 +5033,7 @@ msgid "softwarechannel_listchildchannels: List child software channels"
 msgstr "softwarechannel_listchildchannels: 하위 소프트웨어 채널 나열"
 
 #: ../src/spacecmd/softwarechannel.py:178
-#: ../src/spacecmd/softwarechannel.py:2724
+#: ../src/spacecmd/softwarechannel.py:2731
 msgid "usage:"
 msgstr "사용법:"
 
@@ -5101,9 +5102,23 @@ msgid "softwarechannel_setdetails: Modify details of a software channel"
 msgstr "softwarechannel_setdetails: 소프트웨어 채널의 세부 사항 수정"
 
 #: ../src/spacecmd/softwarechannel.py:357
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "usage: softwarechannel_setdetails [options] <CHANNEL ...>)\n"
+#| "\n"
+#| "options, at least one of which must be given:\n"
+#| "  -n NAME\n"
+#| "  -d DESCRIPTION\n"
+#| "  -s SUMMARY\n"
+#| "  -c CHECKSUM %s\n"
+#| "  -m MAINTAINER_NAME\n"
+#| "  -e MAINTAINER_EMAIL\n"
+#| "  -p MAINTAINER_PHONE\n"
+#| "  -u GPG_URL\n"
+#| "  -i GPG_ID\n"
+#| "  -f GPG_FINGERPRINT"
 msgid ""
-"usage: softwarechannel_setdetails [options] <CHANNEL ...>)\n"
+"usage: softwarechannel_setdetails [options] <CHANNEL ...>\n"
 "\n"
 "options, at least one of which must be given:\n"
 "  -n NAME\n"
@@ -5336,11 +5351,17 @@ msgstr "사용법: softwarechannel_delete <CHANNEL ...>"
 msgid "Channels"
 msgstr "채널"
 
-#: ../src/spacecmd/softwarechannel.py:736
+#: ../src/spacecmd/softwarechannel.py:715
+msgid ""
+"\n"
+"WARNING: If you are removing a Base channel, keep in mind that Activation Keys linked to this base channel will also get removed!"
+msgstr ""
+
+#: ../src/spacecmd/softwarechannel.py:743
 msgid "softwarechannel_update: Update a software channel"
 msgstr "softwarechannel_update: 소프트웨어 채널 업데이트"
 
-#: ../src/spacecmd/softwarechannel.py:737
+#: ../src/spacecmd/softwarechannel.py:744
 #, python-format
 msgid ""
 "usage: softwarechannel_update LABEL(To identify the channel) [options]\n"
@@ -5367,88 +5388,88 @@ msgstr ""
 "  -f GPG-FINGERPRINT\n"
 "  -g DISABLE-GPG-CHECK"
 
-#: ../src/spacecmd/softwarechannel.py:768
-#: ../src/spacecmd/softwarechannel.py:900
-#: ../src/spacecmd/softwarechannel.py:1070
+#: ../src/spacecmd/softwarechannel.py:775
+#: ../src/spacecmd/softwarechannel.py:907
+#: ../src/spacecmd/softwarechannel.py:1077
 msgid "Channel Label:"
 msgstr "채널 레이블:"
 
-#: ../src/spacecmd/softwarechannel.py:773
+#: ../src/spacecmd/softwarechannel.py:780
 msgid "New Name (blank to keep unchanged)"
 msgstr "새 이름(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:779
+#: ../src/spacecmd/softwarechannel.py:786
 msgid "New Summary (blank to keep unchanged)"
 msgstr "새 요약(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:782
+#: ../src/spacecmd/softwarechannel.py:789
 msgid "Summary:"
 msgstr "요약:"
 
-#: ../src/spacecmd/softwarechannel.py:785
+#: ../src/spacecmd/softwarechannel.py:792
 msgid "New Description (blank to keep unchanged)"
 msgstr "새 설명(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:791
+#: ../src/spacecmd/softwarechannel.py:798
 msgid "New Checksum type (blank to keep unchanged)"
 msgstr "새 체크섬(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:798
+#: ../src/spacecmd/softwarechannel.py:805
 msgid "New GPG URL (blank to keep unchanged)"
 msgstr "새 GPG URL(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:801
-#: ../src/spacecmd/softwarechannel.py:929
-#: ../src/spacecmd/softwarechannel.py:1083
-#: ../src/spacecmd/softwarechannel.py:1172
+#: ../src/spacecmd/softwarechannel.py:808
+#: ../src/spacecmd/softwarechannel.py:936
+#: ../src/spacecmd/softwarechannel.py:1090
+#: ../src/spacecmd/softwarechannel.py:1179
 msgid "GPG URL:"
 msgstr "GPG URL:"
 
-#: ../src/spacecmd/softwarechannel.py:804
+#: ../src/spacecmd/softwarechannel.py:811
 msgid "New GPG ID (blank to keep unchanged)"
 msgstr "새 GPG ID(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:807
-#: ../src/spacecmd/softwarechannel.py:935
-#: ../src/spacecmd/softwarechannel.py:1084
-#: ../src/spacecmd/softwarechannel.py:1173
+#: ../src/spacecmd/softwarechannel.py:814
+#: ../src/spacecmd/softwarechannel.py:942
+#: ../src/spacecmd/softwarechannel.py:1091
+#: ../src/spacecmd/softwarechannel.py:1180
 msgid "GPG ID:"
 msgstr "GPG ID:"
 
-#: ../src/spacecmd/softwarechannel.py:810
+#: ../src/spacecmd/softwarechannel.py:817
 msgid "New GPG Fingerprint (blank to keep unchanged)"
 msgstr "새 GPG 지문(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:813
-#: ../src/spacecmd/softwarechannel.py:941
-#: ../src/spacecmd/softwarechannel.py:1085
-#: ../src/spacecmd/softwarechannel.py:1174
+#: ../src/spacecmd/softwarechannel.py:820
+#: ../src/spacecmd/softwarechannel.py:948
+#: ../src/spacecmd/softwarechannel.py:1092
+#: ../src/spacecmd/softwarechannel.py:1181
 msgid "GPG Fingerprint:"
 msgstr "GPG 지문:"
 
-#: ../src/spacecmd/softwarechannel.py:816
+#: ../src/spacecmd/softwarechannel.py:823
 msgid "Disable GPG CHECK (blank to keep unchanged)"
 msgstr "GPG 확인 비활성화(변경하지 않으려면 비워둠)"
 
-#: ../src/spacecmd/softwarechannel.py:819
-#: ../src/spacecmd/softwarechannel.py:1086
-#: ../src/spacecmd/softwarechannel.py:1175
+#: ../src/spacecmd/softwarechannel.py:826
+#: ../src/spacecmd/softwarechannel.py:1093
+#: ../src/spacecmd/softwarechannel.py:1182
 msgid "Disable GPG Check [yes/no]? "
 msgstr "GPG 확인을 비활성화시겠습니까? [yes/no] "
 
-#: ../src/spacecmd/softwarechannel.py:822
+#: ../src/spacecmd/softwarechannel.py:829
 msgid "A channel label is required to identify the channel"
 msgstr "채널을 식별하기 위해서는 채널 레이블 필수"
 
-#: ../src/spacecmd/softwarechannel.py:825
+#: ../src/spacecmd/softwarechannel.py:832
 msgid "Only [yes/no] values are acceptable for --disable_gpg_check"
 msgstr "--disable_gpg_check에서는 [yes/no] 값만 사용할 수 있음"
 
-#: ../src/spacecmd/softwarechannel.py:865
+#: ../src/spacecmd/softwarechannel.py:872
 msgid "softwarechannel_create: Create a software channel"
 msgstr "softwarechannel_create: 소프트웨어 채널 생성"
 
-#: ../src/spacecmd/softwarechannel.py:866
+#: ../src/spacecmd/softwarechannel.py:873
 #, python-format
 msgid ""
 "usage: softwarechannel_create [options])\n"
@@ -5479,73 +5500,73 @@ msgstr ""
 "  -f GPG_FINGERPRINT\n"
 "  -g DISABLE_GPG_CHECK"
 
-#: ../src/spacecmd/softwarechannel.py:899
-#: ../src/spacecmd/softwarechannel.py:1069
+#: ../src/spacecmd/softwarechannel.py:906
+#: ../src/spacecmd/softwarechannel.py:1076
 msgid "Channel Name:"
 msgstr "채널 이름:"
 
-#: ../src/spacecmd/softwarechannel.py:901
+#: ../src/spacecmd/softwarechannel.py:908
 msgid "Channel Summary:"
 msgstr "채널 요약:"
 
-#: ../src/spacecmd/softwarechannel.py:909
-#: ../src/spacecmd/softwarechannel.py:1077
+#: ../src/spacecmd/softwarechannel.py:916
+#: ../src/spacecmd/softwarechannel.py:1084
 msgid "Select Parent [blank to create a base channel]:"
 msgstr "상위 선택 [기본 채널을 생성하려면 비워둠]:"
 
-#: ../src/spacecmd/softwarechannel.py:912
+#: ../src/spacecmd/softwarechannel.py:919
 msgid "Architecture"
 msgstr "아키텍처"
 
-#: ../src/spacecmd/softwarechannel.py:919
+#: ../src/spacecmd/softwarechannel.py:926
 msgid "Checksum type"
 msgstr "체크섬 유형"
 
-#: ../src/spacecmd/softwarechannel.py:926
+#: ../src/spacecmd/softwarechannel.py:933
 msgid "GPG URL"
 msgstr "GPG URL"
 
-#: ../src/spacecmd/softwarechannel.py:932
+#: ../src/spacecmd/softwarechannel.py:939
 msgid "GPG ID"
 msgstr "GPG ID"
 
-#: ../src/spacecmd/softwarechannel.py:938
+#: ../src/spacecmd/softwarechannel.py:945
 msgid "GPG Fingerprint"
 msgstr "GPG 지문"
 
-#: ../src/spacecmd/softwarechannel.py:944
+#: ../src/spacecmd/softwarechannel.py:951
 msgid "GPG CHECK"
 msgstr "GPG 확인"
 
-#: ../src/spacecmd/softwarechannel.py:947
+#: ../src/spacecmd/softwarechannel.py:954
 msgid "Disable GPG Check [y/N]? "
 msgstr "GPG 확인을 비활성화하시겠습니까? [y/N] "
 
-#: ../src/spacecmd/softwarechannel.py:999
-#: ../src/spacecmd/softwarechannel.py:1097
+#: ../src/spacecmd/softwarechannel.py:1006
+#: ../src/spacecmd/softwarechannel.py:1104
 msgid "A channel name is required"
 msgstr "채널 이름은 필수입니다."
 
-#: ../src/spacecmd/softwarechannel.py:1003
-#: ../src/spacecmd/softwarechannel.py:1101
+#: ../src/spacecmd/softwarechannel.py:1010
+#: ../src/spacecmd/softwarechannel.py:1108
 msgid "A channel label is required"
 msgstr "채널 레이블은 필수입니다."
 
-#: ../src/spacecmd/softwarechannel.py:1016
+#: ../src/spacecmd/softwarechannel.py:1023
 #, python-format
 msgid "Name %s already in use by channel %s"
 msgstr "%s 이름이 %s 채널에서 이미 사용 중입니다."
 
-#: ../src/spacecmd/softwarechannel.py:1020
+#: ../src/spacecmd/softwarechannel.py:1027
 #, python-format
 msgid "Label %s already in use by channel %s"
 msgstr "%s 레이블이 %s 채널에서 이미 사용 중입니다."
 
-#: ../src/spacecmd/softwarechannel.py:1028
+#: ../src/spacecmd/softwarechannel.py:1035
 msgid "softwarechannel_clone: Clone a software channel"
 msgstr "softwarechannel_clone: 소프트웨어 채널 복제"
 
-#: ../src/spacecmd/softwarechannel.py:1029
+#: ../src/spacecmd/softwarechannel.py:1036
 msgid ""
 "usage: softwarechannel_clone [options])\n"
 "\n"
@@ -5579,45 +5600,45 @@ msgstr ""
 "  --regex/-x \"s/foo/bar\" : 선택 사항 정규식 대체,\n"
 "        클론 이름 및 레이블에서 foo를 bar로 대체"
 
-#: ../src/spacecmd/softwarechannel.py:1064
-#: ../src/spacecmd/softwarechannel.py:1164
+#: ../src/spacecmd/softwarechannel.py:1071
+#: ../src/spacecmd/softwarechannel.py:1171
 msgid "Source Channels:"
 msgstr "소스 채널:"
 
-#: ../src/spacecmd/softwarechannel.py:1068
-#: ../src/spacecmd/softwarechannel.py:1167
+#: ../src/spacecmd/softwarechannel.py:1075
+#: ../src/spacecmd/softwarechannel.py:1174
 msgid "Select source channel:"
 msgstr "소스 채널 선택:"
 
-#: ../src/spacecmd/softwarechannel.py:1072
+#: ../src/spacecmd/softwarechannel.py:1079
 msgid "Base Channels:"
 msgstr "기본 채널:"
 
-#: ../src/spacecmd/softwarechannel.py:1080
-#: ../src/spacecmd/softwarechannel.py:1170
+#: ../src/spacecmd/softwarechannel.py:1087
+#: ../src/spacecmd/softwarechannel.py:1177
 msgid "Copy source channel GPG details? [y/N]:"
 msgstr "소스 채널 GPG 세부 사항을 복사하시겠습니까? [y/N]:"
 
-#: ../src/spacecmd/softwarechannel.py:1089
-#: ../src/spacecmd/softwarechannel.py:1178
+#: ../src/spacecmd/softwarechannel.py:1096
+#: ../src/spacecmd/softwarechannel.py:1185
 msgid "Original State (No Errata) [y/N]:"
 msgstr "원본 상태(오류 없음) [y/N]:"
 
-#: ../src/spacecmd/softwarechannel.py:1093
-#: ../src/spacecmd/softwarechannel.py:1181
+#: ../src/spacecmd/softwarechannel.py:1100
+#: ../src/spacecmd/softwarechannel.py:1188
 msgid "A source channel is required"
 msgstr "소스 채널은 필수입니다."
 
-#: ../src/spacecmd/softwarechannel.py:1114
-#: ../src/spacecmd/softwarechannel.py:1192
+#: ../src/spacecmd/softwarechannel.py:1121
+#: ../src/spacecmd/softwarechannel.py:1199
 msgid "Only [yes/no] values are acceptable for --disable-gpg-check"
 msgstr "--disable-gpg-check에는 [yes/no] 값만 사용할 수 있음"
 
-#: ../src/spacecmd/softwarechannel.py:1130
+#: ../src/spacecmd/softwarechannel.py:1137
 msgid "softwarechannel_clonetree: Clone a software channel and its child channels"
 msgstr "softwarechannel_clonetree: 소프트웨어 채널 및 하위 채널 복제"
 
-#: ../src/spacecmd/softwarechannel.py:1131
+#: ../src/spacecmd/softwarechannel.py:1138
 msgid ""
 "usage: softwarechannel_clonetree [options])\n"
 "             e.g    softwarechannel_clonetree foobasechannel -p \"my_\"\n"
@@ -5653,203 +5674,203 @@ msgstr ""
 "  --regex/-x \"s/foo/bar\" : 선택 사항 정규식 대체,\n"
 "        클론 이름, 레이블 및 설명에서 foo를 bar로 대체"
 
-#: ../src/spacecmd/softwarechannel.py:1168
+#: ../src/spacecmd/softwarechannel.py:1175
 msgid "Prefix:"
 msgstr "접두어:"
 
-#: ../src/spacecmd/softwarechannel.py:1185
+#: ../src/spacecmd/softwarechannel.py:1192
 msgid "A prefix or regex is required"
 msgstr "접두어 또는 정규식은 필수입니다."
 
-#: ../src/spacecmd/softwarechannel.py:1197
-#: ../src/spacecmd/softwarechannel.py:1982
-#: ../src/spacecmd/softwarechannel.py:2022
+#: ../src/spacecmd/softwarechannel.py:1204
+#: ../src/spacecmd/softwarechannel.py:1989
+#: ../src/spacecmd/softwarechannel.py:2029
 msgid "Channel does not exist or is not a base channel!"
 msgstr "채널이 없거나 기본 채널이 아닙니다!"
 
 #. Shouldn't ever get here due to earlier checks
-#: ../src/spacecmd/softwarechannel.py:1224
+#: ../src/spacecmd/softwarechannel.py:1231
 msgid "called without prefix or regex option!"
 msgstr "접두어 또는 정규식 옵션을 사용하지 않고 호출되었습니다!"
 
-#: ../src/spacecmd/softwarechannel.py:1276
+#: ../src/spacecmd/softwarechannel.py:1283
 #, python-format
 msgid "Cloning %s as %s"
 msgstr "%s을(를) %s(으)로 복제 줌"
 
-#: ../src/spacecmd/softwarechannel.py:1324
+#: ../src/spacecmd/softwarechannel.py:1331
 msgid "softwarechannel_addpackages: Add packages to a software channel"
 msgstr "softwarechannel_addpackages: 패키지를 소프트웨어 채널에 추가"
 
-#: ../src/spacecmd/softwarechannel.py:1325
+#: ../src/spacecmd/softwarechannel.py:1332
 msgid "usage: softwarechannel_addpackages CHANNEL <PACKAGE ...>"
 msgstr "사용법: softwarechannel_addpackages CHANNEL <PACKAGE ...>"
 
-#: ../src/spacecmd/softwarechannel.py:1365
+#: ../src/spacecmd/softwarechannel.py:1372
 msgid "No packages to add"
 msgstr "추가할 패키지 없음"
 
-#: ../src/spacecmd/softwarechannel.py:1372
+#: ../src/spacecmd/softwarechannel.py:1379
 msgid "Add these packages [y/N]:"
 msgstr "이 패키지 추가 [y/N]:"
 
-#: ../src/spacecmd/softwarechannel.py:1384
+#: ../src/spacecmd/softwarechannel.py:1391
 msgid "softwarechannel_mergepackages: Merge packages from one software channel into another"
 msgstr "softwarechannel_mergepackages: 한 소프트웨어 채널에서 다른 채널로 패키지 병합"
 
-#: ../src/spacecmd/softwarechannel.py:1385
+#: ../src/spacecmd/softwarechannel.py:1392
 msgid "usage: softwarechannel_mergepackages SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr "사용법: softwarechannel_mergepackages SOURCE_CHANNEL TARGET_CHANNEL"
 
-#: ../src/spacecmd/softwarechannel.py:1411
+#: ../src/spacecmd/softwarechannel.py:1418
 msgid "softwarechannel_removeerrata: Remove patches from a software channel"
 msgstr "softwarechannel_removeerrata: 소프트웨어 채널에서 패키지 제거"
 
-#: ../src/spacecmd/softwarechannel.py:1413
+#: ../src/spacecmd/softwarechannel.py:1420
 msgid "usage: softwarechannel_removeerrata CHANNEL <ERRATA:search:XXX ...>"
 msgstr "사용법: softwarechannel_removeerrata CHANNEL <ERRATA:search:XXX ...>"
 
-#: ../src/spacecmd/softwarechannel.py:1468
+#: ../src/spacecmd/softwarechannel.py:1475
 msgid "No patches to remove"
 msgstr "제거할 패치 없음"
 
-#: ../src/spacecmd/softwarechannel.py:1479
-#: ../src/spacecmd/softwarechannel.py:1816
+#: ../src/spacecmd/softwarechannel.py:1486
+#: ../src/spacecmd/softwarechannel.py:1823
 #, python-format
 msgid "Total Errata:   %s"
 msgstr "총 오류:   %s"
 
-#: ../src/spacecmd/softwarechannel.py:1480
-#: ../src/spacecmd/softwarechannel.py:1819
+#: ../src/spacecmd/softwarechannel.py:1487
+#: ../src/spacecmd/softwarechannel.py:1826
 #, python-format
 msgid "Total Packages: %s"
 msgstr "총 패키지: %s"
 
-#: ../src/spacecmd/softwarechannel.py:1482
+#: ../src/spacecmd/softwarechannel.py:1489
 msgid "Remove these patches [y/N]:"
 msgstr "이 패치 제거 [y/N]:"
 
-#: ../src/spacecmd/softwarechannel.py:1497
+#: ../src/spacecmd/softwarechannel.py:1504
 msgid "softwarechannel_removepackages: Remove packages from a software channel"
 msgstr "softwarechannel_removepackages: 소프트웨어 채널에서 패키지 제거"
 
-#: ../src/spacecmd/softwarechannel.py:1499
+#: ../src/spacecmd/softwarechannel.py:1506
 msgid "usage: softwarechannel_removepackages CHANNEL <PACKAGE ...>"
 msgstr "사용법: softwarechannel_removepackages CHANNEL <PACKAGE ...>"
 
-#: ../src/spacecmd/softwarechannel.py:1553
+#: ../src/spacecmd/softwarechannel.py:1560
 msgid "No packages to remove"
 msgstr "제거할 패키지 없음"
 
-#: ../src/spacecmd/softwarechannel.py:1575
+#: ../src/spacecmd/softwarechannel.py:1582
 msgid "softwarechannel_adderratabydate: Add errata from one channel into another channel based on a date range"
 msgstr "softwarechannel_adderratabydate: 날짜 범위에 따라 한 채널에서 다른 채널로 오류 추가"
 
-#: ../src/spacecmd/softwarechannel.py:1577
+#: ../src/spacecmd/softwarechannel.py:1584
 msgid "usage: softwarechannel_adderratabydate [options] SOURCE DEST BEGINDATE ENDDATE"
 msgstr "사용법: softwarechannel_adderratabydate [options] SOURCE DEST BEGINDATE ENDDATE"
 
-#: ../src/spacecmd/softwarechannel.py:1578
-#: ../src/spacecmd/softwarechannel.py:1655
+#: ../src/spacecmd/softwarechannel.py:1585
+#: ../src/spacecmd/softwarechannel.py:1662
 msgid "Date format : YYYYMMDD"
 msgstr "날짜 형식: YYYYMMDD"
 
-#: ../src/spacecmd/softwarechannel.py:1579
-#: ../src/spacecmd/softwarechannel.py:1714
-#: ../src/spacecmd/softwarechannel.py:2609
-#: ../src/spacecmd/softwarechannel.py:2652
-#: ../src/spacecmd/softwarechannel.py:2872
+#: ../src/spacecmd/softwarechannel.py:1586
+#: ../src/spacecmd/softwarechannel.py:1721
+#: ../src/spacecmd/softwarechannel.py:2616
+#: ../src/spacecmd/softwarechannel.py:2659
+#: ../src/spacecmd/softwarechannel.py:2879
 msgid "Options:"
 msgstr "옵션:"
 
-#: ../src/spacecmd/softwarechannel.py:1580
+#: ../src/spacecmd/softwarechannel.py:1587
 msgid "        -p/--publish : Publish errata to the channel (don't clone)"
 msgstr "        -p/--publish : 오류를 채널로 게시(복제하지 않음)"
 
-#: ../src/spacecmd/softwarechannel.py:1609
-#: ../src/spacecmd/softwarechannel.py:1614
-#: ../src/spacecmd/softwarechannel.py:1682
-#: ../src/spacecmd/softwarechannel.py:1687
+#: ../src/spacecmd/softwarechannel.py:1616
+#: ../src/spacecmd/softwarechannel.py:1621
+#: ../src/spacecmd/softwarechannel.py:1689
+#: ../src/spacecmd/softwarechannel.py:1694
 #, python-format
 msgid "%s is an invalid date"
 msgstr "%s은(는) 유효한 날짜가 아닙니다."
 
-#: ../src/spacecmd/softwarechannel.py:1627
+#: ../src/spacecmd/softwarechannel.py:1634
 msgid "No patches found between the given dates"
 msgstr "지정된 날짜 사이에 패치가 없음"
 
-#: ../src/spacecmd/softwarechannel.py:1634
+#: ../src/spacecmd/softwarechannel.py:1641
 #, python-format
 msgid "Publishing errata %s to %s"
 msgstr "%s 오류를 %s에 게시 중"
 
-#: ../src/spacecmd/softwarechannel.py:1652
+#: ../src/spacecmd/softwarechannel.py:1659
 msgid "softwarechannel_listerratabydate: list errata from channelbased on a date range"
 msgstr "softwarechannel_listerratabydate: 날짜 범위에 따라 채널에서 제공된 오류 나열"
 
-#: ../src/spacecmd/softwarechannel.py:1654
+#: ../src/spacecmd/softwarechannel.py:1661
 msgid "usage: softwarechannel_listerratabydate CHANNEL BEGINDATE ENDDATE"
 msgstr "사용법: softwarechannel_listerratabydate CHANNEL BEGINDATE ENDDATE"
 
-#: ../src/spacecmd/softwarechannel.py:1700
+#: ../src/spacecmd/softwarechannel.py:1707
 msgid "No errata found between the given dates"
 msgstr "지정된 날짜 사이에 오류 없음"
 
-#: ../src/spacecmd/softwarechannel.py:1711
+#: ../src/spacecmd/softwarechannel.py:1718
 msgid "softwarechannel_adderrata: Add patches from one channel into another channel"
 msgstr "softwarechannel_adderrata: 한 채널에서 다른 채널로 패치 추가"
 
-#: ../src/spacecmd/softwarechannel.py:1713
+#: ../src/spacecmd/softwarechannel.py:1720
 msgid "usage: softwarechannel_adderrata SOURCE DEST <ERRATA|search:XXX ...>"
 msgstr "사용법: softwarechannel_adderrata SOURCE DEST <ERRATA|search:XXX ...>"
 
-#: ../src/spacecmd/softwarechannel.py:1715
+#: ../src/spacecmd/softwarechannel.py:1722
 msgid "    -q/--quick : Don't display list of packages (slightly faster)"
 msgstr "    -q/--quick : 패키지 목록 표시 안 함(약간 더 빠름)"
 
-#: ../src/spacecmd/softwarechannel.py:1716
+#: ../src/spacecmd/softwarechannel.py:1723
 msgid "    -s/--skip :  Skip errata which appear to exist already in DEST"
 msgstr "    -s/--skip :  DEST에 이미 있는 오류 건너뛰기"
 
-#: ../src/spacecmd/softwarechannel.py:1744
+#: ../src/spacecmd/softwarechannel.py:1751
 #, python-format
 msgid "source channel %s does not exist!"
 msgstr "소스 채널 %s이(가) 없습니다!"
 
-#: ../src/spacecmd/softwarechannel.py:1749
+#: ../src/spacecmd/softwarechannel.py:1756
 #, python-format
 msgid "dest channel %s does not exist!"
 msgstr "대상 채널 %s이(가) 이미 있습니다!"
 
-#: ../src/spacecmd/softwarechannel.py:1802
+#: ../src/spacecmd/softwarechannel.py:1809
 msgid "No patch to add"
 msgstr "추가할 패치 없음"
 
-#: ../src/spacecmd/softwarechannel.py:1821
+#: ../src/spacecmd/softwarechannel.py:1828
 msgid "Add these patches [y/N]:"
 msgstr "이 패치 추가 [y/N]:"
 
-#: ../src/spacecmd/softwarechannel.py:1835
+#: ../src/spacecmd/softwarechannel.py:1842
 msgid "Using the old errata.clone function"
 msgstr "기존 errata.clone 함수 사용 중"
 
-#: ../src/spacecmd/softwarechannel.py:1836
+#: ../src/spacecmd/softwarechannel.py:1843
 msgid "If you have base channels for multiple OS versions, check no unexpected packages have been added"
 msgstr "여러 OS 버전에 대한 기본 채널이 있는 경우 예기치 못한 패키지가 추가되지 않았는지 확인하십시오."
 
-#: ../src/spacecmd/softwarechannel.py:1849
+#: ../src/spacecmd/softwarechannel.py:1856
 msgid "softwarechannel_getorgaccess: Get the org-access for the software channel"
 msgstr "softwarechannel_getorgaccess: 소프트웨어 채널에 대한 조직 액세스 가져오기"
 
-#: ../src/spacecmd/softwarechannel.py:1850
+#: ../src/spacecmd/softwarechannel.py:1857
 msgid "usage: softwarechannel_getorgaccess [CHANNEL ...]"
 msgstr "사용법: softwarechannel_getorgaccess [CHANNEL ...]"
 
-#: ../src/spacecmd/softwarechannel.py:1888
+#: ../src/spacecmd/softwarechannel.py:1895
 msgid "softwarechannel_setorgaccess: Set the org-access for the software channel"
 msgstr "softwarechannel_setorgaccess: 소프트웨어 채널에 대한 조직 액세스 설정"
 
-#: ../src/spacecmd/softwarechannel.py:1889
+#: ../src/spacecmd/softwarechannel.py:1896
 msgid ""
 "usage : softwarechannel_setorgaccess <CHANNEL> [options])\n"
 "-d,--disable : disable org access (private, no org sharing)\n"
@@ -5861,44 +5882,44 @@ msgstr ""
 "-e,--enable : enable org access (트러스트된 모든 조직에 대한 공용 액세스)\n"
 "-p,--protected ORG : ORG에 대해서만 보호된 조직 액세스(-p ORG의 여러 인스턴스가 허용됨)"
 
-#: ../src/spacecmd/softwarechannel.py:1929
+#: ../src/spacecmd/softwarechannel.py:1936
 #, python-format
 msgid "Making org sharing public for channel : %s "
 msgstr "채널에 대한 조직 공유 공개: %s "
 
-#: ../src/spacecmd/softwarechannel.py:1934
+#: ../src/spacecmd/softwarechannel.py:1941
 #, python-format
 msgid "Making org sharing private for channel : %s "
 msgstr "채널에 대한 조직 공유 비공개: %s "
 
-#: ../src/spacecmd/softwarechannel.py:1939
+#: ../src/spacecmd/softwarechannel.py:1946
 #, python-format
 msgid "Making org sharing protected for channel : %s "
 msgstr "채널에 대한 조직 공유 보호: %s "
 
-#: ../src/spacecmd/softwarechannel.py:1945
+#: ../src/spacecmd/softwarechannel.py:1952
 #, python-format
 msgid "Enabling %s access for channel : %s "
 msgstr "채널에 대한 %s 액세스 활성화: %s "
 
-#: ../src/spacecmd/softwarechannel.py:1950
+#: ../src/spacecmd/softwarechannel.py:1957
 #, python-format
 msgid "Disabling %s access for channel : %s "
 msgstr "채널에 대한 %s 액세스 비활성화: %s "
 
-#: ../src/spacecmd/softwarechannel.py:1963
+#: ../src/spacecmd/softwarechannel.py:1970
 msgid "softwarechannel_getorgaccesstree: Get the org-access for a software base channel and its children"
 msgstr "softwarechannel_getorgaccesstree: 소프트웨어 기본 채널 및 하위 채널에 대한 조직 액세스 가져오기"
 
-#: ../src/spacecmd/softwarechannel.py:1964
+#: ../src/spacecmd/softwarechannel.py:1971
 msgid "usage: softwarechannel_getorgaccesstree [CHANNEL]"
 msgstr "사용법: softwarechannel_getorgaccesstree [CHANNEL]"
 
-#: ../src/spacecmd/softwarechannel.py:1997
+#: ../src/spacecmd/softwarechannel.py:2004
 msgid "softwarechannel_setorgaccesstree: set the org-access for a software base channel and its children"
 msgstr "softwarechannel_setorgaccesstree: 소프트웨어 기본 채널 및 하위 채널에 대한 조직 액세스 설정"
 
-#: ../src/spacecmd/softwarechannel.py:1998
+#: ../src/spacecmd/softwarechannel.py:2005
 msgid ""
 "usage: softwarechannel_setorgaccesstree <CHANNEL> [options])\n"
 "-d,--disable : disable org access (private, no org sharing)\n"
@@ -5910,27 +5931,27 @@ msgstr ""
 "-e,--enable : enable org access (트러스트된 모든 조직에 대한 공용 액세스)\n"
 "-p,--protected ORG : ORG에 대해서만 보호된 조직 액세스(-p ORG의 여러 인스턴스가 허용됨)"
 
-#: ../src/spacecmd/softwarechannel.py:2037
+#: ../src/spacecmd/softwarechannel.py:2044
 msgid "softwarechannel_regenerateneededcache: "
 msgstr "softwarechannel_regenerateneededcache: "
 
-#: ../src/spacecmd/softwarechannel.py:2038
+#: ../src/spacecmd/softwarechannel.py:2045
 msgid "Regenerate the needed errata and package cache for all systems"
 msgstr "모든 시스템에 필요한 오류 및 패키지 캐시 재생성"
 
-#: ../src/spacecmd/softwarechannel.py:2040
+#: ../src/spacecmd/softwarechannel.py:2047
 msgid "usage: softwarechannel_regenerateneededcache"
 msgstr "사용법: softwarechannel_regenerateneededcache"
 
-#: ../src/spacecmd/softwarechannel.py:2054
+#: ../src/spacecmd/softwarechannel.py:2061
 msgid "softwarechannel_regenerateyumcache: "
 msgstr "softwarechannel_regenerateyumcache: "
 
-#: ../src/spacecmd/softwarechannel.py:2055
+#: ../src/spacecmd/softwarechannel.py:2062
 msgid "Regenerate the YUM cache for a software channel"
 msgstr "소프트웨어 채널에 대한 YUM 캐시 재생성"
 
-#: ../src/spacecmd/softwarechannel.py:2057
+#: ../src/spacecmd/softwarechannel.py:2064
 msgid ""
 "usage: softwarechannel_regenerateyumcache [options] <CHANNEL ...>\n"
 "\n"
@@ -5944,39 +5965,39 @@ msgstr ""
 "      -f 캐시 강제 재생성\n"
 "    "
 
-#: ../src/spacecmd/softwarechannel.py:2101
+#: ../src/spacecmd/softwarechannel.py:2108
 msgid "no softwarechannel label given"
 msgstr "소프트웨어 채널 레이블이 지정되지 않음"
 
-#: ../src/spacecmd/softwarechannel.py:2104
+#: ../src/spacecmd/softwarechannel.py:2111
 msgid "invalid softwarechannel label "
 msgstr "잘못된 소프트웨어 채널 레이블 "
 
-#: ../src/spacecmd/softwarechannel.py:2122
+#: ../src/spacecmd/softwarechannel.py:2129
 msgid "softwarechannel_diff: diff softwarechannel files"
 msgstr "softwarechannel_diff: 차이 소프트웨어 채널 파일"
 
-#: ../src/spacecmd/softwarechannel.py:2124
+#: ../src/spacecmd/softwarechannel.py:2131
 msgid "usage: softwarechannel_diff SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr "사용법: softwarechannel_diff SOURCE_CHANNEL TARGET_CHANNEL"
 
-#: ../src/spacecmd/softwarechannel.py:2185
+#: ../src/spacecmd/softwarechannel.py:2192
 msgid "softwarechannel_errata_diff: diff softwarechannel files"
 msgstr "softwarechannel_errata_diff: 차이 소프트웨어 채널 파일"
 
-#: ../src/spacecmd/softwarechannel.py:2187
+#: ../src/spacecmd/softwarechannel.py:2194
 msgid "usage: softwarechannel_errata_diff SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr "사용법: softwarechannel_errata_diff SOURCE_CHANNEL TARGET_CHANNEL"
 
-#: ../src/spacecmd/softwarechannel.py:2237
+#: ../src/spacecmd/softwarechannel.py:2244
 msgid "softwarechannel_sync: "
 msgstr "softwarechannel_sync: "
 
-#: ../src/spacecmd/softwarechannel.py:2238
+#: ../src/spacecmd/softwarechannel.py:2245
 msgid "sync the packages of two software channels"
 msgstr "두 소프트웨어 채널의 패키지 동기화"
 
-#: ../src/spacecmd/softwarechannel.py:2240
+#: ../src/spacecmd/softwarechannel.py:2247
 msgid ""
 "usage: softwarechannel_sync SOURCE_CHANNEL TARGET_CHANNEL [options])\n"
 "    -q,--quiet : quiet mode (omits the output of common packages in both channels)"
@@ -5984,323 +6005,320 @@ msgstr ""
 "사용법: softwarechannel_sync SOURCE_CHANNEL TARGET_CHANNEL [옵션])\n"
 "    -q,--quiet : 자동 모드(두 채널에서 공통 패키지 출력 생략)"
 
-#: ../src/spacecmd/softwarechannel.py:2282
+#: ../src/spacecmd/softwarechannel.py:2289
 #, python-format
 msgid "%s packages from softwarechannel %s to %s"
 msgstr "소프트웨어 채널 %s에서 %s(으)로의 %s 패키지"
 
-#: ../src/spacecmd/softwarechannel.py:2301
-#: ../src/spacecmd/softwarechannel.py:2309
-#: ../src/spacecmd/softwarechannel.py:2423
-#: ../src/spacecmd/softwarechannel.py:2431
-#: ../src/spacecmd/softwarechannel.py:2563
-#: ../src/spacecmd/softwarechannel.py:2571
+#: ../src/spacecmd/softwarechannel.py:2308
+#: ../src/spacecmd/softwarechannel.py:2316
+#: ../src/spacecmd/softwarechannel.py:2430
+#: ../src/spacecmd/softwarechannel.py:2438
+#: ../src/spacecmd/softwarechannel.py:2570
+#: ../src/spacecmd/softwarechannel.py:2578
 msgid "failed to read key id"
 msgstr "키 ID를 읽지 못함"
 
-#: ../src/spacecmd/softwarechannel.py:2312
+#: ../src/spacecmd/softwarechannel.py:2319
 msgid "packages common in both channels:"
 msgstr "두 채널의 공통 패키지:"
 
-#: ../src/spacecmd/softwarechannel.py:2317
+#: ../src/spacecmd/softwarechannel.py:2324
 msgid "Omitting common packages in both specified channels"
 msgstr "지정된 두 채널에서 공통 패키지 생략 중"
 
-#: ../src/spacecmd/softwarechannel.py:2322
+#: ../src/spacecmd/softwarechannel.py:2329
 msgid "packages to add to channel \""
 msgstr "다음 채널에 추가할 패키지: \""
 
-#: ../src/spacecmd/softwarechannel.py:2330
+#: ../src/spacecmd/softwarechannel.py:2337
 msgid "packages to remove from channel \""
 msgstr "다음 채널에서 제거할 패키지: \""
 
-#: ../src/spacecmd/softwarechannel.py:2336
-#: ../src/spacecmd/softwarechannel.py:2458
-#: ../src/spacecmd/softwarechannel.py:2588
+#: ../src/spacecmd/softwarechannel.py:2343
+#: ../src/spacecmd/softwarechannel.py:2465
+#: ../src/spacecmd/softwarechannel.py:2595
 msgid "summary:"
 msgstr "요약:"
 
-#: ../src/spacecmd/softwarechannel.py:2337
-#: ../src/spacecmd/softwarechannel.py:2338
+#: ../src/spacecmd/softwarechannel.py:2344
+#: ../src/spacecmd/softwarechannel.py:2345
 msgid " packages"
 msgstr " 패키지"
 
-#: ../src/spacecmd/softwarechannel.py:2339
+#: ../src/spacecmd/softwarechannel.py:2346
 msgid "    add    "
 msgstr "    추가    "
 
-#: ../src/spacecmd/softwarechannel.py:2340
+#: ../src/spacecmd/softwarechannel.py:2347
 msgid " packages to   "
 msgstr " 패키지 대상   "
 
-#: ../src/spacecmd/softwarechannel.py:2343
+#: ../src/spacecmd/softwarechannel.py:2350
 msgid "    remove "
 msgstr "    제거 "
 
-#: ../src/spacecmd/softwarechannel.py:2344
+#: ../src/spacecmd/softwarechannel.py:2351
 msgid " packages from "
 msgstr " 다음에서 제공된 패키지: "
 
-#: ../src/spacecmd/softwarechannel.py:2346
-#: ../src/spacecmd/softwarechannel.py:2466
+#: ../src/spacecmd/softwarechannel.py:2353
+#: ../src/spacecmd/softwarechannel.py:2473
 msgid "Perform these changes to channel "
 msgstr "채널에서 이 변경 수행 "
 
-#: ../src/spacecmd/softwarechannel.py:2367
+#: ../src/spacecmd/softwarechannel.py:2374
 msgid "softwarechannel_errata_sync: "
 msgstr "softwarechannel_errata_sync: "
 
-#: ../src/spacecmd/softwarechannel.py:2368
+#: ../src/spacecmd/softwarechannel.py:2375
 msgid "sync errata of two software channels"
 msgstr "두 소프트웨어 채널의 오류 동기화"
 
-#: ../src/spacecmd/softwarechannel.py:2370
+#: ../src/spacecmd/softwarechannel.py:2377
 msgid "usage: softwarechannel_errata_sync SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr "사용법: softwarechannel_errata_sync SOURCE_CHANNEL TARGET_CHANNEL"
 
-#: ../src/spacecmd/softwarechannel.py:2409
+#: ../src/spacecmd/softwarechannel.py:2416
 msgid "syncing errata from softwarechannel "
 msgstr "소프트웨어 채널에서 오류 동기화 중 "
 
-#: ../src/spacecmd/softwarechannel.py:2410
-#: ../src/spacecmd/softwarechannel.py:2542
+#: ../src/spacecmd/softwarechannel.py:2417
+#: ../src/spacecmd/softwarechannel.py:2549
 msgid " to "
 msgstr " 대상 "
 
-#: ../src/spacecmd/softwarechannel.py:2434
+#: ../src/spacecmd/softwarechannel.py:2441
 msgid "errata common in both channels:"
 msgstr "두 채널의 공통 오류:"
 
-#: ../src/spacecmd/softwarechannel.py:2443
+#: ../src/spacecmd/softwarechannel.py:2450
 msgid "errata to add to channel \""
 msgstr "다음 채널에 추가할 오류: \""
 
-#: ../src/spacecmd/softwarechannel.py:2452
+#: ../src/spacecmd/softwarechannel.py:2459
 msgid "errata to remove from channel \""
 msgstr "채널에서 제거할 오류: \""
 
-#: ../src/spacecmd/softwarechannel.py:2461
-#: ../src/spacecmd/softwarechannel.py:2591
+#: ../src/spacecmd/softwarechannel.py:2468
+#: ../src/spacecmd/softwarechannel.py:2598
 msgid "    add   "
 msgstr "    추가   "
 
-#: ../src/spacecmd/softwarechannel.py:2462
+#: ../src/spacecmd/softwarechannel.py:2469
 msgid "errata to  "
 msgstr "오류 대상  "
 
-#: ../src/spacecmd/softwarechannel.py:2463
+#: ../src/spacecmd/softwarechannel.py:2470
 msgid "    remove"
 msgstr "    제거"
 
-#: ../src/spacecmd/softwarechannel.py:2464
+#: ../src/spacecmd/softwarechannel.py:2471
 msgid "errata from"
 msgstr "오류 출처"
 
-#: ../src/spacecmd/softwarechannel.py:2489
+#: ../src/spacecmd/softwarechannel.py:2496
 msgid "softwarechannel_errata_merge: "
 msgstr "softwarechannel_errata_merge: "
 
-#: ../src/spacecmd/softwarechannel.py:2490
+#: ../src/spacecmd/softwarechannel.py:2497
 msgid "merge errata of one software channel into another"
 msgstr "소프트웨어 채널의 오류를 다른 채널로 병합"
 
-#: ../src/spacecmd/softwarechannel.py:2492
+#: ../src/spacecmd/softwarechannel.py:2499
 msgid "usage:   softwarechannel_errata_merge SOURCE_CHANNEL TARGET_CHANNEL [FROM_DATE] [TO_DATE]"
 msgstr "사용법:   softwarechannel_errata_merge SOURCE_CHANNEL TARGET_CHANNEL [FROM_DATE] [TO_DATE]"
 
-#: ../src/spacecmd/softwarechannel.py:2493
+#: ../src/spacecmd/softwarechannel.py:2500
 msgid "example: softwarechannel_errata_merge OldSoftChannel NewSoftChannel 2018-01-01"
 msgstr "예: softwarechannel_errata_merge OldSoftChannel NewSoftChannel 2018-01-01"
 
-#: ../src/spacecmd/softwarechannel.py:2494
+#: ../src/spacecmd/softwarechannel.py:2501
 msgid "note:    Providing only FROM_DATE will merge all errata since that date."
 msgstr "참고: FROM_DATE만 입력하면 해당 날짜 이후의 모든 오류를 병합합니다."
 
-#: ../src/spacecmd/softwarechannel.py:2495
+#: ../src/spacecmd/softwarechannel.py:2502
 msgid "note:    When no date is provided, all errata will be merged."
 msgstr "참고: 날짜를 입력하지 않으면 모든 오류가 병합됩니다."
 
-#: ../src/spacecmd/softwarechannel.py:2525
 #: ../src/spacecmd/softwarechannel.py:2532
+#: ../src/spacecmd/softwarechannel.py:2539
 msgid "wrong dateformat: "
 msgstr "잘못된 날짜 형식: "
 
-#: ../src/spacecmd/softwarechannel.py:2525
 #: ../src/spacecmd/softwarechannel.py:2532
+#: ../src/spacecmd/softwarechannel.py:2539
 msgid " please specify as: YYYY-MM-DD"
 msgstr " 다음과 같이 지정: YYYY-MM-DD"
 
-#: ../src/spacecmd/softwarechannel.py:2541
+#: ../src/spacecmd/softwarechannel.py:2548
 msgid "merging errata from softwarechannel "
 msgstr "소프트웨어 채널의 오류 병합 "
 
 #. pylint: disable=len-as-condition
-#: ../src/spacecmd/softwarechannel.py:2578
-#, python-brace-format
+#: ../src/spacecmd/softwarechannel.py:2585
 msgid "{} contains no errata which is not already present in {}"
 msgstr "{}에는 {}에 없는 오류가 포함되지 않음"
 
-#: ../src/spacecmd/softwarechannel.py:2583
-#, python-brace-format
+#: ../src/spacecmd/softwarechannel.py:2590
 msgid "errata to add to channel {}: "
 msgstr "{} 채널에 추가할 오류: "
 
-#: ../src/spacecmd/softwarechannel.py:2589
-#: ../src/spacecmd/softwarechannel.py:2590
+#: ../src/spacecmd/softwarechannel.py:2596
+#: ../src/spacecmd/softwarechannel.py:2597
 msgid " errata"
 msgstr " 오류"
 
-#: ../src/spacecmd/softwarechannel.py:2592
+#: ../src/spacecmd/softwarechannel.py:2599
 msgid " errata to  "
 msgstr " 오류 대상  "
 
-#: ../src/spacecmd/softwarechannel.py:2594
-#, python-brace-format
+#: ../src/spacecmd/softwarechannel.py:2601
 msgid "Perform these changes to channel {} [y/N]:"
 msgstr "{} 채널에 이 변경 수행 [y/N]:"
 
-#: ../src/spacecmd/softwarechannel.py:2605
+#: ../src/spacecmd/softwarechannel.py:2612
 msgid "softwarechannel_syncrepos: "
 msgstr "softwarechannel_syncrepos: "
 
-#: ../src/spacecmd/softwarechannel.py:2606
+#: ../src/spacecmd/softwarechannel.py:2613
 msgid "Sync users repos for a software channel"
 msgstr "소프트웨어 채널의 사용자 저장소 동기화"
 
-#: ../src/spacecmd/softwarechannel.py:2608
+#: ../src/spacecmd/softwarechannel.py:2615
 msgid "usage: softwarechannel_syncrepos <CHANNEL ...>"
 msgstr "사용법: softwarechannel_syncrepos <CHANNEL ...>"
 
-#: ../src/spacecmd/softwarechannel.py:2610
-#: ../src/spacecmd/softwarechannel.py:2653
+#: ../src/spacecmd/softwarechannel.py:2617
+#: ../src/spacecmd/softwarechannel.py:2660
 msgid "    -e/--no-errata : Do not sync errata"
 msgstr "    -e/--no-errata : 오류를 동기화하지 않음"
 
-#: ../src/spacecmd/softwarechannel.py:2611
-#: ../src/spacecmd/softwarechannel.py:2654
+#: ../src/spacecmd/softwarechannel.py:2618
+#: ../src/spacecmd/softwarechannel.py:2661
 msgid "    -f/--fail : Terminate upon any error"
 msgstr "    -f/--fail : 오류 발생 시 종료"
 
-#: ../src/spacecmd/softwarechannel.py:2612
-#: ../src/spacecmd/softwarechannel.py:2655
+#: ../src/spacecmd/softwarechannel.py:2619
+#: ../src/spacecmd/softwarechannel.py:2662
 msgid "    -k/--sync-kickstart : Create kickstartable tree"
 msgstr "    -k/--sync-kickstart : 킥스타트 트리 생성"
 
-#: ../src/spacecmd/softwarechannel.py:2613
-#: ../src/spacecmd/softwarechannel.py:2656
+#: ../src/spacecmd/softwarechannel.py:2620
+#: ../src/spacecmd/softwarechannel.py:2663
 msgid "    -l/--latest : Only download latest package versions when repo syncs"
 msgstr "    -l/--latest : 저장소 동기화 시 가장 최신 패키지 버전만 다운로드"
 
-#: ../src/spacecmd/softwarechannel.py:2648
+#: ../src/spacecmd/softwarechannel.py:2655
 msgid "softwarechannel_setsyncschedule: "
 msgstr "softwarechannel_setsyncschedule: "
 
-#: ../src/spacecmd/softwarechannel.py:2649
+#: ../src/spacecmd/softwarechannel.py:2656
 msgid "Sets the repo sync schedule for a software channel"
 msgstr "소프트웨어 채널에 대한 저장소 동기화 일정 설정"
 
-#: ../src/spacecmd/softwarechannel.py:2651
+#: ../src/spacecmd/softwarechannel.py:2658
 msgid "usage: softwarechannel_setsyncschedule <CHANNEL> <SCHEDULE>"
 msgstr "사용법: softwarechannel_setsyncschedule <CHANNEL> <SCHEDULE>"
 
-#: ../src/spacecmd/softwarechannel.py:2658
+#: ../src/spacecmd/softwarechannel.py:2665
 msgid "The schedule is specified in Quartz CronTrigger format without enclosing quotes."
 msgstr "일정은 따옴표로 감싸지 않고 Quartz CronTrigger 형식으로 지정됩니다."
 
-#: ../src/spacecmd/softwarechannel.py:2659
+#: ../src/spacecmd/softwarechannel.py:2666
 msgid "For example, to set a schedule of every day at 1am, <SCHEDULE> would be 0 0 1 * * ?"
 msgstr "예를 들어, 매일 오전 1시에 예약을 설정하려면 <SCHEDULE>은 0 0 1 * * ?이어야 합니다."
 
-#: ../src/spacecmd/softwarechannel.py:2660
+#: ../src/spacecmd/softwarechannel.py:2667
 msgid "If <SCHEDULE> is left empty, it will be disabled."
 msgstr "<SCHEDULE>을 비워두면 비활성화됩니다."
 
-#: ../src/spacecmd/softwarechannel.py:2695
+#: ../src/spacecmd/softwarechannel.py:2702
 msgid "softwarechannel_removesyncschedule: "
 msgstr "softwarechannel_removesyncschedule: "
 
-#: ../src/spacecmd/softwarechannel.py:2696
+#: ../src/spacecmd/softwarechannel.py:2703
 msgid "Removes the repo sync schedule for a software channel"
 msgstr "소프트웨어 채널에 대한 저장소 동기화 일정 제거"
 
-#: ../src/spacecmd/softwarechannel.py:2698
+#: ../src/spacecmd/softwarechannel.py:2705
 msgid "usage: softwarechannel_removesyncschedule <CHANNEL>"
 msgstr "사용법: softwarechannel_removesyncschedule <CHANNEL>"
 
-#: ../src/spacecmd/softwarechannel.py:2723
+#: ../src/spacecmd/softwarechannel.py:2730
 msgid "softwarechannel_listsyncschedule: List sync schedules for all software channels"
 msgstr "softwarechannel_listsyncschedule: 모든 소프트웨어 채널의 동기화 일정 나열"
 
-#: ../src/spacecmd/softwarechannel.py:2725
+#: ../src/spacecmd/softwarechannel.py:2732
 msgid "softwarechannel_listsyncschedule : List all channels"
 msgstr "softwarechannel_listsyncschedule : 모든 채널 나열"
 
-#: ../src/spacecmd/softwarechannel.py:2748
+#: ../src/spacecmd/softwarechannel.py:2755
 msgid "key"
 msgstr "키"
 
-#: ../src/spacecmd/softwarechannel.py:2748
+#: ../src/spacecmd/softwarechannel.py:2755
 msgid "Channel Name"
 msgstr "채널 이름"
 
-#: ../src/spacecmd/softwarechannel.py:2748
+#: ../src/spacecmd/softwarechannel.py:2755
 msgid "Update Schedule"
 msgstr "일정 업데이트"
 
-#: ../src/spacecmd/softwarechannel.py:2760
+#: ../src/spacecmd/softwarechannel.py:2767
 msgid "softwarechannel_addrepo: Add a repo to a software channel"
 msgstr "softwarechannel_addrepo: 소프트웨어 채널에 저장소 추가"
 
-#: ../src/spacecmd/softwarechannel.py:2761
+#: ../src/spacecmd/softwarechannel.py:2768
 msgid "usage: softwarechannel_addrepo CHANNEL REPO"
 msgstr "사용법: softwarechannel_addrepo CHANNEL REPO"
 
-#: ../src/spacecmd/softwarechannel.py:2796
+#: ../src/spacecmd/softwarechannel.py:2803
 msgid "softwarechannel_removerepo: Remove a repo from a software channel"
 msgstr "softwarechannel_removerepo: 소프트웨어 채널에서 저장소 제거"
 
-#: ../src/spacecmd/softwarechannel.py:2797
+#: ../src/spacecmd/softwarechannel.py:2804
 msgid "usage: softwarechannel_removerepo CHANNEL REPO"
 msgstr "사용법: softwarechannel_removerepo CHANNEL REPO"
 
-#: ../src/spacecmd/softwarechannel.py:2839
+#: ../src/spacecmd/softwarechannel.py:2846
 msgid "softwarechannel_listrepos: List the repos for a software channel"
 msgstr "softwarechannel_listrepos: 소프트웨어 채널에 대한 저장소 나열"
 
-#: ../src/spacecmd/softwarechannel.py:2840
+#: ../src/spacecmd/softwarechannel.py:2847
 msgid "usage: softwarechannel_listrepos CHANNEL"
 msgstr "사용법: softwarechannel_listrepos CHANNEL"
 
-#: ../src/spacecmd/softwarechannel.py:2863
+#: ../src/spacecmd/softwarechannel.py:2870
 msgid "No repos have been found for this channel."
 msgstr "이 채널에 대한 저장소를 찾을 수 없습니다."
 
-#: ../src/spacecmd/softwarechannel.py:2870
+#: ../src/spacecmd/softwarechannel.py:2877
 msgid "softwarechannel_mirrorpackages: Download packages of a given channel"
 msgstr "softwarechannel_mirrorpackages: 지정된 채널의 패키지 다운로드"
 
-#: ../src/spacecmd/softwarechannel.py:2871
+#: ../src/spacecmd/softwarechannel.py:2878
 msgid "usage: softwarechannel_mirrorpackages CHANNEL"
 msgstr "사용법: softwarechannel_mirrorpackages CHANNEL"
 
-#: ../src/spacecmd/softwarechannel.py:2873
+#: ../src/spacecmd/softwarechannel.py:2880
 msgid "    -l/--latest : Only mirror latest package version"
 msgstr "    -l/--latest : 가장 최신 패키지 버전만 미러링"
 
-#: ../src/spacecmd/softwarechannel.py:2904
+#: ../src/spacecmd/softwarechannel.py:2911
 msgid "Skipping"
 msgstr "건너뛰는 중"
 
-#: ../src/spacecmd/softwarechannel.py:2906
+#: ../src/spacecmd/softwarechannel.py:2913
 msgid "Fetching package"
 msgstr "패키지를 가져오는 중"
 
-#: ../src/spacecmd/softwarechannel.py:2911
+#: ../src/spacecmd/softwarechannel.py:2918
 #, python-format
 msgid "Received package %s from channel %s is broken. Content is too short"
 msgstr "%s 채널에서 수신된 %s 패키지가 손상되었습니다. 컨텐트가 너무 짧습니다."
 
-#: ../src/spacecmd/softwarechannel.py:2915
+#: ../src/spacecmd/softwarechannel.py:2922
 #, python-format
 msgid "Could not fetch package %s from channel %s"
 msgstr "%s 채널에서 %s 패키지를 가져올 수 없음"
@@ -8041,7 +8059,6 @@ msgstr "부트스트랩 시점에 서버는 재활성화 키를 지원하지 않
 
 #. pylint: disable-next=consider-using-f-string
 #: ../src/spacecmd/system.py:4979
-#, python-brace-format
 msgid "Bootstrapping '{}'. This may take a while."
 msgstr "'{}'을(를) 부트스트랩하는 중입니다. 잠시 시간이 걸릴 수 있습니다."
 
@@ -8397,7 +8414,6 @@ msgid "Skipping usage of common strings: number of substrings differ"
 msgstr "공통 문자열 사용 건너뛰기: 하위 문자열의 수가 다름"
 
 #: ../src/spacecmd/utils.py:928
-#, python-brace-format
 msgid "Parameter {} not a string type, but {}."
 msgstr "{} 파라미터가 문자열 유형이 아니라 {}입니다."
 

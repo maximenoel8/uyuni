@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 09:56+0200\n"
+"POT-Creation-Date: 2026-09-11 09:42+0200\n"
 "PO-Revision-Date: 2020-11-22 17:26+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/uyuni/spacecmd/pt_BR/>\n"
@@ -189,7 +189,7 @@ msgid "Description [None]:"
 msgstr ""
 
 #: ../src/spacecmd/activationkey.py:756 ../src/spacecmd/distribution.py:96
-#: ../src/spacecmd/softwarechannel.py:903
+#: ../src/spacecmd/softwarechannel.py:910
 msgid "Base Channels"
 msgstr ""
 
@@ -307,10 +307,10 @@ msgid "System Groups"
 msgstr ""
 
 #: ../src/spacecmd/activationkey.py:994 ../src/spacecmd/package.py:206
-#: ../src/spacecmd/package.py:264 ../src/spacecmd/softwarechannel.py:1368
-#: ../src/spacecmd/softwarechannel.py:1474
-#: ../src/spacecmd/softwarechannel.py:1556
-#: ../src/spacecmd/softwarechannel.py:1810
+#: ../src/spacecmd/package.py:264 ../src/spacecmd/softwarechannel.py:1375
+#: ../src/spacecmd/softwarechannel.py:1481
+#: ../src/spacecmd/softwarechannel.py:1563
+#: ../src/spacecmd/softwarechannel.py:1817
 msgid "Packages"
 msgstr ""
 
@@ -405,7 +405,6 @@ msgid "File %s exists, confirm overwrite file? (y/n)"
 msgstr ""
 
 #: ../src/spacecmd/activationkey.py:1330
-#, python-brace-format
 msgid "Failed to save exported keys to file: {}"
 msgstr ""
 
@@ -865,7 +864,7 @@ msgstr ""
 #: ../src/spacecmd/custominfo.py:200 ../src/spacecmd/distribution.py:89
 #: ../src/spacecmd/filepreservation.py:71 ../src/spacecmd/group.py:185
 #: ../src/spacecmd/repo.py:353 ../src/spacecmd/repo.py:469
-#: ../src/spacecmd/softwarechannel.py:776
+#: ../src/spacecmd/softwarechannel.py:783
 msgid "Name:"
 msgstr ""
 
@@ -875,7 +874,7 @@ msgstr ""
 
 #: ../src/spacecmd/configchannel.py:482 ../src/spacecmd/cryptokey.py:107
 #: ../src/spacecmd/custominfo.py:60 ../src/spacecmd/custominfo.py:205
-#: ../src/spacecmd/group.py:190 ../src/spacecmd/softwarechannel.py:788
+#: ../src/spacecmd/group.py:190 ../src/spacecmd/softwarechannel.py:795
 #: ../src/spacecmd/system.py:3873
 msgid "Description:"
 msgstr ""
@@ -910,7 +909,7 @@ msgstr ""
 msgid "No channels matched argument(s): %s"
 msgstr ""
 
-#: ../src/spacecmd/configchannel.py:546 ../src/spacecmd/softwarechannel.py:712
+#: ../src/spacecmd/configchannel.py:546 ../src/spacecmd/softwarechannel.py:719
 msgid "Delete these channels [y/N]:"
 msgstr ""
 
@@ -1029,14 +1028,14 @@ msgid ""
 "  detect files which require this, but you may need to explicitly specify.\n"
 msgstr ""
 
-#: ../src/spacecmd/configchannel.py:814 ../src/spacecmd/softwarechannel.py:795
-#: ../src/spacecmd/softwarechannel.py:916
+#: ../src/spacecmd/configchannel.py:814 ../src/spacecmd/softwarechannel.py:802
 #: ../src/spacecmd/softwarechannel.py:923
+#: ../src/spacecmd/softwarechannel.py:930
 msgid "Select:"
 msgstr ""
 
 #: ../src/spacecmd/configchannel.py:821 ../src/spacecmd/configchannel.py:934
-#: ../src/spacecmd/softwarechannel.py:1352
+#: ../src/spacecmd/softwarechannel.py:1359
 #, python-format
 msgid "%s is not a valid channel"
 msgstr ""
@@ -1173,7 +1172,6 @@ msgid "Exporting cc %s to %s"
 msgstr ""
 
 #: ../src/spacecmd/configchannel.py:1266
-#, python-brace-format
 msgid "File '{}' exists, confirm overwrite file? (y/n)"
 msgstr ""
 
@@ -1470,7 +1468,6 @@ msgid "usage: custominfo_details KEY ..."
 msgstr ""
 
 #: ../src/spacecmd/custominfo.py:157
-#, python-brace-format
 msgid "No keys matched argument '{}'."
 msgstr ""
 
@@ -3418,7 +3415,6 @@ msgstr ""
 #: ../src/spacecmd/org.py:208 ../src/spacecmd/org.py:241
 #: ../src/spacecmd/org.py:275 ../src/spacecmd/org.py:311
 #: ../src/spacecmd/org.py:420 ../src/spacecmd/org.py:456
-#, python-brace-format
 msgid "Organisation '{}' was not found"
 msgstr ""
 
@@ -3448,7 +3444,6 @@ msgid "No trust organisation found for the name %s"
 msgstr ""
 
 #: ../src/spacecmd/org.py:279 ../src/spacecmd/org.py:315
-#, python-brace-format
 msgid "Organisation '{}' to trust for, was not found"
 msgstr ""
 
@@ -3482,7 +3477,6 @@ msgid "No trusted organisation found for the name %s"
 msgstr ""
 
 #: ../src/spacecmd/org.py:354
-#, python-brace-format
 msgid "Trusted organisation '{}' was not found"
 msgstr ""
 
@@ -3701,7 +3695,7 @@ msgid "No packages found to remove"
 msgstr ""
 
 #: ../src/spacecmd/package.py:210 ../src/spacecmd/package.py:268
-#: ../src/spacecmd/softwarechannel.py:1560 ../src/spacecmd/system.py:999
+#: ../src/spacecmd/softwarechannel.py:1567 ../src/spacecmd/system.py:999
 msgid "Remove these packages [y/N]:"
 msgstr ""
 
@@ -3769,6 +3763,7 @@ msgid "proxy_container_config: create a proxy system and return its configuratio
 msgstr ""
 
 #: ../src/spacecmd/proxy.py:33
+#, python-format
 msgid ""
 "usage: proxy_container_config [options] PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL ROOT_CA CRT KEY\n"
 "\n"
@@ -3796,6 +3791,7 @@ msgid "proxy_container_config_generate_cert: create a proxy system and return it
 msgstr ""
 
 #: ../src/spacecmd/proxy.py:90
+#, python-format
 msgid ""
 "usage: proxy_container_config_generate_cert PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL\n"
 "\n"
@@ -3872,7 +3868,6 @@ msgid "Repository SSL Client Key:         %s"
 msgstr ""
 
 #: ../src/spacecmd/repo.py:103
-#, python-brace-format
 msgid "No repositories found for '{}' query"
 msgstr ""
 
@@ -4073,7 +4068,6 @@ msgid "%s  # Systems"
 msgstr ""
 
 #: ../src/spacecmd/report.py:174
-#, python-brace-format
 msgid "No errata found for '{}'"
 msgstr ""
 
@@ -4493,7 +4487,6 @@ msgid "If no date is provided it will delete all archived actions"
 msgstr ""
 
 #: ../src/spacecmd/schedule.py:492
-#, python-brace-format
 msgid "Do you want to delete ({}) archived actions? [y/N]"
 msgstr ""
 
@@ -4514,7 +4507,6 @@ msgid "If no date is provided it will archive all completed actions"
 msgstr ""
 
 #: ../src/spacecmd/schedule.py:551
-#, python-brace-format
 msgid "Do you want to archive ({}) completed actions? [y/N]"
 msgstr ""
 
@@ -4624,7 +4616,7 @@ msgstr ""
 
 #: ../src/spacecmd/softwarechannel.py:59
 msgid ""
-"usage: softwarechannel_list [options]')\n"
+"usage: softwarechannel_list [options]\n"
 "options:\n"
 "  -v verbose (display label and summary)\n"
 "  -t tree view (pretty-print(child-channels))\n"
@@ -4651,7 +4643,7 @@ msgstr ""
 
 #: ../src/spacecmd/softwarechannel.py:149
 msgid ""
-"usage: softwarechannel_listbasechannels [options])\n"
+"usage: softwarechannel_listbasechannels [options]\n"
 "options:\n"
 "  -v verbose (display label and summary)"
 msgstr ""
@@ -4661,7 +4653,7 @@ msgid "softwarechannel_listchildchannels: List child software channels"
 msgstr ""
 
 #: ../src/spacecmd/softwarechannel.py:178
-#: ../src/spacecmd/softwarechannel.py:2724
+#: ../src/spacecmd/softwarechannel.py:2731
 msgid "usage:"
 msgstr ""
 
@@ -4730,7 +4722,7 @@ msgstr ""
 #: ../src/spacecmd/softwarechannel.py:357
 #, python-format
 msgid ""
-"usage: softwarechannel_setdetails [options] <CHANNEL ...>)\n"
+"usage: softwarechannel_setdetails [options] <CHANNEL ...>\n"
 "\n"
 "options, at least one of which must be given:\n"
 "  -n NAME\n"
@@ -4950,11 +4942,17 @@ msgstr ""
 msgid "Channels"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:736
+#: ../src/spacecmd/softwarechannel.py:715
+msgid ""
+"\n"
+"WARNING: If you are removing a Base channel, keep in mind that Activation Keys linked to this base channel will also get removed!"
+msgstr ""
+
+#: ../src/spacecmd/softwarechannel.py:743
 msgid "softwarechannel_update: Update a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:737
+#: ../src/spacecmd/softwarechannel.py:744
 #, python-format
 msgid ""
 "usage: softwarechannel_update LABEL(To identify the channel) [options]\n"
@@ -4970,88 +4968,88 @@ msgid ""
 "  -g DISABLE-GPG-CHECK"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:768
-#: ../src/spacecmd/softwarechannel.py:900
-#: ../src/spacecmd/softwarechannel.py:1070
+#: ../src/spacecmd/softwarechannel.py:775
+#: ../src/spacecmd/softwarechannel.py:907
+#: ../src/spacecmd/softwarechannel.py:1077
 msgid "Channel Label:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:773
+#: ../src/spacecmd/softwarechannel.py:780
 msgid "New Name (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:779
+#: ../src/spacecmd/softwarechannel.py:786
 msgid "New Summary (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:782
+#: ../src/spacecmd/softwarechannel.py:789
 msgid "Summary:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:785
+#: ../src/spacecmd/softwarechannel.py:792
 msgid "New Description (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:791
+#: ../src/spacecmd/softwarechannel.py:798
 msgid "New Checksum type (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:798
+#: ../src/spacecmd/softwarechannel.py:805
 msgid "New GPG URL (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:801
-#: ../src/spacecmd/softwarechannel.py:929
-#: ../src/spacecmd/softwarechannel.py:1083
-#: ../src/spacecmd/softwarechannel.py:1172
+#: ../src/spacecmd/softwarechannel.py:808
+#: ../src/spacecmd/softwarechannel.py:936
+#: ../src/spacecmd/softwarechannel.py:1090
+#: ../src/spacecmd/softwarechannel.py:1179
 msgid "GPG URL:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:804
+#: ../src/spacecmd/softwarechannel.py:811
 msgid "New GPG ID (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:807
-#: ../src/spacecmd/softwarechannel.py:935
-#: ../src/spacecmd/softwarechannel.py:1084
-#: ../src/spacecmd/softwarechannel.py:1173
+#: ../src/spacecmd/softwarechannel.py:814
+#: ../src/spacecmd/softwarechannel.py:942
+#: ../src/spacecmd/softwarechannel.py:1091
+#: ../src/spacecmd/softwarechannel.py:1180
 msgid "GPG ID:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:810
+#: ../src/spacecmd/softwarechannel.py:817
 msgid "New GPG Fingerprint (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:813
-#: ../src/spacecmd/softwarechannel.py:941
-#: ../src/spacecmd/softwarechannel.py:1085
-#: ../src/spacecmd/softwarechannel.py:1174
+#: ../src/spacecmd/softwarechannel.py:820
+#: ../src/spacecmd/softwarechannel.py:948
+#: ../src/spacecmd/softwarechannel.py:1092
+#: ../src/spacecmd/softwarechannel.py:1181
 msgid "GPG Fingerprint:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:816
+#: ../src/spacecmd/softwarechannel.py:823
 msgid "Disable GPG CHECK (blank to keep unchanged)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:819
-#: ../src/spacecmd/softwarechannel.py:1086
-#: ../src/spacecmd/softwarechannel.py:1175
+#: ../src/spacecmd/softwarechannel.py:826
+#: ../src/spacecmd/softwarechannel.py:1093
+#: ../src/spacecmd/softwarechannel.py:1182
 msgid "Disable GPG Check [yes/no]? "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:822
+#: ../src/spacecmd/softwarechannel.py:829
 msgid "A channel label is required to identify the channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:825
+#: ../src/spacecmd/softwarechannel.py:832
 msgid "Only [yes/no] values are acceptable for --disable_gpg_check"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:865
+#: ../src/spacecmd/softwarechannel.py:872
 msgid "softwarechannel_create: Create a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:866
+#: ../src/spacecmd/softwarechannel.py:873
 #, python-format
 msgid ""
 "usage: softwarechannel_create [options])\n"
@@ -5069,73 +5067,73 @@ msgid ""
 "  -g DISABLE_GPG_CHECK"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:899
-#: ../src/spacecmd/softwarechannel.py:1069
+#: ../src/spacecmd/softwarechannel.py:906
+#: ../src/spacecmd/softwarechannel.py:1076
 msgid "Channel Name:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:901
+#: ../src/spacecmd/softwarechannel.py:908
 msgid "Channel Summary:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:909
-#: ../src/spacecmd/softwarechannel.py:1077
+#: ../src/spacecmd/softwarechannel.py:916
+#: ../src/spacecmd/softwarechannel.py:1084
 msgid "Select Parent [blank to create a base channel]:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:912
+#: ../src/spacecmd/softwarechannel.py:919
 msgid "Architecture"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:919
+#: ../src/spacecmd/softwarechannel.py:926
 msgid "Checksum type"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:926
+#: ../src/spacecmd/softwarechannel.py:933
 msgid "GPG URL"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:932
+#: ../src/spacecmd/softwarechannel.py:939
 msgid "GPG ID"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:938
+#: ../src/spacecmd/softwarechannel.py:945
 msgid "GPG Fingerprint"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:944
+#: ../src/spacecmd/softwarechannel.py:951
 msgid "GPG CHECK"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:947
+#: ../src/spacecmd/softwarechannel.py:954
 msgid "Disable GPG Check [y/N]? "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:999
-#: ../src/spacecmd/softwarechannel.py:1097
+#: ../src/spacecmd/softwarechannel.py:1006
+#: ../src/spacecmd/softwarechannel.py:1104
 msgid "A channel name is required"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1003
-#: ../src/spacecmd/softwarechannel.py:1101
+#: ../src/spacecmd/softwarechannel.py:1010
+#: ../src/spacecmd/softwarechannel.py:1108
 msgid "A channel label is required"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1016
+#: ../src/spacecmd/softwarechannel.py:1023
 #, python-format
 msgid "Name %s already in use by channel %s"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1020
+#: ../src/spacecmd/softwarechannel.py:1027
 #, python-format
 msgid "Label %s already in use by channel %s"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1028
+#: ../src/spacecmd/softwarechannel.py:1035
 msgid "softwarechannel_clone: Clone a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1029
+#: ../src/spacecmd/softwarechannel.py:1036
 msgid ""
 "usage: softwarechannel_clone [options])\n"
 "\n"
@@ -5154,45 +5152,45 @@ msgid ""
 "        replaces foo with bar in the clone name and label"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1064
-#: ../src/spacecmd/softwarechannel.py:1164
+#: ../src/spacecmd/softwarechannel.py:1071
+#: ../src/spacecmd/softwarechannel.py:1171
 msgid "Source Channels:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1068
-#: ../src/spacecmd/softwarechannel.py:1167
+#: ../src/spacecmd/softwarechannel.py:1075
+#: ../src/spacecmd/softwarechannel.py:1174
 msgid "Select source channel:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1072
+#: ../src/spacecmd/softwarechannel.py:1079
 msgid "Base Channels:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1080
-#: ../src/spacecmd/softwarechannel.py:1170
+#: ../src/spacecmd/softwarechannel.py:1087
+#: ../src/spacecmd/softwarechannel.py:1177
 msgid "Copy source channel GPG details? [y/N]:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1089
-#: ../src/spacecmd/softwarechannel.py:1178
+#: ../src/spacecmd/softwarechannel.py:1096
+#: ../src/spacecmd/softwarechannel.py:1185
 msgid "Original State (No Errata) [y/N]:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1093
-#: ../src/spacecmd/softwarechannel.py:1181
+#: ../src/spacecmd/softwarechannel.py:1100
+#: ../src/spacecmd/softwarechannel.py:1188
 msgid "A source channel is required"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1114
-#: ../src/spacecmd/softwarechannel.py:1192
+#: ../src/spacecmd/softwarechannel.py:1121
+#: ../src/spacecmd/softwarechannel.py:1199
 msgid "Only [yes/no] values are acceptable for --disable-gpg-check"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1130
+#: ../src/spacecmd/softwarechannel.py:1137
 msgid "softwarechannel_clonetree: Clone a software channel and its child channels"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1131
+#: ../src/spacecmd/softwarechannel.py:1138
 msgid ""
 "usage: softwarechannel_clonetree [options])\n"
 "             e.g    softwarechannel_clonetree foobasechannel -p \"my_\"\n"
@@ -5212,203 +5210,203 @@ msgid ""
 "        replaces foo with bar in the clone name, label and description"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1168
+#: ../src/spacecmd/softwarechannel.py:1175
 msgid "Prefix:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1185
+#: ../src/spacecmd/softwarechannel.py:1192
 msgid "A prefix or regex is required"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1197
-#: ../src/spacecmd/softwarechannel.py:1982
-#: ../src/spacecmd/softwarechannel.py:2022
+#: ../src/spacecmd/softwarechannel.py:1204
+#: ../src/spacecmd/softwarechannel.py:1989
+#: ../src/spacecmd/softwarechannel.py:2029
 msgid "Channel does not exist or is not a base channel!"
 msgstr ""
 
 #. Shouldn't ever get here due to earlier checks
-#: ../src/spacecmd/softwarechannel.py:1224
+#: ../src/spacecmd/softwarechannel.py:1231
 msgid "called without prefix or regex option!"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1276
+#: ../src/spacecmd/softwarechannel.py:1283
 #, python-format
 msgid "Cloning %s as %s"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1324
+#: ../src/spacecmd/softwarechannel.py:1331
 msgid "softwarechannel_addpackages: Add packages to a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1325
+#: ../src/spacecmd/softwarechannel.py:1332
 msgid "usage: softwarechannel_addpackages CHANNEL <PACKAGE ...>"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1365
+#: ../src/spacecmd/softwarechannel.py:1372
 msgid "No packages to add"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1372
+#: ../src/spacecmd/softwarechannel.py:1379
 msgid "Add these packages [y/N]:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1384
+#: ../src/spacecmd/softwarechannel.py:1391
 msgid "softwarechannel_mergepackages: Merge packages from one software channel into another"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1385
+#: ../src/spacecmd/softwarechannel.py:1392
 msgid "usage: softwarechannel_mergepackages SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1411
+#: ../src/spacecmd/softwarechannel.py:1418
 msgid "softwarechannel_removeerrata: Remove patches from a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1413
+#: ../src/spacecmd/softwarechannel.py:1420
 msgid "usage: softwarechannel_removeerrata CHANNEL <ERRATA:search:XXX ...>"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1468
+#: ../src/spacecmd/softwarechannel.py:1475
 msgid "No patches to remove"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1479
-#: ../src/spacecmd/softwarechannel.py:1816
+#: ../src/spacecmd/softwarechannel.py:1486
+#: ../src/spacecmd/softwarechannel.py:1823
 #, python-format
 msgid "Total Errata:   %s"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1480
-#: ../src/spacecmd/softwarechannel.py:1819
+#: ../src/spacecmd/softwarechannel.py:1487
+#: ../src/spacecmd/softwarechannel.py:1826
 #, python-format
 msgid "Total Packages: %s"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1482
+#: ../src/spacecmd/softwarechannel.py:1489
 msgid "Remove these patches [y/N]:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1497
+#: ../src/spacecmd/softwarechannel.py:1504
 msgid "softwarechannel_removepackages: Remove packages from a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1499
+#: ../src/spacecmd/softwarechannel.py:1506
 msgid "usage: softwarechannel_removepackages CHANNEL <PACKAGE ...>"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1553
+#: ../src/spacecmd/softwarechannel.py:1560
 msgid "No packages to remove"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1575
+#: ../src/spacecmd/softwarechannel.py:1582
 msgid "softwarechannel_adderratabydate: Add errata from one channel into another channel based on a date range"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1577
+#: ../src/spacecmd/softwarechannel.py:1584
 msgid "usage: softwarechannel_adderratabydate [options] SOURCE DEST BEGINDATE ENDDATE"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1578
-#: ../src/spacecmd/softwarechannel.py:1655
+#: ../src/spacecmd/softwarechannel.py:1585
+#: ../src/spacecmd/softwarechannel.py:1662
 msgid "Date format : YYYYMMDD"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1579
-#: ../src/spacecmd/softwarechannel.py:1714
-#: ../src/spacecmd/softwarechannel.py:2609
-#: ../src/spacecmd/softwarechannel.py:2652
-#: ../src/spacecmd/softwarechannel.py:2872
+#: ../src/spacecmd/softwarechannel.py:1586
+#: ../src/spacecmd/softwarechannel.py:1721
+#: ../src/spacecmd/softwarechannel.py:2616
+#: ../src/spacecmd/softwarechannel.py:2659
+#: ../src/spacecmd/softwarechannel.py:2879
 msgid "Options:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1580
+#: ../src/spacecmd/softwarechannel.py:1587
 msgid "        -p/--publish : Publish errata to the channel (don't clone)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1609
-#: ../src/spacecmd/softwarechannel.py:1614
-#: ../src/spacecmd/softwarechannel.py:1682
-#: ../src/spacecmd/softwarechannel.py:1687
+#: ../src/spacecmd/softwarechannel.py:1616
+#: ../src/spacecmd/softwarechannel.py:1621
+#: ../src/spacecmd/softwarechannel.py:1689
+#: ../src/spacecmd/softwarechannel.py:1694
 #, python-format
 msgid "%s is an invalid date"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1627
+#: ../src/spacecmd/softwarechannel.py:1634
 msgid "No patches found between the given dates"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1634
+#: ../src/spacecmd/softwarechannel.py:1641
 #, python-format
 msgid "Publishing errata %s to %s"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1652
+#: ../src/spacecmd/softwarechannel.py:1659
 msgid "softwarechannel_listerratabydate: list errata from channelbased on a date range"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1654
+#: ../src/spacecmd/softwarechannel.py:1661
 msgid "usage: softwarechannel_listerratabydate CHANNEL BEGINDATE ENDDATE"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1700
+#: ../src/spacecmd/softwarechannel.py:1707
 msgid "No errata found between the given dates"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1711
+#: ../src/spacecmd/softwarechannel.py:1718
 msgid "softwarechannel_adderrata: Add patches from one channel into another channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1713
+#: ../src/spacecmd/softwarechannel.py:1720
 msgid "usage: softwarechannel_adderrata SOURCE DEST <ERRATA|search:XXX ...>"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1715
+#: ../src/spacecmd/softwarechannel.py:1722
 msgid "    -q/--quick : Don't display list of packages (slightly faster)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1716
+#: ../src/spacecmd/softwarechannel.py:1723
 msgid "    -s/--skip :  Skip errata which appear to exist already in DEST"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1744
+#: ../src/spacecmd/softwarechannel.py:1751
 #, python-format
 msgid "source channel %s does not exist!"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1749
+#: ../src/spacecmd/softwarechannel.py:1756
 #, python-format
 msgid "dest channel %s does not exist!"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1802
+#: ../src/spacecmd/softwarechannel.py:1809
 msgid "No patch to add"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1821
+#: ../src/spacecmd/softwarechannel.py:1828
 msgid "Add these patches [y/N]:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1835
+#: ../src/spacecmd/softwarechannel.py:1842
 msgid "Using the old errata.clone function"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1836
+#: ../src/spacecmd/softwarechannel.py:1843
 msgid "If you have base channels for multiple OS versions, check no unexpected packages have been added"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1849
+#: ../src/spacecmd/softwarechannel.py:1856
 msgid "softwarechannel_getorgaccess: Get the org-access for the software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1850
+#: ../src/spacecmd/softwarechannel.py:1857
 msgid "usage: softwarechannel_getorgaccess [CHANNEL ...]"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1888
+#: ../src/spacecmd/softwarechannel.py:1895
 msgid "softwarechannel_setorgaccess: Set the org-access for the software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1889
+#: ../src/spacecmd/softwarechannel.py:1896
 msgid ""
 "usage : softwarechannel_setorgaccess <CHANNEL> [options])\n"
 "-d,--disable : disable org access (private, no org sharing)\n"
@@ -5416,44 +5414,44 @@ msgid ""
 "-p,--protected ORG : protected org access for ORG only (multiple instances of -p ORG are allowed)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1929
+#: ../src/spacecmd/softwarechannel.py:1936
 #, python-format
 msgid "Making org sharing public for channel : %s "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1934
+#: ../src/spacecmd/softwarechannel.py:1941
 #, python-format
 msgid "Making org sharing private for channel : %s "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1939
+#: ../src/spacecmd/softwarechannel.py:1946
 #, python-format
 msgid "Making org sharing protected for channel : %s "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1945
+#: ../src/spacecmd/softwarechannel.py:1952
 #, python-format
 msgid "Enabling %s access for channel : %s "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1950
+#: ../src/spacecmd/softwarechannel.py:1957
 #, python-format
 msgid "Disabling %s access for channel : %s "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1963
+#: ../src/spacecmd/softwarechannel.py:1970
 msgid "softwarechannel_getorgaccesstree: Get the org-access for a software base channel and its children"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1964
+#: ../src/spacecmd/softwarechannel.py:1971
 msgid "usage: softwarechannel_getorgaccesstree [CHANNEL]"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1997
+#: ../src/spacecmd/softwarechannel.py:2004
 msgid "softwarechannel_setorgaccesstree: set the org-access for a software base channel and its children"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:1998
+#: ../src/spacecmd/softwarechannel.py:2005
 msgid ""
 "usage: softwarechannel_setorgaccesstree <CHANNEL> [options])\n"
 "-d,--disable : disable org access (private, no org sharing)\n"
@@ -5461,27 +5459,27 @@ msgid ""
 "-p,--protected ORG : protected org access for ORG only (multiple instances of -p ORG are allowed)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2037
+#: ../src/spacecmd/softwarechannel.py:2044
 msgid "softwarechannel_regenerateneededcache: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2038
+#: ../src/spacecmd/softwarechannel.py:2045
 msgid "Regenerate the needed errata and package cache for all systems"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2040
+#: ../src/spacecmd/softwarechannel.py:2047
 msgid "usage: softwarechannel_regenerateneededcache"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2054
+#: ../src/spacecmd/softwarechannel.py:2061
 msgid "softwarechannel_regenerateyumcache: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2055
+#: ../src/spacecmd/softwarechannel.py:2062
 msgid "Regenerate the YUM cache for a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2057
+#: ../src/spacecmd/softwarechannel.py:2064
 msgid ""
 "usage: softwarechannel_regenerateyumcache [options] <CHANNEL ...>\n"
 "\n"
@@ -5490,361 +5488,358 @@ msgid ""
 "    "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2101
+#: ../src/spacecmd/softwarechannel.py:2108
 msgid "no softwarechannel label given"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2104
+#: ../src/spacecmd/softwarechannel.py:2111
 msgid "invalid softwarechannel label "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2122
+#: ../src/spacecmd/softwarechannel.py:2129
 msgid "softwarechannel_diff: diff softwarechannel files"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2124
+#: ../src/spacecmd/softwarechannel.py:2131
 msgid "usage: softwarechannel_diff SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2185
+#: ../src/spacecmd/softwarechannel.py:2192
 msgid "softwarechannel_errata_diff: diff softwarechannel files"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2187
+#: ../src/spacecmd/softwarechannel.py:2194
 msgid "usage: softwarechannel_errata_diff SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2237
+#: ../src/spacecmd/softwarechannel.py:2244
 msgid "softwarechannel_sync: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2238
+#: ../src/spacecmd/softwarechannel.py:2245
 msgid "sync the packages of two software channels"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2240
+#: ../src/spacecmd/softwarechannel.py:2247
 msgid ""
 "usage: softwarechannel_sync SOURCE_CHANNEL TARGET_CHANNEL [options])\n"
 "    -q,--quiet : quiet mode (omits the output of common packages in both channels)"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2282
+#: ../src/spacecmd/softwarechannel.py:2289
 #, python-format
 msgid "%s packages from softwarechannel %s to %s"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2301
-#: ../src/spacecmd/softwarechannel.py:2309
-#: ../src/spacecmd/softwarechannel.py:2423
-#: ../src/spacecmd/softwarechannel.py:2431
-#: ../src/spacecmd/softwarechannel.py:2563
-#: ../src/spacecmd/softwarechannel.py:2571
+#: ../src/spacecmd/softwarechannel.py:2308
+#: ../src/spacecmd/softwarechannel.py:2316
+#: ../src/spacecmd/softwarechannel.py:2430
+#: ../src/spacecmd/softwarechannel.py:2438
+#: ../src/spacecmd/softwarechannel.py:2570
+#: ../src/spacecmd/softwarechannel.py:2578
 msgid "failed to read key id"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2312
+#: ../src/spacecmd/softwarechannel.py:2319
 msgid "packages common in both channels:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2317
+#: ../src/spacecmd/softwarechannel.py:2324
 msgid "Omitting common packages in both specified channels"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2322
+#: ../src/spacecmd/softwarechannel.py:2329
 msgid "packages to add to channel \""
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2330
+#: ../src/spacecmd/softwarechannel.py:2337
 msgid "packages to remove from channel \""
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2336
-#: ../src/spacecmd/softwarechannel.py:2458
-#: ../src/spacecmd/softwarechannel.py:2588
+#: ../src/spacecmd/softwarechannel.py:2343
+#: ../src/spacecmd/softwarechannel.py:2465
+#: ../src/spacecmd/softwarechannel.py:2595
 msgid "summary:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2337
-#: ../src/spacecmd/softwarechannel.py:2338
+#: ../src/spacecmd/softwarechannel.py:2344
+#: ../src/spacecmd/softwarechannel.py:2345
 msgid " packages"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2339
+#: ../src/spacecmd/softwarechannel.py:2346
 msgid "    add    "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2340
+#: ../src/spacecmd/softwarechannel.py:2347
 msgid " packages to   "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2343
+#: ../src/spacecmd/softwarechannel.py:2350
 msgid "    remove "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2344
+#: ../src/spacecmd/softwarechannel.py:2351
 msgid " packages from "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2346
-#: ../src/spacecmd/softwarechannel.py:2466
+#: ../src/spacecmd/softwarechannel.py:2353
+#: ../src/spacecmd/softwarechannel.py:2473
 msgid "Perform these changes to channel "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2367
+#: ../src/spacecmd/softwarechannel.py:2374
 msgid "softwarechannel_errata_sync: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2368
+#: ../src/spacecmd/softwarechannel.py:2375
 msgid "sync errata of two software channels"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2370
+#: ../src/spacecmd/softwarechannel.py:2377
 msgid "usage: softwarechannel_errata_sync SOURCE_CHANNEL TARGET_CHANNEL"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2409
+#: ../src/spacecmd/softwarechannel.py:2416
 msgid "syncing errata from softwarechannel "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2410
-#: ../src/spacecmd/softwarechannel.py:2542
+#: ../src/spacecmd/softwarechannel.py:2417
+#: ../src/spacecmd/softwarechannel.py:2549
 msgid " to "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2434
+#: ../src/spacecmd/softwarechannel.py:2441
 msgid "errata common in both channels:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2443
+#: ../src/spacecmd/softwarechannel.py:2450
 msgid "errata to add to channel \""
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2452
+#: ../src/spacecmd/softwarechannel.py:2459
 msgid "errata to remove from channel \""
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2461
-#: ../src/spacecmd/softwarechannel.py:2591
+#: ../src/spacecmd/softwarechannel.py:2468
+#: ../src/spacecmd/softwarechannel.py:2598
 msgid "    add   "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2462
+#: ../src/spacecmd/softwarechannel.py:2469
 msgid "errata to  "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2463
+#: ../src/spacecmd/softwarechannel.py:2470
 msgid "    remove"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2464
+#: ../src/spacecmd/softwarechannel.py:2471
 msgid "errata from"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2489
+#: ../src/spacecmd/softwarechannel.py:2496
 msgid "softwarechannel_errata_merge: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2490
+#: ../src/spacecmd/softwarechannel.py:2497
 msgid "merge errata of one software channel into another"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2492
+#: ../src/spacecmd/softwarechannel.py:2499
 msgid "usage:   softwarechannel_errata_merge SOURCE_CHANNEL TARGET_CHANNEL [FROM_DATE] [TO_DATE]"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2493
+#: ../src/spacecmd/softwarechannel.py:2500
 msgid "example: softwarechannel_errata_merge OldSoftChannel NewSoftChannel 2018-01-01"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2494
+#: ../src/spacecmd/softwarechannel.py:2501
 msgid "note:    Providing only FROM_DATE will merge all errata since that date."
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2495
+#: ../src/spacecmd/softwarechannel.py:2502
 msgid "note:    When no date is provided, all errata will be merged."
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2525
 #: ../src/spacecmd/softwarechannel.py:2532
+#: ../src/spacecmd/softwarechannel.py:2539
 msgid "wrong dateformat: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2525
 #: ../src/spacecmd/softwarechannel.py:2532
+#: ../src/spacecmd/softwarechannel.py:2539
 msgid " please specify as: YYYY-MM-DD"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2541
+#: ../src/spacecmd/softwarechannel.py:2548
 msgid "merging errata from softwarechannel "
 msgstr ""
 
 #. pylint: disable=len-as-condition
-#: ../src/spacecmd/softwarechannel.py:2578
-#, python-brace-format
+#: ../src/spacecmd/softwarechannel.py:2585
 msgid "{} contains no errata which is not already present in {}"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2583
-#, python-brace-format
+#: ../src/spacecmd/softwarechannel.py:2590
 msgid "errata to add to channel {}: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2589
-#: ../src/spacecmd/softwarechannel.py:2590
+#: ../src/spacecmd/softwarechannel.py:2596
+#: ../src/spacecmd/softwarechannel.py:2597
 msgid " errata"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2592
+#: ../src/spacecmd/softwarechannel.py:2599
 msgid " errata to  "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2594
-#, python-brace-format
+#: ../src/spacecmd/softwarechannel.py:2601
 msgid "Perform these changes to channel {} [y/N]:"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2605
+#: ../src/spacecmd/softwarechannel.py:2612
 msgid "softwarechannel_syncrepos: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2606
+#: ../src/spacecmd/softwarechannel.py:2613
 msgid "Sync users repos for a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2608
+#: ../src/spacecmd/softwarechannel.py:2615
 msgid "usage: softwarechannel_syncrepos <CHANNEL ...>"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2610
-#: ../src/spacecmd/softwarechannel.py:2653
+#: ../src/spacecmd/softwarechannel.py:2617
+#: ../src/spacecmd/softwarechannel.py:2660
 msgid "    -e/--no-errata : Do not sync errata"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2611
-#: ../src/spacecmd/softwarechannel.py:2654
+#: ../src/spacecmd/softwarechannel.py:2618
+#: ../src/spacecmd/softwarechannel.py:2661
 msgid "    -f/--fail : Terminate upon any error"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2612
-#: ../src/spacecmd/softwarechannel.py:2655
+#: ../src/spacecmd/softwarechannel.py:2619
+#: ../src/spacecmd/softwarechannel.py:2662
 msgid "    -k/--sync-kickstart : Create kickstartable tree"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2613
-#: ../src/spacecmd/softwarechannel.py:2656
+#: ../src/spacecmd/softwarechannel.py:2620
+#: ../src/spacecmd/softwarechannel.py:2663
 msgid "    -l/--latest : Only download latest package versions when repo syncs"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2648
+#: ../src/spacecmd/softwarechannel.py:2655
 msgid "softwarechannel_setsyncschedule: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2649
+#: ../src/spacecmd/softwarechannel.py:2656
 msgid "Sets the repo sync schedule for a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2651
+#: ../src/spacecmd/softwarechannel.py:2658
 msgid "usage: softwarechannel_setsyncschedule <CHANNEL> <SCHEDULE>"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2658
+#: ../src/spacecmd/softwarechannel.py:2665
 msgid "The schedule is specified in Quartz CronTrigger format without enclosing quotes."
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2659
+#: ../src/spacecmd/softwarechannel.py:2666
 msgid "For example, to set a schedule of every day at 1am, <SCHEDULE> would be 0 0 1 * * ?"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2660
+#: ../src/spacecmd/softwarechannel.py:2667
 msgid "If <SCHEDULE> is left empty, it will be disabled."
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2695
+#: ../src/spacecmd/softwarechannel.py:2702
 msgid "softwarechannel_removesyncschedule: "
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2696
+#: ../src/spacecmd/softwarechannel.py:2703
 msgid "Removes the repo sync schedule for a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2698
+#: ../src/spacecmd/softwarechannel.py:2705
 msgid "usage: softwarechannel_removesyncschedule <CHANNEL>"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2723
+#: ../src/spacecmd/softwarechannel.py:2730
 msgid "softwarechannel_listsyncschedule: List sync schedules for all software channels"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2725
+#: ../src/spacecmd/softwarechannel.py:2732
 msgid "softwarechannel_listsyncschedule : List all channels"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2748
+#: ../src/spacecmd/softwarechannel.py:2755
 msgid "key"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2748
+#: ../src/spacecmd/softwarechannel.py:2755
 msgid "Channel Name"
 msgstr "Nome do Canal"
 
-#: ../src/spacecmd/softwarechannel.py:2748
+#: ../src/spacecmd/softwarechannel.py:2755
 msgid "Update Schedule"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2760
+#: ../src/spacecmd/softwarechannel.py:2767
 msgid "softwarechannel_addrepo: Add a repo to a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2761
+#: ../src/spacecmd/softwarechannel.py:2768
 msgid "usage: softwarechannel_addrepo CHANNEL REPO"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2796
+#: ../src/spacecmd/softwarechannel.py:2803
 msgid "softwarechannel_removerepo: Remove a repo from a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2797
+#: ../src/spacecmd/softwarechannel.py:2804
 msgid "usage: softwarechannel_removerepo CHANNEL REPO"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2839
+#: ../src/spacecmd/softwarechannel.py:2846
 msgid "softwarechannel_listrepos: List the repos for a software channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2840
+#: ../src/spacecmd/softwarechannel.py:2847
 msgid "usage: softwarechannel_listrepos CHANNEL"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2863
+#: ../src/spacecmd/softwarechannel.py:2870
 msgid "No repos have been found for this channel."
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2870
+#: ../src/spacecmd/softwarechannel.py:2877
 msgid "softwarechannel_mirrorpackages: Download packages of a given channel"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2871
+#: ../src/spacecmd/softwarechannel.py:2878
 msgid "usage: softwarechannel_mirrorpackages CHANNEL"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2873
+#: ../src/spacecmd/softwarechannel.py:2880
 msgid "    -l/--latest : Only mirror latest package version"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2904
+#: ../src/spacecmd/softwarechannel.py:2911
 msgid "Skipping"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2906
+#: ../src/spacecmd/softwarechannel.py:2913
 msgid "Fetching package"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2911
+#: ../src/spacecmd/softwarechannel.py:2918
 #, python-format
 msgid "Received package %s from channel %s is broken. Content is too short"
 msgstr ""
 
-#: ../src/spacecmd/softwarechannel.py:2915
+#: ../src/spacecmd/softwarechannel.py:2922
 #, python-format
 msgid "Could not fetch package %s from channel %s"
 msgstr ""
@@ -7442,7 +7437,6 @@ msgstr ""
 
 #. pylint: disable-next=consider-using-f-string
 #: ../src/spacecmd/system.py:4979
-#, python-brace-format
 msgid "Bootstrapping '{}'. This may take a while."
 msgstr ""
 
@@ -7789,7 +7783,6 @@ msgid "Skipping usage of common strings: number of substrings differ"
 msgstr ""
 
 #: ../src/spacecmd/utils.py:928
-#, python-brace-format
 msgid "Parameter {} not a string type, but {}."
 msgstr ""
 
