@@ -15730,7 +15730,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 --------------------------------------------------------------------------------
 
-Package: picomatch@2.3.1
+Package: picomatch@2.3.2
 License text:
 
 The MIT License (MIT)
@@ -15757,7 +15757,7 @@ THE SOFTWARE.
 
 --------------------------------------------------------------------------------
 
-Package: picomatch@4.0.3
+Package: picomatch@4.0.7
 License text:
 
 The MIT License (MIT)
