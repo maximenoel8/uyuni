@@ -137,6 +137,16 @@ Then(/^The amount of packages in channel "([^"]*)" should be the same as before$
   end
 end
 
+Then(/^the channel "([^"]*)" should not be empty$/) do |channel_label|
+  channels = $api_test.channel.list_all_channels
+  raise ScriptError, "Channel #{channel_label} does not exist" unless channels.key?(channel_label)
+
+  packages = channels[channel_label]['packages'].to_i
+  raise ScriptError, "Channel #{channel_label} is empty, its synchronization stored no package" if packages.zero?
+
+  log "Channel #{channel_label} contains #{packages} packages"
+end
+
 Then(/^The amount of packages in channel "([^"]*)" should be fewer than before$/) do |channel_label|
   add_context('channels', $api_test.channel.list_all_channels)
   if get_context('channels').key?(channel_label) && get_context('channels')[channel_label]['packages'] >= $package_amount
@@ -182,8 +192,7 @@ When(/^I use spacewalk-repo-sync to sync channel "([^"]*)"$/) do |channel|
 end
 
 When(/^I use spacewalk-repo-sync to sync channel "([^"]*)" including "([^"]*)" packages?$/) do |channel, packages|
-  append_includes = packages.split.map { |pkg| "--include #{pkg}" }.join(' ')
-  $command_output, _code = get_target('server').run("spacewalk-repo-sync -c #{channel} #{append_includes}", check_errors: false, verbose: true)
+  $command_output = sync_channel_including_packages(channel, packages.split)
 end
 
 Then(/^I should get "([^"]*)"$/) do |value|
@@ -335,25 +344,7 @@ When(/^I execute mgr-sync refresh$/) do
 end
 
 When(/^I kill running spacewalk-repo-sync for "([^"]*)" channel$/) do |channel|
-  time_spent = 0
-  checking_rate = 5
-  repeat_until_timeout(timeout: 60, message: 'Some reposync processes were not killed properly', dont_raise: true) do
-    command_output, _code = get_target('server').run('ps axo pid,cmd | grep spacewalk-repo-sync | grep -v grep', verbose: true, check_errors: false)
-    process = command_output.split("\n")[0]
-    channel_synchronizing = process.split[5].strip
-    if process.nil?
-      log "#{time_spent / 60.to_i} minutes waiting for '#{channel}' channel to start its repo-sync processes." if ((time_spent += checking_rate) % 60).zero?
-      sleep checking_rate
-      next
-    elsif channel_synchronizing == channel
-      pid = process.split[0]
-      get_target('server').run("kill #{pid}", verbose: true, check_errors: false)
-      log "Reposync of channel #{channel} killed"
-      break
-    else
-      log "Warning: Repo-sync process for channel '#{channel_synchronizing}' running."
-    end
-  end
+  kill_reposync_for_channel(channel)
 end
 
 Then(/^the reposync logs should not report errors$/) do
