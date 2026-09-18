@@ -153,6 +153,7 @@ export class TableDataHandler extends Component<Props, State> {
     columns: [],
   };
   panelHeaderRef: RefObject<HTMLDivElement>;
+  private isComponentMounted = false;
 
   constructor(props: Props) {
     super(props);
@@ -199,7 +200,7 @@ export class TableDataHandler extends Component<Props, State> {
   }
 
   getData() {
-    if (!this.state.provider) {
+    if (!this.isComponentMounted || !this.state.provider) {
       return;
     }
 
@@ -216,16 +217,30 @@ export class TableDataHandler extends Component<Props, State> {
     this.setState({ loading: true }, () => {
       this.state.provider.get((promise) => {
         promise
-          .then((data) => this.updateData(data))
+          .then((data) => {
+            if (this.isComponentMounted) {
+              this.updateData(data);
+            }
+          })
           .finally(() => {
-            this.setState({ loading: false });
+            if (this.isComponentMounted) {
+              this.setState({ loading: false });
+            }
           });
       }, pageControl);
     });
   }
 
   updateData({ items, total, selectedIds }: PagedData) {
+    if (!this.isComponentMounted) {
+      return;
+    }
+
     this.setState({ data: items, totalItems: total }, () => {
+      if (!this.isComponentMounted) {
+        return;
+      }
+
       if (!DEPRECATED_unsafeEquals(selectedIds, null)) {
         this.props.onSelect?.(selectedIds);
       }
@@ -243,6 +258,7 @@ export class TableDataHandler extends Component<Props, State> {
   }
 
   componentDidMount() {
+    this.isComponentMounted = true;
     this.getData();
 
     if (this.panelHeaderRef.current) {
@@ -260,6 +276,8 @@ export class TableDataHandler extends Component<Props, State> {
   }
 
   componentWillUnmount() {
+    this.isComponentMounted = false;
+
     if (this.context && this.context.saveState) {
       this.context.saveState(this.state);
     }
@@ -432,15 +450,31 @@ export class TableDataHandler extends Component<Props, State> {
     };
 
     const handleSearchPanelSelectAll = () => {
+      if (!this.isComponentMounted) {
+        return;
+      }
+
       this.setState({ loading: true }, () => {
+        if (!this.isComponentMounted) {
+          return;
+        }
+
         this.state.provider.getIds(
           (promise) =>
             promise
               .then((data) => {
+                if (!this.isComponentMounted) {
+                  return;
+                }
+
                 const selected = selectedItems;
                 this.setSelection(selected.concat(data.filter((id) => !selected.includes(id))));
               })
-              .finally(() => this.setState({ loading: false })),
+              .finally(() => {
+                if (this.isComponentMounted) {
+                  this.setState({ loading: false });
+                }
+              }),
           this.state.criteria
         );
       });

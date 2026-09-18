@@ -23809,6 +23809,12 @@ given channel.</source>
           <context context-type="sourcefile">/rhn/admin/BunchDetail.do</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="bunch.jsp.description.clm-diff-bunch" xml:space="preserve">
+        <source>Generates differences for CLM channels</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/admin/BunchDetail.do</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="bunch.jsp.description.cleanup-data-bunch" xml:space="preserve">
         <source>Cleans up orphaned and outdated data</source>
         <context-group name="ctx">
@@ -24283,6 +24289,9 @@ given channel.</source>
       </trans-unit>
       <trans-unit id="task.status.channel-repodata" xml:space="preserve">
         <source>Channel Repodata</source>
+      </trans-unit>
+      <trans-unit id="task.status.clm-diff" xml:space="preserve">
+        <source>Calculate CLM Differences</source>
       </trans-unit>
       <trans-unit id="task.status.cleanup-timeseries-data" xml:space="preserve">
         <source>TimeSeries Cleanup</source>
@@ -25132,9 +25141,6 @@ given channel.</source>
       </trans-unit>
       <trans-unit id="spmigration.jsp.error.unsupported" xml:space="preserve">
         <source>Product Migrations are supported for &lt;strong&gt;SUSE&lt;/strong&gt; systems only.</source>
-      </trans-unit>
-      <trans-unit id="spmigration.jsp.error.update-zypp-plugin" xml:space="preserve">
-        <source>Product Migrations are currently not supported for this system, please install the latest version of &lt;strong&gt;zypp-plugin-spacewalk&lt;/strong&gt;.</source>
       </trans-unit>
       <trans-unit id="spmigration.jsp.error.scheduled" xml:space="preserve">
         <source>A Product Migration is already &lt;a href="/rhn/systems/details/history/Event.do?sid={0}&amp;aid={1}"&gt;scheduled&lt;/a&gt; for this system.</source>

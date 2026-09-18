@@ -226,6 +226,7 @@ public class ConfigDefaults {
      * Taskomatic defaults
      */
     private static final String TASKOMATIC_CHANNEL_REPODATA_WORKERS = "java.taskomatic_channel_repodata_workers";
+    private static final String TASKOMATIC_CLMDIFF_WORKERS = "java.taskomatic_clmdiff_workers";
 
     /**
      * HTTP proxy defaults
@@ -1015,6 +1016,10 @@ public class ConfigDefaults {
         return Config.get().getInt(TASKOMATIC_CHANNEL_REPODATA_WORKERS, 1);
     }
 
+    public int getTaskoClmDiffWorkers() {
+        return Config.get().getInt(TASKOMATIC_CLMDIFF_WORKERS, 1);
+    }
+
     /**
      * Gets the proxy host.
      * @return the proxy host
@@ -1330,4 +1335,5 @@ public class ConfigDefaults {
         return Config.get().getString(ERRATA_ADVISORY_MAP_CSV_DOWNLOAD_URL,
                 "https://ftp.suse.com/pub/projects/security/advisory-map.csv");
     }
+
 }
