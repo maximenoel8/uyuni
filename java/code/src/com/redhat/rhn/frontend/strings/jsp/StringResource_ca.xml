@@ -10303,11 +10303,11 @@ Tingueu en compte que encara pot ser necessària alguna configuració manual d'a
       </trans-unit>
       <trans-unit id="distchannelmap.jsp.summary" xml:space="preserve">
         <source>Distribution channel mappings are defined as default base channels that clients pick up according to their OS and architecture at registration time. These mappings may be overridden, but not deleted.</source>
-        <target state="needs-adaptation">Les assignacions de canals de distribució es defineixen com a canals base per defecte que els clients recullen segons el seu SO i arquitectura en el moment del registre. Aquestes assignacions poden ser anul·lades, però no eliminades.</target>
+        <target state="translated">Les assignacions de canals de distribució es defineixen com a canals base predeterminats que els clients seleccionen en funció del sistema operatiu i de l'arquitectura en el moment del registre. Aquestes assignacions es poden substituir, però no eliminar.</target>
       </trans-unit>
       <trans-unit id="distchannelmap.jsp.edit.summary" xml:space="preserve">
         <source>Organization specific Distribution Channel Mappings may be edited here. Default Distribution Channel Mappings cannot be edited. They can only be overridden within every organization.</source>
-        <target state="needs-adaptation">Els mapes de canals de distribució específics de l'organització es poden editar aquí. No es poden editar els mapes de canals de distribució per defecte. Només es poden anul·lar dins de cada organització.</target>
+        <target state="translated">Aquí es poden editar les assignacions de canals de distribució específiques de l'organització. Les assignacions de canals de distribució per defecte no es poden editar; només es poden substituir dins de cada organització.</target>
       </trans-unit>
       <trans-unit id="distchannelmap.jsp.delete.summary" xml:space="preserve">
         <source>Organization specific Distribution Channel Mapping will be deleted. If it is currently overriding a default channel mapping, the default mapping becomes effective.</source>
@@ -10315,7 +10315,7 @@ Tingueu en compte que encara pot ser necessària alguna configuració manual d'a
       </trans-unit>
       <trans-unit id="distchannelmap.jsp.delete.default.summary" xml:space="preserve">
         <source>Default Distribution Channel Mappings cannot be deleted. They can only be overridden within every organization.</source>
-        <target state="needs-adaptation">No es poden suprimir les assignacions predeterminades dels canals de distribució. Només es poden anul·lar dins de cada organització.</target>
+        <target state="translated">Les assignacions de canals de distribució predeterminades no es poden suprimir; només es poden substituir a cada organització.</target>
       </trans-unit>
       <trans-unit id="toolbar.create.distchannelmap" xml:space="preserve">
         <source>Create Distribution Channel Mapping</source>
@@ -29975,74 +29975,75 @@ lt;/pgt;
         <source>AppArmor profiles will be migrated to SELinux</source>
         <target state="translated">Els perfils d'AppArmor es migraran a SELinux.</target>
       </trans-unit>
-    <trans-unit id="channel.manage.sync.noerrata-tt.jsp" xml:space="preserve">
+      <trans-unit id="channel.manage.sync.noerrata-tt.jsp" xml:space="preserve">
         <source>Do not synchronize patches.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">No sincronitzis els pedaços.</target>
+      </trans-unit>
       <trans-unit id="channel.manage.sync.nostrict-tt.jsp" xml:space="preserve">
         <source>Allows a channel to deviate from the repository, keeping packages that have been removed from the remote repository.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">Permet que un canal divergeixi del repositori, conservant els paquets que s'han eliminat del repositori remot.</target>
+      </trans-unit>
       <trans-unit id="channel.manage.sync.latestonly-tt.jsp" xml:space="preserve">
         <source>Synchronize the latest package version only.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">Sincronitza només la versió més recent del paquet.</target>
+      </trans-unit>
       <trans-unit id="channel.manage.sync.synckickstart-tt.jsp" xml:space="preserve">
         <source>This option prepares a directory tree ready for Kickstart auto installation.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">Aquesta opció prepara una estructura de directoris llesta per a la instal·lació automàtica mitjançant Kickstart.</target>
+      </trans-unit>
       <trans-unit id="channel.manage.sync.fail-tt.jsp" xml:space="preserve">
         <source>Stop synchronizing if an error occurs.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">Atura la sincronització si es produeix un error.</target>
+      </trans-unit>
       <trans-unit id="channel.delete.jsp.actkeysheader" xml:space="preserve">
         <source>Activation Keys</source>
-            <context-group name="ctx">
+        <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Delete.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">Claus d'activació</target>
+      </trans-unit>
       <trans-unit id="channel.delete.jsp.actkeysparagraph" xml:space="preserve">
         <source>Channel deletion will remove any Activation Key that has {0} as a base channel.
          </source>
-            <context-group name="ctx">
+        <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Delete.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">L'eliminació del canal suprimirà qualsevol clau d'activació que tingui {0} com a canal base.
+         </target>
+      </trans-unit>
       <trans-unit id="channel.delete.jsp.actkeysaffected" xml:space="preserve">
         <source>Activation Keys Affected:</source>
-            <context-group name="ctx">
+        <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Delete.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">Claus d'activació afectades:</target>
+      </trans-unit>
       <trans-unit id="bunch.jsp.description.clm-diff-bunch" xml:space="preserve">
         <source>Generates differences for CLM channels</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/BunchDetail.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
+        <target state="translated">Genera diferències per als canals CLM</target>
+      </trans-unit>
       <trans-unit id="task.status.clm-diff" xml:space="preserve">
         <source>Calculate CLM Differences</source>
-      <target state="new"/>
-  </trans-unit>
-      </body>
+        <target state="translated">Calcula les diferències de CLM</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
