@@ -327,7 +327,8 @@ public class ActivationKeyFactory extends HibernateFactory {
 
         // Perform a direct insert to avoid problems with stale state in multi-threading operations
         Session session = getSession();
-        session.createNativeQuery("INSERT INTO rhnServerTokenRegs (token_id, server_id) VALUES (:tokenId, :serverId)")
+        session.createNativeQuery(
+                "INSERT INTO rhnServerTokenRegs (token_id, server_id) VALUES (:tokenId, :serverId)")
                 .addSynchronizedEntityClass(Token.class)
                 .setParameter("tokenId", key.getToken().getId())
                 .setParameter("serverId", server.getId())
@@ -344,17 +345,18 @@ public class ActivationKeyFactory extends HibernateFactory {
     }
 
     /**
-     * Remove an activated server to an activation key
+     * Remove an activated server from an activation key
      * @param key the activation key
      * @param server the server
      */
     public static void removeActivatedServer(ActivationKey key, Server server) {
-        if (key.getToken() == null || !key.getToken().getActivatedServers().contains(server)) {
+        if (key.getToken() == null) {
             return;
         }
 
         Session session = getSession();
-        session.createNativeQuery("DELETE FROM rhnServerTokenRegs WHERE token_id = :tokenId AND server_id = :serverId")
+        session.createNativeQuery(
+                "DELETE FROM rhnServerTokenRegs WHERE token_id = :tokenId AND server_id = :serverId")
                 .addSynchronizedEntityClass(Token.class)
                 .setParameter("tokenId", key.getToken().getId())
                 .setParameter("serverId", server.getId())
@@ -365,7 +367,7 @@ public class ActivationKeyFactory extends HibernateFactory {
             session.refresh(key);
         }
         else {
-            // Otherwise manually add the server
+            // Otherwise manually remove the server
             key.getToken().getActivatedServers().remove(server);
         }
     }
