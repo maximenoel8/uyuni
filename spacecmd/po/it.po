@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-18 10:22+0200\n"
+"POT-Creation-Date: 2026-09-25 15:20+0200\n"
 "PO-Revision-Date: 2023-05-26 18:14+0000\n"
 "Last-Translator: Marina Latini <marina.latini@suse.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/uyuni/spacecmd/it/>\n"
@@ -405,7 +405,6 @@ msgid "File %s exists, confirm overwrite file? (y/n)"
 msgstr ""
 
 #: ../src/spacecmd/activationkey.py:1330
-#, python-brace-format
 msgid "Failed to save exported keys to file: {}"
 msgstr ""
 
@@ -1173,7 +1172,6 @@ msgid "Exporting cc %s to %s"
 msgstr ""
 
 #: ../src/spacecmd/configchannel.py:1266
-#, python-brace-format
 msgid "File '{}' exists, confirm overwrite file? (y/n)"
 msgstr ""
 
@@ -1470,7 +1468,6 @@ msgid "usage: custominfo_details KEY ..."
 msgstr ""
 
 #: ../src/spacecmd/custominfo.py:157
-#, python-brace-format
 msgid "No keys matched argument '{}'."
 msgstr ""
 
@@ -3418,7 +3415,6 @@ msgstr ""
 #: ../src/spacecmd/org.py:208 ../src/spacecmd/org.py:241
 #: ../src/spacecmd/org.py:275 ../src/spacecmd/org.py:311
 #: ../src/spacecmd/org.py:420 ../src/spacecmd/org.py:456
-#, python-brace-format
 msgid "Organisation '{}' was not found"
 msgstr ""
 
@@ -3448,7 +3444,6 @@ msgid "No trust organisation found for the name %s"
 msgstr ""
 
 #: ../src/spacecmd/org.py:279 ../src/spacecmd/org.py:315
-#, python-brace-format
 msgid "Organisation '{}' to trust for, was not found"
 msgstr ""
 
@@ -3482,7 +3477,6 @@ msgid "No trusted organisation found for the name %s"
 msgstr ""
 
 #: ../src/spacecmd/org.py:354
-#, python-brace-format
 msgid "Trusted organisation '{}' was not found"
 msgstr ""
 
@@ -3769,6 +3763,7 @@ msgid "proxy_container_config: create a proxy system and return its configuratio
 msgstr ""
 
 #: ../src/spacecmd/proxy.py:33
+#, python-format
 msgid ""
 "usage: proxy_container_config [options] PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL ROOT_CA CRT KEY\n"
 "\n"
@@ -3796,6 +3791,7 @@ msgid "proxy_container_config_generate_cert: create a proxy system and return it
 msgstr ""
 
 #: ../src/spacecmd/proxy.py:90
+#, python-format
 msgid ""
 "usage: proxy_container_config_generate_cert PROXY_FQDN SERVER_FQDN MAX_CACHE EMAIL\n"
 "\n"
@@ -3872,7 +3868,6 @@ msgid "Repository SSL Client Key:         %s"
 msgstr ""
 
 #: ../src/spacecmd/repo.py:103
-#, python-brace-format
 msgid "No repositories found for '{}' query"
 msgstr ""
 
@@ -4073,7 +4068,6 @@ msgid "%s  # Systems"
 msgstr ""
 
 #: ../src/spacecmd/report.py:174
-#, python-brace-format
 msgid "No errata found for '{}'"
 msgstr ""
 
@@ -4493,7 +4487,6 @@ msgid "If no date is provided it will delete all archived actions"
 msgstr ""
 
 #: ../src/spacecmd/schedule.py:492
-#, python-brace-format
 msgid "Do you want to delete ({}) archived actions? [y/N]"
 msgstr ""
 
@@ -4514,7 +4507,6 @@ msgid "If no date is provided it will archive all completed actions"
 msgstr ""
 
 #: ../src/spacecmd/schedule.py:551
-#, python-brace-format
 msgid "Do you want to archive ({}) completed actions? [y/N]"
 msgstr ""
 
@@ -5686,12 +5678,10 @@ msgstr ""
 
 #. pylint: disable=len-as-condition
 #: ../src/spacecmd/softwarechannel.py:2585
-#, python-brace-format
 msgid "{} contains no errata which is not already present in {}"
 msgstr ""
 
 #: ../src/spacecmd/softwarechannel.py:2590
-#, python-brace-format
 msgid "errata to add to channel {}: "
 msgstr ""
 
@@ -5705,7 +5695,6 @@ msgid " errata to  "
 msgstr ""
 
 #: ../src/spacecmd/softwarechannel.py:2601
-#, python-brace-format
 msgid "Perform these changes to channel {} [y/N]:"
 msgstr ""
 
@@ -7448,7 +7437,6 @@ msgstr ""
 
 #. pylint: disable-next=consider-using-f-string
 #: ../src/spacecmd/system.py:4979
-#, python-brace-format
 msgid "Bootstrapping '{}'. This may take a while."
 msgstr ""
 
@@ -7795,7 +7783,6 @@ msgid "Skipping usage of common strings: number of substrings differ"
 msgstr ""
 
 #: ../src/spacecmd/utils.py:928
-#, python-brace-format
 msgid "Parameter {} not a string type, but {}."
 msgstr ""
 
