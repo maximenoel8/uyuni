@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spacewalk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-20 17:53+0200\n"
+"POT-Creation-Date: 2026-09-26 12:51+0200\n"
 "PO-Revision-Date: 2025-11-14 07:04+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/uyuni/backend-5-1/zh_CN/>\n"
@@ -198,7 +198,7 @@ msgid "Service not enabled for system profile: \"%s\""
 msgstr "未为系统配置文件启用服务：\"%s\""
 
 #: ../server/rhnPackage.py:52 ../server/rhnPackage.py:98
-#: ../server/rhnPackage.py:118 ../server/rhnPackage.py:179
+#: ../server/rhnPackage.py:118 ../server/rhnPackage.py:180
 #, python-format
 msgid "Invalid RPM package %s requested"
 msgstr "请求的 RPM 软件包 %s 无效"
@@ -254,62 +254,62 @@ msgstr "Kickstart 会话不匹配"
 msgid "Stacking of re-registration tokens is not supported"
 msgstr "不支持堆叠重新注册令牌"
 
-#: ../server/rhnUser.py:327 ../server/rhnUser.py:330
+#: ../server/rhnUser.py:324 ../server/rhnUser.py:327
 msgid "Invalid username/password combination"
 msgstr "无效的用户名/口令组合"
 
 #. nope, not reserved either
-#: ../server/rhnUser.py:527
+#: ../server/rhnUser.py:508
 #, python-format
 msgid "Username `%s' has not been reserved"
 msgstr "未保留用户名 `%s'"
 
 #. New accounts have to specify an e-mail address
-#: ../server/rhnUser.py:533
+#: ../server/rhnUser.py:514
 msgid "E-mail address not specified"
 msgstr "未指定电子邮件地址"
 
-#: ../server/rhnUser.py:575
+#: ../server/rhnUser.py:556
 #, python-format
 msgid "username should be at least %d characters"
 msgstr "用户名应至少为 %d 个字符"
 
-#: ../server/rhnUser.py:579
+#: ../server/rhnUser.py:560
 #, python-format
 msgid "username should be less than %d characters"
 msgstr "用户名应小于 %d 个字符"
 
-#: ../server/rhnUser.py:593
+#: ../server/rhnUser.py:574
 #, python-format
 msgid "username = `%s', invalid character `%s'"
 msgstr "用户名 = `%s'，字符 `%s' 无效"
 
-#: ../server/rhnUser.py:614
+#: ../server/rhnUser.py:595
 #, python-format
 msgid "Please limit your e-mail address to %s chars"
 msgstr "请将您的电子邮件地址限制为 %s 个字符"
 
-#: ../server/rhnUser.py:704
+#: ../server/rhnUser.py:693
 #, python-format
 msgid "password must be at least %d characters"
 msgstr "口令必须至少为 %d 个字符"
 
-#: ../server/rhnUser.py:708
+#: ../server/rhnUser.py:697
 #, python-format
 msgid "Password must be shorter than %d characters"
 msgstr "口令必须短于 %d 个字符"
 
-#: ../server/rhnUser.py:724
+#: ../server/rhnUser.py:713
 #, python-format
 msgid "password contains character `%s'"
 msgstr "口令包含字符 `%s'"
 
-#: ../server/rhnUser.py:733
+#: ../server/rhnUser.py:722
 #, python-format
 msgid "username should be at least %d characters long"
 msgstr "用户名长度应至少为 %d 个字符"
 
-#: ../server/rhnUser.py:744
+#: ../server/rhnUser.py:733
 #, python-format
 msgid "Cannot register usernames ending with %s"
 msgstr "无法注册以 %s 结尾的用户名"
@@ -1140,16 +1140,16 @@ msgstr "正在导入 kickstart 树 (%d)"
 msgid "Imported kickstartable trees (%d)"
 msgstr "已导入 kickstart 树 (%d)"
 
-#: ../satellite_tools/reposync.py:138
+#: ../satellite_tools/reposync.py:148
 msgid "+++ sending log as an email +++"
 msgstr "+++ 正在以电子邮件形式发送日志 +++"
 
-#: ../satellite_tools/reposync.py:141
+#: ../satellite_tools/reposync.py:151
 #, python-format
 msgid "%s sync. report from %s"
 msgstr "%s 同步报告，来自 %s"
 
-#: ../satellite_tools/reposync.py:151
+#: ../satellite_tools/reposync.py:161
 msgid "+++ email requested, but there is nothing to send +++"
 msgstr "+++ 已请求电子邮件，但没有可发送的内容 +++"
 

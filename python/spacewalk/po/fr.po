@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spacewalk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-20 17:53+0200\n"
+"POT-Creation-Date: 2026-09-26 12:51+0200\n"
 "PO-Revision-Date: 2026-04-28 15:04+0000\n"
 "Last-Translator: sorau <sorau@proton.me>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/uyuni/backend-5-1/fr/>\n"
@@ -204,7 +204,7 @@ msgid "Service not enabled for system profile: \"%s\""
 msgstr "Service désactivé pour le profil de système : \"%s\""
 
 #: ../server/rhnPackage.py:52 ../server/rhnPackage.py:98
-#: ../server/rhnPackage.py:118 ../server/rhnPackage.py:179
+#: ../server/rhnPackage.py:118 ../server/rhnPackage.py:180
 #, python-format
 msgid "Invalid RPM package %s requested"
 msgstr "Paquet RPM %s demandé invalide"
@@ -260,62 +260,62 @@ msgstr "Inadéquation de session kickstart"
 msgid "Stacking of re-registration tokens is not supported"
 msgstr "L'empilement de jetons de réenregistrement n'est pas supporté"
 
-#: ../server/rhnUser.py:327 ../server/rhnUser.py:330
+#: ../server/rhnUser.py:324 ../server/rhnUser.py:327
 msgid "Invalid username/password combination"
 msgstr "Combinaison utilisateur/mot de passe invalide"
 
 #. nope, not reserved either
-#: ../server/rhnUser.py:527
+#: ../server/rhnUser.py:508
 #, python-format
 msgid "Username `%s' has not been reserved"
 msgstr "Le nom d'utilisateur `%s' n'a pas été réservé"
 
 #. New accounts have to specify an e-mail address
-#: ../server/rhnUser.py:533
+#: ../server/rhnUser.py:514
 msgid "E-mail address not specified"
 msgstr "Adresse courriel non spécifiée"
 
-#: ../server/rhnUser.py:575
+#: ../server/rhnUser.py:556
 #, python-format
 msgid "username should be at least %d characters"
 msgstr "Le nom d'utilisateur doit comporter au moins %d caractères"
 
-#: ../server/rhnUser.py:579
+#: ../server/rhnUser.py:560
 #, python-format
 msgid "username should be less than %d characters"
 msgstr "Le nom d'utilisateur doit comporter au plus %d caractères"
 
-#: ../server/rhnUser.py:593
+#: ../server/rhnUser.py:574
 #, python-format
 msgid "username = `%s', invalid character `%s'"
 msgstr "nom d'utilisateur = `%s', caractère invalide `%s'"
 
-#: ../server/rhnUser.py:614
+#: ../server/rhnUser.py:595
 #, python-format
 msgid "Please limit your e-mail address to %s chars"
 msgstr "Veuillez limiter votre adresse courriel à %s caractères"
 
-#: ../server/rhnUser.py:704
+#: ../server/rhnUser.py:693
 #, python-format
 msgid "password must be at least %d characters"
 msgstr "Le mot de passe doit comporter au moins %d caractères"
 
-#: ../server/rhnUser.py:708
+#: ../server/rhnUser.py:697
 #, python-format
 msgid "Password must be shorter than %d characters"
 msgstr "Le mot de passe doit comporter au plus %d caractères"
 
-#: ../server/rhnUser.py:724
+#: ../server/rhnUser.py:713
 #, python-format
 msgid "password contains character `%s'"
 msgstr "le mot de passe contient le caractère `%s'"
 
-#: ../server/rhnUser.py:733
+#: ../server/rhnUser.py:722
 #, python-format
 msgid "username should be at least %d characters long"
 msgstr "Le nom d'utilisateur doit comporter au moins %d caractères"
 
-#: ../server/rhnUser.py:744
+#: ../server/rhnUser.py:733
 #, python-format
 msgid "Cannot register usernames ending with %s"
 msgstr "Impossible d'enregistrer un nom d'utilisateur se terminant par %s"
@@ -1131,16 +1131,16 @@ msgstr "Importer kickstartable trees (%d)"
 msgid "Imported kickstartable trees (%d)"
 msgstr "kickstartable trees importés (%d)"
 
-#: ../satellite_tools/reposync.py:138
+#: ../satellite_tools/reposync.py:148
 msgid "+++ sending log as an email +++"
 msgstr "+++ envoyer les journaux par courriel +++"
 
-#: ../satellite_tools/reposync.py:141
+#: ../satellite_tools/reposync.py:151
 #, python-format
 msgid "%s sync. report from %s"
 msgstr "%s synchronisation. Rapport de %s"
 
-#: ../satellite_tools/reposync.py:151
+#: ../satellite_tools/reposync.py:161
 msgid "+++ email requested, but there is nothing to send +++"
 msgstr "+++ courriel requis, mais il n'y a rien à envoyer +++"
 
