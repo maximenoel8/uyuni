@@ -189,7 +189,7 @@ public class UbuntuErrataManager {
             UbuntuErrataInfo ubuntuErrataInfo = entry.getValue();
 
             // fallback to key if id is not present
-            String errataId =  Objects.requireNonNullElseGet(ubuntuErrataInfo.getId(), () -> entry.getKey());
+            String errataId = Objects.requireNonNullElseGet(ubuntuErrataInfo.getId(), () -> entry.getKey());
             String description = StringUtils.truncate(ubuntuErrataInfo.getDescription(), 4000);
             boolean reboot = ubuntuErrataInfo.getAction().map(a -> a.contains("you need to reboot")).orElse(false);
 
