@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 SUSE LLC
+ * Copyright (c) 2021--2026 SUSE LLC
  *
  * This software is licensed to you under the GNU General Public License,
  * version 2 (GPLv2). There is NO WARRANTY for this software, express or
@@ -7,10 +7,6 @@
  * FOR A PARTICULAR PURPOSE. You should have received a copy of GPLv2
  * along with this software; if not, see
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
- *
- * Red Hat trademarks are not licensed under GPLv2. No permission is
- * granted to use or replicate Red Hat trademarks that are incorporated
- * in this software or its documentation.
  */
 package com.redhat.rhn.manager.content.ubuntu;
 
@@ -37,6 +33,7 @@ import com.redhat.rhn.manager.content.MgrSyncUtils;
 import com.redhat.rhn.manager.errata.ErrataManager;
 
 import com.suse.manager.reactor.utils.OptionalTypeAdapterFactory;
+import com.suse.utils.gson.StringOrArrayAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,6 +43,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
@@ -84,8 +82,12 @@ public class UbuntuErrataManager {
         return Config.get().getString(ContentSyncManager.RESOURCE_PATH, null) != null;
     }
 
-    private static final Gson GSON = new GsonBuilder()
+    /**
+     * Gson parser used to parse the Ubuntu database. Public due to testing limitations. Should not be used directly.
+     */
+    public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapterFactory(new OptionalTypeAdapterFactory())
+            .registerTypeAdapter(new TypeToken<List<String>>() { }.getType(), new StringOrArrayAdapter())
             .registerTypeAdapter(Instant.class, new TypeAdapter<Instant>() {
                 @Override
                 public void write(JsonWriter jsonWriter, Instant instant) {
@@ -175,12 +177,22 @@ public class UbuntuErrataManager {
         }
     }
 
-    private static Stream<Entry> parseUbuntuErrata(Map<String, UbuntuErrataInfo> errataInfo, Set<String> packageNames) {
-        return errataInfo.values().stream().flatMap(ubuntuErrataInfo -> {
-            String description = ubuntuErrataInfo.getDescription().length() > 4000 ?
-                    ubuntuErrataInfo.getDescription().substring(0, 4000) :
-                    ubuntuErrataInfo.getDescription();
+    /**
+     * Parse the {@link UbuntuErrataInfo} into {@link Entry}. This method is public for only due to testing limitations.
+     * Do not call it directly.
+     * @param errataInfo the errata information as extracted from the Ubuntu database
+     * @param packageNames the name of the packages part of the current channel under processing
+     * @return the stream of entries to store.
+     */
+    public static Stream<Entry> parseUbuntuErrata(Map<String, UbuntuErrataInfo> errataInfo, Set<String> packageNames) {
+        return errataInfo.entrySet().stream().flatMap(entry -> {
+            UbuntuErrataInfo ubuntuErrataInfo = entry.getValue();
+
+            // fallback to key if id is not present
+            String errataId = Objects.requireNonNullElseGet(ubuntuErrataInfo.getId(), () -> entry.getKey());
+            String description = StringUtils.truncate(ubuntuErrataInfo.getDescription(), 4000);
             boolean reboot = ubuntuErrataInfo.getAction().map(a -> a.contains("you need to reboot")).orElse(false);
+
             List<Tuple3<String, String, List<String>>> packageData = ubuntuErrataInfo.getReleases().entrySet().stream()
                     .flatMap(release ->
                             release.getValue().getBinaries().entrySet().stream().flatMap(binary -> {
@@ -191,8 +203,8 @@ public class UbuntuErrataManager {
                                 String version = binary.getValue().getVersion();
 
                                 List<String> archs = release.getValue().getArchs()
+                                        .entrySet()
                                         .stream()
-                                        .flatMap(m -> m.entrySet().stream())
                                         .flatMap(a -> {
                                             String arch = a.getKey();
                                             boolean hasArchPkg = a.getValue().getUrls().entrySet().stream()
@@ -207,18 +219,21 @@ public class UbuntuErrataManager {
                                                     else {
                                                         return Stream.empty();
                                                     }
-                                                }).collect(Collectors.toList());
+                                        })
+                                        .collect(Collectors.toList());
+
                                 return Stream.of(new Tuple3<>(name, version, archs));
                             })
-                    ).collect(Collectors.toList());
+                    )
+                    .collect(Collectors.toList());
 
             if (packageData.isEmpty()) {
                 // Skip Errata when we have no matching packages
-                LOG.debug("Skipping errata without matching packages: {}", ubuntuErrataInfo.getId());
+                LOG.debug("Skipping errata without matching packages: {}", errataId);
                 return Stream.empty();
             }
             return Stream.of(new Entry(
-                    ubuntuErrataInfo.getId(),
+                    errataId,
                     ubuntuErrataInfo.getCves(),
                     ubuntuErrataInfo.getSummary(),
                     ubuntuErrataInfo.getIsummary().orElse("-"),
@@ -228,7 +243,6 @@ public class UbuntuErrataManager {
                     packageData));
         });
     }
-
     private static Map<String, UbuntuErrataInfo> getUbuntuErrataInfo() throws IOException {
         String jsonDBUrl = "https://usn.ubuntu.com/usn-db/database.json";
         if (isFromDir()) {
@@ -287,7 +301,7 @@ public class UbuntuErrataManager {
      * @param packagesMap Map of deb packages by their corresponding channel
      * @param ubuntuErrataInfo list of ubuntu errata entries
      */
-    public static void processUbuntuErrata(Map<Channel, Set<PackageDto>> packagesMap, Stream<Entry> ubuntuErrataInfo) {
+    static void processUbuntuErrata(Map<Channel, Set<PackageDto>> packagesMap, Stream<Entry> ubuntuErrataInfo) {
         Set<Errata> changedErrata = new HashSet<>();
         TimeUtils.logTime(LOG, "writing erratas to db", () -> ubuntuErrataInfo.flatMap(entry -> {
             Map<Channel, Set<PackageDto>> matchingPackagesByChannel =
