@@ -87,6 +87,7 @@ fi
 %{_sbindir}/spacewalk-service
 %{_sbindir}/uyuni-update-config
 %{_sbindir}/import-suma-build-keys
+%{_sbindir}/mgr-sync-osimage-ca-rpm
 %{_bindir}/rhn-config-satellite.pl
 %{_bindir}/rhn-deploy-ca-cert.pl
 %{_bindir}/rhn-install-ssl-cert.pl
@@ -107,6 +108,7 @@ fi
 %{_unitdir}/cobbler-refresh-mkloaders.service
 %{_unitdir}/uyuni-check-database.service
 %{_unitdir}/uyuni-update-config.service
+%{_unitdir}/mgr-osimage-ca-rpm.service
 %{_unitdir}/*.service.d
 
 %changelog

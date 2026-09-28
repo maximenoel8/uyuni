@@ -35,14 +35,15 @@ SCRIPTS = rhn-config-satellite.pl \
 			   spacewalk-hostname-rename \
                salt-secrets-config.py
 
-SBIN_SCRIPTS = rhn-sat-restart-silent spacewalk-service spacewalk-startup-helper mgr-monitoring-ctl uyuni-update-config \
+SBIN_SCRIPTS = rhn-sat-restart-silent spacewalk-service spacewalk-startup-helper mgr-monitoring-ctl uyuni-update-config mgr-sync-osimage-ca-rpm \
 	       import-suma-build-keys
 
 CONF_FILES =
 
 SYSTEMD_FILES = spacewalk.target spacewalk-wait-for-tomcat.service spacewalk-wait-for-salt.service \
 		spacewalk-wait-for-taskomatic.service salt-secrets-config.service \
-		uyuni-check-database.service uyuni-update-config.service cobbler-refresh-mkloaders.service
+		uyuni-check-database.service uyuni-update-config.service cobbler-refresh-mkloaders.service \
+		mgr-osimage-ca-rpm.service
 
 SYSTEMD_OVERRIDE_SERVICES = tomcat.service apache2.service salt-master.service salt-api.service rhn-search.service \
 			    taskomatic.service salt-secrets-config.service cobbler-refresh-mkloaders.service
