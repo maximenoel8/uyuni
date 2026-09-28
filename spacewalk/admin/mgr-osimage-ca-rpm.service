@@ -1,0 +1,7 @@
+[Unit]
+Description=Regenerate the OS image trusted CA RPM when the server CA changes
+ConditionPathExists=/etc/pki/trust/anchors/LOCAL-RHN-ORG-TRUSTED-SSL-CERT
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/mgr-sync-osimage-ca-rpm
