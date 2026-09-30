@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Sep 30 09:11:19 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.27-0
+  * Make migration product configurable for DMS product migration
+  * Propagate cert validation errors to UI (bsc#1271332)
+  * Fix salt deletion on SSH minions (bsc#1274023)
+
+-------------------------------------------------------------------
 Mon Jul 13 17:32:49 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.26-0
