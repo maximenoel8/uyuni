@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Sep 30 08:59:41 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.17
+  * Remove salt-call from server image healthcheck (bsc#1276498)
+  * Fix error handling at buildtime
+  * Increase start-period (bsc#1271124)
+  * Check disk space on startup
+
+-------------------------------------------------------------------
 Mon Jul 13 14:53:01 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.16
