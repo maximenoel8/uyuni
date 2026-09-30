@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Wed Sep 30 09:04:20 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.19-0
+  * Delete activation keys when removing a base channel (bsc#1233592)
+  * Allow diskcheck env vars into containers (bsc#1270033)
+  * Remove token based authentication mechanism for package_push
+    (bsc#1230949)
+  * Allow using spacewalk-diskcheck without running service
+  * Increase errata advisory char limit to 150 (bsc#1273846)
+
+-------------------------------------------------------------------
 Mon Jul 13 17:30:29 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.18-0
