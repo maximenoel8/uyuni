@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 30 08:57:17 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.16
+  * Adding helm charts automation for jenkins
+
+-------------------------------------------------------------------
 Mon Jul 13 14:16:56 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.15
