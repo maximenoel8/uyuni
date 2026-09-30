@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Sep 30 09:06:29 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.8-0
+  * Stream responses directly instead of buffering them in
+    temporary files, avoiding disk exhaustion during large client
+    updates (bsc#1275482)
+  * CVE-2026-71400: Remove cobbler_api endpoint from public interface
+    (bsc#1274613, bsc#1274775)
+
+-------------------------------------------------------------------
 Sat Jan 17 01:22:24 CET 2026 - marina.latini@suse.com
 
 - version 5.1.7-0
