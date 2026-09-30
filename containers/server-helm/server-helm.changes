@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep 30 08:59:00 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.16
+  * CVE-2026-71400: Remove cobbler_api endpoint from public interface
+    (bsc#1274613, bsc#1274775)
+
+-------------------------------------------------------------------
 Mon Jul 13 14:41:46 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.15
