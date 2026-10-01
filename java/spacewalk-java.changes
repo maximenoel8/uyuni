@@ -1,4 +1,86 @@
 -------------------------------------------------------------------
+Thu Oct 01 15:24:08 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.32-0
+  * Fixed inconsistent SSM and Convert to Proxy buttons state on the
+    System Details tabs. (bsc#1268632)
+  * Fix image status icon to reflect failed image inspections.
+    (bsc#1255090)
+  * Removed "Go to OS image directory listing" link
+    from Images page. (bsc#1251867)
+  * Fix Ansible path API descriptions
+  * Fix accessibility markup for mirror credential dialogs.
+  * Commit transaction in syncChannel when repo-sync is running for
+    the same channel to prevent possible deadlocks (bsc#1274884)
+  * Handle distupgrade to SLE16 for SSH minions (bsc#1268463)
+  * Add migration path for EL10 products
+  * Enable product migrations to 16.1 for SLES, SLES for SAP and
+    SLE-RT
+  * Refactor ClmChannelDiff task to use a Queue. With this
+    the tasks can be executed in parallel and the hibernate
+    cache is staying smaller as the results are faster commited.
+    This should prevent blocking other tasks (bsc#1273021)
+  * Fix CLM stuck in building by waiting for
+    full DB commit in ActionExecutor
+  * Optimize cloned channel sync queries in
+    `Errata_queries.xml` to avoid nested loops (bsc#1273071)
+  * Remove traditional stack leftover in dist migration
+    and allow the API to proceed product migration
+    even if there are outstanding management
+    stack updates (bsc#1275215)
+  * Fix virtual instance refresh for mixed SSH and regular
+    minions (bsc#1254316)
+  * Restored the original reset behavior in isDryRun() by swapping
+    subscribedChannels and unsubscribedChannels back (bsc#1271681)
+  * Fix config channel position gaps (bsc#1272988)
+  * Fixed custom RBAC role names being incorrectly
+    localized. (bsc#1271116)
+  * Improve handling of invalid issue_date values when creating
+    CLM filters via the API. (bsc#1271467)
+  * Fix HTTP 500 error when creating CLM Template filters.
+  * Remove activation keys when a base channel is deleted
+    (bsc#1233592)
+  * Fix on removing activation keys when a base channel
+    is deleted (bsc#1233592)
+  * Mainframe systems showing wrong os version (bsc#1260342)
+  * Fix duplicate UI entries in rhel10-like minion package
+    upgrades (bsc#1262234)
+  * Set default checksum type for new UI channels to sha256
+    (bsc#1269011)
+  * Fix correct assignment of peripheral entitlement (bsc#1269086)
+  * Fix untranslated strings in jsp pages (bsc#1269948)
+  * Fix Profile tab display in system details menu (bsc#1271963)
+  * Allow diskcheck env vars into containers (bsc#1270033)
+  * Separate Live-Patching Errata for SLE15 SP7 (bsc#1270039)
+  * Query only systems for virtual machines which are flagged as
+    virtualization hosts (bsc#1273073)
+  * Fix EOL notifications in containers
+  * Do not add FQDNs from proxy certificate (bsc#1270141, bsc#1272404)
+  * Do not crash on conflicting FQDNs, add error message
+  * Wait for taskomatic before processing events (bsc#1265472)
+  * CVE-2026-71400: Remove cobbler_api endpoint from public interface
+    (bsc#1274613, bsc#1274775)
+  * Fix Hibernate session crash on Errata Sync by
+    dynamically loading default access groups
+    from the active session (bsc#1272298)
+  * Fix race condition when adding or removing a server to or from
+    an activation key (bsc#1268744)
+  * Change color of languages and remove spaces in user creation page
+  * Accept both string and array of string as values for the cves
+    field in Ubuntu erratas (bsc#1280946,
+    gh#uyuni-project/uyuni#12544)
+  * Process Ubuntu erratas with no binaries (bsc#1280946,
+    gh#uyuni-project/uyuni#12596)
+  * Stop forcing password-based SAML authentication by default; the
+    requested AuthnContext defaults shipped in the SSO config are now
+    commented out so the IdP can pick the appropriate authentication
+    method (FIDO2, Yubikey, Windows Hello) with strict SAML clients
+    such as Microsoft Edge
+  * Add a fallback errata ID for Ubuntu errata without identification
+  * CVE-2026-94288: Disallow external XML entries and DOCTYPE
+    when parsing systemid (bsc#1282990)
+
+-------------------------------------------------------------------
 Thu Jul 23 19:11:50 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.31-0

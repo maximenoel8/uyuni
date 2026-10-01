@@ -1,4 +1,0 @@
-- Refactor ClmChannelDiff task to use a Queue. With this
-  the tasks can be executed in parallel and the hibernate
-  cache is staying smaller as the results are faster commited.
-  This should prevent blocking other tasks (bsc#1273021)
