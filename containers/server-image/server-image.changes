@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 09 14:52:48 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.18
+  * Create reduced SBOM filesize of containers
+
+-------------------------------------------------------------------
 Wed Sep 30 08:59:41 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.17
