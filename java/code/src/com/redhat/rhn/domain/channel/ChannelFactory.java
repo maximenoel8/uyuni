@@ -23,6 +23,7 @@ import com.redhat.rhn.common.db.datasource.Row;
 import com.redhat.rhn.common.db.datasource.SelectMode;
 import com.redhat.rhn.common.db.datasource.WriteMode;
 import com.redhat.rhn.common.hibernate.HibernateFactory;
+import com.redhat.rhn.common.util.FileUtils;
 import com.redhat.rhn.domain.common.ChecksumType;
 import com.redhat.rhn.domain.org.Org;
 import com.redhat.rhn.domain.org.OrgFactory;
@@ -36,6 +37,7 @@ import com.redhat.rhn.manager.appstreams.AppStreamsManager;
 import com.redhat.rhn.manager.channel.ChannelManager;
 import com.redhat.rhn.manager.content.ContentSyncManager;
 import com.redhat.rhn.manager.content.MgrSyncUtils;
+import com.redhat.rhn.manager.satellite.SystemCommandExecutor;
 import com.redhat.rhn.manager.ssm.SsmChannelDto;
 
 import com.suse.manager.model.hub.ChannelInfoDTO;
@@ -1670,9 +1672,15 @@ public class ChannelFactory extends HibernateFactory {
      * @param channelInfoByLabel all channel info by label
      * @param syncFinished list of finished channel labels
      */
-    public static void syncChannel(ChannelInfoDetailsJson info, Map<String, ChannelInfoDetailsJson> channelInfoByLabel,
-                                   Set<String> syncFinished) {
+    public static void syncChannel(ChannelInfoDetailsJson info,
+                                      Map<String, ChannelInfoDetailsJson> channelInfoByLabel,
+                                      Set<String> syncFinished) {
 
+        if (isSyncInProgress(info.getLabel())) {
+            HibernateFactory.commitTransaction();
+            HibernateFactory.closeSession();
+            log.debug("Sync is in progress - commit transaction to prevent deadlock");
+        }
         String parentChannelLabel = info.getParentChannelLabel();
         if (StringUtils.isNotEmpty(parentChannelLabel) && !syncFinished.contains(parentChannelLabel)) {
             ChannelInfoDetailsJson parentInfo = channelInfoByLabel.get(parentChannelLabel);
@@ -1938,7 +1946,8 @@ public class ChannelFactory extends HibernateFactory {
         setValueIfNotNull(channel, modifyChannelInfo.getMaintainerEmail(), Channel::setMaintainerEmail);
         setValueIfNotNull(channel, modifyChannelInfo.getMaintainerPhone(), Channel::setMaintainerPhone);
         setValueIfNotNull(channel, modifyChannelInfo.getSupportPolicy(), Channel::setSupportPolicy);
-        setValueIfNotNull(channel, modifyChannelInfo.getUpdateTag(), Channel::setUpdateTag);
+        // we also need to be able to change the update tag to NULL.
+        channel.setUpdateTag(modifyChannelInfo.getUpdateTag());
         setValueIfNotNull(channel, modifyChannelInfo.isInstallerUpdates(), Channel::setInstallerUpdates);
 
         if (null != modifyChannelInfo.getRepositoryInfo()) {
@@ -2002,5 +2011,26 @@ public class ChannelFactory extends HibernateFactory {
                         tuple.get("original_id", Long.class)
                 ))
                 .toList();
+    }
+
+    /**
+     * Check if a repo-sync is running for the given channel
+     * @param channelLabel the channel label
+     * @return return true when a repo-sync is running, otherwise false
+     */
+    public static boolean isSyncInProgress(String channelLabel) {
+        String pid;
+        try {
+            pid = FileUtils.readStringFromFile("/run/spacewalk-repo-sync.pid").trim();
+        }
+        catch (RuntimeException e) {
+            return false;
+        }
+
+        // Is this PID running?
+        String[] cmd = {"/usr/bin/ps", "-o", "args", "-p", pid};
+        SystemCommandExecutor ce = new SystemCommandExecutor();
+        ce.execute(cmd);
+        return ce.getLastCommandOutput().contains(" " + channelLabel + " ");
     }
 }

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { type HTMLProps, type ReactNode, Component } from "react";
 
 /**
  * Various HTML button components.
@@ -7,9 +7,9 @@ import * as React from "react";
 
 type BaseProps = {
   /** Text to display on the button. */
-  text?: React.ReactNode;
+  text?: ReactNode;
   /** Text to display on the button. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /**
    * FontAwesome icon class of the button. Can also include additional FA classes
    * (sizing, animation etc.).
@@ -38,7 +38,7 @@ type BaseState = {};
 /**
  * Base class for button components.
  */
-class _ButtonBase<P extends BaseProps = BaseProps, S extends BaseState = BaseState> extends React.Component<P, S> {
+class _ButtonBase<P extends BaseProps = BaseProps, S extends BaseState = BaseState> extends Component<P, S> {
   renderIcon() {
     const text = this.props.text ?? this.props.children;
     const margin = text ? "" : " no-margin";
@@ -83,11 +83,21 @@ type AsyncState = {
  * A button which performs an asynchronous action and displays an animation while waiting for the result.
  */
 export class AsyncButton extends _ButtonBase<AsyncProps, AsyncState> {
+  private isComponentMounted = false;
+
   constructor(props: AsyncProps) {
     super(props);
     this.state = {
       value: props.initialValue ? props.initialValue : "initial",
     };
+  }
+
+  componentDidMount() {
+    this.isComponentMounted = true;
+  }
+
+  componentWillUnmount() {
+    this.isComponentMounted = false;
   }
 
   trigger = () => {
@@ -103,14 +113,18 @@ export class AsyncButton extends _ButtonBase<AsyncProps, AsyncState> {
     }
     future.then(
       () => {
-        this.setState({
-          value: "success",
-        });
+        if (this.isComponentMounted) {
+          this.setState({
+            value: "success",
+          });
+        }
       },
       () => {
-        this.setState({
-          value: "failure",
-        });
+        if (this.isComponentMounted) {
+          this.setState({
+            value: "failure",
+          });
+        }
       }
     );
   };
@@ -211,6 +225,9 @@ type LinkProps = BaseProps & {
   /** to treat the link URL as a download  */
   download?: string;
 
+  /** Disable Senna SPA navigation for this link. */
+  disableSenna?: boolean;
+
   /** Callback function to execute on button click. */
   handler?: (...args: any[]) => any;
 };
@@ -230,7 +247,7 @@ export class LinkButton extends _ButtonBase<LinkProps> {
         }
       : {};
 
-    const targetProps: Partial<React.HTMLProps<HTMLAnchorElement>> =
+    const targetProps: Partial<HTMLProps<HTMLAnchorElement>> =
       this.props.target === "_blank"
         ? {
             target: "_blank",
@@ -248,6 +265,7 @@ export class LinkButton extends _ButtonBase<LinkProps> {
         href={this.props.href}
         onClick={this.props.handler}
         download={this.props.download}
+        data-senna-off={this.props.disableSenna ? "true" : undefined}
         {...targetProps}
         {...tooltipProps}
       >
@@ -293,7 +311,7 @@ type DropdownProps = BaseProps & {
   /** Callback function to execute on button click. */
   handler?: (...args: any[]) => any;
 
-  items: React.ReactNode[];
+  items: ReactNode[];
 };
 
 /**

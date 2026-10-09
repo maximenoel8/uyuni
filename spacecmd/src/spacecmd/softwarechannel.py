@@ -56,7 +56,7 @@ CHECKSUM = ['sha1', 'sha256', 'sha384', 'sha512']
 
 def help_softwarechannel_list(self):
     print(_('softwarechannel_list: List all available software channels'))
-    print(_('''usage: softwarechannel_list [options]')
+    print(_('''usage: softwarechannel_list [options]
 options:
   -v verbose (display label and summary)
   -t tree view (pretty-print(child-channels))
@@ -146,7 +146,7 @@ def do_softwarechannel_listmanageablechannels(self, args, doreturn=False):
 
 def help_softwarechannel_listbasechannels(self):
     print(_('softwarechannel_listbasechannels: List all base software channels'))
-    print(_('''usage: softwarechannel_listbasechannels [options])
+    print(_('''usage: softwarechannel_listbasechannels [options]
 options:
   -v verbose (display label and summary)'''))
 
@@ -354,7 +354,7 @@ def do_softwarechannel_listlatestpackages(self, args, doreturn=False):
 
 def help_softwarechannel_setdetails(self):
     print(_('softwarechannel_setdetails: Modify details of a software channel'))
-    print(_('''usage: softwarechannel_setdetails [options] <CHANNEL ...>)
+    print(_('''usage: softwarechannel_setdetails [options] <CHANNEL ...>
 
 options, at least one of which must be given:
   -n NAME
@@ -708,6 +708,13 @@ def do_softwarechannel_delete(self, args):
     print(_('Channels'))
     print('--------')
     print('\n'.join(sorted(to_delete)))
+
+
+    print(
+        _(
+            "\nWARNING: If you are removing a Base channel, keep in mind that Activation Keys linked to this base channel will also get removed!"
+        )
+    )
 
     if not self.user_confirm(_('Delete these channels [y/N]:')):
         return 1

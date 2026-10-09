@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { DEPRECATED_Select, Form, Text } from "components/input";
 
 import { ProjectEnvironmentType } from "../../../type";
@@ -20,7 +18,7 @@ const EnvironmentForm = (props: Props) => (
       props.onChange(model);
     }}
   >
-    <React.Fragment>
+    <>
       <div className="row">
         <Text
           required
@@ -58,7 +56,7 @@ const EnvironmentForm = (props: Props) => (
           />
         </div>
       )}
-    </React.Fragment>
+    </>
   </Form>
 );
 

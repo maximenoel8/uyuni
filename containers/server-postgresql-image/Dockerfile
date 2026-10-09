@@ -23,7 +23,7 @@ LABEL org.opencontainers.image.description="${PRODUCT} PostgreSQL container imag
 LABEL org.opencontainers.image.created="%BUILDTIME%"
 LABEL org.opencontainers.image.vendor="${VENDOR}"
 LABEL org.opencontainers.image.url="${URL}"
-LABEL org.opencontainers.image.version=5.1.15
+LABEL org.opencontainers.image.version=5.1.16
 LABEL org.openbuildservice.disturl="%DISTURL%"
 LABEL org.opensuse.reference="${REFERENCE_PREFIX}/server-postgresql:${PRODUCT_VERSION}.%RELEASE%"
 # endlabelprefix
@@ -39,4 +39,4 @@ RUN echo "${REFERENCE_PREFIX}/server-postgresql:${PRODUCT_VERSION}.%RELEASE%" > 
 ENTRYPOINT ["/uyuni-entrypoint.sh"]
 
 CMD ["postgres"]
-HEALTHCHECK --interval=10s --start-period=10s --timeout=5s --retries=3 CMD ["/usr/bin/healthcheck.sh"]
+HEALTHCHECK --interval=10s --start-period=600s --timeout=120s --retries=3 CMD ["/usr/bin/healthcheck.sh"]

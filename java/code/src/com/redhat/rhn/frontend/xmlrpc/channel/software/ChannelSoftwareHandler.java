@@ -206,7 +206,7 @@ public class ChannelSoftwareHandler extends BaseHandler {
         Channel channel = lookupChannelByLabel(loggedInUser, channelLabel);
         //Verify permissions
         if (!(UserManager.verifyChannelAdmin(loggedInUser, channel) ||
-                loggedInUser.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN))) {
+                loggedInUser.isMemberOf(AccessGroupFactory.getChannelAdmin()))) {
             throw new PermissionCheckFailureException();
         }
 
@@ -1014,7 +1014,7 @@ public class ChannelSoftwareHandler extends BaseHandler {
         Channel channel = lookupChannelByLabel(loggedInUser, channelLabel);
         //Verify permissions
         if (!(UserManager.verifyChannelAdmin(loggedInUser, channel) ||
-              loggedInUser.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN))) {
+              loggedInUser.isMemberOf(AccessGroupFactory.getChannelAdmin()))) {
             throw new PermissionCheckFailureException();
         }
 
@@ -1064,7 +1064,7 @@ public class ChannelSoftwareHandler extends BaseHandler {
         }
         //Verify permissions
         if (!(UserManager.verifyChannelAdmin(loggedInUser, channel) ||
-              loggedInUser.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN))) {
+              loggedInUser.isMemberOf(AccessGroupFactory.getChannelAdmin()))) {
             throw new PermissionCheckFailureException();
         }
 
@@ -1105,7 +1105,7 @@ public class ChannelSoftwareHandler extends BaseHandler {
         Channel channel = lookupChannelByLabel(loggedInUser.getOrg(), channelLabel);
         //Verify permissions
         if (!(UserManager.verifyChannelAdmin(loggedInUser, channel) ||
-              loggedInUser.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN))) {
+              loggedInUser.isMemberOf(AccessGroupFactory.getChannelAdmin()))) {
             throw new PermissionCheckFailureException();
         }
 
@@ -1158,7 +1158,7 @@ public class ChannelSoftwareHandler extends BaseHandler {
         }
         //Verify permissions
         if (!(UserManager.verifyChannelAdmin(loggedInUser, channel) ||
-              loggedInUser.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN))) {
+              loggedInUser.isMemberOf(AccessGroupFactory.getChannelAdmin()))) {
             throw new PermissionCheckFailureException();
         }
 

@@ -245,20 +245,20 @@ When(/^I wait at most (\d+) seconds until I see the name of "([^"]*)", refreshin
   end
 end
 
-When(/^I wait at most (\d+) seconds until onboarding is completed for "([^"]*)"$/) do |seconds, host|
+When(/^I wait (?:at most (\d+) seconds )?until onboarding is completed for "([^"]*)"$/) do |seconds, host|
+  seconds ||= DEFAULT_TIMEOUT
   steps %(
     When I follow the left menu "Systems > System List > All"
-    And I wait until I see the name of "#{host}", refreshing the page
+    And I wait at most #{seconds} seconds until I see the name of "#{host}", refreshing the page
     And I follow this "#{host}" link
     And I wait until I see "System Status" text
-    And I wait 180 seconds until the event is picked up and #{seconds} seconds until the event "Apply states" is completed
-    And I wait 180 seconds until the event is picked up and #{seconds} seconds until the event "Hardware List Refresh" is completed
-    And I wait 180 seconds until the event is picked up and #{seconds} seconds until the event "Package List Refresh" is completed
+    And I wait at most #{seconds} seconds until the event "Apply states" is picked up
+    And I wait at most #{seconds} seconds until the event "Apply states" is completed in the history
+    And I wait at most #{seconds} seconds until the event "Hardware List Refresh" is picked up
+    And I wait at most #{seconds} seconds until the event "Hardware List Refresh" is completed in the history
+    And I wait at most #{seconds} seconds until the event "Package List Refresh" is picked up
+    And I wait at most #{seconds} seconds until the event "Package List Refresh" is completed in the history
   )
-end
-
-When(/^I wait until onboarding is completed for "([^"]*)"$/) do |host|
-  step %(I wait at most #{DEFAULT_TIMEOUT} seconds until onboarding is completed for "#{host}")
 end
 
 Then(/^I should see "([^"]*)" via spacecmd$/) do |host|
@@ -493,16 +493,10 @@ When(/^I check for failed events on history event page$/) do
     And I follow "History" in the content area
     Then I should see a "System History" text
   '
-  failings = ''
-  event_table_xpath = '//div[@class=\'table-responsive\']/table/tbody'
-  rows = find(:xpath, event_table_xpath)
-  rows.all('tr').each do |tr|
-    if tr.all(:css, '.fa.fa-times-circle-o.fa-1-5x.text-danger').any?
-      failings << "#{tr.text}\n"
-    end
-  end
-  count_failures = failings.length
-  raise ScriptError, "\nFailures in event history found:\n\n#{failings}" if count_failures.nonzero?
+  failed_events_xpath = "//div[@class='table-responsive']/table/tbody/tr[.//*[contains(@class, 'fa-times-circle-o')]]"
+  failed_events = all(:xpath, failed_events_xpath).map(&:text)
+
+  raise ScriptError, "\nFailures in event history found:\n\n#{failed_events.join("\n")}\n\n" if failed_events.any?
 end
 
 Then(/^I should see a list item with text "([^"]*)" and a (success|failing|warning|pending|refreshing) bullet$/) do |text, bullet_type|

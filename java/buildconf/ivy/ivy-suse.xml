@@ -19,16 +19,16 @@
         <dependency org="manager-51" name="commons-cli" rev="1.9.0" />
         <dependency org="manager-51" name="commons-codec" rev="1.16.1" />
         <dependency org="manager-51" name="commons-collections" rev="3.2.2" />
-        <dependency org="manager-51" name="commons-compress" rev="1.26.0" />
+        <dependency org="manager-51" name="commons-compress" rev="1.28.0" />
         <dependency org="manager-51" name="commons-digester" rev="2.1" />
         <dependency org="manager-51" name="commons-discovery" rev="0.5" />
         <dependency org="manager-51" name="commons-el" rev="1.0" />
         <dependency org="manager-51" name="commons-fileupload" rev="1.6.0" />
         <dependency org="manager-51" name="commons-io" rev="2.18.0" />
         <dependency org="manager-51" name="commons-jexl" rev="2.1.1" />
-        <dependency org="manager-51" name="commons-lang3" rev="3.18.0" />
+        <dependency org="manager-51" name="commons-lang3" rev="3.20.0" />
         <dependency org="manager-51" name="commons-logging" rev="1.3.4" />
-        <dependency org="manager-51" name="commons-text" rev="1.10.0" />
+        <dependency org="manager-51" name="commons-text" rev="1.15.0" />
         <dependency org="manager-51" name="commons-validator" rev="1.1.4" />
         <dependency org="manager-51" name="concurrentlinkedhashmap-lru" rev="1.3.2" />
         <dependency org="manager-51" name="dom4j" rev="2.1.4" />
@@ -45,9 +45,9 @@
         <dependency org="manager-51" name="httpcore" rev="4.4.14" />
         <dependency org="manager-51" name="httpcore-nio" rev="4.4.14" />
         <dependency org="manager-51" name="ical4j" rev="3.0.18" />
-        <dependency org="manager-51" name="jackson-annotations" rev="2.17.3" />
-        <dependency org="manager-51" name="jackson-core" rev="2.17.3" />
-        <dependency org="manager-51" name="jackson-databind" rev="2.17.3" />
+        <dependency org="manager-51" name="jackson-annotations" rev="2.18.9" />
+        <dependency org="manager-51" name="jackson-core" rev="2.18.9" />
+        <dependency org="manager-51" name="jackson-databind" rev="2.18.9" />
         <dependency org="manager-51" name="jade4j" rev="1.2.7" />
         <dependency org="manager-51" name="jakarta-persistence-api" rev="2.2.2" />
         <dependency org="manager-51" name="java-saml" rev="2.4.0" />
@@ -57,18 +57,18 @@
         <dependency org="manager-51" name="jdom" rev="1.1.3" />
         <dependency org="manager-51" name="joda-time" rev="2.10.1" />
         <dependency org="manager-51" name="jose4j" rev="0.9.5" />
-        <dependency org="manager-51" name="log4j-api" rev="2.20.0" />
-        <dependency org="manager-51" name="log4j-core" rev="2.20.0" />
+        <dependency org="manager-51" name="log4j-api" rev="2.26.1" />
+        <dependency org="manager-51" name="log4j-core" rev="2.26.1" />
         <dependency org="manager-51" name="jsch" rev="0.2.22" />
         <dependency org="manager-51" name="jctools-core" rev="4.0.5" />
         <dependency org="manager-51" name="mchange-commons-java" rev="0.2.20" />
-        <dependency org="manager-51" name="netty-buffer" rev="4.1.132" />
-        <dependency org="manager-51" name="netty-codec" rev="4.1.132" />
-        <dependency org="manager-51" name="netty-common" rev="4.1.132" />
-        <dependency org="manager-51" name="netty-handler" rev="4.1.132" />
-        <dependency org="manager-51" name="netty-resolver" rev="4.1.132" />
-        <dependency org="manager-51" name="netty-transport" rev="4.1.132" />
-        <dependency org="manager-51" name="netty-transport-native-unix-common" rev="4.1.132" />
+        <dependency org="manager-51" name="netty-buffer" rev="4.1.136" />
+        <dependency org="manager-51" name="netty-codec" rev="4.1.136" />
+        <dependency org="manager-51" name="netty-common" rev="4.1.136" />
+        <dependency org="manager-51" name="netty-handler" rev="4.1.136" />
+        <dependency org="manager-51" name="netty-resolver" rev="4.1.136" />
+        <dependency org="manager-51" name="netty-transport" rev="4.1.136" />
+        <dependency org="manager-51" name="netty-transport-native-unix-common" rev="4.1.136" />
         <dependency org="manager-51" name="oro" rev="2.0.8" />
         <dependency org="manager-51" name="pgjdbc-ng" rev="0.8.7" />
         <dependency org="manager-51" name="postgresql-jdbc" rev="42.2.25" />
@@ -85,18 +85,18 @@
         <dependency org="manager-51" name="simple-xml" rev="2.6.2" />
         <dependency org="manager-51" name="sitemesh" rev="2.1" />
         <dependency org="manager-51" name="slf4j-api" rev="1.7.36" />
-        <dependency org="manager-51" name="log4j-slf4j-impl" rev="2.20.0" />
+        <dependency org="manager-51" name="log4j-slf4j-impl" rev="2.26.1" />
         <dependency org="manager-51" name="snakeyaml" rev="2.2" />
         <dependency org="manager-51" name="spark-core" rev="2.9.3" />
         <dependency org="manager-51" name="spark-template-jade" rev="2.7.1" />
         <dependency org="manager-51" name="spy" rev="0.8.7" />
         <dependency org="manager-51" name="statistics" rev="1.0.2" />
-        <dependency org="manager-51" name="stax2-api" rev="3.1.4" />
+        <dependency org="manager-51" name="stax2-api" rev="4.3.0" />
         <dependency org="manager-51" name="struts" rev="1.2.9" />
         <dependency org="manager-51" name="taglibs-standard-impl" rev="1.2.5" />
         <dependency org="manager-51" name="taglibs-standard-jstlel" rev="1.2.5" />
         <dependency org="manager-51" name="taglibs-standard-spec" rev="1.2.5" />
-        <dependency org="manager-51" name="woodstox-core-asl" rev="4.4.2" />
+        <dependency org="manager-51" name="woodstox-core" rev="7.2.1" />
         <dependency org="manager-51" name="xalan-j2" rev="2.7.3" />
         <dependency org="manager-51" name="xalan-j2-serializer" rev="2.7.3" />
         <dependency org="manager-51" name="xerces-j2" rev="2.12.2" />

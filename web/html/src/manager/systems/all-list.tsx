@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 
 import { LinkButton } from "components/buttons";
 import { IconTag } from "components/icontag";
@@ -33,15 +33,16 @@ const DownloadCSVButton = ({ search }) => {
     <LinkButton
       text={t("Download CSV")}
       href={url}
+      download="systems.csv"
       className="btn btn-default"
       icon="spacewalk-icon-download-csv"
-      data-senna-off="true"
+      disableSenna
     />
   );
 };
 
 export function AllSystems(props: Props) {
-  const [selectedSystems, setSelectedSystems] = React.useState<string[]>([]);
+  const [selectedSystems, setSelectedSystems] = useState<string[]>([]);
 
   const handleSelectedSystems = (items: string[]) => {
     const removed = selectedSystems.filter((item) => !items.includes(item)).map((item) => [item, false]);
@@ -70,26 +71,11 @@ export function AllSystems(props: Props) {
             id="addsystem"
             icon="fa-plus"
             className="btn btn-primary"
-            title={t("Add a system")}
             text={t("Add system")}
             href="/rhn/manager/systems/bootstrap"
           />
         </div>
       </h1>
-      <div className="spacewalk-section-toolbar">
-        <div className="action-button-wrapper">
-          <a
-            role="button"
-            title="Download CSV"
-            href="/rhn/manager/systems/csv/all"
-            className="btn btn-default"
-            data-senna-off="true"
-          >
-            <IconTag type="item-download-csv" />
-            {t("Download CSV")}
-          </a>
-        </div>
-      </div>
       <Table
         data="/rhn/manager/api/systems/list/all"
         identifier={(item) => item.id}

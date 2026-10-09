@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useState } from "react";
 
 import { Button } from "components/buttons";
@@ -45,7 +44,7 @@ const CreatorPanel = (props: Props) => {
   const panelCollapseId = props.collapsible ? `${props.id}-panel` : null;
 
   return (
-    <React.Fragment>
+    <>
       <Panel
         headingLevel={panelLevels[props.panelLevel]}
         collapseId={panelCollapseId}
@@ -88,7 +87,7 @@ const CreatorPanel = (props: Props) => {
           })}
           onClose={() => setOpen(false)}
           footer={
-            <React.Fragment>
+            <>
               <div className="btn-group col-lg-6">
                 {props.onDelete && (
                   <Button
@@ -134,11 +133,11 @@ const CreatorPanel = (props: Props) => {
                   />
                 </div>
               </div>
-            </React.Fragment>
+            </>
           }
         />
       )}
-    </React.Fragment>
+    </>
   );
 };
 

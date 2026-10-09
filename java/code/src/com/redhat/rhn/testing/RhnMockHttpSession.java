@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 SUSE LLC
  * Copyright (c) 2009--2010 Red Hat, Inc.
  *
  * This software is licensed to you under the GNU General Public License,
@@ -31,12 +32,16 @@ public class RhnMockHttpSession extends MockHttpSession {
 
     private Map<String, Object> attributes;
 
+    private boolean valid;
+
     /**
      * default constructor
      */
     public RhnMockHttpSession() {
         super();
+
         attributes = new HashMap<>();
+        valid = true;
     }
 
     /**
@@ -46,6 +51,10 @@ public class RhnMockHttpSession extends MockHttpSession {
      */
     @Override
     public Object getAttribute(String name) {
+        if (!valid) {
+            throw new IllegalStateException("Session has been invalidated");
+        }
+
         return attributes.get(name);
     }
 
@@ -56,11 +65,19 @@ public class RhnMockHttpSession extends MockHttpSession {
      */
     @Override
     public void setAttribute(String name, Object value) {
+        if (!valid) {
+            throw new IllegalStateException("Session has been invalidated");
+        }
+
         attributes.put(name, value);
     }
 
     @Override
     public Enumeration getAttributeNames() {
+        if (!valid) {
+            throw new IllegalStateException("Session has been invalidated");
+        }
+
         return new IteratorEnumeration(attributes.keySet().iterator());
     }
 
@@ -70,6 +87,10 @@ public class RhnMockHttpSession extends MockHttpSession {
      */
     @Override
     public void removeAttribute(String name) {
+        if (!valid) {
+            throw new IllegalStateException("Session has been invalidated");
+        }
+
         attributes.remove(name);
     }
 
@@ -77,5 +98,10 @@ public class RhnMockHttpSession extends MockHttpSession {
     @Override
     public String toString() {
         return this.getClass().getName() + " attributes: " + attributes;
+    }
+
+    @Override
+    public void invalidate() {
+        valid = false;
     }
 }

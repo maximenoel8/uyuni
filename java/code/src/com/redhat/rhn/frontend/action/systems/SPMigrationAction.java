@@ -78,8 +78,6 @@ public class SPMigrationAction extends RhnAction {
     private static Logger logger = LogManager.getLogger(SPMigrationAction.class);
 
     // Request attributes
-    private static final String UPGRADE_SUPPORTED = "upgradeSupported";
-    private static final String ZYPP_INSTALLED = "zyppPluginInstalled";
     private static final String MIGRATION_SCHEDULED = "migrationScheduled";
     private static final String LATEST_SP = "latestServicePack";
     private static final String MISSING_SUCCESSOR_EXTENSIONS = "missingSuccessorExtensions";
@@ -165,31 +163,14 @@ public class SPMigrationAction extends RhnAction {
         request.setAttribute(IS_SALT_UP_TO_DATE, isSaltUpToDate);
         request.setAttribute(SALT_PACKAGE, saltPackage);
 
-        // Check if this server supports distribution upgrades via capabilities
-        // (for traditional clients only)
-        boolean supported = isSUSEMinion || isRedHatMinion ||
-                DistUpgradeManager.isUpgradeSupported(server, ctx.getCurrentUser());
-        logger.debug("Upgrade supported for '{}'? {}", server.getName(), supported);
-        request.setAttribute(UPGRADE_SUPPORTED, supported);
-
-        // Check if zypp-plugin-spacewalk is installed (for traditional clients only)
-        boolean zyppPluginInstalled = PackageFactory.lookupByNameAndServer(
-                "zypp-plugin-spacewalk", server) != null;
-        logger.debug("zypp plugin installed? {}", zyppPluginInstalled);
-        request.setAttribute(ZYPP_INSTALLED, zyppPluginInstalled);
-
-        // Check if the newest update stack is installed (for traditional clients only)
+        // Check if the newest update stack is installed
         boolean updateStackUpdateNeeded = ErrataManager.updateStackUpdateNeeded(
                 ctx.getCurrentUser(), server);
         logger.debug("update stack update needed? {}", updateStackUpdateNeeded);
         request.setAttribute(UPDATESTACK_UPDATE_NEEDED, updateStackUpdateNeeded);
 
-
         // Check if there is already a migration in the schedule
-        Action migration = null;
-        if (supported) {
-            migration = ActionFactory.isMigrationScheduledForServer(server.getId());
-        }
+        Action migration = ActionFactory.isMigrationScheduledForServer(server.getId());
         request.setAttribute(MIGRATION_SCHEDULED, migration);
 
         // Init request parameters
@@ -249,7 +230,7 @@ public class SPMigrationAction extends RhnAction {
         ActionForward forward = findForward(actionMapping, actionStep, dispatch, goBack);
 
         // Put data to the request
-        if (forward.getName().equals(TARGET) && supported && migration == null) {
+        if (forward.getName().equals(TARGET) && migration == null) {
             // Find target products
             Optional<SUSEProductSet> installedProducts = server.getInstalledProductSet();
             if (installedProducts.isEmpty()) {
@@ -455,12 +436,12 @@ public class SPMigrationAction extends RhnAction {
         boolean isSLES15Source = sourceProducts
                 .map(SUSEProductSet::getBaseProduct)
                 .filter(Objects::nonNull)
-                .map(SUSEProduct::isSles15)
+                .map(SUSEProduct::isSle15)
                 .orElse(false);
         boolean isSLES16Target = targetProducts.stream()
                 .map(SUSEProductSet::getBaseProduct)
-                .anyMatch(p -> p != null && p.isSles16());
-        // Skip the successors warning for specific SLES 15 -> 16 migrations, show the pre-flight checklist instead
+                .anyMatch(p -> p != null && p.isSle16());
+        // Skip the successors warning for specific SLES 15.x -> 16.y migrations, show the pre-flight checklist instead
         if (isSLES15Source && isSLES16Target) {
             request.setAttribute("hasSLES16Target", true);
         }

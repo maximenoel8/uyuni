@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useState } from "react";
 
 import { docsLocale, productName } from "core/user-preferences";
@@ -22,7 +21,7 @@ const UyuniThemeLogin = (props: ThemeProps) => {
   const { product } = props;
 
   return (
-    <React.Fragment>
+    <>
       <header className="navbar-pf navbar" role="presentation" />
       <div className="spacewalk-main-column-layout">
         <section className={styles.contentArea}>
@@ -130,7 +129,7 @@ const UyuniThemeLogin = (props: ThemeProps) => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

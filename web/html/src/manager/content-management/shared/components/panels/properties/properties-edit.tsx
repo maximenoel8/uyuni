@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { isOrgAdmin } from "core/auth/auth.utils";
 import useRoles from "core/auth/use-roles";
 
@@ -75,10 +73,10 @@ const PropertiesEdit = (props: Props) => {
       }}
       onCancel={() => cancelAction()}
       renderContent={() => (
-        <React.Fragment>
+        <>
           {messages.messages}
           <PropertiesView properties={propertiesToShow} />
-        </React.Fragment>
+        </>
       )}
       renderCreationContent={({ item, setItem, errors }) => {
         if (isLoading) {

@@ -29,7 +29,7 @@
 %global __python %{_bindir}/python3
 
 Name:           spacewalk-certs-tools
-Version:        5.1.11
+Version:        5.1.12
 Release:        0
 Summary:        Spacewalk SSL Key/Cert Tool
 License:        GPL-2.0-only

@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2026 SUSE LLC
  * Copyright (c) 2009--2010 Red Hat, Inc.
  *
  * This software is licensed to you under the GNU General Public License,
@@ -15,16 +16,20 @@
 package com.redhat.rhn.domain.token.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.redhat.rhn.domain.kickstart.KickstartData;
 import com.redhat.rhn.domain.kickstart.test.KickstartDataTest;
 import com.redhat.rhn.domain.server.Server;
+import com.redhat.rhn.domain.server.test.ServerFactoryTest;
 import com.redhat.rhn.domain.token.ActivationKey;
 import com.redhat.rhn.domain.token.ActivationKeyFactory;
 import com.redhat.rhn.testing.BaseTestCaseWithUser;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -70,5 +75,50 @@ public class ActivationKeyFactoryTest extends BaseTestCaseWithUser {
         activationKey.getToken().getActivatedServers().add(server);
         activationKeys = ActivationKeyFactory.lookupByActivatedServer(server);
         assertEquals(activationKey, activationKeys.get(0));
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    public void testAddActivatedServer(boolean clearSession) {
+        ActivationKey activationKey = ActivationKeyTest.createTestActivationKey(user);
+        int initialActivatedServerCount = activationKey.getToken().getActivatedServers().size();
+        Server newServer = ServerFactoryTest.createTestServer(user, true);
+
+        if (clearSession) {
+            clearSession();
+        }
+
+        ActivationKeyFactory.addActivatedServer(activationKey, newServer);
+
+        // Check the collection
+        assertEquals(initialActivatedServerCount + 1, activationKey.getToken().getActivatedServers().size());
+        assertTrue(activationKey.getToken().getActivatedServers().contains(newServer));
+
+        // Check the database
+        clearSession();
+        assertEquals(1, ActivationKeyFactory.lookupByActivatedServer(newServer).size());
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    public void testRemoveActivatedServer(boolean clearSession) {
+        ActivationKey activationKey = ActivationKeyFactory.createNewKey(user, "DEFAULT-KEY");
+        Server server = ServerFactoryTest.createTestServer(user, true);
+        activationKey.getToken().getActivatedServers().add(server);
+        ActivationKeyFactory.save(activationKey);
+
+        if (clearSession) {
+            clearSession();
+        }
+
+        ActivationKeyFactory.removeActivatedServer(activationKey, server);
+
+        // Check the collection
+        assertEquals(0, activationKey.getToken().getActivatedServers().size());
+        assertFalse(activationKey.getToken().getActivatedServers().contains(server));
+
+        // Check the database
+        clearSession();
+        assertTrue(ActivationKeyFactory.lookupByActivatedServer(server).isEmpty());
     }
 }

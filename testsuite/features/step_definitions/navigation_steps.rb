@@ -20,6 +20,15 @@ Then(/^I should not see a "(.*)" text in the content area$/) do |text|
   end
 end
 
+Then(/^I should (not )?see the "(.*)" alert (danger|warning)$/) do |negative, message, alert_type|
+  selector = "div.alert.alert-#{alert_type}"
+  if negative
+    raise ScriptError, "Alert #{alert_type} '#{message}' found" unless has_no_css?(selector, text: message)
+  else
+    raise ScriptError, "Alert #{alert_type} '#{message}' not found" unless has_css?(selector, text: message)
+  end
+end
+
 When(/^I click on "([^"]+)" in row "([^"]+)"$/) do |link, item|
   within(:xpath, "//tr[td[contains(.,'#{item}')]]") do
     click_link_or_button_and_wait(link)
@@ -67,11 +76,11 @@ When(/^I wait until I see "([^"]*)" text or "([^"]*)" text(?:, (refreshing the p
   end
 end
 
-When(/^I wait until I see "([^"]*)" (text|regex), refreshing the page$/) do |text, type|
+When(/^I wait (?:at most (\d+) seconds )?until I see "([^"]*)" (text|regex), refreshing the page$/) do |seconds, text, type|
   text = Regexp.new(text) if type == 'regex'
   next if has_content?(text, wait: 3)
 
-  repeat_until_timeout(message: "Couldn't find text '#{text}'") do
+  repeat_until_timeout(message: "Couldn't find text '#{text}'", timeout: seconds ? seconds.to_i : DEFAULT_TIMEOUT) do
     break if has_content?(text, wait: 3)
 
     refresh_page
@@ -153,9 +162,7 @@ Then(/^I wait until I see the (VNC|spice) graphical console$/) do |type|
     break if find(:xpath, '//canvas')
 
     # If the connection failed try reloading since the VM may not have been ready
-    if find(:xpath, '//*[contains(@class, "modal-title") and text() = "Failed to connect"]')
-      refresh_page
-    end
+    refresh_page if find(:xpath, '//*[contains(@class, "modal-title") and text() = "Failed to connect"]')
   end
 end
 
@@ -1440,8 +1447,6 @@ Then(/^the following restrictions should be (enabled|disabled):$/) do |expected_
     raise "Unknown restriction: #{restriction}" unless checkbox_id
 
     actual = checkbox_state(checkbox_id)
-    unless actual == expected_checkbox_state
-      raise "Expected '#{restriction}' to be #{expected_checkbox_state}, but was #{actual}"
-    end
+    raise "Expected '#{restriction}' to be #{expected_checkbox_state}, but was #{actual}" unless actual == expected_checkbox_state
   end
 end

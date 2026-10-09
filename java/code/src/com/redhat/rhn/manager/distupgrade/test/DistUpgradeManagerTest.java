@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import com.redhat.rhn.common.hibernate.HibernateFactory;
 import com.redhat.rhn.domain.action.Action;
 import com.redhat.rhn.domain.action.ActionFactory;
 import com.redhat.rhn.domain.action.dup.DistUpgradeAction;
@@ -43,22 +44,16 @@ import com.redhat.rhn.domain.product.SUSEProductExtension;
 import com.redhat.rhn.domain.product.SUSEProductSet;
 import com.redhat.rhn.domain.product.SUSEProductUpgrade;
 import com.redhat.rhn.domain.product.test.SUSEProductTestUtils;
-import com.redhat.rhn.domain.rhnpackage.Package;
-import com.redhat.rhn.domain.rhnpackage.PackageName;
-import com.redhat.rhn.domain.rhnpackage.test.PackageTest;
 import com.redhat.rhn.domain.scc.SCCRepository;
 import com.redhat.rhn.domain.server.InstalledProduct;
 import com.redhat.rhn.domain.server.MinionServer;
 import com.redhat.rhn.domain.server.Server;
-import com.redhat.rhn.domain.server.ServerConstants;
+import com.redhat.rhn.domain.server.ServerFactory;
 import com.redhat.rhn.domain.server.test.MinionServerFactoryTest;
-import com.redhat.rhn.domain.server.test.ServerFactoryTest;
 import com.redhat.rhn.frontend.dto.EssentialChannelDto;
 import com.redhat.rhn.manager.action.ActionManager;
 import com.redhat.rhn.manager.distupgrade.DistUpgradeException;
 import com.redhat.rhn.manager.distupgrade.DistUpgradeManager;
-import com.redhat.rhn.manager.rhnpackage.PackageManager;
-import com.redhat.rhn.manager.system.test.SystemManagerTest;
 import com.redhat.rhn.taskomatic.TaskomaticApi;
 import com.redhat.rhn.testing.BaseTestCaseWithUser;
 import com.redhat.rhn.testing.ErrataTestUtils;
@@ -476,79 +471,25 @@ public class DistUpgradeManagerTest extends BaseTestCaseWithUser {
     }
 
     /**
-     * Test for performServerChecks(): capability "distupgrade.upgrade" is missing.
-     */
-    @Test
-    public void testCapabilityMissing() {
-        Server server = ServerFactoryTest.createTestServer(user, true,
-                ServerConstants.getServerGroupTypeEnterpriseEntitled());
-        try {
-            DistUpgradeManager.performServerChecks(server.getId(), user);
-            fail("Missing capability should make the server checks fail!");
-        }
-        catch (DistUpgradeException e) {
-            assertEquals("Dist upgrade not supported for server: " +
-                    server.getId(), e.getMessage());
-        }
-    }
-
-    /**
-     * Test for performServerChecks(): "zypp-plugin-spacewalk" is not installed.
-     * @throws Exception if anything goes wrong
-     */
-    @Test
-    public void testZyppPluginNotInstalled() throws Exception {
-        Server server = ServerFactoryTest.createTestServer(user, true,
-                ServerConstants.getServerGroupTypeEnterpriseEntitled());
-        SystemManagerTest.giveCapability(server.getId(), "distupgrade.upgrade", 1L);
-        try {
-            DistUpgradeManager.performServerChecks(server.getId(), user);
-            fail("Missing package zyppPluginSpacewalk should make the server checks fail!");
-        }
-        catch (DistUpgradeException e) {
-            assertEquals("Package zypp-plugin-spacewalk is not installed: " +
-                    server.getId(), e.getMessage());
-        }
-    }
-
-    /**
      * Test for performServerChecks(): a dist upgrade action is already scheduled.
      * @throws Exception if anything goes wrong
      */
     @Test
     public void testDistUpgradeScheduled() throws Exception {
-        Server server = ServerFactoryTest.createTestServer(user, true,
-                ServerConstants.getServerGroupTypeEnterpriseEntitled());
-        SystemManagerTest.giveCapability(server.getId(), "distupgrade.upgrade", 1L);
-
-        // Install the zypp-plugin-spacewalk package
-        Package zyppPlugin = PackageTest.createTestPackage(user.getOrg());
-        PackageName name = PackageManager.lookupPackageName("zypp-plugin-spacewalk");
-        if (name == null) {
-            name = zyppPlugin.getPackageName();
-            name.setName("zypp-plugin-spacewalk");
-            TestUtils.saveAndFlush(name);
-        }
-        else {
-            // Handle the case that the package name exists in the DB
-            zyppPlugin.setPackageName(name);
-            TestUtils.saveAndFlush(zyppPlugin);
-        }
-        ErrataTestUtils.createTestInstalledPackage(zyppPlugin, server);
+        MinionServer minion = MinionServerFactoryTest.createTestMinionServer(user);
 
         // Store a dist upgrade action for this server
-        Action action = ActionFactoryTest.createAction(user,
-                ActionFactory.TYPE_DIST_UPGRADE);
-        ServerAction serverAction = ActionFactoryTest.createServerAction(server, action);
+        Action action = ActionFactoryTest.createAction(user, ActionFactory.TYPE_DIST_UPGRADE);
+        ServerAction serverAction = ActionFactoryTest.createServerAction(minion, action);
         TestUtils.saveAndFlush(serverAction);
 
         try {
-            DistUpgradeManager.performServerChecks(server.getId(), user);
+            DistUpgradeManager.performServerChecks(minion.getId(), user);
             fail("A scheduled dist upgrade should make the server checks fail!");
         }
         catch (DistUpgradeException e) {
             assertEquals("Another dist upgrade is in the schedule for server: " +
-                    server.getId(), e.getMessage());
+                    minion.getId(), e.getMessage());
         }
     }
 
@@ -1168,6 +1109,61 @@ public class DistUpgradeManagerTest extends BaseTestCaseWithUser {
 
         assertTrue(sa.isStatusPickedUp(),
                 "Action must be reset to In Progress while minion is offline after migration start");
+    }
+
+    @Test
+    public void testDryrunRestoreChannels() throws Exception {
+        MinionServer minion = MinionServerFactoryTest.createTestMinionServer(user);
+
+        Channel sles156Channel = ChannelFactoryTest.createTestChannel(user);
+        sles156Channel.setLabel("sles-15.6-channel");
+        Channel sles157Channel = ChannelFactoryTest.createTestChannel(user);
+        sles157Channel.setLabel("sles-15.7-channel");
+        minion.addChannel(sles157Channel);
+        ServerFactory.save(minion);
+        HibernateFactory.getSession().flush();
+
+        DistUpgradeActionDetails det = new DistUpgradeActionDetails();
+
+        DistUpgradeChannelTask subscribeTask = new DistUpgradeChannelTask();
+        subscribeTask.setChannel(sles157Channel);
+        subscribeTask.setTask(DistUpgradeChannelTask.SUBSCRIBE);
+        det.addChannelTask(subscribeTask);
+
+        DistUpgradeChannelTask unsubscribeTask = new DistUpgradeChannelTask();
+        unsubscribeTask.setChannel(sles156Channel);
+        unsubscribeTask.setTask(DistUpgradeChannelTask.UNSUBSCRIBE);
+        det.addChannelTask(unsubscribeTask);
+
+        det.setServer(minion);
+        det.setDryRun(true);
+
+        Map<Long, DistUpgradeActionDetails> detailsMap = new HashMap<>();
+        detailsMap.put(det.getServer().getId(), det);
+
+        var action = (DistUpgradeAction) ActionFactoryTest.createAction(user, ActionFactory.TYPE_DIST_UPGRADE);
+        HibernateFactory.getSession().flush();
+
+        detailsMap.values().stream()
+                .map(DistUpgradeActionDetails::getServer)
+                .forEach(server -> ActionFactory.createAddServerAction(server, action));
+
+        HibernateFactory.getSession().flush();
+        // Add the details and save
+        action.setDetailsMap(detailsMap);
+        ActionFactory.save(action);
+
+        // Simulate SaltUtils prematurely marking the action complete
+        ServerAction sa = action.getServerActions().stream().findFirst().orElseThrow();
+        sa.setStatusCompleted();
+        ActionFactory.save(sa);
+
+        assertEquals(sles157Channel, minion.getBaseChannel());
+
+        // A non-verify result (e.g. the initial sles16.sls state completing)
+        action.handleUpdateServerAction(sa, buildUnrelatedStateResult(), null);
+
+        assertEquals(sles156Channel, minion.getBaseChannel());
     }
 
     /**

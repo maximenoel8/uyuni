@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import type { ReactNode } from "react";
 import ReactModal from "react-modal";
 
 export type DialogProps = {
@@ -12,18 +11,19 @@ export type DialogProps = {
   /** The css className for the 'modal-dialog' div */
   className?: string;
   /** Title of the dialog */
-  title?: React.ReactNode;
+  title?: ReactNode;
   /** The body of the popup */
-  content?: React.ReactNode;
+  content?: ReactNode;
   /** The footer content of the dialog. Usually buttons. */
-  footer?: React.ReactNode;
+  footer?: ReactNode;
   /** Should the dialog show a header with a title. Defaults to False */
   hideHeader?: boolean;
   /** Can the modal be closed using the cross button, ESC or by clicking on the overlay? */
   closableModal?: boolean;
 };
 
-ReactModal.setAppElement(document.body);
+const appElement = document.querySelector<HTMLElement>(".spacewalk-main-column-layout") ?? document.body;
+ReactModal.setAppElement(appElement);
 
 export function Dialog(props: DialogProps) {
   const closableModal = props.closableModal ?? true;
@@ -44,13 +44,7 @@ export function Dialog(props: DialogProps) {
         {!props.hideHeader && (
           <div className="modal-header">
             {closableModal && (
-              <button
-                type="button"
-                className="close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                onClick={() => props.onClose?.()}
-              >
+              <button type="button" className="close" aria-label="Close" onClick={() => props.onClose?.()}>
                 <span aria-hidden="true">
                   <i className="fa fa-close"></i>
                 </span>

@@ -10,8 +10,8 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'cucumber'
 # require 'simplecov'
-require 'minitest/autorun'
-require 'minitest/unit'
+require 'minitest'
+require 'minitest/assertions'
 require 'securerandom'
 require 'capybara/playwright'
 require 'multi_test'
@@ -44,6 +44,11 @@ end
 # Context per feature
 $context = {}
 
+# Set by the Layer 3 watchdog (see the Around hook below) when it has force-torn-down the browser
+# session. Once true, every remaining scenario in the run is skipped with one clear reason instead
+# of failing individually with confusing Playwright::Transport::AlreadyDisconnectedError traces.
+$watchdog_run_aborted = false
+
 # Other global variables
 $pxeboot_mac = ENV.fetch('PXEBOOT_MAC', nil)
 $pxeboot_image = ENV.fetch('PXEBOOT_IMAGE', nil) || 'sles15sp7o'
@@ -73,7 +78,7 @@ SCENARIO_HARD_LIMIT = ENV['SCENARIO_HARD_LIMIT'] ? ENV['SCENARIO_HARD_LIMIT'].to
 # Scenarios tagged @long_running (e.g. "Synchronize products" in the Setup Wizard: ~40 min in CI,
 # up to ~13 h in BV) use this instead. It is 0 (watchdog disabled, rely on the external Layer 4
 # job timeout) unless explicitly set, so set it per pipeline: e.g. 3600 in CI, 50400 in BV.
-LONG_SCENARIO_HARD_LIMIT = ENV.fetch('LONG_SCENARIO_HARD_LIMIT', '0').to_i
+LONG_SCENARIO_HARD_LIMIT = ENV.fetch('LONG_SCENARIO_HARD_LIMIT', '9000').to_i
 # Small positive wait for "is it there right now" existence gates. capybara-playwright-driver does
 # NOT support wait: 0 / wait: false: it requires wait > 0, and a 0 maps to Playwright's "disable
 # timeout" which means wait forever. Never use wait: 0 with the Playwright driver - use this instead.
@@ -144,7 +149,7 @@ Capybara.server_port = 8888 + ENV['TEST_ENV_NUMBER'].to_i
 $stdout.puts "Capybara APP Host: #{Capybara.app_host}:#{Capybara.server_port}"
 
 # enable minitest assertions in steps
-World(MiniTest::Assertions)
+World(Minitest::Assertions)
 
 # Initialize the API client
 $api_test = new_api_client
@@ -166,10 +171,17 @@ After do |scenario|
   log "This scenario took: #{current_epoch - @scenario_start_time} seconds"
   if scenario.failed?
     begin
-      # web_session_is_active? can raise if the session went stale after a long step.
+      # web_session_is_active? can raise or hang if the Playwright pipe was corrupted mid-call
+      # (e.g. by Timeout.timeout firing inside repeat_until_timeout). The 10s backstop ensures
+      # the After hook doesn't wait 36+ minutes for the watchdog when the connection is already dead.
       session_active =
         begin
-          web_session_is_active?
+          Timeout.timeout(10) { web_session_is_active? }
+        rescue Timeout::Error
+          warn 'After: Playwright connection hung during session check — triggering emergency browser kill'
+          unblock_wedged_browser
+          $watchdog_run_aborted = true
+          false
         rescue StandardError => e
           log "Web session went stale when checking for active session: #{e.message}"
           false
@@ -365,6 +377,11 @@ Around do |scenario, block|
       warn "WATCHDOG: scenario '#{scenario.name}' exceeded its hard limit of #{limit}s - " \
            'tearing down the browser session to unblock the run'
       unblock_wedged_browser
+      # capybara/cucumber's own After hook calls driver.reset! unconditionally, which tries to talk
+      # to the browser process we just killed and raises again - it does not rebuild a fresh one.
+      # Without this flag every remaining scenario would fail one-by-one with confusing
+      # Playwright::Transport::AlreadyDisconnectedError traces instead of a single clear reason.
+      $watchdog_run_aborted = true
     end
 
   begin
@@ -373,6 +390,12 @@ Around do |scenario, block|
     finished = true
     watchdog.kill
   end
+end
+
+# Must be the first unconditional Before hook in the suite (registered here, right after the
+# watchdog) so it runs before any hook that touches the browser. See $watchdog_run_aborted above.
+Before do
+  skip_this_scenario if $watchdog_run_aborted
 end
 
 Before('@skip') do
@@ -425,8 +448,8 @@ Before('@run_if_proxy_transactional_or_slmicro61_minion') do
   skip_this_scenario unless suse_proxy_transactional? || ENV.key?(ENV_VAR_BY_HOST['slmicro61_minion'])
 end
 
-Before('@run_if_proxy_not_transactional_or_sles15sp7_minion') do
-  skip_this_scenario unless suse_proxy_non_transactional? || ENV.key?(ENV_VAR_BY_HOST['sles15sp7_minion'])
+Before('@run_if_proxy_not_transactional_or_sles15sp7_minion_or_monitoring_server') do
+  skip_this_scenario unless suse_proxy_non_transactional? || ENV.key?(ENV_VAR_BY_HOST['sles15sp7_minion']) || ENV.key?(ENV_VAR_BY_HOST['monitoring_server'])
 end
 
 Before('@sle_minion') do
@@ -507,6 +530,14 @@ Before('@liberty9_sshminion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['liberty9_sshminion']
 end
 
+Before('@liberty10_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['liberty10_minion']
+end
+
+Before('@liberty10_sshminion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['liberty10_sshminion']
+end
+
 Before('@oracle9_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['oracle9_minion']
 end
@@ -523,12 +554,36 @@ Before('@oracle10_sshminion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['oracle10_sshminion']
 end
 
+Before('@rhel7_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel7_minion']
+end
+
+Before('@rhel7_sshminion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel7_sshminion']
+end
+
+Before('@rhel8_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel8_minion']
+end
+
+Before('@rhel8_sshminion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel8_sshminion']
+end
+
 Before('@rhel9_minion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel9_minion']
 end
 
 Before('@rhel9_sshminion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel9_sshminion']
+end
+
+Before('@rhel10_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel10_minion']
+end
+
+Before('@rhel10_sshminion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['rhel10_sshminion']
 end
 
 Before('@rocky8_minion') do
@@ -585,6 +640,14 @@ end
 
 Before('@debian13_sshminion') do
   skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['debian13_sshminion']
+end
+
+Before('@raspios13_minion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['raspios13_minion']
+end
+
+Before('@raspios13_sshminion') do
+  skip_this_scenario unless ENV.key? ENV_VAR_BY_HOST['raspios13_sshminion']
 end
 
 Before('@sles12sp5_minion') do
@@ -773,8 +836,28 @@ Before('@skip_for_transactional_minion') do |scenario|
   skip_this_scenario if scenario.location.file.include?('slemicro') || scenario.location.file.include?('slmicro')
 end
 
+Before('@skip_for_rhel_container') do |scenario|
+  skip_this_scenario if scenario.location.file.match?(/rhel\d+_(ssh)?minion/)
+end
+
+Before('@skip_for_rhel7') do |scenario|
+  skip_this_scenario if scenario.location.file.include? 'rhel7'
+end
+
+Before('@skip_for_rhel8') do |scenario|
+  skip_this_scenario if scenario.location.file.include? 'rhel8'
+end
+
+Before('@skip_for_rhel9') do |scenario|
+  skip_this_scenario if scenario.location.file.include? 'rhel9'
+end
+
+Before('@skip_for_rhel10') do |scenario|
+  skip_this_scenario if scenario.location.file.include? 'rhel10'
+end
+
 Before('@skip_for_rhel10_like') do |scenario|
-  rhel10_minion_tags = %w[@alma10_minion @alma10_sshminion @oracle10_minion @oracle10_sshminion @rocky10_minion @rocky10_sshminion]
+  rhel10_minion_tags = %w[@alma10_minion @alma10_sshminion @oracle10_minion @oracle10_sshminion @rhel10_minion @rhel10_sshminion @rocky10_minion @rocky10_sshminion]
   skip_this_scenario if rhel10_minion_tags.any? { |tag| scenario.source_tag_names.include?(tag) }
 end
 
@@ -805,12 +888,12 @@ end
 
 # do some tests only if we are using salt bundle
 Before('@salt_bundle') do
-  skip_this_scenario unless use_salt_bundle
+  skip_this_scenario unless $use_salt_bundle
 end
 
 # do some tests only if we are using salt bundle
 Before('@skip_if_salt_bundle') do
-  skip_this_scenario if use_salt_bundle
+  skip_this_scenario if $use_salt_bundle
 end
 
 # do test only if HTTP proxy for Uyuni is defined

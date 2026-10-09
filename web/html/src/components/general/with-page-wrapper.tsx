@@ -1,4 +1,4 @@
-import * as React from "react";
+import { type ComponentType, type ErrorInfo, type FC, type ReactNode, Component } from "react";
 
 import DefaultJsError from "manager/errors/default-js-error";
 
@@ -7,13 +7,13 @@ class State {
 }
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-class ErrorBoundary extends React.Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   state = new State();
 
-  componentDidCatch(error: Error, info: React.ErrorInfo) {
+  componentDidCatch(error: Error, info: ErrorInfo) {
     this.setState({ hasError: true });
     // Log error to server
     Loggerhead.error(`
@@ -33,8 +33,8 @@ class ErrorBoundary extends React.Component<Props, State> {
 const PageWrapper = ErrorBoundary;
 
 function withPageWrapper<WrapperProps extends Record<string, unknown>>(
-  Component: React.ComponentType<WrapperProps>
-): React.FC<WrapperProps> {
+  Component: ComponentType<WrapperProps>
+): FC<WrapperProps> {
   return function WrapperComponent(props: WrapperProps) {
     return (
       <PageWrapper>

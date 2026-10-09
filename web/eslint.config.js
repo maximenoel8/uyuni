@@ -13,7 +13,13 @@ import localRules from "./eslint-local-rules/index.js";
 const isProduction = process.env.NODE_ENV === "production";
 
 export default defineConfig([
-  globalIgnores(["html/src/dist/**/*", "html/src/vendors/**/*", "html/javascript/**/*"]),
+  globalIgnores([
+    "html/src/dist/**/*",
+    "html/src/storybook/generated/**/*",
+    "html/src/vendors/**/*",
+    "html/javascript/**/*",
+    "storybook-static/**/*",
+  ]),
   eslint.configs.recommended,
   // In the future, it would be nice to use `tseslint.configs.recommended` here, but legacy code is too far from that for now
   tseslint.configs.stylistic,
@@ -116,7 +122,7 @@ export default defineConfig([
           paths: [
             {
               name: "node-gettext",
-              message: "Please import from `core/intl/node-gettext` instead.",
+              message: "Import from `core/intl/node-gettext` instead.",
             },
             // TODO: List everything we want to limit once the implementation is done
             // {
@@ -125,6 +131,11 @@ export default defineConfig([
             //   // TODO: Update message once we move the directory to where it should be
             //   message: "Please import from `components/formik` instead.",
             // },
+            {
+              name: "react",
+              importNames: ["default"],
+              message: 'Import specific submodules instead, e.g. `import { useEffect } from "react";`.',
+            },
           ],
         },
       ],

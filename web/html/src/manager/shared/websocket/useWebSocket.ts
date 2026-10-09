@@ -1,17 +1,29 @@
-import * as React from "react";
+import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
 
-export function useWebSocket(errors: string[], setErrors: Function, property: string, callback: (value: any) => void) {
-  const [webSocketErr, setWebSocketErr] = React.useState(false);
-  const [pageUnloading, setPageUnloading] = React.useState(false);
+export function useWebSocket(
+  errors: string[],
+  setErrors: Dispatch<SetStateAction<string[]>>,
+  property: string,
+  callback: (value: any) => void
+) {
+  const callbackRef = useRef(callback);
+  const errorsRef = useRef(errors);
 
-  const onBeforeUnload = () => {
-    setPageUnloading(true);
-  };
+  callbackRef.current = callback;
+  errorsRef.current = errors;
 
-  React.useEffect(() => {
+  useEffect(() => {
+    let closedByCleanup = false;
+    let pageUnloading = false;
+    let webSocketErr = false;
+
     const { port } = window.location;
     const url = `wss://${window.location.hostname}${port ? `:${port}` : ""}/rhn/websocket/notifications`;
     const ws = new WebSocket(url);
+
+    const onBeforeUnload = () => {
+      pageUnloading = true;
+    };
 
     ws.onopen = () => {
       // Tell the websocket what we want to hear about
@@ -19,29 +31,39 @@ export function useWebSocket(errors: string[], setErrors: Function, property: st
     };
 
     ws.onclose = () => {
-      setErrors(
-        (errors || []).concat(
-          !pageUnloading && !webSocketErr ? t("Websocket connection closed. Refresh the page to try again.") : []
-        )
-      );
+      if (!closedByCleanup && !pageUnloading && !webSocketErr) {
+        setErrors((currentErrors) =>
+          (currentErrors || errorsRef.current || []).concat(
+            t("Websocket connection closed. Refresh the page to try again.")
+          )
+        );
+      }
     };
 
     ws.onerror = () => {
-      setErrors([t("Error connecting to server. Refresh the page to try again.")]);
-      setWebSocketErr(true);
+      if (!closedByCleanup) {
+        webSocketErr = true;
+        setErrors([t("Error connecting to server. Refresh the page to try again.")]);
+      }
     };
 
     ws.onmessage = (e) => {
-      if (typeof e.data === "string") {
+      if (!closedByCleanup && typeof e.data === "string") {
         const data = JSON.parse(e.data);
-        callback(data[property]);
+        callbackRef.current(data[property]);
       }
     };
 
     window.addEventListener("beforeunload", onBeforeUnload);
 
     return () => {
+      closedByCleanup = true;
       window.removeEventListener("beforeunload", onBeforeUnload);
+      // Detach handlers before closing to prevent events from updating state after unmount.
+      ws.onopen = null;
+      ws.onclose = null;
+      ws.onerror = null;
+      ws.onmessage = null;
       ws.close();
     };
   }, [property]);

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { type ReactNode, Component } from "react";
 
 import _partition from "lodash/partition";
 import _sortBy from "lodash/sortBy";
@@ -66,16 +66,29 @@ class StatesPickerState {
   messages: MessageType[] = [];
 }
 
-class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState> {
+class StatesPicker extends Component<StatesPickerProps, StatesPickerState> {
   state = new StatesPickerState();
+  private isComponentMounted = false;
 
   constructor(props: StatesPickerProps) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.isComponentMounted = true;
     this.init();
+  }
+
+  componentWillUnmount() {
+    this.isComponentMounted = false;
   }
 
   init = () => {
     Network.get(this.props.matchUrl()).then((data) => {
+      if (!this.isComponentMounted) {
+        return;
+      }
+
       data = this.getSortedList(data);
       this.setState({
         channels: data,
@@ -137,6 +150,10 @@ class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState>
     }
     const request = this.props.saveRequest(channels).then(
       (data) => {
+        if (!this.isComponentMounted) {
+          return;
+        }
+
         const newSearchResults = this.state.search.results.map((channel) => {
           const changed = this.state.changed.get(channelKey(channel));
           // We want to make sure the search results are updated with the changes. If there was a change
@@ -169,6 +186,10 @@ class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState>
         this.hideRanking();
       },
       () => {
+        if (!this.isComponentMounted) {
+          return;
+        }
+
         this.setMessages(MessagesUtils.error(t("An error occurred on save.")));
       }
     );
@@ -188,11 +209,19 @@ class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState>
 
   search = () => {
     return Promise.resolve().then(() => {
+      if (!this.isComponentMounted) {
+        return;
+      }
+
       if (this.state.filter !== this.state.search.filter) {
         // Since we don't commit our changes to the backend in case of state type we perform a local search
         this.props.type === "state"
           ? this.stateTypeSearch()
           : Network.get(this.props.matchUrl(this.state.filter)).then((data) => {
+              if (!this.isComponentMounted) {
+                return;
+              }
+
               this.setState({
                 search: {
                   filter: this.state.filter,
@@ -237,7 +266,7 @@ class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState>
   };
 
   tableBody = () => {
-    const elements: React.ReactNode[] = [];
+    const elements: ReactNode[] = [];
     let rows: any[] = [];
     rows = this.state.search.results.map((channel) => {
       const changed = this.state.changed.get(channelKey(channel));
@@ -314,6 +343,10 @@ class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState>
 
   showPopUp = (channel) => {
     Network.get("/rhn/manager/api/states/" + channel.id + "/content").then((data) => {
+      if (!this.isComponentMounted) {
+        return;
+      }
+
       this.setState({
         showSaltState: Object.assign({}, channel, { content: data }),
       });
@@ -336,6 +369,10 @@ class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState>
   };
 
   setMessages = (message) => {
+    if (!this.isComponentMounted) {
+      return;
+    }
+
     this.setState({
       messages: message,
     });
@@ -381,7 +418,12 @@ class StatesPicker extends React.Component<StatesPickerProps, StatesPickerState>
         const assigned = currentAssignment.length > 0;
         buttons = [
           typeof this.props.applyRequest !== "undefined" && (
-            <ExecuteStatesButton assigned={assigned} applySaltState={this.applySaltState} type={this.props.type} />
+            <ExecuteStatesButton
+              key="execute-states"
+              assigned={assigned}
+              applySaltState={this.applySaltState}
+              type={this.props.type}
+            />
           ),
         ];
 
@@ -475,7 +517,7 @@ type ExecuteStatesProps = {
   applySaltState: (memberIds: any[]) => any;
 };
 
-class ExecuteStatesButton extends React.Component<ExecuteStatesProps> {
+class ExecuteStatesButton extends Component<ExecuteStatesProps> {
   state = {
     selected: [],
     showPopup: false,
@@ -569,7 +611,7 @@ class ExecuteStatesButton extends React.Component<ExecuteStatesProps> {
   }
 }
 
-class ExecuteStatesFilter extends React.Component {
+class ExecuteStatesFilter extends Component {
   render() {
     const filterOptions = [{ value: "name", label: t("System Name") }];
     return <TableFilter filterOptions={filterOptions} {...this.props} />;

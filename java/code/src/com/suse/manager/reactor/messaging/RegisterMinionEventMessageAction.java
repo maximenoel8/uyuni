@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015--2025 SUSE LLC
+ * Copyright (c) 2015--2026 SUSE LLC
  *
  * This software is licensed to you under the GNU General Public License,
  * version 2 (GPLv2). There is NO WARRANTY for this software, express or
@@ -21,11 +21,6 @@ import com.redhat.rhn.common.messaging.EventMessage;
 import com.redhat.rhn.common.messaging.MessageAction;
 import com.redhat.rhn.common.messaging.MessageQueue;
 import com.redhat.rhn.common.util.StringUtil;
-import com.redhat.rhn.domain.action.Action;
-import com.redhat.rhn.domain.action.ActionFactory;
-import com.redhat.rhn.domain.action.dup.DistUpgradeAction;
-import com.redhat.rhn.domain.action.dup.DistUpgradeActionDetails;
-import com.redhat.rhn.domain.action.server.ServerAction;
 import com.redhat.rhn.domain.notification.NotificationMessage;
 import com.redhat.rhn.domain.notification.UserNotificationFactory;
 import com.redhat.rhn.domain.notification.types.OnboardingFailed;
@@ -263,8 +258,7 @@ public class RegisterMinionEventMessageAction implements MessageAction {
                         },
                         minionServer -> server.asMinionServer().filter(ms -> ms.equals(minionServer)).ifPresentOrElse(
                                 serverAsMinion -> {
-                                    // Case 2.2a - minion_id and machine-id are the same
-                                    updateAlreadyRegisteredInfo(minionId, machineId, minionServer);
+                                    // Case 2.2a - minion_id and machine-id are the same. Just apply start states
                                     applyMinionStartStates(minionId, minionServer, saltbootInitrd);
                                 },
                                 () -> {
@@ -333,7 +327,7 @@ public class RegisterMinionEventMessageAction implements MessageAction {
             scheduleCoCoAttestation(registeredMinion);
             schedulePackageListRefresh(registeredMinion);
             // Check for pending SLES 16 migration verification
-            scheduleSLES16VerificationIfNeeded(registeredMinion);
+            RegistrationUtils.scheduleSLES16VerificationIfNeeded(registeredMinion);
         }
     }
 
@@ -388,63 +382,6 @@ public class RegisterMinionEventMessageAction implements MessageAction {
     }
 
     /**
-     * Trigger SLES 16 post-migration verification if a qualifying migration is pending.
-     * This runs automatically when a minion reconnects. The 'sles16_verify' state
-     * independently checks for the presence of the migration marker file.
-     * @param minion the minion server instance
-     */
-    private void scheduleSLES16VerificationIfNeeded(MinionServer minion) {
-        // Find the specific migration action that triggered this flow
-        Optional<ServerAction> sles16MigrationAction = ActionFactory
-                .listServerActionsForServer(minion, ActionFactory.ALL_PENDING_STATUSES)
-                .stream()
-                .filter(sa -> isSles15To16Migration(sa, minion))
-                .findFirst();
-
-        if (sles16MigrationAction.isEmpty()) {
-            LOG.debug("No pending SLES 15 -> 16 DistUpgradeAction for minion {}, skipping verify.",
-                      minion.getMinionId());
-            return;
-        }
-
-        ServerAction action = sles16MigrationAction.get();
-        Long parentActionId = action.getParentAction().getId();
-
-        try {
-            LOG.info("SLES 16: Minion {} reconnected. Scheduling verification for action: {}",
-                     minion.getMinionId(), parentActionId);
-
-            // This publishes a Salt event to run the verification SLS
-            MessageQueue.publish(new ApplyStatesEventMessage(
-                minion.getId(),
-                false,
-                ApplyStatesEventMessage.DISTUPGRADE_SLES16_VERIFY
-            ));
-        }
-        catch (Exception e) {
-            LOG.error("SLES 16: Failed to schedule verification for minion: {} (Action: {})",
-                      minion.getMinionId(), parentActionId, e);
-        }
-    }
-
-    /**
-     * Determines if a ServerAction represents a cross-major migration from SLES 15 to SLES 16.
-     * This specific path requires the 'reboot-to-live' verification flow.
-     *
-     * @param sa the server action to check
-     * @param minion the minion to check
-     * @return true if the server action is a pending SLES 15 -> SLES 16 migration for the given minion
-     */
-    private boolean isSles15To16Migration(ServerAction sa, MinionServer minion) {
-        Action action = HibernateFactory.unproxy(sa.getParentAction());
-        if (action instanceof DistUpgradeAction dup) {
-            DistUpgradeActionDetails details = dup.getDetails(minion.getId());
-            return (details != null) && details.isSles15To16Migration();
-        }
-        return false;
-    }
-
-    /**
      * Reactivate the system
      * @param minionId minion id of the minion
      * @param machineId machine_id of the minion
@@ -453,12 +390,17 @@ public class RegisterMinionEventMessageAction implements MessageAction {
     private void reactivateSystem(String minionId, String machineId, String reActivationKey) {
         // The machine id may have changed, but we know from the reactivation key
         // which system should become this one
-        of(ActivationKeyFactory.lookupByKey(reActivationKey))
-                .flatMap(ak -> ak.getServer().asMinionServer())
-                .ifPresent(minion -> {
-                    minion.setMachineId(machineId);
-                    minion.setMinionId(minionId);
-        });
+        Optional<ActivationKey> akOpt = of(ActivationKeyFactory.lookupByKey(reActivationKey));
+        LOG.debug("Reactivate '{}' with key id '{}'", minionId,
+                akOpt.map(ActivationKey::getId).orElse(0L));
+        akOpt.flatMap(ak -> ak.getServer().asMinionServer())
+                .ifPresentOrElse(minion -> {
+                            minion.setMachineId(machineId);
+                            minion.setMinionId(minionId);
+                        },
+                        () -> LOG.warn("Reactivationkey with id '{}' did not point to a minion",
+                                akOpt.map(ActivationKey::getId).orElse(0L))
+                );
     }
 
     private void setMinionName(String minionId, MinionServer minion, Optional<ValueMap> grains) {
@@ -615,6 +557,9 @@ public class RegisterMinionEventMessageAction implements MessageAction {
                                 "organization selected for registration (" + org + "). Keeping the " +
                                 "existing server organization. " + ignoreAKMessage);
             }
+
+            LOG.info("Register '{}' to Org '{}' with activation key id '{}'. SSH: {} saltboot: {}", minionId,
+                    org.getName(), activationKey.map(ActivationKey::getId).orElse(0L), isSaltSSH, saltbootInitrd);
 
             // Set creator to the user who accepted the key if available
             minion.setCreator(creator.orElse(null));
@@ -906,18 +851,14 @@ public class RegisterMinionEventMessageAction implements MessageAction {
 
                 // Remove relations to previously used activation keys
                 List<ActivationKey> keys = ActivationKeyFactory.lookupByActivatedServer(minion);
-                keys.forEach(key -> {
-                    Set<Server> activatedServers = key.getToken().getActivatedServers();
-                    activatedServers.remove(minion);
-                });
+                keys.forEach(key -> ActivationKeyFactory.removeActivatedServer(key, minion));
 
                 // add reactivation event to server history
                 ServerHistoryEvent historyEvent = new ServerHistoryEvent();
                 historyEvent.setCreated(new Date());
                 historyEvent.setServer(minion);
                 historyEvent.setSummary("Server reactivated as Salt minion");
-                historyEvent.setDetails(
-                        "System type was changed from Management to Salt");
+                historyEvent.setDetails("System type was changed from Management to Salt");
                 minion.getHistory().add(historyEvent);
 
                 SystemManager.updateSystemOverview(minion.getId());

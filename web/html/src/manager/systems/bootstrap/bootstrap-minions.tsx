@@ -1,11 +1,10 @@
-import * as React from "react";
+import { Component, Fragment } from "react";
 
 import SpaRenderer from "core/spa/spa-renderer";
 import { productName } from "core/user-preferences";
 
 import { AsyncButton, Button } from "components/buttons";
 import { Dialog } from "components/dialog/Dialog";
-import { ModalLink } from "components/dialog/ModalLink";
 import { Messages, MessageType, Utils as MessagesUtils } from "components/messages/messages";
 import { TopPanel } from "components/panels/TopPanel";
 
@@ -32,7 +31,7 @@ type ErrorDetailsDialogProps = {
   onDialogClose: () => void;
 };
 
-class ErrorDetailsDialog extends React.Component<ErrorDetailsDialogProps> {
+class ErrorDetailsDialog extends Component<ErrorDetailsDialogProps> {
   render() {
     let content, title, buttons;
 
@@ -149,7 +148,7 @@ type State = {
   errorDetails: ErrorDetails | null;
 };
 
-class BootstrapMinions extends React.Component<Props, State> {
+class BootstrapMinions extends Component<Props, State> {
   initState: State;
 
   constructor(props: Props) {
@@ -369,19 +368,18 @@ class BootstrapMinions extends React.Component<Props, State> {
     } else if (this.state.errors.length > 0) {
       alertMessages = MessagesUtils.error(
         this.state.errors.map((error, index) => (
-          <>
+          <Fragment key={`${error.message}-${index}`}>
             {error.message}{" "}
             {this.hasDetails(error) && (
-              <ModalLink
+              <Button
                 id={"error-details-" + index}
                 text={t("Details")}
                 title={t("Show additional details about this error")}
-                target="show-error-details"
-                className="no-padding"
-                onClick={() => this.showErrorDetailsDialog(error)}
+                className="btn-tertiary no-padding"
+                handler={() => this.showErrorDetailsDialog(error)}
               />
             )}
-          </>
+          </Fragment>
         )),
         true,
         t("Unable to bootstrap host. The following errors have happened:")

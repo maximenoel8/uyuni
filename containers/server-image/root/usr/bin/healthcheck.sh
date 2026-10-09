@@ -31,7 +31,6 @@ fi
 
 if [ -f "$MANAGER_COMPLETE" ]; then
     /usr/bin/systemctl is-active multi-user.target
-    salt-call --local --no-color status.ping_master localhost |grep -q True
     if ! check_manager_login; then
         echo "Healthcheck failed: manager login endpoint is not reachable after retries."
         exit 1

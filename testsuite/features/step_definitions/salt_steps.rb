@@ -1,4 +1,4 @@
-# Copyright 2015-2024 SUSE LLC
+# Copyright 2015-2026 SUSE LLC
 # Licensed under the terms of the MIT license.
 
 ### This file contains all step definitions concerning Salt and bootstrapping
@@ -32,7 +32,7 @@ end
 
 When(/^I stop salt-minion on "(.*?)"$/) do |minion|
   node = get_target(minion)
-  pkgname = use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
+  pkgname = $use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
   os_version = node.os_version
   os_family = node.os_family
   if os_family.match?(/^sles/) && os_version.match?(/^11/)
@@ -44,7 +44,7 @@ end
 
 When(/^I start salt-minion on "(.*?)"$/) do |minion|
   node = get_target(minion)
-  pkgname = use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
+  pkgname = $use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
   os_version = node.os_version
   os_family = node.os_family
   if os_family.match?(/^sles/) && os_version.match?(/^11/)
@@ -56,7 +56,7 @@ end
 
 When(/^I restart salt-minion on "(.*?)"$/) do |minion|
   node = get_target(minion)
-  pkgname = use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
+  pkgname = $use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
   os_version = node.os_version
   os_family = node.os_family
   if os_family.match?(/^sles/) && os_version.match?(/^11/)
@@ -68,7 +68,7 @@ end
 
 When(/^I refresh salt-minion grains on "(.*?)"$/) do |minion|
   node = get_target(minion)
-  salt_call = use_salt_bundle ? 'venv-salt-call' : 'salt-call'
+  salt_call = $use_salt_bundle ? 'venv-salt-call' : 'salt-call'
   node.run("#{salt_call} saltutil.refresh_grains")
 end
 
@@ -107,7 +107,7 @@ When(/^I wait at most (\d+) seconds until Salt master sees "([^"]*)" as "([^"]*)
 end
 
 When(/^I wait until Salt client is inactive on "([^"]*)"$/) do |minion|
-  salt_minion = use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
+  salt_minion = $use_salt_bundle ? 'venv-salt-minion' : 'salt-minion'
   step %(I wait until "#{salt_minion}" service is inactive on "#{minion}")
 end
 
@@ -118,7 +118,7 @@ end
 
 When(/^I wait until no Salt job is running on "([^"]*)"$/) do |minion|
   target = get_target(minion)
-  salt_call = use_salt_bundle ? 'venv-salt-call' : 'salt-call'
+  salt_call = $use_salt_bundle ? 'venv-salt-call' : 'salt-call'
   repeat_until_timeout(timeout: 600, message: "A Salt job is still running on #{minion}") do
     output, _code = target.run("#{salt_call} -lquiet saltutil.running", verbose: true)
     break if output == "local:\n"
@@ -216,9 +216,7 @@ When(/^I click on preview$/) do
   end
 
   # After the loop, check if the run button is still not visible
-  unless page.has_button?('run', visible: true)
-    raise "Preview button not working: the run button is not visible after #{max_attempts} attempts."
-  end
+  raise "Preview button not working: the run button is not visible after #{max_attempts} attempts." unless page.has_button?('run', visible: true)
 end
 
 When(/^I click on stop waiting$/) do
@@ -260,9 +258,7 @@ end
 When(/^I manually uninstall the "([^"]*)" formula from the server$/) do |package|
   get_target('server').run("zypper --non-interactive remove #{package}-formula")
   # Remove automatically installed dependency if needed
-  if package == 'uyuni-config'
-    get_target('server').run("zypper --non-interactive remove #{package}-modules")
-  end
+  get_target('server').run("zypper --non-interactive remove #{package}-modules") if package == 'uyuni-config'
 end
 
 When(/^I synchronize all Salt dynamic modules on "([^"]*)"$/) do |host|
@@ -272,13 +268,13 @@ end
 
 When(/^I remove "([^"]*)" from salt cache on "([^"]*)"$/) do |filename, host|
   node = get_target(host)
-  salt_cache = use_salt_bundle ? '/var/cache/venv-salt-minion/' : '/var/cache/salt/'
+  salt_cache = $use_salt_bundle ? '/var/cache/venv-salt-minion/' : '/var/cache/salt/'
   file_delete(node, "#{salt_cache}#{filename}")
 end
 
 When(/^I remove "([^"]*)" from salt minion config directory on "([^"]*)"$/) do |filename, host|
   node = get_target(host)
-  salt_config = use_salt_bundle ? '/etc/venv-salt-minion/minion.d/' : '/etc/salt/minion.d/'
+  salt_config = $use_salt_bundle ? '/etc/venv-salt-minion/minion.d/' : '/etc/salt/minion.d/'
   file_delete(node, "#{salt_config}#{filename}")
 end
 
@@ -296,7 +292,7 @@ start_event_grains:
 end
 
 When(/^I store "([^"]*)" into file "([^"]*)" in salt minion config directory on "([^"]*)"$/) do |content, filename, host|
-  salt_config = use_salt_bundle ? '/etc/venv-salt-minion/minion.d/' : '/etc/salt/minion.d/'
+  salt_config = $use_salt_bundle ? '/etc/venv-salt-minion/minion.d/' : '/etc/salt/minion.d/'
   step %(I store "#{content}" into file "#{salt_config}#{filename}" on "#{host}")
 end
 
@@ -370,7 +366,7 @@ end
 
 When(/^I wait until there is no Salt job calling the module "([^"]*)" on "([^"]*)"$/) do |salt_module, minion|
   target = get_target(minion)
-  salt_call = use_salt_bundle ? 'venv-salt-call' : 'salt-call'
+  salt_call = $use_salt_bundle ? 'venv-salt-call' : 'salt-call'
   target.run_until_fail("#{salt_call} -lquiet saltutil.running | grep #{salt_module}", timeout: 600)
 end
 
@@ -455,7 +451,7 @@ end
 
 When(/^I see "([^"]*)" fingerprint$/) do |host|
   node = get_target(host)
-  salt_call = use_salt_bundle ? 'venv-salt-call' : 'salt-call'
+  salt_call = $use_salt_bundle ? 'venv-salt-call' : 'salt-call'
   output, _code = node.run("#{salt_call} --local key.finger")
   fing = output.split("\n")[1]&.strip
   raise ScriptError, 'Fingerprint line not found in salt-call output' if fing.nil?
@@ -495,9 +491,7 @@ When(/^I change the state of "([^"]*)" to "([^"]*)" and "([^"]*)"$/) do |pkg, st
   # Options for instd_state are Any or Latest
   # Default if you pick Installed is Latest
   find("##{pkg}-pkg-state").select(state)
-  if !instd_state.to_s.empty? && state == 'Installed'
-    find("##{pkg}-version-constraint").select(instd_state)
-  end
+  find("##{pkg}-version-constraint").select(instd_state) if !instd_state.to_s.empty? && state == 'Installed'
 end
 
 When(/^I click apply$/) do
@@ -534,7 +528,7 @@ end
 # salt-ssh steps
 When(/^I install Salt packages from "(.*?)"$/) do |host|
   target = get_target(host)
-  pkgs = use_salt_bundle ? 'venv-salt-minion' : 'salt salt-minion'
+  pkgs = $use_salt_bundle ? 'venv-salt-minion' : 'salt salt-minion'
   if suse_host?(host)
     target.run("test -e /usr/bin/zypper && zypper --non-interactive install -y #{pkgs}", check_errors: false)
   elsif transactional_system?(host)

@@ -1,6 +1,6 @@
 import "./formula-form.css";
 
-import * as React from "react";
+import { type ReactNode, Component } from "react";
 
 import { productName } from "core/user-preferences";
 
@@ -44,7 +44,7 @@ type EditGroupState = {
  * Base class for edit-group.
  * Based on the edit-group data, the corresponing shape of component is used.
  */
-class EditGroup extends React.Component<EditGroupProps, EditGroupState> {
+class EditGroup extends Component<EditGroupProps, EditGroupState> {
   constructor(props: EditGroupProps) {
     super(props);
     this.state = {
@@ -145,7 +145,7 @@ class EditGroup extends React.Component<EditGroupProps, EditGroupState> {
         </div>
         <div>
           {this.state.visible ? (
-            <React.Fragment>
+            <>
               {"$help" in this.props.element ? <p>{this.props.element.$help}</p> : null}
               <Component
                 handleRemoveItem={this.handleRemoveItem}
@@ -158,7 +158,7 @@ class EditGroup extends React.Component<EditGroupProps, EditGroupState> {
                 setSectionsExpanded={this.props.setSectionsExpanded}
                 formulaForm={this.props.formulaForm}
               />
-            </React.Fragment>
+            </>
           ) : null}
         </div>
       </div>
@@ -179,11 +179,11 @@ type EditPrimitiveGroupProps = {
  * Used for rendering edit-groups in the form of "list of primitive types",
  * to be rendered as a list of simple form elements in the UI.
  */
-class EditPrimitiveGroup extends React.Component<EditPrimitiveGroupProps> {
+class EditPrimitiveGroup extends Component<EditPrimitiveGroupProps> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   simpleWrapper = (name, required, element, help = null) => {
     return (
-      <React.Fragment>
+      <>
         <div className="col-lg-3">{element}</div>
         {required ? (
           <span className="required-form-field" style={{ float: "left", paddingRight: "10px" }}>
@@ -191,12 +191,12 @@ class EditPrimitiveGroup extends React.Component<EditPrimitiveGroupProps> {
           </span>
         ) : null}
         <HelpIcon text={this.props.element["$help"]} />
-      </React.Fragment>
+      </>
     );
   };
 
   render() {
-    const elements: React.ReactNode[] = [];
+    const elements: ReactNode[] = [];
     for (const i in this.props.value) {
       if (i === "$meta") {
         continue;
@@ -237,7 +237,7 @@ type EditPrimitiveDictionaryGroupProps = {
  * Used for rendering edit-groups in the form of "dictionary of primitive types",
  * to be rendered as a list of [key, value] in the UI.
  */
-class EditPrimitiveDictionaryGroup extends React.Component<EditPrimitiveDictionaryGroupProps> {
+class EditPrimitiveDictionaryGroup extends Component<EditPrimitiveDictionaryGroupProps> {
   pairElementWrapper(elementName) {
     return (name, required, element) => (
       <div key={elementName}>
@@ -251,7 +251,7 @@ class EditPrimitiveDictionaryGroup extends React.Component<EditPrimitiveDictiona
   }
 
   render() {
-    const elements: React.ReactNode[] = [];
+    const elements: ReactNode[] = [];
 
     for (const i in this.props.value) {
       if (i === "$meta") {
@@ -294,7 +294,7 @@ type RemoveButtonProps = {
   handleRemoveItem: (...args: any[]) => any;
 };
 
-class RemoveButton extends React.Component<RemoveButtonProps> {
+class RemoveButton extends Component<RemoveButtonProps> {
   render() {
     return (
       <button
@@ -329,7 +329,7 @@ type EditDictionaryGroupState = {
  * Used for rendering edit-groups that are backed up list of dictionaries
  * to be rendered as a list of key-value groups in the UI.
  */
-class EditDictionaryGroup extends React.Component<EditDictionaryGroupProps, EditDictionaryGroupState> {
+class EditDictionaryGroup extends Component<EditDictionaryGroupProps, EditDictionaryGroupState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -390,14 +390,14 @@ class EditDictionaryGroup extends React.Component<EditDictionaryGroupProps, Edit
   }
 
   render() {
-    const elements: React.ReactNode[] = [];
+    const elements: ReactNode[] = [];
     for (const i in this.props.value) {
       if (i === "$meta") {
         continue;
       }
       const id = this.props.id + "#" + i;
 
-      const item_elements: React.ReactNode[] = [];
+      const item_elements: ReactNode[] = [];
       for (const element_name in this.props.element.$prototype) {
         if (element_name.startsWith("$") && element_name !== "$key") continue;
         item_elements.push(

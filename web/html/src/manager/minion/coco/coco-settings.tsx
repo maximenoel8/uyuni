@@ -1,12 +1,13 @@
-import * as React from "react";
+import { type ReactNode, Component } from "react";
 
+import { type SingleCoCoSettingsResponse, normalizeSingleCoCoSettingsResponse } from "components/coco-attestation/api";
 import CoCoSettingsForm from "components/coco-attestation/CoCoSettingsForm";
 import { Settings } from "components/coco-attestation/Utils";
 import { Messages, MessageType, Utils as MessagesUtils } from "components/messages/messages";
 import { TopPanel } from "components/panels/TopPanel";
 import { Loading } from "components/utils";
 
-import Network from "utils/network";
+import Network, { type JsonResult } from "utils/network";
 
 type Props = {
   serverId: number;
@@ -21,7 +22,7 @@ type State = {
   loading: boolean;
 };
 
-class CoCoSettings extends React.Component<Props, State> {
+class CoCoSettings extends Component<Props, State> {
   public static readonly defaultProps: Partial<Props> = {
     showOnScheduleOption: true,
   };
@@ -53,7 +54,7 @@ class CoCoSettings extends React.Component<Props, State> {
     );
   }
 
-  render(): React.ReactNode {
+  render(): ReactNode {
     if (this.state.loading) {
       return (
         <div className="panel panel-default">
@@ -84,13 +85,17 @@ class CoCoSettings extends React.Component<Props, State> {
     );
   };
 
-  handleResult = (result) => {
+  handleResult = (result: JsonResult<SingleCoCoSettingsResponse>) => {
     if (!result.success) {
       this.setState({
         messages: MessagesUtils.error(result.messages),
         loading: false,
       });
-    } else if (!result.data.supported) {
+      return;
+    }
+
+    const response = normalizeSingleCoCoSettingsResponse(result.data);
+    if (!response.supported) {
       this.setState({
         supported: false,
         messages: MessagesUtils.warning(result.messages),
@@ -100,7 +105,7 @@ class CoCoSettings extends React.Component<Props, State> {
       this.setState({
         messages: MessagesUtils.success(result.messages),
         supported: true,
-        settings: result.data,
+        settings: response.settings,
         loading: false,
       });
     }

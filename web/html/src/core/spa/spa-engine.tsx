@@ -1,8 +1,6 @@
 import "senna/build/senna.css";
 import "./spa-engine.css";
 
-import * as React from "react";
-
 import App, { HtmlScreen } from "senna";
 
 import SpaRenderer from "core/spa/spa-renderer";
@@ -36,7 +34,7 @@ window.pageRenderers.spaengine.init = function init(timeout?: number) {
     // appInstance.setLinkSelector("a.js-spa");
     appInstance.setFormSelector("form.js-spa");
 
-    appInstance.addSurfaces(["left-menu-data", "ssm-box", "page-body"]);
+    appInstance.addSurfaces(["left-menu-data", "page-body"]);
     appInstance.addRoutes([
       {
         path: /.*/,

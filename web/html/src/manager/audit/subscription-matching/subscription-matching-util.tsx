@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { LinkButton } from "components/buttons";
 
 const ToolTip = (props) => <span title={props.title}>{props.content}</span>;
@@ -9,7 +7,7 @@ const CsvLink = (props) => (
     <LinkButton
       className="btn btn-default"
       href={"/rhn/manager/subscription-matching/" + props.name}
-      data-senna-off="true"
+      disableSenna
       text={t("Download CSV")}
       icon="spacewalk-icon-download-csv"
     />

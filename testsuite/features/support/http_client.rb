@@ -2,6 +2,7 @@
 # Licensed under the terms of the MIT license.
 
 require 'faraday'
+require_relative 'api_retry'
 
 # When we pass a list of values in the query string of an HTTP request, the defaul encoder will only update the key for that param
 # As an example: sids=1000010027&sids=1000010010&sids=1000010012 maps to params={"sids"=>"1000010012"}
@@ -10,6 +11,10 @@ Faraday::Utils.default_params_encoder = Faraday::FlatParamsEncoder
 
 # Wrapper class for HTTP client library (Faraday)
 class HttpClient
+  # Number of characters of a non-JSON response body kept in the error message.
+  MAX_ERROR_BODY_LENGTH = 200
+  private_constant :MAX_ERROR_BODY_LENGTH
+
   # Creates a new HTTP client using the Faraday library.
   #
   # @param host [String] The host to connect to.
@@ -26,14 +31,7 @@ class HttpClient
   # @param params [Hash] The parameters for the call.
   # @return [Array] An array containing the call type and the URL.
   def prepare_call(name, params)
-    short_name = name.split('.')[-1]
-    call_type =
-      if short_name.start_with?('list', 'get', 'is', 'find') || name.start_with?('system.search.', 'packages.search.') || %w[auth.logout errata.applicableToChannels].include?(name)
-
-        'GET'
-      else
-        'POST'
-      end
+    call_type = ApiRetry.read_only?(name) ? 'GET' : 'POST'
     url = "/rhn/manager/api/#{name.tr('.', '/')}"
     if call_type == 'GET'
       url += '?'
@@ -75,23 +73,24 @@ class HttpClient
     # Call API
     call_type, url = prepare_call(name, params)
     answer =
-      if call_type == 'GET'
-        @http_client.get(url) do |request|
-          request.headers['Content-Type'] = 'application/json'
-          request.headers['Cookie'] = session_cookie unless session_cookie.nil?
-        end
-      else
-        @http_client.post(url) do |request|
-          request.headers['Content-Type'] = 'application/json'
-          request.headers['Cookie'] = session_cookie unless session_cookie.nil?
-          request.body = params.to_json unless params.nil?
+      ApiRetry.with_retries(name) do
+        if call_type == 'GET'
+          @http_client.get(url) do |request|
+            request.headers['Content-Type'] = 'application/json'
+            request.headers['Cookie'] = session_cookie unless session_cookie.nil?
+          end
+        else
+          @http_client.post(url) do |request|
+            request.headers['Content-Type'] = 'application/json'
+            request.headers['Cookie'] = session_cookie unless session_cookie.nil?
+            request.body = params.to_json unless params.nil?
+          end
         end
       end
     unless answer.status == 200
-      raise ScriptError, "Unexpected HTTP status code #{answer.status}" if answer.body.empty?
+      raise ScriptError, "Unexpected HTTP status code #{answer.status} for #{call_type} #{url}" if answer.body.empty?
 
-      json_body = JSON.parse(answer.body)
-      raise ScriptError, "Unexpected HTTP status code #{answer.status}, message: #{json_body['message']}"
+      raise ScriptError, "Unexpected HTTP status code #{answer.status} for #{call_type} #{url}, message: #{error_message(answer.body)}"
     end
 
     # Return either new session cookie or HTTP body
@@ -100,9 +99,7 @@ class HttpClient
       cookies = answer.headers['Set-cookie']
       cookies.split(',').each do |cookie|
         # isolate the new session cookie, but ignore the expired one (with Max-Age=0)
-        if cookie.include?('pxt-session-cookie=') && !cookie.include?('Max-Age=0;')
-          session_cookie = cookie.split(';')[0]
-        end
+        session_cookie = cookie.split(';')[0] if cookie.include?('pxt-session-cookie=') && !cookie.include?('Max-Age=0;')
       end
       session_cookie
     else
@@ -111,5 +108,19 @@ class HttpClient
 
       json_body['result']
     end
+  end
+
+  private
+
+  # Extracts the failure message from a response body, falling back to a summary of the
+  # body itself when it is not the JSON the API contract promises.
+  #
+  # @param body [String] The body of the HTTP response.
+  # @return [String] The message describing the failure.
+  def error_message(body)
+    JSON.parse(body)['message']
+  rescue JSON::ParserError
+    summary = body.scrub.gsub(/\s+/, ' ').strip
+    summary.length > MAX_ERROR_BODY_LENGTH ? "#{summary[0, MAX_ERROR_BODY_LENGTH]}..." : summary
   end
 end

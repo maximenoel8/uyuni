@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep 30 08:47:35 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.17
+  * Image rebuilt to the newest version with updated dependencies
+    for SUSE Multi-Linux Manager 5.1.6
+
+-------------------------------------------------------------------
 Mon Jul 13 14:50:53 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.16

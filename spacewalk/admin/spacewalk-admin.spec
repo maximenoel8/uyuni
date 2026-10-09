@@ -1,7 +1,7 @@
 #
 # spec file for package spacewalk-admin
 #
-# Copyright (c) 2024 SUSE LLC
+# Copyright (c) 2026 SUSE LLC and contributors
 # Copyright (c) 2008-2018 Red Hat, Inc.
 #
 # All modifications and additions to the file contributed by third parties
@@ -18,7 +18,7 @@
 
 
 Name:           spacewalk-admin
-Version:        5.1.9
+Version:        5.1.11
 Release:        0
 Summary:        Various utility scripts and data files for Spacewalk installations
 License:        GPL-2.0-only
@@ -34,18 +34,19 @@ Requires:       spacewalk-base
 Requires:       perl(MIME::Base64)
 # Required by spacewalk-hostname-rename
 Requires:       postfix
-Requires:       cobbler
 Requires:       bash
-Requires:       spacewalk-certs-tools
+Requires:       cobbler
 Requires:       spacewalk-backend-tools >= 2.2.27
+Requires:       spacewalk-certs-tools
 # Required by spacewalk-hostname-rename (provides /usr/bin/spacewalk-sql)
 Requires:       susemanager-schema-utility
 BuildRequires:  /usr/bin/pod2man
 BuildRequires:  make
-BuildRequires:  systemd
 BuildRequires:  spacewalk-config
+BuildRequires:  systemd
 BuildRequires:  uyuni-base-common
 Requires(pre):  uyuni-base-common
+Requires:       crypto-policies-scripts
 Requires:       susemanager-schema-utility
 Requires:       uyuni-setup-reportdb
 BuildArch:      noarch
@@ -87,6 +88,7 @@ fi
 %{_sbindir}/spacewalk-service
 %{_sbindir}/uyuni-update-config
 %{_sbindir}/import-suma-build-keys
+%{_sbindir}/mgr-sync-osimage-ca-rpm
 %{_bindir}/rhn-config-satellite.pl
 %{_bindir}/rhn-deploy-ca-cert.pl
 %{_bindir}/rhn-install-ssl-cert.pl
@@ -107,6 +109,7 @@ fi
 %{_unitdir}/cobbler-refresh-mkloaders.service
 %{_unitdir}/uyuni-check-database.service
 %{_unitdir}/uyuni-update-config.service
+%{_unitdir}/mgr-osimage-ca-rpm.service
 %{_unitdir}/*.service.d
 
 %changelog

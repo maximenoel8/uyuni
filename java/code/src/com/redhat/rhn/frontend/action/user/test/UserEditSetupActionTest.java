@@ -53,7 +53,7 @@ public class UserEditSetupActionTest extends RhnBaseTestCase {
         user.setTitle("Test title");
         // Lets add some roles
         user.addPermanentRole(RoleFactory.ORG_ADMIN);
-        user.getAccessGroups().addAll(AccessGroupFactory.DEFAULT_GROUPS);
+        user.getAccessGroups().addAll(AccessGroupFactory.getDefaultGroups());
 
         setupExpectations(sah.getForm(), sah.getUser());
 

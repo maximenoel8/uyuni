@@ -7845,8 +7845,8 @@ Vezmite, prosím, na vedomie, že neaktívne systémy nemôžu prijímať žiadn
         </context-group>
       </trans-unit>
       <trans-unit id="cobbler.powermanagement.no_fence_agents" xml:space="preserve">
-        <source>This functionality is only available on @@PRODUCT_NAME@@ servers that have installed "fence agents," which are possibly availabe as "fence-agents", "fence-agents-all", or "fence-agents-ipmilan" packages depending on your operating system and desired power management infrastructure. Please install the fence agents. If fence agents are not available for your operating system then power management functionality is not supported.</source>
-        <target>Táto funkcia je dostupná len na serveroch @@PRODUCT_NAME@@, ktoré majú nainštalovaných "agentov zábran", ktorí sú prípadne k dispozícii ako balíky "fence-agents", "fence-agents-all" alebo "fence-agents-ipmilan" v závislosti od operačného systému a požadovanej infraštruktúry správy napájania. Prosím, nainštalujte agentov zábran. Ak pre váš operačný systém nie sú k dispozícii agenti zábran, funkcia správy napájania nie je podporovaná.</target>
+        <source>This functionality is only available on @@PRODUCT_NAME@@ servers that have installed "fence agents," which are possibly available as "fence-agents", "fence-agents-all", or "fence-agents-ipmilan" packages depending on your operating system and desired power management infrastructure. Please install the fence agents. If fence agents are not available for your operating system then power management functionality is not supported.</source>
+        <target state="translated">Táto funkcia je dostupná len na serveroch @@PRODUCT_NAME@@, ktoré majú nainštalovaných "agentov zábran", ktorí sú prípadne k dispozícii ako balíky "fence-agents", "fence-agents-all" alebo "fence-agents-ipmilan" v závislosti od operačného systému a požadovanej infraštruktúry správy napájania. Prosím, nainštalujte agentov zábran. Ak pre váš operačný systém nie sú k dispozícii agenti zábran, funkcia správy napájania nie je podporovaná.</target>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/systems/details/kickstart/PowerManagement.do</context>
         </context-group>
@@ -10613,8 +10613,8 @@ Prípadne si budete chcieť stiahnuť &lt;strong&gt; Inkrementálne obsahové IS
         <target>Kalendár s id '{0}' neexistuje</target>
       </trans-unit>
       <trans-unit id="maintenance.action.reschedule.error.cancel" xml:space="preserve">
-        <source>An error occured trying to cancel affected actions for schedule '{0}'</source>
-        <target>Pri pokuse o zrušenie ovplyvnených akcií pre plán '{0}' došlo k chybe</target>
+        <source>An error occurred trying to cancel affected actions for schedule '{0}'</source>
+        <target state="translated">Pri pokuse o zrušenie ovplyvnených akcií pre plán '{0}' došlo k chybe</target>
       </trans-unit>
       <trans-unit id="maintenance.action.reschedule.error.fail" xml:space="preserve">
         <source>Operation could not be performed. There are scheduled actions on systems</source>
@@ -12124,6 +12124,17 @@ Ak chcete túto situáciu napraviť, pridajte prihlasovacie údaje SCC &lt;a hre
           <context context-type="sourcefile">/rhn/account/UserDetails</context>
         </context-group>
         <target state="translated">Prístup administrátora</target>
+      </trans-unit>
+      <trans-unit id="contentmanagement.invalid_issue_date" xml:space="preserve">
+        <source>Invalid date format. It must follow ISO 8601 offset format (e.g. 2026-06-04T22:00:00Z).</source>
+        <target state="translated">Neplatný formát dátumu. Musí byť v súlade s ofsetovým formátom ISO 8601 (napr. 2026-06-04T22:00:00Z).</target>
+      </trans-unit>
+      <trans-unit id="system.entitle.added.peripheral_server" xml:space="preserve">
+        <source>&lt;strong&gt;Peripheral server&lt;/strong&gt; type has been applied.</source>
+        <context-group name="ctx">
+          <context context-type="sourcefile">/rhn/systems/details/Overview.do</context>
+        </context-group>
+        <target state="translated">Bol použitý typ &lt;strong&gt;periférneho servera&lt;/strong&gt;.</target>
       </trans-unit>
     </body>
   </file>

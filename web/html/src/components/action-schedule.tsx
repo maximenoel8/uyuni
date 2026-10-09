@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Component } from "react";
 
 import { DateTimePicker } from "components/datetime";
 import { Loading } from "components/utils/loading/Loading";
@@ -45,8 +45,9 @@ type ActionScheduleState = {
   actionType: string;
 };
 
-class ActionSchedule extends React.Component<ActionScheduleProps, ActionScheduleState> {
+class ActionSchedule extends Component<ActionScheduleProps, ActionScheduleState> {
   newActionChainOpt = { id: Number(0), text: t("new action chain") };
+  private isUnmounted = false;
 
   constructor(props: ActionScheduleProps) {
     super(props);
@@ -81,6 +82,10 @@ class ActionSchedule extends React.Component<ActionScheduleProps, ActionSchedule
       };
       Network.post("/rhn/manager/api/maintenance/upcoming-windows", postData)
         .then((data) => {
+          if (this.isUnmounted) {
+            return;
+          }
+
           const multiMaintWindows = data.data.maintenanceWindowsMultiSchedules;
           const maintenanceWindows = data.data.maintenanceWindows;
 
@@ -114,7 +119,15 @@ class ActionSchedule extends React.Component<ActionScheduleProps, ActionSchedule
     }
   };
 
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  }
+
   handleResponseError = (jqXHR) => {
+    if (this.isUnmounted) {
+      return;
+    }
+
     Loggerhead.error(Network.responseErrorMessage(jqXHR).toString());
     this.setState({ loading: false });
   };

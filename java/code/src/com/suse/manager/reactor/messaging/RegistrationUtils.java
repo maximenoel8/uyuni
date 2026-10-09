@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018--2021 SUSE LLC
+ * Copyright (c) 2018--2026 SUSE LLC
  *
  * This software is licensed to you under the GNU General Public License,
  * version 2 (GPLv2). There is NO WARRANTY for this software, express or
@@ -7,10 +7,6 @@
  * FOR A PARTICULAR PURPOSE. You should have received a copy of GPLv2
  * along with this software; if not, see
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
- *
- * Red Hat trademarks are not licensed under GPLv2. No permission is
- * granted to use or replicate Red Hat trademarks that are incorporated
- * in this software or its documentation.
  */
 
 package com.suse.manager.reactor.messaging;
@@ -24,8 +20,15 @@ import static java.util.stream.Collectors.toSet;
 
 import com.redhat.rhn.GlobalInstanceHolder;
 import com.redhat.rhn.common.RhnRuntimeException;
+import com.redhat.rhn.common.hibernate.HibernateFactory;
 import com.redhat.rhn.common.messaging.MessageQueue;
 import com.redhat.rhn.common.validator.ValidatorResult;
+import com.redhat.rhn.domain.action.Action;
+import com.redhat.rhn.domain.action.ActionFactory;
+import com.redhat.rhn.domain.action.dup.DistUpgradeAction;
+import com.redhat.rhn.domain.action.dup.DistUpgradeActionDetails;
+import com.redhat.rhn.domain.action.salt.ApplyStatesAction;
+import com.redhat.rhn.domain.action.server.ServerAction;
 import com.redhat.rhn.domain.channel.Channel;
 import com.redhat.rhn.domain.channel.ChannelFamily;
 import com.redhat.rhn.domain.channel.ChannelFamilyFactory;
@@ -117,7 +120,7 @@ public class RegistrationUtils {
                     creator.orElse(null));
         }
         catch (RuntimeException e) {
-            LOG.error("Error generating Salt files for minion '{}':{}", minionId, e.getMessage());
+            LOG.error("Error generating Salt files for minion '{}': {}", minionId, e.getMessage(), e);
         }
 
         LOG.info("Finished minion registration: {}", minionId);
@@ -212,9 +215,7 @@ public class RegistrationUtils {
      * @param grains map of minion grains
      */
     public static void applyActivationKeyProperties(Server server, ActivationKey ak, ValueMap grains) {
-        ak.getToken().getActivatedServers().add(server);
-        ActivationKeyFactory.save(ak);
-
+        ActivationKeyFactory.addActivatedServer(ak, server);
         ak.getServerGroups().forEach(group -> ServerFactory.addServerToGroup(server, group));
 
         ServerStateRevision serverStateRevision = new ServerStateRevision();
@@ -410,6 +411,79 @@ public class RegistrationUtils {
                     }
                     return false;
                 });
+    }
+
+    /**
+     * Trigger SLES 16 post-migration verification if a qualifying migration is pending.
+     * This runs automatically when a minion reconnects. The 'sles16_verify' state
+     * independently checks for the presence of the migration marker file.
+     * @param minion the minion server instance
+     */
+    public static void scheduleSLES16VerificationIfNeeded(MinionServer minion) {
+        List<ServerAction> pendingServerActions = ActionFactory
+                .listServerActionsForServer(minion, ActionFactory.ALL_PENDING_STATUSES);
+
+        // Find the specific migration action that triggered this flow
+        Optional<ServerAction> sles16MigrationAction = pendingServerActions.stream()
+                .filter(sa -> isSles15To16Migration(sa, minion))
+                .findFirst();
+
+        if (sles16MigrationAction.isEmpty()) {
+            LOG.debug("No pending SLES 15 -> 16 DistUpgradeAction for minion {}, skipping verify.",
+                    minion.getMinionId());
+            return;
+        }
+        // Check if verify is already running
+        Optional<ApplyStatesAction> sles16VerifyAction = pendingServerActions.stream()
+                .map(ServerAction::getParentAction)
+                .map(HibernateFactory::unproxy)
+                .filter(a -> ActionFactory.TYPE_APPLY_STATES.equals(a.getActionType()))
+                .map(ApplyStatesAction.class::cast)
+                .filter(a -> a.getDetails().getMods().contains(ApplyStatesEventMessage.DISTUPGRADE_SLES16_VERIFY))
+                .findFirst();
+
+        if (sles16VerifyAction.isPresent()) {
+            LOG.debug("SLES 15 -> 16 DistUpgrade verify action for minion {} is already running. Skipping verify.",
+                    minion.getMinionId());
+            return;
+        }
+
+        ServerAction action = sles16MigrationAction.get();
+        Long parentActionId = action.getParentAction().getId();
+
+        try {
+            LOG.info("SLES 16: Minion {} reconnected. Scheduling verification for action: {}",
+                    minion.getMinionId(), parentActionId);
+
+            // This publishes a Salt event to run the verification SLS
+            MessageQueue.publish(new ApplyStatesEventMessage(
+                    minion.getId(),
+                    false,
+                    ApplyStatesEventMessage.DISTUPGRADE_SLES16_VERIFY
+            ));
+        }
+        catch (Exception e) {
+            LOG.error("SLES 16: Failed to schedule verification for minion: {} (Action: {})",
+                    minion.getMinionId(), parentActionId, e);
+        }
+    }
+
+    /**
+     * Determines if a ServerAction represents a cross-major migration from SLES 15 to SLES 16.
+     * This specific path requires the 'reboot-to-live' verification flow.
+     *
+     * @param sa the server action to check
+     * @param minion the minion to check
+     * @return true if the server action is a pending SLES 15 -> SLES 16 migration for the given minion
+     */
+    private static boolean isSles15To16Migration(ServerAction sa, MinionServer minion) {
+        Action action = HibernateFactory.unproxy(sa.getParentAction());
+        if (ActionFactory.TYPE_DIST_UPGRADE.equals(action.getActionType())) {
+            DistUpgradeAction dup = (DistUpgradeAction) action;
+            DistUpgradeActionDetails details = dup.getDetails(minion.getId());
+            return (details != null) && details.isSles15To16Migration();
+        }
+        return false;
     }
 
     private static Set<SUSEProduct> identifyProduct(SystemQuery systemQuery, MinionServer server, ValueMap grains) {

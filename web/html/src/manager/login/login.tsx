@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { isUyuni } from "core/user-preferences";
 
 import withPageWrapper from "components/general/with-page-wrapper";
@@ -13,10 +11,10 @@ const products = {
   suma: {
     productName: "SUSE Multi-Linux Manager",
     headerTitle: (
-      <React.Fragment>
+      <>
         <span>SUSE</span>
         <i className="fa fa-registered" /> <span>Multi-Linux Manager</span>
-      </React.Fragment>
+      </>
     ),
     bodyTitle: (
       <span>

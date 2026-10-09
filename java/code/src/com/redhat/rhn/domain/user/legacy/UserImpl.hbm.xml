@@ -31,12 +31,12 @@ PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     <sql-query name="User.findRandomOrgAdmin">
         <return-scalar type="long" column="user_id"/>
         SELECT ugm.user_id as user_id
-        FROM rhnUserGroupMembers ugm, web_contact wc
-        WHERE ugm.user_group_id = (SELECT id
-                                   FROM rhnUserGroup
-                                   WHERE org_id = :org_id
-                                   AND group_type = :type_id)
-        AND wc.id = ugm.user_id
+          FROM rhnUserGroupMembers ugm, web_contact wc
+         WHERE ugm.user_group_id = (SELECT id
+                                      FROM rhnUserGroup
+                                     WHERE org_id = :org_id
+                                       AND group_type = :type_id)
+           AND wc.id = ugm.user_id
         ORDER BY wc.id
     </sql-query>
 
@@ -44,13 +44,13 @@ PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         <return-scalar type="long" column="user_id"/>
         <return-scalar type="string" column="login"/>
         SELECT ugm.user_id as user_id, wc.login as login
-  FROM rhnUserGroupMembers ugm,
-       web_contact wc
- WHERE ugm.user_group_id = (SELECT id
-                              FROM rhnUserGroup
-                             WHERE org_id = :org_id
-                               AND group_type = :type_id)
-   AND wc.id = ugm.user_id
-ORDER BY wc.id
+          FROM rhnUserGroupMembers ugm,
+               web_contact wc
+         WHERE ugm.user_group_id = (SELECT id
+                                      FROM rhnUserGroup
+                                     WHERE org_id = :org_id
+                                       AND group_type = :type_id)
+           AND wc.id = ugm.user_id
+      ORDER BY wc.id
     </sql-query>
 </hibernate-mapping>

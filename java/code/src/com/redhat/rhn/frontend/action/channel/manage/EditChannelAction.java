@@ -107,7 +107,7 @@ public class EditChannelAction extends RhnAction implements Listable<OrgTrust> {
     public static final String CHANNEL_ARCH_LABEL = "channel_arch_label";
 
     public static final String DEFAULT_ARCH = "channel-x86_64";
-    public static final String DEFAULT_CHECKSUM = "sha1";
+    public static final String DEFAULT_CHECKSUM = "sha256";
     public static final String DEFAULT_ORG_SHARING = "private";
     public static final String DEFAULT_SUBSCRIPTIONS = "all";
     public static final boolean DEFAULT_GPG_CHECK = true;
@@ -669,7 +669,7 @@ public class EditChannelAction extends RhnAction implements Listable<OrgTrust> {
             Channel c = ChannelManager.lookupByIdAndUser(cid,
                                                          ctx.getCurrentUser());
             if (!UserManager.verifyChannelAdmin(ctx.getCurrentUser(), c)) {
-                throw new PermissionException(AccessGroupFactory.CHANNEL_ADMIN);
+                throw new PermissionException(AccessGroupFactory.getChannelAdmin());
             }
 
             form.set(NAME, c.getName());

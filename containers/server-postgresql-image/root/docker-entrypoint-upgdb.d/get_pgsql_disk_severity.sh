@@ -7,11 +7,14 @@
 DB_CRIT=${DISKTHRESHOLD:-95}
 DB_WARN=${DISKCHECKALERT:-90}
 
+. /usr/lib/uyuni-helpers.sh
+MANAGER_DB_NAME=$(get_manager_db_name) || exit 1
+
 run_sql() {
     PGHOST='' PGHOSTADDR='' psql -v ON_ERROR_STOP=1 \
         -p "${PGPORT:-5432}" \
         -U "$POSTGRES_USER" \
-        --no-password --no-psqlrc -d susemanager
+        --no-password --no-psqlrc -d "$MANAGER_DB_NAME"
 }
 
 cat << EOF | run_sql

@@ -61,6 +61,7 @@ import com.redhat.rhn.domain.server.InstalledProduct;
 import com.redhat.rhn.domain.server.MinionServer;
 import com.redhat.rhn.domain.server.Server;
 import com.redhat.rhn.domain.server.ServerFactory;
+import com.redhat.rhn.domain.token.ActivationKeyFactory;
 import com.redhat.rhn.domain.user.User;
 import com.redhat.rhn.frontend.action.channel.ssm.ChannelActionDAO;
 import com.redhat.rhn.frontend.dto.ChannelOverview;
@@ -84,6 +85,7 @@ import com.redhat.rhn.manager.rhnpackage.PackageManager;
 import com.redhat.rhn.manager.rhnset.RhnSetDecl;
 import com.redhat.rhn.manager.ssm.SsmChannelDto;
 import com.redhat.rhn.manager.system.SystemManager;
+import com.redhat.rhn.manager.token.ActivationKeyManager;
 import com.redhat.rhn.manager.user.UserManager;
 import com.redhat.rhn.taskomatic.TaskoFactory;
 import com.redhat.rhn.taskomatic.TaskomaticApi;
@@ -711,6 +713,12 @@ public class ChannelManager extends BaseManager {
                                 environmentInUse.getContentEnvironment().getContentProject().getName(),
                                 environmentInUse.getContentEnvironment().getName())
         );
+
+        //remove all activation keys that have this as a base channel
+        if (toRemove.isBaseChannel()) {
+            ActivationKeyFactory.lookupByBaseChannelId(toRemove.getId())
+                    .forEach(ak -> ActivationKeyManager.getInstance().remove(ak, user));
+        }
 
         ChannelManager.queueChannelChange(label, user.getLogin(), "java::deleteChannel");
         ChannelFactory.remove(toRemove);
@@ -2410,7 +2418,7 @@ public class ChannelManager extends BaseManager {
      */
     public static void removeErrata(Channel chan, Set<Long> errataIds, User user) {
         if (!UserManager.verifyChannelAdmin(user, chan)) {
-            throw new PermissionException(AccessGroupFactory.CHANNEL_ADMIN);
+            throw new PermissionException(AccessGroupFactory.getChannelAdmin());
         }
 
         List<Long> ids = new ArrayList<>(errataIds);
@@ -2474,8 +2482,8 @@ public class ChannelManager extends BaseManager {
      * @return list of errataOverview objects that need to be resynced
      */
     public static List<ErrataOverview> listErrataNeedingResync(Channel c, User user) {
-        if (!user.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN)) {
-            throw new PermissionException(AccessGroupFactory.CHANNEL_ADMIN);
+        if (!user.isMemberOf(AccessGroupFactory.getChannelAdmin())) {
+            throw new PermissionException(AccessGroupFactory.getChannelAdmin());
         }
 
         if (c.isCloned()) {
@@ -2496,8 +2504,8 @@ public class ChannelManager extends BaseManager {
      * @return the list of PackageOverview objects
      */
     public static List<PackageOverview> listErrataPackagesForResync(Channel c, User user) {
-        if (!user.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN)) {
-            throw new PermissionException(AccessGroupFactory.CHANNEL_ADMIN);
+        if (!user.isMemberOf(AccessGroupFactory.getChannelAdmin())) {
+            throw new PermissionException(AccessGroupFactory.getChannelAdmin());
         }
 
         if (c.isCloned()) {
@@ -2520,8 +2528,8 @@ public class ChannelManager extends BaseManager {
      */
     public static List<PackageOverview> listErrataPackagesForResync(Channel c, User user,
             String setLabel) {
-        if (!user.isMemberOf(AccessGroupFactory.CHANNEL_ADMIN)) {
-            throw new PermissionException(AccessGroupFactory.CHANNEL_ADMIN);
+        if (!user.isMemberOf(AccessGroupFactory.getChannelAdmin())) {
+            throw new PermissionException(AccessGroupFactory.getChannelAdmin());
         }
 
         if (c.isCloned()) {

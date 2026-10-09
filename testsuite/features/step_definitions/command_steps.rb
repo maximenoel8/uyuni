@@ -56,6 +56,51 @@ Then(/^it should be possible to reach the test packages$/) do
   get_target('server').run("curl --insecure --location #{url} --output /dev/null")
 end
 
+# Base URL of the test package repositories: the CI mirror host (BUILD_SOURCES, as $mirror is only a flag) if configured, otherwise download.opensuse.org.
+def test_packages_base_url(path)
+  "http://#{($mirror && $build_sources) || 'download.opensuse.org'}/repositories/systemsmanagement:/Uyuni:/Test-Packages:/#{path}"
+end
+
+# Downloads the given hrefs (relative to base_url) into dir on the server, in a single command.
+def download_hrefs(server, base_url, dir, hrefs)
+  list = hrefs.map { |href| "'#{href}'" }.join(' ')
+  server.run("cd #{dir} && printf '%s\\n' #{list} | xargs -P4 -I{} sh -c 'mkdir -p $(dirname {}) && curl -sLf --retry 3 #{base_url}/{} -o {}'", timeout: 1800)
+end
+
+# Downloads all RPM packages and repodata from base_url into dest on the server.
+# Everything lands in a temporary directory that is moved to dest only when complete,
+# so an interrupted run never leaves a partial repository behind.
+def mirror_repo_locally(server, base_url, dest)
+  _out, rc = server.run("test -f #{dest}/repodata/repomd.xml", check_errors: false)
+  return if rc.zero?
+
+  tmp = "#{dest}.tmp"
+  server.run("rm -rf #{tmp} && mkdir -p #{tmp}/repodata")
+  download_hrefs(server, base_url, tmp, ['repodata/repomd.xml'])
+  repomd_xml, = server.run("cat #{tmp}/repodata/repomd.xml")
+  download_hrefs(server, base_url, tmp, repomd_xml.scan(/href="([^"]+)"/).flatten)
+  primary_href = repomd_xml.match(/href="(repodata\/[^"]*primary[^"]*\.xml\.gz)"/)[1]
+  rpm_hrefs, = server.run("gzip -dc #{tmp}/#{primary_href} | grep -o 'href=\"[^\"]*\\.rpm\"' | sed 's/href=\"//;s/\"//'")
+  download_hrefs(server, base_url, tmp, rpm_hrefs.split("\n"))
+  server.run("rm -rf #{dest} && mv #{tmp} #{dest}")
+end
+
+# Mirrors the RPM test repository and points AnotherRepo at it.
+def mirror_rpm_test_packages
+  server = get_target('server')
+  mirror_repo_locally(server, test_packages_base_url('Updates/rpm'), '/srv/www/htdocs/pub/TestRepoRpmUpdates')
+  # -T: fail instead of nesting the link when AnotherRepo is a real directory
+  server.run('ln -sfnT /srv/www/htdocs/pub/TestRepoRpmUpdates /srv/www/htdocs/pub/AnotherRepo')
+end
+
+Given(/^I mirror the RPM test packages locally$/) do
+  mirror_rpm_test_packages
+end
+
+Given(/^I mirror the AppStream test packages locally$/) do
+  mirror_repo_locally(get_target('server'), test_packages_base_url('Appstream/rhlike'), '/srv/www/htdocs/pub/TestRepoAppStream')
+end
+
 Then(/^it should be possible to use the HTTP proxy$/) do
   url = 'https://www.suse.com'
   # Proxy Password: P4$$w/ord With%and&
@@ -103,6 +148,7 @@ end
 
 # Channels
 When(/^I prepare a channel clone for strict mode testing$/) do
+  mirror_rpm_test_packages
   get_target('server').run('cp -r /srv/www/htdocs/pub/TestRepoRpmUpdates /srv/www/htdocs/pub/TestRepoRpmUpdates_STRICT_TEST')
   get_target('server').run('rm -rf /srv/www/htdocs/pub/TestRepoRpmUpdates_STRICT_TEST/repodata')
   %w[i586 src x86_64].each do |folder|
@@ -132,20 +178,26 @@ end
 
 Then(/^The amount of packages in channel "([^"]*)" should be the same as before$/) do |channel_label|
   add_context('channels', $api_test.channel.list_all_channels)
-  if get_context('channels').key?(channel_label) && (get_context('package_amount') != get_context('channels')[channel_label]['packages'])
-    raise 'Package counts do not match'
-  end
+  raise 'Package counts do not match' if get_context('channels').key?(channel_label) && (get_context('package_amount') != get_context('channels')[channel_label]['packages'])
+end
+
+Then(/^the channel "([^"]*)" should not be empty$/) do |channel_label|
+  channels = $api_test.channel.list_all_channels
+  raise ScriptError, "Channel #{channel_label} does not exist" unless channels.key?(channel_label)
+
+  packages = channels[channel_label]['packages'].to_i
+  raise ScriptError, "Channel #{channel_label} is empty, its synchronization stored no package" if packages.zero?
+
+  log "Channel #{channel_label} contains #{packages} packages"
 end
 
 Then(/^The amount of packages in channel "([^"]*)" should be fewer than before$/) do |channel_label|
   add_context('channels', $api_test.channel.list_all_channels)
-  if get_context('channels').key?(channel_label) && get_context('channels')[channel_label]['packages'] >= $package_amount
-    raise 'Package count is not fewer than before'
-  end
+  raise 'Package count is not fewer than before' if get_context('channels').key?(channel_label) && get_context('channels')[channel_label]['packages'] >= $package_amount
 end
 
 When(/^I delete these channels with spacewalk-remove-channel:$/) do |table|
-  channels_cmd = 'spacewalk-remove-channel '
+  channels_cmd = 'spacewalk-remove-channel --username admin --password admin'
   table.raw.each { |x| channels_cmd = "#{channels_cmd} -c #{x[0]}" }
   $command_output, _return_code = get_target('server').run(channels_cmd, check_errors: false)
 end
@@ -182,8 +234,7 @@ When(/^I use spacewalk-repo-sync to sync channel "([^"]*)"$/) do |channel|
 end
 
 When(/^I use spacewalk-repo-sync to sync channel "([^"]*)" including "([^"]*)" packages?$/) do |channel, packages|
-  append_includes = packages.split.map { |pkg| "--include #{pkg}" }.join(' ')
-  $command_output, _code = get_target('server').run("spacewalk-repo-sync -c #{channel} #{append_includes}", check_errors: false, verbose: true)
+  $command_output = sync_channel_including_packages(channel, packages.split)
 end
 
 Then(/^I should get "([^"]*)"$/) do |value|
@@ -212,9 +263,7 @@ Then(/^"([^"]*)" should not be installed on "([^"]*)"$/) do |package, host|
 end
 
 When(/^I wait for "([^"]*)" to be (uninstalled|installed) on "([^"]*)"$/) do |package, status, host|
-  if package.include?('suma') && product == 'Uyuni'
-    package.gsub! 'suma', 'uyuni'
-  end
+  package.gsub! 'suma', 'uyuni' if package.include?('suma') && product == 'Uyuni'
   node = get_target(host)
   if deb_host?(host)
     pkg_version = package.split('-')[-1]
@@ -238,10 +287,8 @@ end
 
 When(/^I query latest Salt changes on "(.*?)"$/) do |host|
   node = get_target(host)
-  salt = use_salt_bundle ? 'venv-salt-minion' : 'salt'
-  if host == 'server'
-    salt = 'salt'
-  end
+  salt = $use_salt_bundle ? 'venv-salt-minion' : 'salt'
+  salt = 'salt' if host == 'server'
   result, _return_code = node.run("LANG=en_US.UTF-8 rpm -q --changelog #{salt}")
   result.split("\n")[0, 15].each do |line|
     line.force_encoding('UTF-8')
@@ -252,12 +299,12 @@ end
 When(/^I query latest Salt changes on Debian-like system "(.*?)"$/) do |host|
   node = get_target(host)
   salt =
-    if use_salt_bundle
+    if $use_salt_bundle
       'venv-salt-minion'
     else
       'salt'
     end
-  changelog_file = use_salt_bundle ? 'changelog.gz' : 'changelog.Debian.gz'
+  changelog_file = $use_salt_bundle ? 'changelog.gz' : 'changelog.Debian.gz'
   result, _return_code = node.run("zcat /usr/share/doc/#{salt}/#{changelog_file}")
   result.split("\n")[0, 15].each do |line|
     line.force_encoding('UTF-8')
@@ -313,7 +360,7 @@ When(/^I wait until "([^"]*)" exporter service is active on "([^"]*)"$/) do |ser
 end
 
 When(/^I execute mgr-sync "([^"]*)" with user "([^"]*)" and password "([^"]*)"$/) do |arg1, u, p|
-  get_target('server').run("echo -e \'mgrsync.user = \"#{u}\"\nmgrsync.password = \"#{p}\"\n\' > ~/.mgr-sync")
+  get_target('server').run("echo -e 'mgrsync.user = \"#{u}\"\nmgrsync.password = \"#{p}\"\n' > ~/.mgr-sync")
   $command_output, _code = get_target('server').run("echo -e '#{u}\n#{p}\n' | mgr-sync #{arg1}", check_errors: false, buffer_size: 1_000_000)
 end
 
@@ -335,25 +382,7 @@ When(/^I execute mgr-sync refresh$/) do
 end
 
 When(/^I kill running spacewalk-repo-sync for "([^"]*)" channel$/) do |channel|
-  time_spent = 0
-  checking_rate = 5
-  repeat_until_timeout(timeout: 60, message: 'Some reposync processes were not killed properly', dont_raise: true) do
-    command_output, _code = get_target('server').run('ps axo pid,cmd | grep spacewalk-repo-sync | grep -v grep', verbose: true, check_errors: false)
-    process = command_output.split("\n")[0]
-    channel_synchronizing = process.split[5].strip
-    if process.nil?
-      log "#{time_spent / 60.to_i} minutes waiting for '#{channel}' channel to start its repo-sync processes." if ((time_spent += checking_rate) % 60).zero?
-      sleep checking_rate
-      next
-    elsif channel_synchronizing == channel
-      pid = process.split[0]
-      get_target('server').run("kill #{pid}", verbose: true, check_errors: false)
-      log "Reposync of channel #{channel} killed"
-      break
-    else
-      log "Warning: Repo-sync process for channel '#{channel_synchronizing}' running."
-    end
-  end
+  kill_reposync_for_channel(channel)
 end
 
 Then(/^the reposync logs should not report errors$/) do
@@ -501,9 +530,24 @@ Then(/^the log messages should not contain out of memory errors$/) do
 end
 
 Then(/^the server log should not contain "([^"]*)" errors$/) do |component|
-  cmd = "cat /var/log/rhn/rhn_web_ui.log | grep -i 'Exception' | grep -i '#{component}'"
-  output, code = get_target('server').run(cmd, check_errors: false)
-  raise ScriptError, "Error related to \"#{component}\" found!\n#{output}" if code.zero?
+  log_file = '/var/log/rhn/rhn_web_ui.log'
+  output, _code = get_target('server').run("cat #{log_file}")
+
+  records = []
+  output.each_line do |line|
+    if records.empty? || line.match?(/\A\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}/)
+      records << line
+    else
+      records.last << line
+    end
+  end
+
+  errors = records.select { |record| record.match?(/exception/i) && record.match?(/#{Regexp.escape(component)}/i) }
+  unless errors.empty?
+    details = errors.take(5)
+    details << "... and #{errors.size - details.size} more" if errors.size > details.size
+    raise ScriptError, "#{errors.size} error(s) related to \"#{component}\" found in #{log_file}!\n#{details.join("\n")}"
+  end
 end
 
 When(/^I restart the spacewalk service$/) do
@@ -536,7 +580,7 @@ When(/^I extract the log files from all our active nodes$/) do
 end
 
 Then(/^the susemanager repo file should exist on the "([^"]*)"$/) do |host|
-  step %(file "/etc/zypp/repos.d/susemanager\:channels.repo" should exist on "#{host}")
+  step %(file "/etc/zypp/repos.d/susemanager:channels.repo" should exist on "#{host}")
 end
 
 Then(/^the repo file should contain the (custom|normal) download endpoint on the "([^"]*)"$/) do |type, target|
@@ -600,16 +644,21 @@ When(/^the controller starts mocking a Redfish host$/) do
   file_extract(get_target('server'), crt_path.strip, '/root/controller.crt')
 
   data_dir = "#{File.dirname(__FILE__)}/../upload_files/Redfish-Mockup-Server/data/public-catfish"
+  log_file = '/tmp/redfish_mockup_server.log'
   cmd = "/usr/bin/python3 #{File.dirname(__FILE__)}/../upload_files/Redfish-Mockup-Server/redfishMockupServer.py " \
         "-H #{hostname} -p 8443 " \
         "-S -D #{data_dir} " \
         '--ssl --cert /root/controller.crt --key /root/controller.key ' \
-        '< /dev/null > /dev/null 2>&1 &'
+        "< /dev/null > #{log_file} 2>&1 &"
   `#{cmd}`
-  repeat_until_timeout(timeout: 30, message: 'Redfish mock server did not start on port 8443') do
-    result = `curl -sk --connect-timeout 2 --max-time 3 https://#{hostname}:8443/redfish/v1 2>/dev/null`
-    break unless result.empty?
-    sleep 1
+  begin
+    repeat_until_timeout(timeout: 30, message: 'Redfish mock server did not start on port 8443') do
+      result = `curl -sk --connect-timeout 2 --max-time 3 https://#{hostname}:8443/redfish/v1 2>/dev/null`
+      break unless result.empty?
+      sleep 1
+    end
+  rescue Timeout::Error
+    raise ScriptError, "Redfish mock server did not start on port 8443:\n#{`tail -n 20 #{log_file} 2>&1`}"
   end
 end
 
@@ -916,9 +965,7 @@ When(/^I disable source package syncing$/) do
 end
 
 When(/^I install pattern "([^"]*)" on this "([^"]*)"$/) do |pattern, host|
-  if pattern.include?('suma') && product == 'Uyuni'
-    pattern.gsub! 'suma', 'uyuni'
-  end
+  pattern.gsub! 'suma', 'uyuni' if pattern.include?('suma') && product == 'Uyuni'
   node = get_target(host)
   node.run('zypper ref')
   cmd = "zypper --non-interactive install -t pattern #{pattern}"
@@ -926,9 +973,7 @@ When(/^I install pattern "([^"]*)" on this "([^"]*)"$/) do |pattern, host|
 end
 
 When(/^I remove pattern "([^"]*)" from this "([^"]*)"$/) do |pattern, host|
-  if pattern.include?('suma') && product == 'Uyuni'
-    pattern.gsub! 'suma', 'uyuni'
-  end
+  pattern.gsub! 'suma', 'uyuni' if pattern.include?('suma') && product == 'Uyuni'
   node = get_target(host)
   node.run('zypper ref')
   cmd = "zypper --non-interactive remove -t pattern #{pattern}"
@@ -1401,10 +1446,8 @@ end
 
 When(/^I apply "([^"]*)" local salt state on "([^"]*)"$/) do |state, host|
   node = get_target(host)
-  salt_call = use_salt_bundle ? 'venv-salt-call' : 'salt-call'
-  if host == 'server'
-    salt_call = 'salt-call'
-  end
+  salt_call = $use_salt_bundle ? 'venv-salt-call' : 'salt-call'
+  salt_call = 'salt-call' if host == 'server'
   source = "#{File.dirname(__FILE__)}/../upload_files/salt/#{state}.sls"
   remote_file = "/usr/share/susemanager/salt/#{state}.sls"
   success = file_inject(node, source, remote_file)
@@ -1660,6 +1703,11 @@ When(/^I wait until port "([^"]*)" is listening on "([^"]*)" (host|container)$/)
   node.run_until_ok("lsof  -i:#{port}", runs_in_container: location == 'container')
 end
 
+When(/^I check that "([^"]*)" (host|container) is listening on TCP port "([^"]*)"$/) do |host, location, port|
+  node = get_target(host)
+  node.run_until_ok("timeout 2 bash -c 'cat < /dev/null > /dev/tcp/$(hostname -f)/#{port}'", runs_in_container: location == 'container')
+end
+
 Then(/^port "([^"]*)" should be (open|closed)$/) do |port, selection|
   _output, code = get_target('server').run("ss --listening --numeric | grep :#{port}", check_errors: false, verbose: true)
   port_opened = code.zero?
@@ -1827,8 +1875,8 @@ When(/^I change back the server's hostname$/) do
   log "Old hostname: #{old_hostname} - New hostname: #{new_hostname}"
   server_node.run("sed -i 's/#{old_hostname}/#{new_hostname}/g' /etc/hostname &&
                    hostname #{new_hostname} &&
-                   sed -i \'$d\' /etc/hosts &&
-                   sed -i \'$d\' /etc/hosts")
+                   sed -i '$d' /etc/hosts &&
+                   sed -i '$d' /etc/hosts")
   get_target('server', refresh: true) # This will refresh the attributes of this node
   hostname, _result = get_target('server').run('hostname')
   hostname.strip!
@@ -1900,12 +1948,12 @@ end
 When(/^I stop the health check tool on "([^"]*)"$/) do |host|
   node = get_target(host)
   node.run('mgr-health-check stop', check_errors: false, verbose: true)
-  node.run('podman rm -f health_check_loki health_check_promtail health_check_supportconfig_exporter health-check-grafana', check_errors: false)
+  node.run("podman rm -f #{HEALTH_CHECK_CONTAINERS.join(' ')}", check_errors: false)
   node.run('podman network rm -f health-check-network', check_errors: false)
 end
 
 Then(/^the word "([^']*)" does not occur more than (\d+) times in "(.*)" on "([^"]*)"$/) do |word, threshold, path, host|
-  count, _ret = get_target(host).run("grep -o -i \'#{word}\' #{path} | wc -l")
+  count, _ret = get_target(host).run("grep -o -i '#{word}' #{path} | wc -l")
   occurences = count.to_i
   raise "The word #{word} occured #{occurences} times, which is more more than #{threshold} times in file #{path}" if occurences > threshold
 end
@@ -1920,9 +1968,10 @@ When(/^I wait until a new "([^"]*)" event is completed for "([^"]*)"$/) do |even
 
   target_event = nil
   repeat_until_timeout(message: "Waiting for new '#{event_summary}' event to be created for #{host}") do
-    target_event = get_last_events(host, 10).find do |e|
-      e["id"] > baseline["id"] && e["summary"].include?(event_summary)
-    end
+    target_event =
+      get_last_events(host, 10).find do |e|
+        e["id"] > baseline["id"] && e["summary"].include?(event_summary)
+      end
     break if target_event
 
     sleep 2
@@ -1982,7 +2031,20 @@ end
 
 Then(/^the health check tool (should be|should not be) running on "([^"]*)"$/) do |action, host|
   node = get_target(host)
-  node.run("test $(podman ps | grep health-check | wc -l) == #{action == 'should be' ? '4' : '0'}", check_errors: true, verbose: true)
+  expected = action == 'should be' ? HEALTH_CHECK_CONTAINERS : []
+  running, _code = node.run('podman ps --format "{{.Names}}"', check_errors: true, verbose: true)
+  running_containers = running.lines.map(&:strip).grep(/^health[-_]check/)
+  missing = expected - running_containers
+  unexpected = running_containers - expected
+  next if missing.empty? && unexpected.empty?
+
+  problems = []
+  problems << "not running: #{missing.join(', ')}" unless missing.empty?
+  problems << "unexpectedly running: #{unexpected.join(', ')}" unless unexpected.empty?
+  output, _code = node.run('podman ps -a --format "{{.Names}} {{.Status}}"', check_errors: true)
+  containers = output.lines.map(&:strip).grep(/^health[-_]check/)
+  statuses = containers.empty? ? 'no health check containers found' : containers.join("\n")
+  raise "Health check containers #{problems.join('; ')}\n#{statuses}"
 end
 
 Then(/^podman container "([^"]*)" should be (running|healthy) on "([^"]*)"$/) do |container, state, host|
@@ -1995,6 +2057,47 @@ Then(/^podman container "([^"]*)" should be (running|healthy) on "([^"]*)"$/) do
   else
     raise "Unsupported container state '#{state}'"
   end
+end
+
+When(/^I (start|restart|stop) the uyuni server$/) do |operation|
+  node = get_target('server')
+  res_out, res_err, code = ssh_command("mgradm #{operation}", node.full_hostname)
+  raise ScriptError, "Uyuni server #{operation} failed: #{res_out}  #{res_err}" unless code.zero?
+end
+
+Then(/^I check the uyuni server (has started|is running|has stopped)$/) do |status|
+  node = get_target('server')
+  repeat_until_timeout(timeout: 130, report_result: true) do
+    cmd = "podman inspect -f '{{.State.Running}}|{{if .State.Health}}{{.State.Health.Status}}{{end}}' uyuni-server"
+    res_out, res_err, code = ssh_command(cmd, node.full_hostname)
+    running, health = res_out.strip.split('|')
+    if ['has started', 'is running'].include? status
+      break if code.zero? && running == 'true' && health == 'healthy'
+    elsif status == 'has stopped'
+      break if code.nonzero? || running != 'true'
+    end
+    sleep 6
+    "return code: #{code};  stdout: #{res_out};  stderr: #{res_err}"
+  end
+end
+
+When(/^I trigger the healthcheck of "([^"]*)" container on "([^"]*)"( and expect it to fail)?$/) do |container, host, negative|
+  node = get_target(host)
+  result, code = node.run("podman healthcheck run #{container}", runs_in_container: false, check_errors: false)
+  if negative
+    raise ScriptError, "podman healthcheck of \"#{container}\" should have failed: #{result}" if code.zero?
+  else
+    raise ScriptError, "podman healthcheck of \"#{container}\" failed: #{result}" unless code.zero?
+  end
+end
+
+Then(/^I wait for the "([^"]*)" container to be running for more than "(\d+)" seconds on "([^"]*)"$/) do |container, seconds, host|
+  node = get_target(host)
+  cmd = "START_STR=$(podman inspect --format='{{.State.StartedAt}}' #{container}) && START=$(date -d \"${START_STR% *}\" +%s) && echo $(($(date +%s) - ${START}))"
+  res_out, res_err, code = ssh_command(cmd, node.full_hostname)
+  raise ScriptError, "An error occurred while getting the container runtime: #{res_out}  #{res_err}" unless code.zero?
+  seconds_to_wait = seconds.to_i - res_out.to_i
+  sleep(seconds_to_wait) unless seconds_to_wait <= 0
 end
 
 When(/^I remove test supportconfig on "([^"]*)"$/) do |host|

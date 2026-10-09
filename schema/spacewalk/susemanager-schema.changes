@@ -1,4 +1,24 @@
 -------------------------------------------------------------------
+Wed Sep 30 09:10:03 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.21-0
+  * Fix Ansible path descriptions in access-control groups
+  * Create a Queue table for ClmChannelDiff (bsc#1273021)
+  * Support '/next' directory for easier schema upgrade during
+    development and when providing PTFs
+  * Renumber config channel positions to close gaps left by deleting
+    an assigned config channel (ON DELETE CASCADE did not compact
+    the survivors), preventing multiple failures (bsc#1272988)
+  * RBAC: add missing endpoints to 'systems.profiles' namespace
+    (bsc#1271963)
+  * Use temp table for hidden packages (bsc#1267912)
+  * Separate Live-Patching Errata for SLE15 SP7 (bsc#1270039)
+  * Increase advisory char limit to 150 in
+    rhnErrata (bsc#1273846)
+  * Fix failed repo-sync due to wrong size of reason column
+    (bsc#1281412)
+
+-------------------------------------------------------------------
 Mon Jul 13 15:01:53 CEST 2026 - antonio.garofalo@suse.com
 
 - version 5.1.20-0

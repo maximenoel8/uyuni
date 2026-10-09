@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 10 10:46:40 CEST 2026 - marina.latini@suse.com
+
+- version 5.1.12-0
+  * Set Basic Constraints extension as 'critical' according to
+    RFC 5280 for self signed CA certificates (bsc#1274571)
+
+-------------------------------------------------------------------
 Mon Mar 23 08:43:12 CET 2026 - marina.latini@suse.com
 
 - version 5.1.11-0

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 SUSE LLC
+ * Copyright (c) 2026 SUSE LLC
  *
  * This software is licensed to you under the GNU General Public License,
  * version 2 (GPLv2). There is NO WARRANTY for this software, express or
@@ -7,10 +7,6 @@
  * FOR A PARTICULAR PURPOSE. You should have received a copy of GPLv2
  * along with this software; if not, see
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
- *
- * Red Hat trademarks are not licensed under GPLv2. No permission is
- * granted to use or replicate Red Hat trademarks that are incorporated
- * in this software or its documentation.
  */
 package com.suse.manager.api.test;
 
@@ -24,11 +20,15 @@ import com.suse.manager.api.HttpApiRegistry;
 import com.suse.manager.api.ReadOnly;
 import com.suse.manager.api.RouteFactory;
 import com.suse.manager.api.SparkRegistrationHelper;
+import com.suse.manager.webui.controllers.login.LoginController;
+import com.suse.manager.webui.services.OidcAuthHandler;
 
 import org.jmock.Expectations;
 import org.jmock.imposters.ByteBuddyClassImposteriser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
 
 import spark.Route;
 
@@ -59,8 +59,10 @@ public class HttpApiRegistryTest extends RhnJmockBaseTestCase {
         HandlerFactory handlerFactory = new HandlerFactory();
         handlerFactory.addHandler("test.path", new RegistryTestHandler());
 
+        LoginController loginController = new LoginController(new OidcAuthHandler(), Optional.empty());
+
         SparkRegistrationHelper helper = context().mock(SparkRegistrationHelper.class);
-        HttpApiRegistry registry = new HttpApiRegistry(handlerFactory, routeFactory, helper);
+        HttpApiRegistry registry = new HttpApiRegistry(handlerFactory, routeFactory, helper, loginController);
 
         context().checking(new Expectations() {{
             // Auth routes are added in all cases

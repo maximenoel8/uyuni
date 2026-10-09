@@ -95,7 +95,7 @@ RUN set -euo pipefail; \
 # The RemoveIPC was needed for postgresql, not sure if it is safe to remove now that it's in its own container
     mkdir -p /etc/systemd/logind.conf.d/ && \
     printf "[Login]\nRemoveIPC=no" >/etc/systemd/logind.conf.d/disable-removeipc.conf && \
-    zypper --non-interactive removerepo --all; \
+    zypper --non-interactive removerepo --all && \
     rm -rf /var/log/{alternatives.log,lastlog,tallylog,suseconnect.log,zypper.log,zypp/history,YaST2}
 
 ADD --chown=root:root root.tar.gz /
@@ -128,11 +128,11 @@ LABEL org.opencontainers.image.description="All-in-one ${PRODUCT} server image"
 LABEL org.opencontainers.image.created="%BUILDTIME%"
 LABEL org.opencontainers.image.vendor="${VENDOR}"
 LABEL org.opencontainers.image.url="${URL}"
-LABEL org.opencontainers.image.version=5.1.16
+LABEL org.opencontainers.image.version=5.1.17
 LABEL org.openbuildservice.disturl="%DISTURL%"
 LABEL org.opensuse.reference="${REFERENCE_PREFIX}/server:${PRODUCT_VERSION}.%RELEASE%"
 # endlabelprefix
 LABEL org.uyuni.version="${PRODUCT_VERSION}"
 
 CMD ["/usr/lib/systemd/systemd"]
-HEALTHCHECK --interval=10s --start-period=180s --timeout=120s --retries=1 CMD ["/usr/bin/healthcheck.sh"]
+HEALTHCHECK --interval=10s --start-period=600s --timeout=120s --retries=1 CMD ["/usr/bin/healthcheck.sh"]

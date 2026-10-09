@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 
 import { AsyncButton, SubmitButton } from "components/buttons";
 import { Form } from "components/input/form/Form";
@@ -43,7 +42,7 @@ const initialModel = {
 };
 
 export function ProxyConfig() {
-  const [messages, setMessages] = useState<React.ReactNode[]>([]);
+  const [messages, setMessages] = useState<ReactNode[]>([]);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<boolean | undefined>();
   const [model, setModel] = useState(initialModel);

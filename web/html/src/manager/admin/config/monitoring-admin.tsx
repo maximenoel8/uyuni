@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect } from "react";
 
 import { docsLocale, isUyuni, productName } from "core/user-preferences";
@@ -214,6 +213,10 @@ const MonitoringAdmin = () => {
     }
     changeStatus(enable)
       .then((result: any) => {
+        if (!result) {
+          return;
+        }
+
         if (result.success) {
           setMessages(MessagesUtils.success(messageMap[result.message]));
         } else {
@@ -228,7 +231,7 @@ const MonitoringAdmin = () => {
     switch (action) {
       case "checking":
         buttons = (
-          <React.Fragment>
+          <>
             <Button
               id="enable-monitoring-btn"
               disabled={true}
@@ -243,12 +246,12 @@ const MonitoringAdmin = () => {
               icon="fa-stop"
               text={t("Disable")}
             />
-          </React.Fragment>
+          </>
         );
         break;
       case "enabling":
         buttons = (
-          <React.Fragment>
+          <>
             <Button
               id="enable-monitoring-btn"
               disabled={true}
@@ -263,12 +266,12 @@ const MonitoringAdmin = () => {
               icon="fa-pause"
               text={t("Disable")}
             />
-          </React.Fragment>
+          </>
         );
         break;
       case "disabling":
         buttons = (
-          <React.Fragment>
+          <>
             <Button
               id="enable-monitoring-btn"
               disabled={true}
@@ -283,7 +286,7 @@ const MonitoringAdmin = () => {
               icon="fa-circle-o-notch fa-spin"
               text={t("Disable")}
             />
-          </React.Fragment>
+          </>
         );
         break;
       default:
@@ -291,7 +294,7 @@ const MonitoringAdmin = () => {
     }
   } else {
     buttons = (
-      <React.Fragment>
+      <>
         <AsyncButton
           id="enable-monitoring-btn"
           defaultType="btn-default"
@@ -307,7 +310,7 @@ const MonitoringAdmin = () => {
           text={t("Disable")}
           action={() => changeMonitoringStatus(false)}
         />
-      </React.Fragment>
+      </>
     );
   }
 

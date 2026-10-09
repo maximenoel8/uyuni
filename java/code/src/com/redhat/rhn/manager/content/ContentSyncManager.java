@@ -66,6 +66,7 @@ import com.redhat.rhn.taskomatic.task.payg.beans.PaygProductInfo;
 
 import com.suse.cloud.CloudPaygManager;
 import com.suse.manager.hub.HubManager;
+import com.suse.manager.model.hub.ChannelInfoDetailsJson;
 import com.suse.manager.model.hub.HubFactory;
 import com.suse.manager.model.hub.IssHub;
 import com.suse.manager.webui.services.pillar.MinionGeneralPillarGenerator;
@@ -89,6 +90,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -223,11 +225,58 @@ public class ContentSyncManager {
                 new Tuple2<>(-41L, -35L), // oraclelinux-9-None.x86_64 => el-base-9-None.x86_64
                 new Tuple2<>(-36L, -35L), // rockylinux-9-None.x86_64 => el-base-9-None.x86_64
                 new Tuple2<>(-38L, -35L), // almalinux-9-None.x86_64 => el-base-9-None.x86_64
+                new Tuple2<>(-52L, -58L), // oraclelinux-10-None.x86_64 => el-base-10-None.x86_64
+                new Tuple2<>(-56L, -58L), // rockylinux-10-None.x86_64 => el-base-10-None.x86_64
+                new Tuple2<>(-54L, -58L), // almalinux-10-None.x86_64 => el-base-10-None.x86_64
                 // SLES 15 SP7 => SLES 16.0 upgrade paths
                 new Tuple2<>(2793L, 2930L), // SLES-15.7-None.x86_64 => SLES-16.0-None.x86_64
                 new Tuple2<>(2792L, 2932L), // SLES-15.7-None.s390x => SLES-16.0-None.s390x
                 new Tuple2<>(2791L, 2933L), // SLES-15.7-None.ppc64le => SLES-16.0-None.ppc64le
-                new Tuple2<>(2790L, 2931L)  // SLES-15.7-None.aarch64 => SLES-16.0-None.aarch64
+                new Tuple2<>(2790L, 2931L), // SLES-15.7-None.aarch64 => SLES-16.0-None.aarch64
+                // define client tools 15 to 16 as migration possibility
+                new Tuple2<>(3052L, 3247L), // mlm-client-tools-15.aarch64 => mlm-client-tools-16.aarch64
+                new Tuple2<>(3053L, 3249L), // mlm-client-tools-15.ppc64le => mlm-client-tools-16.ppc64le
+                new Tuple2<>(3054L, 3248L), // mlm-client-tools-15.s390x => mlm-client-tools-16.s390x
+                new Tuple2<>(3055L, 3246L), // mlm-client-tools-15.x86_64 => mlm-client-tools-16.x86_64
+                // define client tools 5 to 6.0 as migration possibility for Micro (no ppc64le)
+                new Tuple2<>(3064L, 3112L), // mlm-client-tools-micro-5.5.aarch64 => mlm-client-tools-micro-6.aarch64
+                new Tuple2<>(3065L, 3113L), // mlm-client-tools-micro-5.5.s390x => mlm-client-tools-micro-6.s390x
+                new Tuple2<>(3066L, 3111L), // mlm-client-tools-micro-5.5.x86_64 => mlm-client-tools-micro-6.x86_64
+                // define client tools 5 to 16 as migration possibility for Micro (no ppc64le)
+                new Tuple2<>(3064L, 3247L), // mlm-client-tools-micro-5.5.aarch64 => mlm-client-tools-16.aarch64
+                new Tuple2<>(3065L, 3248L), // mlm-client-tools-micro-5.5.s390x => mlm-client-tools-16.s390x
+                new Tuple2<>(3066L, 3246L), // mlm-client-tools-micro-5.5.x86_64 => mlm-client-tools-16.x86_64
+                // define client tools 6.0 to 16-6.1 as migration possibility for Micro
+                new Tuple2<>(3112L, 3247L), // mlm-client-tools-micro-6.aarch64 => mlm-client-tools-16.aarch64
+                new Tuple2<>(3114L, 3249L), // mlm-client-tools-micro-6.ppc64le => mlm-client-tools-16.ppc64le
+                new Tuple2<>(3113L, 3248L), // mlm-client-tools-micro-6.s390x => mlm-client-tools-16.s390x
+                new Tuple2<>(3111L, 3246L), // mlm-client-tools-micro-6.x86_64 => mlm-client-tools-16.x86_64
+                // SLES 15 SP7 => SLES 16.1 upgrade paths
+                new Tuple2<>(2793L, 3231L), // SLES-15.7-None.x86_64 => SLES-16.1-None.x86_64
+                new Tuple2<>(2792L, 3233L), // SLES-15.7-None.s390x => SLES-16.1-None.s390x
+                new Tuple2<>(2791L, 3234L), // SLES-15.7-None.ppc64le => SLES-16.1-None.ppc64le
+                new Tuple2<>(2790L, 3232L), // SLES-15.7-None.aarch64 => SLES-16.1-None.aarch64
+                // SLES 15 SP6 => SLES 16.1 upgrade paths
+                new Tuple2<>(2609L, 3231L), // SLES-15.6-None.x86_64 => SLES-16.1-None.x86_64
+                new Tuple2<>(2608L, 3233L), // SLES-15.6-None.s390x => SLES-16.1-None.s390x
+                new Tuple2<>(2607L, 3234L), // SLES-15.6-None.ppc64le => SLES-16.1-None.ppc64le
+                new Tuple2<>(2606L, 3232L), // SLES-15.6-None.aarch64 => SLES-16.1-None.aarch64
+                // SLES 15 SP5 => SLES 16.1 upgrade paths
+                new Tuple2<>(2465L, 3231L), // SLES-15.5-None.x86_64 => SLES-16.1-None.x86_64
+                new Tuple2<>(2464L, 3233L), // SLES-15.5-None.s390x => SLES-16.1-None.s390x
+                new Tuple2<>(2463L, 3234L), // SLES-15.5-None.ppc64le => SLES-16.1-None.ppc64le
+                new Tuple2<>(2462L, 3232L), // SLES-15.5-None.aarch64 => SLES-16.1-None.aarch64
+                // SLE-RT 15 SP7 => SLES 16.1 upgrade paths
+                new Tuple2<>(2926L, 3231L), // SLE-RT-15.7-None.x86_64 => SLES-16.1-None.x86_64
+                // SLES-for-SAP 15 SP5 => SLES-for-SAP 16.1 upgrade paths
+                new Tuple2<>(2467L, 3235L), // SLES_SAP-15.5-None.x86_64 => SLES_SAP-16.1-None.x86_64
+                new Tuple2<>(2466L, 3236L), // SLES_SAP-15.5-None.ppc64le => SLES_SAP-16.1-None.ppc64le
+                // SLES-for-SAP 15 SP6 => SLES-for-SAP 16.1 upgrade paths
+                new Tuple2<>(2611L, 3235L), // SLES_SAP-15.6-None.x86_64 => SLES_SAP-16.1-None.x86_64
+                new Tuple2<>(2610L, 3236L), // SLES_SAP-15.6-None.ppc64le => SLES_SAP-16.1-None.ppc64le
+                // SLES-for-SAP 15 SP7 => SLES-for-SAP 16.1 upgrade paths
+                new Tuple2<>(2795L, 3235L), // SLES_SAP-15.7-None.x86_64 => SLES_SAP-16.1-None.x86_64
+                new Tuple2<>(2794L, 3236L) // SLES_SAP-15.7-None.ppc64le => SLES_SAP-16.1-None.ppc64le
         );
         return upgradePaths.stream();
     }
@@ -558,6 +607,40 @@ public class ContentSyncManager {
      * @throws ContentSyncException in case of an error
      */
     private void refreshRepositoriesAuthentication(String mirrorUrl, boolean excludeSCC) throws ContentSyncException {
+
+        if (hubFactory.isISSPeripheral()) {
+            // Call extra endpoint to get info about channels from the hub incl. custom channels
+            filterCredentials().stream()
+                    .filter(source -> !excludeSCC || !(source instanceof SCCContentSyncSource))
+                    .forEach(source -> {
+                                LOG.debug("Getting custom channels for: {}", source);
+                                List<ChannelInfoDetailsJson> channelInfo = source.match(
+                                        scc -> {
+                                            try {
+                                                SCCClient client = getSCCClient(source);
+                                                return client.listHubChannels();
+                                            }
+                                            catch (SCCClientException e) {
+                                                return Collections.emptyList();
+                                            }
+                                        },
+                                        rmt -> {
+                                            LOG.warn("Custom Channel info cannot be provided from RMT server");
+                                            return Collections.emptyList();
+                                        },
+                                        local -> {
+                                            try {
+                                                SCCClient client = getSCCClient(source);
+                                                return client.listHubChannels();
+                                            }
+                                            catch (SCCClientException e) {
+                                                return Collections.emptyList();
+                                            }
+                                        });
+                                TimeUtils.logTime(LOG, Level.DEBUG, "Update Channel Info",
+                                        () -> updateChannelInfo(channelInfo));
+                    });
+        }
 
         ChannelFactory.cleanupOrphanVendorContentSource();
 
@@ -893,6 +976,19 @@ public class ContentSyncManager {
                 return Optional.empty();
             }
 
+        }
+    }
+
+    /**
+     * Update Channel details according to the provided channelInfo
+     * @param channelInfo the information about channels
+     */
+    public void updateChannelInfo(List<ChannelInfoDetailsJson> channelInfo) {
+        Set<String> syncFinished = new HashSet<>();
+        Map<String, ChannelInfoDetailsJson> channelInfoByLabel = channelInfo.stream()
+                .collect(Collectors.toMap(ChannelInfoDetailsJson::getLabel, v -> v));
+        for (ChannelInfoDetailsJson info : channelInfo) {
+            ChannelFactory.syncChannel(info, channelInfoByLabel, syncFinished);
         }
     }
 

@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Sep 30 09:02:28 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.15-0
+  * Warn about activation keys when removing channels (bsc#1233592)
+  * Pre-filter errata in system_applyerrata to avoid using
+    API calls for all existing errata (bsc#1267261)
+  * Fix spacecmd build on SUSE Linux Micro 6
+
+-------------------------------------------------------------------
 Tue May 26 15:21:11 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.14-0

@@ -87,17 +87,6 @@ def product_version_full
   out.strip if code.zero? && !out.nil?
 end
 
-# TODO: All our current supported versions are using Salt Bundle, consider to remove this method
-#       Refactoring all the code call it.
-# Determines whether to use the Salt bundle based on the product and product version.
-#
-# @return [Boolean] true if the product is 'Uyuni' or the product version is 'head', '5.0', '4.3', or '4.2'
-# - false otherwise
-def use_salt_bundle
-  # Use venv-salt-minion in Uyuni, or MLM Head, 5.1, 5.0, 4.2 and 4.3
-  product == 'Uyuni' || %w[develHead 5.1 5.0 4.3 4.2].include?(product_version)
-end
-
 # WARN: It's working for /24 mask, but couldn't not work properly with others
 # Returns the reverse DNS lookup address for a given network address.
 #
@@ -127,9 +116,9 @@ def repeat_until_timeout(timeout: DEFAULT_TIMEOUT, retries: nil, message: nil, r
       # At the time of writing some of the problems described have been addressed.
       # However, at least https://bugs.ruby-lang.org/issues/15886 remains reproducible and code below
       # works around it by adding an additional check between loops
-      start = Time.new
+      deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
       attempts = 0
-      while (Time.new - start <= timeout) && (retries.nil? || attempts < retries)
+      while Process.clock_gettime(Process::CLOCK_MONOTONIC) <= deadline && (retries.nil? || attempts < retries)
         last_result = yield
         attempts += 1
       end
@@ -152,17 +141,26 @@ end
 #
 # @param text1 [String] The first text to check for visibility.
 # @param text2 [String, nil] The second text to check for visibility (optional).
+# @param stopper [String, nil] Text that aborts the wait and makes the check fail if it shows up first (optional).
 # @param timeout [Integer] The maximum time to wait for the text to become visible (default: Capybara.default_max_wait_time).
 # @return [Boolean] Returns true if the text is visible, false otherwise.
-def check_text?(text1, text2: nil, timeout: Capybara.default_max_wait_time)
+def check_text?(text1, text2: nil, stopper: nil, timeout: Capybara.default_max_wait_time)
   # Rely on Capybara's (Playwright-backed) native auto-waiting instead of a hand-rolled
   # polling loop: has_text? already polls the page until the text appears or `wait` elapses.
   # When two candidates are given, OR them into a single Regexp so the whole `timeout` budget
   # is shared across both instead of being spent sequentially on each one (the old loop waited
   # 1s on text1 before ever looking at text2). Capybara.default_normalize_ws collapses
   # whitespace for us. Regexp.union escapes both strings, so regex metacharacters stay literal.
-  pattern = text2.nil? ? text1 : Regexp.union(text1, text2)
-  has_text?(pattern, wait: timeout)
+  wanted = text2.nil? ? text1 : Regexp.union(text1, text2)
+  return has_text?(wanted, wait: timeout) if stopper.nil?
+
+  # A stopper is the opposite of text2: it must NOT appear. Race it against the wanted text in a
+  # single Regexp so the timeout stays a shared budget and we give up as soon as the stopper shows
+  # up, instead of burning the whole timeout waiting for a text that will never come.
+  return false unless has_text?(Regexp.union(wanted, stopper), wait: timeout)
+
+  # Both may be on the page by now; the wanted text wins, as in the pre-Playwright loop.
+  has_text?(wanted, wait: 0)
 rescue Capybara::ElementNotFound, NoMethodError
   # Page was mid-navigation / driver transiently unusable: treat as "not found".
   false
@@ -399,10 +397,158 @@ def generate_repository_name(repo_url)
   repo_name.sub!(%r{http://(download.suse.de|download.opensuse.org|minima-mirror-ci-bv.mgr.*|.*compute.internal)/ibs/Devel:/Galaxy:/Manager:/}, '')
   repo_name.sub!(%r{http://(download.suse.de|download.opensuse.org|minima-mirror-ci-bv.mgr.*|.*compute.internal)/SUSE:/Maintenance:/}, '')
   repo_name.sub!(%r{http://(download.suse.de|download.opensuse.org|minima-mirror-ci-bv.mgr.*|.*compute.internal)/ibs/SUSE:/SLE-15:/Update:/Products:/MultiLinuxManagerTools/images/repo/}, '')
+  repo_name.sub!(%r{http://(download.suse.de|download.opensuse.org|minima-mirror-ci-bv.mgr.*|.*compute.internal)/ibs/SUSE:/SLFO:/Products:/MultiLinuxManagerTools:/PullRequest:/}, 'PR')
+  repo_name.sub!(%r{http://(download.suse.de|download.opensuse.org|minima-mirror-ci-bv.mgr.*|.*compute.internal)/ibs/SUSE:/SLFO:/Products:/MultiLinuxManagerTools:/}, '')
   repo_name.sub!(%r{http://(download.suse.de|download.opensuse.org|minima-mirror-ci-bv.mgr.*|.*compute.internal)/ibs/SUSE:/}, '')
   repo_name.gsub!('/', '_')
   repo_name.gsub!(':', '_')
   repo_name[0...64] # HACK: Due to the 64 characters size limit of a repository label
+end
+
+# Get the channel a spacewalk-repo-sync process is synchronizing
+#
+# @param process [String] A line of the output of "ps axo pid,cmd"
+# @return [String, nil] The label of the channel, or nil if the line synchronizes no channel
+def reposync_channel(process)
+  process[/\s(?:--channel|-c)[ =](\S+)/, 1]
+end
+
+# Kill spacewalk-repo-sync execution for a given channel
+#
+# @param channel [String] The channel label of the channel to kill reposync execution
+def kill_reposync_for_channel(channel)
+  time_spent = 0
+  checking_rate = 5
+  node = get_target('server')
+  killed_pid = nil
+  repeat_until_timeout(timeout: 60, message: 'Some reposync processes were not killed properly', dont_raise: true) do
+    command_output, _code = node.run('ps axo pid,cmd | grep spacewalk-repo-sync | grep -v grep', verbose: true, check_errors: false)
+    processes = command_output.split("\n").reject { |line| line.strip.empty? }
+    process = processes.find { |line| reposync_channel(line) == channel }
+    if process.nil?
+      other_channels = processes.map { |line| reposync_channel(line) }.compact
+      log "Warning: Repo-sync processes running for the channels #{other_channels.join(', ')}." unless other_channels.empty?
+      log "#{time_spent / 60} minutes waiting for '#{channel}' channel to start its repo-sync processes." if ((time_spent += checking_rate) % 60).zero?
+      sleep checking_rate
+      next
+    end
+
+    killed_pid = process.split[0]
+    node.run("kill #{killed_pid}", verbose: true, check_errors: false)
+    break
+  end
+  return if killed_pid.nil?
+
+  # The wait is done outside of the loop above on purpose: that loop swallows any error,
+  # while a zypp lock that is never released has to fail the scenario
+  wait_for_reposync_termination(node, killed_pid)
+  log "Reposync of channel #{channel} killed"
+end
+
+# Wait until a killed spacewalk-repo-sync and the zypper it spawned are really gone
+#
+# Killing spacewalk-repo-sync only signals the Python process: the zypper it spawned to
+# refresh the metadata keeps running for some moments and keeps the zypp lock. A new
+# spacewalk-repo-sync started while that lock is held dies immediately with
+# "RepoMDError: Cannot access repository", which leaves the channel empty.
+#
+# @param node [RemoteNode] The server node
+# @param pid [String] The PID of the spacewalk-repo-sync process that was killed
+def wait_for_reposync_termination(node, pid)
+  repeat_until_timeout(timeout: 120, message: "The spacewalk-repo-sync process #{pid} is still running after being killed") do
+    _output, code = node.run("kill -0 #{pid}", check_errors: false)
+    break if code.nonzero?
+
+    sleep 2
+  end
+  wait_for_zypp_lock_release(node)
+end
+
+# Wait until no zypper is running on a node and the zypp lock is free
+#
+# The zypper spawned by a reposync can still be starting up when we look, so the node has
+# to come back idle several times in a row before we conclude the lock is free.
+#
+# @param node [RemoteNode] The node to check
+def wait_for_zypp_lock_release(node)
+  settled_checks = 0
+  repeat_until_timeout(timeout: 300, message: 'The zypp lock is still held, a new reposync would fail immediately') do
+    settled_checks = zypp_locked?(node) ? 0 : settled_checks + 1
+    break if settled_checks >= 3
+
+    sleep 2
+  end
+end
+
+# Check whether zypper is running on a node, or the zypp lock is held by a process still alive
+#
+# The reposync uses its own zypper root, so its lock file is not the system one.
+#
+# @param node [RemoteNode] The node to check
+# @return [Boolean] Whether the zypp lock is taken
+def zypp_locked?(node)
+  _output, code = node.run('pgrep -x zypper > /dev/null', check_errors: false)
+  return true if code.zero?
+
+  ZYPP_LOCK_FILES.any? { |lock_file| zypp_lock_file_held?(node, lock_file) }
+end
+
+# Check whether a zypp lock file holds the PID of a process that is still alive
+#
+# A lock file left behind holds a PID that is already gone, and its first line is not
+# necessarily a PID at all, so its content is validated before being used. Zero is rejected
+# along with the rest: "kill -0 0" signals our own process group and would always succeed.
+#
+# @param node [RemoteNode] The node to check
+# @param lock_file [String] The path of the zypp lock file
+# @return [Boolean] Whether the lock file is held
+def zypp_lock_file_held?(node, lock_file)
+  content, code = node.run("head -n 1 #{lock_file}", check_errors: false)
+  pid = content.to_s.strip
+  return false unless code.zero? && pid.match?(/\A[1-9]\d*\z/)
+
+  _output, alive = node.run("kill -0 #{pid}", check_errors: false)
+  alive.zero?
+end
+
+# Check whether a failed synchronization was blocked by the zypp lock
+#
+# The lock is the reason to retry, so the lock state is what decides. The output is only
+# looked at as well to cover the window where the lock is released between the failure and
+# the check.
+#
+# @param node [RemoteNode] The node the synchronization ran on
+# @param output [String] The output of the failed synchronization
+# @return [Boolean] Whether the synchronization is worth retrying
+def blocked_by_zypp_lock?(node, output)
+  zypp_locked?(node) || ZYPP_LOCK_FAILURE_MARKERS.any? { |marker| output.to_s.include?(marker) }
+end
+
+# Synchronize a channel with spacewalk-repo-sync, restricted to a list of packages
+#
+# A synchronization blocked by the zypp lock fails in no time, so it is worth retrying.
+# Any other failure is raised: a channel that stays empty makes every scenario using its
+# packages fail much later, with a symptom that says nothing about the synchronization.
+#
+# @param channel [String] The label of the channel to synchronize
+# @param packages [Array<String>] The packages to include in the synchronization
+# @return [String] The output of the synchronization
+def sync_channel_including_packages(channel, packages)
+  raise ScriptError, "No package to include in the synchronization of channel #{channel}" if packages.nil? || packages.empty?
+
+  node = get_target('server')
+  append_includes = packages.map { |pkg| "--include #{pkg}" }.join(' ')
+  output = nil
+  3.times do |attempt|
+    output, code = node.run("spacewalk-repo-sync -c #{channel} #{append_includes}", check_errors: false, verbose: true)
+    return output if code.zero?
+
+    raise ScriptError, "Synchronization of channel #{channel} failed:\n#{output}" unless blocked_by_zypp_lock?(node, output)
+
+    log "Attempt #{attempt + 1} to synchronize #{channel} found the zypp lock held, waiting for it to be released"
+    wait_for_zypp_lock_release(node)
+  end
+  raise ScriptError, "Synchronization of channel #{channel} lost the race for the zypp lock on every attempt:\n#{output}"
 end
 
 #
@@ -774,6 +920,10 @@ def channel_packages_are_downloaded?(channel_name)
       break
     end
 
+    # spacewalk-repo-sync logs the completion message whatever the outcome of the
+    # synchronization, so an error here still counts as completed
+    log "WARN: Error while synchronizing #{channel_name} at line #{i + 1}: #{line.strip}" if line.include?('ERROR') || line.include?('RepoMDError')
+
     next unless line.include?('Sync of channel completed.')
 
     log "DEBUG: Found 'Sync of channel completed.' for #{channel_name} at line #{i + 1}."
@@ -782,6 +932,33 @@ def channel_packages_are_downloaded?(channel_name)
   end
   log "DEBUG: Sync for #{channel_name} still in progress (no completion message found)."
   false
+end
+
+# Return the child channels an activation key should carry for the given client,
+# excluding the proxy/server channels that don't belong to the client's role.
+def child_channels_for_activation_key(client, base_channel_label)
+  child_channels = $api_test.channel.software.list_child_channels(base_channel_label)
+
+  role = ACTIVATION_KEY_ROLE_BY_CLIENT.fetch(client, :minion)
+  excluded_tokens =
+    ACTIVATION_KEY_EXCLUDED_CATEGORIES_BY_ROLE[role]
+    .flat_map { |category| ACTIVATION_KEY_CHANNEL_CATEGORIES[category] }
+  child_channels.reject! { |channel| excluded_tokens.any? { |token| channel.include?(token) } }
+
+  # A non-transactional proxy/server (5.1 and 5.2) shares the SLES15 SP7 HostOS, so the
+  # other MLM version's channels show up too - drop them.
+  if client.include?('nontransactional')
+    version = product_version_full
+    version_to_exclude =
+      if version&.include?('5.1')
+        '5.2'
+      elsif version&.include?('5.2') || version&.include?('head')
+        '5.1'
+      end
+    child_channels.reject! { |channel| channel.include?(version_to_exclude) } if version_to_exclude
+  end
+
+  child_channels
 end
 
 # Determines whether a channel is synchronized on the server.

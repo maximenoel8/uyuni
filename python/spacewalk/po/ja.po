@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spacewalk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-20 17:53+0200\n"
+"POT-Creation-Date: 2026-09-26 12:51+0200\n"
 "PO-Revision-Date: 2026-05-27 06:12+0000\n"
 "Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/uyuni/backend-5-1/ja/>\n"
@@ -199,7 +199,7 @@ msgid "Service not enabled for system profile: \"%s\""
 msgstr "システムプロファイルに対してサービスが有効になっていません: 「%s」"
 
 #: ../server/rhnPackage.py:52 ../server/rhnPackage.py:98
-#: ../server/rhnPackage.py:118 ../server/rhnPackage.py:179
+#: ../server/rhnPackage.py:118 ../server/rhnPackage.py:180
 #, python-format
 msgid "Invalid RPM package %s requested"
 msgstr "無効な RPM パッケージ %s を要求しています"
@@ -255,62 +255,62 @@ msgstr "キックスタートセッションの不一致です"
 msgid "Stacking of re-registration tokens is not supported"
 msgstr "再登録トークンの積み重ねには対応していません"
 
-#: ../server/rhnUser.py:327 ../server/rhnUser.py:330
+#: ../server/rhnUser.py:324 ../server/rhnUser.py:327
 msgid "Invalid username/password combination"
 msgstr "無効なユーザー名とパスワードの組み合わせです"
 
 #. nope, not reserved either
-#: ../server/rhnUser.py:527
+#: ../server/rhnUser.py:508
 #, python-format
 msgid "Username `%s' has not been reserved"
 msgstr "ユーザー名 `%s' は予約されていません"
 
 #. New accounts have to specify an e-mail address
-#: ../server/rhnUser.py:533
+#: ../server/rhnUser.py:514
 msgid "E-mail address not specified"
 msgstr "Email アドレスが指定されていません"
 
-#: ../server/rhnUser.py:575
+#: ../server/rhnUser.py:556
 #, python-format
 msgid "username should be at least %d characters"
 msgstr "ユーザー名は少なくとも %d 文字以上にしてください"
 
-#: ../server/rhnUser.py:579
+#: ../server/rhnUser.py:560
 #, python-format
 msgid "username should be less than %d characters"
 msgstr "ユーザー名は %d 文字未満にしてください"
 
-#: ../server/rhnUser.py:593
+#: ../server/rhnUser.py:574
 #, python-format
 msgid "username = `%s', invalid character `%s'"
 msgstr "ユーザー名 = `%s'、 無効な文字 `%s'"
 
-#: ../server/rhnUser.py:614
+#: ../server/rhnUser.py:595
 #, python-format
 msgid "Please limit your e-mail address to %s chars"
 msgstr "Email アドレスは %s 文字以内にしてください"
 
-#: ../server/rhnUser.py:704
+#: ../server/rhnUser.py:693
 #, python-format
 msgid "password must be at least %d characters"
 msgstr "パスワードは少なくとも %d 文字に以上にしてください"
 
-#: ../server/rhnUser.py:708
+#: ../server/rhnUser.py:697
 #, python-format
 msgid "Password must be shorter than %d characters"
 msgstr "パスワードは %d 文字以内にしてください"
 
-#: ../server/rhnUser.py:724
+#: ../server/rhnUser.py:713
 #, python-format
 msgid "password contains character `%s'"
 msgstr "パスワードに `%s' 文字が含まれています"
 
-#: ../server/rhnUser.py:733
+#: ../server/rhnUser.py:722
 #, python-format
 msgid "username should be at least %d characters long"
 msgstr "ユーザー名は少なくとも %d 文字以上の長さにしてください"
 
-#: ../server/rhnUser.py:744
+#: ../server/rhnUser.py:733
 #, python-format
 msgid "Cannot register usernames ending with %s"
 msgstr "%s で終わるユーザー名は登録できません"
@@ -1139,16 +1139,16 @@ msgstr "キックスタート可能なツリーを取り込んでいます (%d)"
 msgid "Imported kickstartable trees (%d)"
 msgstr "キックスタート可能なツリーを取り込みました (%d)"
 
-#: ../satellite_tools/reposync.py:138
+#: ../satellite_tools/reposync.py:148
 msgid "+++ sending log as an email +++"
 msgstr "+++ 電子メールでログを送信 +++"
 
-#: ../satellite_tools/reposync.py:141
+#: ../satellite_tools/reposync.py:151
 #, python-format
 msgid "%s sync. report from %s"
 msgstr "%s 同期。 %s からのレポート"
 
-#: ../satellite_tools/reposync.py:151
+#: ../satellite_tools/reposync.py:161
 msgid "+++ email requested, but there is nothing to send +++"
 msgstr "+++ 電子メールの要求がありましたが、送信すべき内容がありません +++"
 
