@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: MIT
 #!BuildTag: uyuni/server:latest
+# Reduce SBOM file size to not hit the registry filesize limit
+#!SbomNoFilesGeneration
 
 ARG INIT_BASE=registry.suse.com/bci/bci-init:15.6
 FROM $INIT_BASE
