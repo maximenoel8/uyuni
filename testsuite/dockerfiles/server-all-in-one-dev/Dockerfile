@@ -8,6 +8,7 @@ RUN zypper -n rr -a && \
     zypper -n install \
       java-17-openjdk-devel \
       rsync \
+      wget \
       apache-ivy \
       ant \
       ant-junit \
