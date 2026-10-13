@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 13 08:26:22 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.20-0
+  * Add bootstrap repository definition for SUSE Linux Enterprise
+    Server for NVIDIA (ARM64) 16.1
+
+-------------------------------------------------------------------
 Tue Jul 14 09:49:59 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.19-0
