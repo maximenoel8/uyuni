@@ -45,9 +45,9 @@
         <dependency org="manager-51" name="httpcore" rev="4.4.14" />
         <dependency org="manager-51" name="httpcore-nio" rev="4.4.14" />
         <dependency org="manager-51" name="ical4j" rev="3.0.18" />
-        <dependency org="manager-51" name="jackson-annotations" rev="2.18.9" />
-        <dependency org="manager-51" name="jackson-core" rev="2.18.9" />
-        <dependency org="manager-51" name="jackson-databind" rev="2.18.9" />
+        <dependency org="manager-51" name="jackson-annotations" rev="2.18.11" />
+        <dependency org="manager-51" name="jackson-core" rev="2.18.11" />
+        <dependency org="manager-51" name="jackson-databind" rev="2.18.11" />
         <dependency org="manager-51" name="jade4j" rev="1.2.7" />
         <dependency org="manager-51" name="jakarta-persistence-api" rev="2.2.2" />
         <dependency org="manager-51" name="java-saml" rev="2.4.0" />
