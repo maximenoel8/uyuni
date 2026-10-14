@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Oct 13 08:28:34 CEST 2026 - antonio.garofalo@suse.com
+
+- version 5.1.12-0
+  * Add channel family for SUSE Linux Enterprise Server for
+    NVIDIA (ARM64)
+  * Set Ubuntu 26.04 to released
+
+-------------------------------------------------------------------
 Tue Jul 14 09:09:51 CEST 2026 - marina.latini@suse.com
 
 - version 5.1.11-0
