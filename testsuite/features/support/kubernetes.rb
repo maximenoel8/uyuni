@@ -7,26 +7,26 @@
 # @param fqdn [String] The fully qualified domain name (FQDN) for the certificate.
 # @return [Array<String>] An array containing the paths to the generated certificate files: [crt_path, key_path, ca_path].
 def generate_certificate(name, fqdn)
-  certificate = 'apiVersion: cert-manager.io/v1\\n'\
-                'kind: Certificate\\n'\
-                'metadata:\\n'\
-                "  name: uyuni-#{name}\\n"\
-                'spec:\\n'\
-                "  secretName: uyuni-#{name}-cert\\n"\
-                '  subject:\\n'\
-                "    countries: ['DE']\\n"\
-                "    provinces: ['Bayern']\\n"\
-                "    localities: ['Nuernberg']\\n"\
-                "    organizations: ['SUSE']\\n"\
-                "    organizationalUnits: ['SUSE']\\n"\
-                '  emailAddresses:\\n'\
-                '    - galaxy-noise@suse.de\\n'\
-                "  commonName: #{fqdn}\\n"\
-                '  dnsNames:\\n'\
-                "    - #{fqdn}\\n"\
-                '  issuerRef:\\n'\
-                '    name: uyuni-ca-issuer\\n'\
-                '    kind: Issuer'
+  certificate = 'apiVersion: cert-manager.io/v1\\n' \
+                'kind: Certificate\\n' \
+                'metadata:\\n  ' \
+                "name: uyuni-#{name}\\n" \
+                'spec:\\n  ' \
+                "secretName: uyuni-#{name}-cert\\n  " \
+                'subject:\\n    ' \
+                "countries: ['DE']\\n    " \
+                "provinces: ['Bayern']\\n    " \
+                "localities: ['Nuernberg']\\n    " \
+                "organizations: ['SUSE']\\n    " \
+                "organizationalUnits: ['SUSE']\\n  " \
+                'emailAddresses:\\n    ' \
+                '- galaxy-noise@suse.de\\n  ' \
+                "commonName: #{fqdn}\\n  " \
+                'dnsNames:\\n    ' \
+                "- #{fqdn}\\n  " \
+                'issuerRef:\\n    ' \
+                'name: uyuni-ca-issuer\\n    ' \
+                'kind: Issuer'
   _out, return_code = get_target('server').run_local("echo -e \"#{certificate}\" | kubectl apply -f -")
   raise SystemCallError, "Failed to define #{name} Certificate resource" unless return_code.zero?
 
