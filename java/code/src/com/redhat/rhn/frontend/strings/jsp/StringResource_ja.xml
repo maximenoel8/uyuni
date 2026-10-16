@@ -29974,74 +29974,75 @@ given channel.</source>
         <source>AppArmor profiles will be migrated to SELinux</source>
         <target state="final">AppArmorプロファイルはSELinuxに移行されます</target>
       </trans-unit>
-    <trans-unit id="channel.manage.sync.noerrata-tt.jsp" xml:space="preserve">
+      <trans-unit id="channel.manage.sync.noerrata-tt.jsp" xml:space="preserve" approved="yes">
         <source>Do not synchronize patches.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="channel.manage.sync.nostrict-tt.jsp" xml:space="preserve">
+        <target state="final">パッチを同期しないでください。</target>
+      </trans-unit>
+      <trans-unit id="channel.manage.sync.nostrict-tt.jsp" xml:space="preserve" approved="yes">
         <source>Allows a channel to deviate from the repository, keeping packages that have been removed from the remote repository.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="channel.manage.sync.latestonly-tt.jsp" xml:space="preserve">
+        <target state="final">チャンネルがリポジトリとは異なる状態を維持し、リモートリポジトリから削除されたパッケージを保持できるようにします。</target>
+      </trans-unit>
+      <trans-unit id="channel.manage.sync.latestonly-tt.jsp" xml:space="preserve" approved="yes">
         <source>Synchronize the latest package version only.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="channel.manage.sync.synckickstart-tt.jsp" xml:space="preserve">
+        <target state="final">最新のパッケージバージョンのみを同期します。</target>
+      </trans-unit>
+      <trans-unit id="channel.manage.sync.synckickstart-tt.jsp" xml:space="preserve" approved="yes">
         <source>This option prepares a directory tree ready for Kickstart auto installation.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="channel.manage.sync.fail-tt.jsp" xml:space="preserve">
+        <target state="final">このオプションは、キックスタートの自動インストールに備えたディレクトリツリーを準備します。</target>
+      </trans-unit>
+      <trans-unit id="channel.manage.sync.fail-tt.jsp" xml:space="preserve" approved="yes">
         <source>Stop synchronizing if an error occurs.</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Sync.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="channel.delete.jsp.actkeysheader" xml:space="preserve">
+        <target state="final">エラーが発生した場合は、同期を停止してください。</target>
+      </trans-unit>
+      <trans-unit id="channel.delete.jsp.actkeysheader" xml:space="preserve" approved="yes">
         <source>Activation Keys</source>
-            <context-group name="ctx">
+        <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Delete.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="channel.delete.jsp.actkeysparagraph" xml:space="preserve">
+        <target state="final">アクティベーションキー</target>
+      </trans-unit>
+      <trans-unit id="channel.delete.jsp.actkeysparagraph" xml:space="preserve" approved="yes">
         <source>Channel deletion will remove any Activation Key that has {0} as a base channel.
          </source>
-            <context-group name="ctx">
+        <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Delete.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="channel.delete.jsp.actkeysaffected" xml:space="preserve">
+        <target state="final">チャンネルの削除により、ベースチャンネルとして {0} を設定しているアクティベーションキーは削除されます。
+         </target>
+      </trans-unit>
+      <trans-unit id="channel.delete.jsp.actkeysaffected" xml:space="preserve" approved="yes">
         <source>Activation Keys Affected:</source>
-            <context-group name="ctx">
+        <context-group name="ctx">
           <context context-type="sourcefile">/rhn/channels/manage/Delete.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="bunch.jsp.description.clm-diff-bunch" xml:space="preserve">
+        <target state="final">影響を受けるアクティベーションキー:</target>
+      </trans-unit>
+      <trans-unit id="bunch.jsp.description.clm-diff-bunch" xml:space="preserve" approved="yes">
         <source>Generates differences for CLM channels</source>
         <context-group name="ctx">
           <context context-type="sourcefile">/rhn/admin/BunchDetail.do</context>
         </context-group>
-      <target state="new"/>
-  </trans-unit>
-      <trans-unit id="task.status.clm-diff" xml:space="preserve">
+        <target state="final">CLMチャンネルの差分を生成します</target>
+      </trans-unit>
+      <trans-unit id="task.status.clm-diff" xml:space="preserve" approved="yes">
         <source>Calculate CLM Differences</source>
-      <target state="new"/>
-  </trans-unit>
-      </body>
+        <target state="final">CLM差分の計算</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
