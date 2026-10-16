@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: MIT
 #!BuildTag: uyuni/server:latest
+# Reduce SBOM file size to not hit the registry filesize limit
+#!SbomNoFilesGeneration
 
 ARG INIT_BASE=registry.suse.com/bci/bci-init:15.6
 FROM $INIT_BASE
@@ -128,7 +130,7 @@ LABEL org.opencontainers.image.description="All-in-one ${PRODUCT} server image"
 LABEL org.opencontainers.image.created="%BUILDTIME%"
 LABEL org.opencontainers.image.vendor="${VENDOR}"
 LABEL org.opencontainers.image.url="${URL}"
-LABEL org.opencontainers.image.version=5.1.17
+LABEL org.opencontainers.image.version=5.1.18
 LABEL org.openbuildservice.disturl="%DISTURL%"
 LABEL org.opensuse.reference="${REFERENCE_PREFIX}/server:${PRODUCT_VERSION}.%RELEASE%"
 # endlabelprefix
