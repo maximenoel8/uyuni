@@ -228,14 +228,14 @@ def fill_peripheral_root_ca(mode, ca_content)
   when :none
     step %(I check radio button "Not needed")
   when :paste
-    step %(I check radio button "Paste the data")
-    find("textarea[name='rootCA_pastedData']").set(ca_content)
+    step %(I check radio button "Paste a PEM certificate")
+    find("textarea[name='pastedRootCA']").set(ca_content)
   when :upload
     step %(I check radio button "Upload a file")
     Tempfile.create(%w[hub_root_ca .pem]) do |file|
       file.write(ca_content)
       file.flush
-      attach_file('rootCA_uploadedFile', file.path)
+      attach_file('uploadedRootCA', file.path)
     end
   end
 end
