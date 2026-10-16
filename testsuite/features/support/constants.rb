@@ -1085,7 +1085,7 @@ CHANNEL_TO_SYNC_BY_OS_PRODUCT_VERSION = {
     'leap16.1-aarch64' =>
       %w[
         opensuse-leap-16.1-aarch64
-        multi-linux-managertools-sle-16-aarch64-opensuse-16.1
+        multi-linux-managertools-sle-16-aarch64-opensuse-16.0
       ],
     'sle-micro-5.3' => # CHECKED
       %w[
@@ -1401,7 +1401,7 @@ CHANNEL_TO_SYNC_BY_OS_PRODUCT_VERSION = {
     'leap16.1-aarch64' =>
       %w[
         opensuse-leap-16.1-aarch64
-        multi-linux-managertools-sle-16-aarch64-opensuse-16.1
+        multi-linux-managertools-sle-16-aarch64-opensuse-16.0
       ],
     'leap-micro5.5-x86_64' => # CHECKED
       %w[
@@ -1591,7 +1591,7 @@ TIMEOUT_BY_CHANNEL_NAME = {
   'managertools-sle15-updates-x86_64-sp7' => 120,
   'managertools-ubuntu2204-updates-amd64' => 60,
   'managertools-ubuntu2404-updates-amd64' => 60,
-  'multi-linux-managertools-sle-16-aarch64-opensuse-16.1' => 60,
+  'multi-linux-managertools-sle-16-aarch64-opensuse-16.0' => 60,
   'multi-linux-managertools-sle-16-aarch64' => 60,
   'multi-linux-managertools-sle-16-x86_64' => 60,
   'multi-linux-managertools-sle-16-x86_64-6.2' => 60,
