@@ -3,10 +3,10 @@
     <dependencies>
         <!-- Runtime dependencies -->
         <dependency org="manager-51" name="antlr" rev="2.7.7" />
-        <dependency org="manager-51" name="asm" rev="9.7" />
+        <dependency org="manager-51" name="asm" rev="9.10.1" />
         <dependency org="manager-51" name="bcel" rev="6.10.0" />
-        <dependency org="manager-51" name="byte-buddy" rev="1.14.16" />
-        <dependency org="manager-51" name="byte-buddy-dep" rev="1.14.16" />
+        <dependency org="manager-51" name="byte-buddy" rev="1.18.8" />
+        <dependency org="manager-51" name="byte-buddy-dep" rev="1.18.8" />
         <dependency org="manager-51" name="c3p0" rev="0.9.5.5" />
         <dependency org="manager-51" name="cglib" rev="3.3.0" />
         <dependency org="manager-51" name="classmate" rev="1.5.1" />
@@ -62,13 +62,13 @@
         <dependency org="manager-51" name="jsch" rev="0.2.22" />
         <dependency org="manager-51" name="jctools-core" rev="4.0.5" />
         <dependency org="manager-51" name="mchange-commons-java" rev="0.2.20" />
-        <dependency org="manager-51" name="netty-buffer" rev="4.1.136" />
-        <dependency org="manager-51" name="netty-codec" rev="4.1.136" />
-        <dependency org="manager-51" name="netty-common" rev="4.1.136" />
-        <dependency org="manager-51" name="netty-handler" rev="4.1.136" />
-        <dependency org="manager-51" name="netty-resolver" rev="4.1.136" />
-        <dependency org="manager-51" name="netty-transport" rev="4.1.136" />
-        <dependency org="manager-51" name="netty-transport-native-unix-common" rev="4.1.136" />
+        <dependency org="manager-51" name="netty-buffer" rev="4.1.138" />
+        <dependency org="manager-51" name="netty-codec" rev="4.1.138" />
+        <dependency org="manager-51" name="netty-common" rev="4.1.138" />
+        <dependency org="manager-51" name="netty-handler" rev="4.1.138" />
+        <dependency org="manager-51" name="netty-resolver" rev="4.1.138" />
+        <dependency org="manager-51" name="netty-transport" rev="4.1.138" />
+        <dependency org="manager-51" name="netty-transport-native-unix-common" rev="4.1.138" />
         <dependency org="manager-51" name="oro" rev="2.0.8" />
         <dependency org="manager-51" name="pgjdbc-ng" rev="0.8.7" />
         <dependency org="manager-51" name="postgresql-jdbc" rev="42.2.25" />
