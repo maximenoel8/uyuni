@@ -1139,8 +1139,8 @@ Then(/^the argument "([^"]*)" is valid in mgradm$/) do |arg|
 end
 
 When(/^I login to SUSE Customer Center DUMMY Sanity Check Account$/) do
-  ptf_username = ENV['SCC_PTF_USER']
-  ptf_password = ENV['SCC_PTF_PASSWORD']
+  ptf_username = ENV.fetch('SCC_PTF_USER', nil)
+  ptf_password = ENV.fetch('SCC_PTF_PASSWORD', nil)
   raise ScriptError, 'SCC_PTF_USER environment variable not set' if ptf_username.nil? || ptf_username.empty?
   raise ScriptError, 'SCC_PTF_PASSWORD environment variable not set' if ptf_password.nil? || ptf_password.empty?
 

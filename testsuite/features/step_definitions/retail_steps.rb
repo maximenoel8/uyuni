@@ -88,9 +88,7 @@ When(/^I set up the private network on the terminals$/) do
     node.run('netplan apply')
   end
   # PXE boot minion
-  if $pxeboot_mac
-    step 'I restart the network on the PXE boot minion'
-  end
+  step 'I restart the network on the PXE boot minion' if $pxeboot_mac
 end
 
 Then(/^"([^"]*)" should communicate with the server using public interface$/) do |host|
