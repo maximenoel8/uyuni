@@ -517,8 +517,6 @@ export class TableDataHandler extends Component<Props, State> {
                 </div>
               </div>
               <SelectedRowDetails
-                fromItem={fromItem}
-                toItem={toItem}
                 itemCount={itemCount}
                 onClear={handleSearchPanelClear}
                 onSelectAll={handleSearchPanelSelectAll}
