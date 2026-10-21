@@ -64,8 +64,3 @@ export function SelectedRowDetails({ selectable = false, selectedCount = 0, ...p
     </div>
   );
 }
-
-SelectedRowDetails.defaultProps = {
-  selectable: false,
-  selectedCount: 0,
-};
