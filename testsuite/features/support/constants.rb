@@ -89,6 +89,8 @@ ENV_VAR_BY_HOST = {
   'ubuntu2204_sshminion' => 'UBUNTU2204_SSHMINION',
   'ubuntu2404_minion' => 'UBUNTU2404_MINION',
   'ubuntu2404_sshminion' => 'UBUNTU2404_SSHMINION',
+  'ubuntu2604_minion' => 'UBUNTU2604_MINION',
+  'ubuntu2604_sshminion' => 'UBUNTU2604_SSHMINION',
   'debian13_minion' => 'DEBIAN13_MINION',
   'debian13_sshminion' => 'DEBIAN13_SSHMINION',
   'raspios13_minion' => 'RASPIOS13_MINION',
@@ -270,6 +272,8 @@ PACKAGE_BY_CLIENT = {
   'ubuntu2204_sshminion' => 'bison',
   'ubuntu2404_minion' => 'bison',
   'ubuntu2404_sshminion' => 'bison',
+  'ubuntu2604_minion' => 'bison',
+  'ubuntu2604_sshminion' => 'bison',
   'debian13_minion' => 'bison',
   'debian13_sshminion' => 'bison',
   'raspios13_minion' => 'bison',
@@ -365,6 +369,8 @@ BASE_CHANNEL_BY_CLIENT = {
     'ubuntu2204_sshminion' => 'ubuntu-2204-amd64-main for amd64',
     'ubuntu2404_minion' => 'ubuntu-2404-amd64-main for amd64',
     'ubuntu2404_sshminion' => 'ubuntu-2404-amd64-main for amd64',
+    'ubuntu2604_minion' => 'ubuntu-2604-amd64-main for amd64',
+    'ubuntu2604_sshminion' => 'ubuntu-2604-amd64-main for amd64',
     'debian13_minion' => 'debian-13-pool for amd64',
     'debian13_sshminion' => 'debian-13-pool for amd64',
     'raspios13_minion' => 'raspberrypios-13-pool for arm64',
@@ -442,6 +448,8 @@ BASE_CHANNEL_BY_CLIENT = {
     'ubuntu2204_sshminion' => 'Ubuntu 22.04 LTS AMD64 Base for Uyuni',
     'ubuntu2404_minion' => 'Ubuntu 24.04 LTS AMD64 Base for Uyuni',
     'ubuntu2404_sshminion' => 'Ubuntu 24.04 LTS AMD64 Base for Uyuni',
+    'ubuntu2604_minion' => 'Ubuntu 26.04 LTS AMD64 Base for Uyuni',
+    'ubuntu2604_sshminion' => 'Ubuntu 26.04 LTS AMD64 Base for Uyuni',
     'opensuse161arm_minion' => 'openSUSE Leap 16.1 (aarch64)',
     'opensuse161arm_sshminion' => 'openSUSE Leap 16.1 (aarch64)',
     'sles15sp5s390_minion' => 'SLE-Product-SLES15-SP5-Pool for s390x',
@@ -782,6 +790,8 @@ PKGARCH_BY_CLIENT = {
   'ubuntu2204_sshminion' => 'amd64',
   'ubuntu2404_minion' => 'amd64',
   'ubuntu2404_sshminion' => 'amd64',
+  'ubuntu2604_minion' => 'amd64',
+  'ubuntu2604_sshminion' => 'amd64',
   'debian13_minion' => 'amd64',
   'debian13_sshminion' => 'amd64',
   'raspios13_minion' => 'arm64',
@@ -1147,6 +1157,14 @@ CHANNEL_TO_SYNC_BY_OS_PRODUCT_VERSION = {
         ubuntu-2404-amd64-main-security-amd64
         managertools-ubuntu2404-updates-amd64
         managertools-beta-ubuntu2404-updates-amd64
+      ],
+    'ubuntu-2604' =>
+      %w[
+        ubuntu-2604-amd64-main-amd64
+        ubuntu-2604-amd64-main-updates-amd64
+        ubuntu-2604-amd64-main-security-amd64
+        managertools-ubuntu2604-updates-amd64
+        managertools-beta-ubuntu2604-updates-amd64
       ],
     'suma-proxy-extension-50' => # CHECKED
       %w[
@@ -1562,6 +1580,7 @@ TIMEOUT_BY_CHANNEL_NAME = {
   'managertools-beta-sle15-updates-x86_64-sp4' => 60,
   'managertools-beta-ubuntu2204-updates-amd64' => 60,
   'managertools-beta-ubuntu2404-updates-amd64' => 60,
+  'managertools-beta-ubuntu2604-updates-amd64' => 60,
   'managertools-debian13-updates-amd64' => 60,
   'managertools-el7-pool-x86_64-lbt7' => 60,
   'managertools-el7-updates-x86_64-lbt7' => 60,
@@ -1606,6 +1625,7 @@ TIMEOUT_BY_CHANNEL_NAME = {
   'managertools-sle15-updates-x86_64-sp7' => 120,
   'managertools-ubuntu2204-updates-amd64' => 60,
   'managertools-ubuntu2404-updates-amd64' => 60,
+  'managertools-ubuntu2604-updates-amd64' => 60,
   'multi-linux-managertools-sle-16-aarch64-opensuse-16.0' => 60,
   'multi-linux-managertools-sle-16-aarch64' => 60,
   'multi-linux-managertools-sle-16-x86_64' => 60,
