@@ -20,3 +20,5 @@
 - features/secondary/srv_handle_config_channels_with_ISS_v2.feature
 - features/secondary/srv_salt_git_pillar.feature
 - features/secondary/srv_admin_gpg_api.feature
+- features/secondary/srv_patches_page.feature
+- features/secondary/srv_errata_api.feature
