@@ -130,6 +130,10 @@ Then(/^I should get at least user "([^"]*)"$/) do |user|
   assert_includes(@users.map { |u| u['login'] }, user)
 end
 
+Then(/^I should not get user "([^"]*)"$/) do |user|
+  refute_includes(@users.map { |u| u['login'] }, user)
+end
+
 When(/^I call user\.list_roles\(\) on user "([^"]*)"$/) do |user|
   @roles = $api_test.user.list_roles(user)
 end
@@ -237,6 +241,14 @@ Given(/^I create a user with name "([^"]*)" and password "([^"]*)"(?: with roles
     add_context('user_creation_error', e.message)
     log "Failed to create user #{user}: #{e.message}"
   end
+end
+
+# access namespace
+
+# access.* calls authenticate as the last identity logged into the web UI: log in as admin first.
+When(/^I make sure the access group "([^"]*)" is not present$/) do |label|
+  present = $api_test.access.list_roles.any? { |role| role['label'] == label }
+  assert_equal(1, $api_test.access.delete_role(label)) if present
 end
 
 # channel namespace
